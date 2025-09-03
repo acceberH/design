@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export default function SchoolProject1() {
   return (
@@ -201,7 +200,7 @@ export default function SchoolProject1() {
                 <div className="bg-white rounded-lg p-6 border border-gray-200">
                   <div className="text-3xl mb-4">🎯</div>
                   <h4 className="font-semibold text-gray-900 mb-2">Context Awareness</h4>
-                  <p className="text-gray-600 text-sm">AI should understand and adapt to user's current task context</p>
+                  <p className="text-gray-600 text-sm">AI should understand and adapt to user&apos;s current task context</p>
                 </div>
               </div>
             </div>

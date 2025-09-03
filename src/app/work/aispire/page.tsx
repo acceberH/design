@@ -209,7 +209,7 @@ export default function Aispire() {
                   <div className="space-y-3 text-gray-600">
                     <p>• Students want to tell authentic stories, not just produce text.</p>
                     <p>• The biggest blocker is starting—many delay until deadlines loom, which lowers quality.</p>
-                    <p>• Anxiety comes from uncertainty: "Is my draft good enough or too generic?"</p>
+                    <p>• Anxiety comes from uncertainty: &quot;Is my draft good enough or too generic?&quot;</p>
                   </div>
                 </div>
                 
@@ -309,7 +309,7 @@ export default function Aispire() {
                   
                   <div className="space-y-4 text-gray-600">
                     <p>Mapped the end-to-end essay journey: Background → Brainstorm → Outline → Writing.</p>
-                    <p>Defined the product's value: a guided, step-by-step workflow that reduces anxiety while preserving authenticity.</p>
+                    <p>Defined the product&apos;s value: a guided, step-by-step workflow that reduces anxiety while preserving authenticity.</p>
                     <p>Created the chatbot-driven IA to ensure continuity across stages.</p>
                   </div>
                   
@@ -532,13 +532,13 @@ export default function Aispire() {
                 
                 <div className="bg-indigo-50 rounded-xl p-8 border border-indigo-100">
                   <blockquote className="text-lg text-gray-700 italic leading-relaxed">
-                    "This felt like having a coach on my screen. I actually finished my first draft in one sitting — something I'd been putting off for weeks."
+                    &quot;This felt like having a coach on my screen. I actually finished my first draft in one sitting — something I&apos;d been putting off for weeks.&quot;
                   </blockquote>
                 </div>
                 
                 <div className="bg-cyan-50 rounded-xl p-8 border border-cyan-100">
                   <blockquote className="text-lg text-gray-700 italic leading-relaxed">
-                    "I can't afford a private consultant, but this gave me the structure and confidence I needed to make my essay stand out."
+                    &quot;I can&apos;t afford a private consultant, but this gave me the structure and confidence I needed to make my essay stand out.&quot;
                   </blockquote>
                 </div>
               </div>
@@ -554,12 +554,12 @@ export default function Aispire() {
                 <div className="bg-indigo-50 rounded-xl p-6 border-l-4 border-indigo-600">
                   <h3 className="text-xl font-semibold text-indigo-600 mb-3">What I Learned</h3>
                   <p className="text-lg text-gray-600 leading-relaxed">
-                    Clear workflows reduce cognitive load more effectively than adding "AI magic." Sometimes the best solution is structured guidance rather than complex automation.
+                    Clear workflows reduce cognitive load more effectively than adding &quot;AI magic.&quot; Sometimes the best solution is structured guidance rather than complex automation.
                   </p>
                 </div>
                 
                 <div className="bg-cyan-50 rounded-xl p-6 border-l-4 border-cyan-600">
-                  <h3 className="text-xl font-semibold text-cyan-600 mb-3">What I'd Improve</h3>
+                  <h3 className="text-xl font-semibold text-cyan-600 mb-3">What I&apos;d Improve</h3>
                   <p className="text-lg text-gray-600 leading-relaxed">
                     More personalization in prompts based on user background, and improved onboarding for first-time users to better understand the four-phase process.
                   </p>

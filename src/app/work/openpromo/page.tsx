@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect } from "react";
 
 export default function Openpromo() {
@@ -399,13 +398,13 @@ export default function Openpromo() {
                 
                 <div className="bg-indigo-50 rounded-xl p-8 border border-indigo-100">
                   <blockquote className="text-lg text-gray-700 italic leading-relaxed">
-                    "Openpromo made it incredibly easy to find projects that match my interests. The interface is intuitive and the project information is comprehensive."
+                    &quot;Openpromo made it incredibly easy to find projects that match my interests. The interface is intuitive and the project information is comprehensive.&quot;
                   </blockquote>
                 </div>
                 
                 <div className="bg-cyan-50 rounded-xl p-8 border border-cyan-100">
                   <blockquote className="text-lg text-gray-700 italic leading-relaxed">
-                    "As a project maintainer, this platform has helped us attract quality contributors and grow our community significantly."
+                    &quot;As a project maintainer, this platform has helped us attract quality contributors and grow our community significantly.&quot;
                   </blockquote>
                 </div>
               </div>
@@ -426,7 +425,7 @@ export default function Openpromo() {
                 </div>
                 
                 <div className="bg-cyan-50 rounded-xl p-6 border-l-4 border-cyan-600">
-                  <h3 className="text-xl font-semibold text-cyan-600 mb-3">What I'd Improve</h3>
+                  <h3 className="text-xl font-semibold text-cyan-600 mb-3">What I&apos;d Improve</h3>
                   <p className="text-lg text-gray-600 leading-relaxed">
                     Enhanced search and filtering capabilities, better integration with GitHub and other platforms, and more advanced community features.
                   </p>

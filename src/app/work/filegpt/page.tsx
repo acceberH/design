@@ -189,7 +189,7 @@ export default function FileGPT() {
                 <div className="bg-sky-50 rounded-lg p-6 border border-sky-100 transform hover:scale-105 transition-all duration-300">
                   <h3 className="text-lg font-bold text-gray-900 mb-3">Solution</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
-                    Designed a GPT-powered conversational tool where users could upload files and "chat with documents." The UI prioritized clarity, persistent context, and inline citations to build trust.
+                    Designed a GPT-powered conversational tool where users could upload files and &quot;chat with documents.&quot; The UI prioritized clarity, persistent context, and inline citations to build trust.
                   </p>
                 </div>
                 
@@ -229,7 +229,7 @@ export default function FileGPT() {
                 </div>
                 
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  A survey of graduate students showed that <span className="font-semibold text-indigo-600">65% spent 5+ hours per week</span> skimming papers for relevance, and <span className="font-semibold text-indigo-600">47% admitted they rarely finished</span> full articles, relying only on abstracts or notes. Early testers also reported that generic AI chat tools were not sufficient, since they couldn't process PDFs, transcripts, or lecture videos directly.
+                  A survey of graduate students showed that <span className="font-semibold text-indigo-600">65% spent 5+ hours per week</span> skimming papers for relevance, and <span className="font-semibold text-indigo-600">47% admitted they rarely finished</span> full articles, relying only on abstracts or notes. Early testers also reported that generic AI chat tools were not sufficient, since they couldn&apos;t process PDFs, transcripts, or lecture videos directly.
                 </p>
                 
                 <p className="text-lg text-gray-600 leading-relaxed">
@@ -260,7 +260,7 @@ export default function FileGPT() {
                     </svg>
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Simplified Interaction</h3>
-                  <p className="text-gray-600">Simplify "chat with files" interaction.</p>
+                  <p className="text-gray-600">Simplify &quot;chat with files&quot; interaction.</p>
                 </div>
                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 transform hover:scale-105 transition-all duration-300">
                   <div className="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mb-4">
@@ -325,7 +325,7 @@ export default function FileGPT() {
                     />
                   </div>
                   <div className="p-4">
-                    <p className="text-sm text-gray-600 italic">Competitive analysis showing FileGPT's advantages in multi-format support and trust features.</p>
+                    <p className="text-sm text-gray-600 italic">Competitive analysis showing FileGPT&apos;s advantages in multi-format support and trust features.</p>
                   </div>
                 </div>
                 
@@ -334,7 +334,7 @@ export default function FileGPT() {
                     <span className="text-xl mr-3">✅</span>
                     <h4 className="text-lg font-semibold text-gray-900">Key Insight</h4>
                   </div>
-                  <p className="text-gray-600">Multi-format support + trust-building features (sources) would define FileGPT's differentiation.</p>
+                  <p className="text-gray-600">Multi-format support + trust-building features (sources) would define FileGPT&apos;s differentiation.</p>
                 </div>
               </div>
               

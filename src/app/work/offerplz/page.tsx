@@ -232,7 +232,7 @@ export default function Offerplz() {
                 </p>
                 
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Frustration is compounded by <strong>flashy, template-heavy builders that sacrifice clarity and professionalism for style</strong>—creating resumes that look busy but don't convert into callbacks.
+                  Frustration is compounded by <strong>flashy, template-heavy builders that sacrifice clarity and professionalism for style</strong>—creating resumes that look busy but don&apos;t convert into callbacks.
                 </p>
                 
                 <div className="bg-indigo-50 rounded-xl p-6 border-l-4 border-indigo-500">
@@ -289,7 +289,7 @@ export default function Offerplz() {
                       <h4 className="font-semibold mb-3 flex items-center text-gray-900">
                         <span className="mr-2">🎯</span> Objective
                       </h4>
-                      <p className="text-gray-600">Validate whether job seekers' biggest struggles are writing impactful project bullets and tailoring resumes to job descriptions.</p>
+                      <p className="text-gray-600">Validate whether job seekers&apos; biggest struggles are writing impactful project bullets and tailoring resumes to job descriptions.</p>
                     </div>
                     <div>
                       <h4 className="font-semibold mb-3 flex items-center text-gray-900">
@@ -356,7 +356,7 @@ export default function Offerplz() {
                   
                   <div className="bg-green-50 rounded-xl p-6 border-l-4 border-green-500">
                     <p className="font-medium text-gray-700">
-                      ✅ <strong>Early tests showed that JD alignment made resumes feel "job-ready", while LaTeX export reinforced professional credibility.</strong>
+                      ✅ <strong>Early tests showed that JD alignment made resumes feel &quot;job-ready&quot;, while LaTeX export reinforced professional credibility.</strong>
                     </p>
                   </div>
                 </div>
@@ -436,14 +436,14 @@ export default function Offerplz() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="bg-gray-50 border-l-4 border-indigo-500 p-6 rounded-r-lg">
                     <blockquote className="italic text-gray-700">
-                      "Offerplz transformed my generic project descriptions into compelling bullet points that actually got recruiters' attention. I landed 3 interviews in two weeks."
+                      &quot;Offerplz transformed my generic project descriptions into compelling bullet points that actually got recruiters&apos; attention. I landed 3 interviews in two weeks.&quot;
                     </blockquote>
                     <footer className="text-sm mt-3 text-gray-600">— Sarah Chen, Product Manager</footer>
                   </div>
                   
                   <div className="bg-gray-50 border-l-4 border-cyan-500 p-6 rounded-r-lg">
                     <blockquote className="italic text-gray-700">
-                      "The AI suggestions helped me articulate impact I didn't even realize I had. My resume finally tells a story recruiters want to hear."
+                      &quot;The AI suggestions helped me articulate impact I didn&apos;t even realize I had. My resume finally tells a story recruiters want to hear.&quot;
                     </blockquote>
                     <footer className="text-sm mt-3 text-gray-600">— Marcus Johnson, Software Engineer</footer>
                   </div>
