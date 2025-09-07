@@ -218,14 +218,6 @@ export default function Offerplz() {
                   We discovered that while AI resume builders exist, <strong>most fail to help job seekers tailor project bullet points with impact</strong>—leaving resumes filled with generic task lists that fail to impress recruiters.
                 </p>
                 
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                  <div className="w-full h-64 bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center">
-                    <div className="text-white text-4xl">📊</div>
-                  </div>
-                  <div className="p-4">
-                    <p className="text-sm text-gray-600 font-medium">Resume builder comparison showing generic task bullets vs impactful results-driven project bullets</p>
-                  </div>
-                </div>
                 
                 <p className="text-lg text-gray-600 leading-relaxed">
                   Surveys revealed that <strong>70% of candidates spend over 5 hours tailoring resumes</strong>, and more than <strong>60% admit they struggle the most with writing project bullets that demonstrate results</strong>.
