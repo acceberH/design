@@ -253,6 +253,31 @@ export default function Home() {
                 </div>
               </div>
             </Link>
+
+            {/* BarBuddy */}
+            <Link href="/work/barbuddy" className="group">
+              <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-105 animate-fade-in-up hover:rotate-1">
+                <div className="h-64 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center relative">
+                  <div className="text-white text-6xl mb-4">🏋️</div>
+                  <div className="absolute bottom-4 right-4 text-white text-2xl font-bold drop-shadow-lg">
+                    →
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
+                    BarBuddy
+                  </h3>
+                    <p className="text-gray-600 mb-4">
+                      IoT-powered smart exercise guidance system using computer vision and machine learning for real-time workout feedback.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded">IoT</span>
+                      <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Computer Vision</span>
+                      <span className="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Machine Learning</span>
+                    </div>
+                </div>
+              </div>
+            </Link>
           </div>
         </div>
       </section>

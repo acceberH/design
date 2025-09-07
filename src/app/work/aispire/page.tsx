@@ -109,6 +109,7 @@ export default function Aispire() {
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="context">Context</span></li>
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="goal">Goal</span></li>
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="approach">Approach</span></li>
+              <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="design-system">Design System</span></li>
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="impact">Impact</span></li>
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="reflect">Reflect</span></li>
             </ul>
@@ -201,39 +202,33 @@ export default function Aispire() {
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Context</h2>
               <div className="space-y-8">
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Before this project, students had no structured way to approach essays. Google Docs and Grammarly only supported editing, while AI chatbots generated text without context or continuity.
+                  Before this project, students had no structured way to approach college application essays. Tools like Google Docs and Grammarly focused only on grammar and editing, while AI chatbots offered generic content with no connection to students&apos; personal stories or progression across drafts.
                 </p>
                 
-                <div className="bg-indigo-50 rounded-xl p-6 border border-indigo-100">
-                  <h3 className="text-xl font-semibold text-indigo-900 mb-4">What We Discovered</h3>
-                  <div className="space-y-3 text-gray-600">
-                    <p>• Students want to tell authentic stories, not just produce text.</p>
-                    <p>• The biggest blocker is starting—many delay until deadlines loom, which lowers quality.</p>
-                    <p>• Anxiety comes from uncertainty: &quot;Is my draft good enough or too generic?&quot;</p>
-                  </div>
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  Through user interviews and testing, I uncovered that the biggest blocker wasn&apos;t writing skill, but emotional resistance—particularly in the form of blank-page anxiety and story uncertainty. Students often delayed starting essays until deadlines loomed, feeling unsure about how to begin or whether their ideas were &quot;good enough.&quot; Even when they tried to write, the lack of structure led to disorganized drafts and wasted time.
+                </p>
+                
+                <div className="bg-red-50 rounded-xl p-6 border border-red-200">
+                  <h3 className="text-xl font-semibold text-red-900 mb-4">The AI Trust Problem</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Additionally, early attempts to incorporate AI-generated content revealed another issue: students didn&apos;t trust or relate to the output. Generic language and prewritten paragraphs felt detached from their experiences, which made them hesitant to use the tool and undermined the goal of helping students find their authentic voice.
+                  </p>
                 </div>
                 
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                    <h4 className="font-semibold text-gray-900 mb-3">User Problem</h4>
-                    <div className="space-y-2 text-sm text-gray-600">
-                      <p>• Anxiety and procrastination</p>
-                      <p>• Difficulty organizing ideas into coherent structures</p>
-                      <p>• Hours wasted drafting without feedback</p>
-                    </div>
-                  </div>
-                  <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                    <h4 className="font-semibold text-gray-900 mb-3">Developer Problem</h4>
-                    <div className="space-y-2 text-sm text-gray-600">
-                      <p>• No tailored workflows for Common App vs. Supplement essays</p>
-                      <p>• No analytics on where students struggled most</p>
-                      <p>• No continuity across brainstorm, outline, and writing</p>
-                    </div>
-                  </div>
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  These insights pushed me to design a system that didn&apos;t just generate text, but scaffolded confidence. The goal was to break the essay journey into progressive, manageable steps—Background, Brainstorm, Outline, and Writing—each paired with AI-powered prompts, examples, and partial suggestions that preserved student ownership.
+                </p>
+                
+                <div className="bg-indigo-50 rounded-xl p-6 border border-indigo-200">
+                  <h3 className="text-xl font-semibold text-indigo-900 mb-4">Our Guiding Question</h3>
+                  <p className="text-lg text-gray-600 leading-relaxed">
+                    <strong>How might we reduce emotional resistance to writing while preserving individuality and creativity in a high-stakes setting like college applications?</strong>
+                  </p>
                 </div>
                 
-                <p className="text-lg text-gray-600 leading-relaxed bg-gray-50 rounded-lg p-6">
-                  As a result, many turned to costly consultants—widening equity gaps—or pieced together fragmented tools.
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  With this in mind, we began designing a guided essay-writing experience that combined workflow clarity with just enough AI support to unlock momentum without sacrificing voice.
                 </p>
               </div>
             </div>
@@ -417,6 +412,80 @@ export default function Aispire() {
                    </div>
                  </div>
 
+                 {/* Deep Dive Section */}
+                 <div className="space-y-6 mt-12">
+                   <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-8 border border-indigo-200">
+                     <h3 className="text-2xl font-bold text-gray-900 mb-6">Deep Dive: Tackling Blank-Page Anxiety through Structured Design</h3>
+                     
+                     <div className="space-y-6">
+                       <p className="text-lg text-gray-600 leading-relaxed">
+                         One of the most critical user problems I addressed was the anxiety students faced at the very beginning of their writing journey.
+                       </p>
+                       
+                       <div className="bg-white rounded-lg p-6 border border-gray-200">
+                         <h4 className="text-lg font-semibold text-gray-900 mb-4">Design Strategy</h4>
+                         <p className="text-gray-600 leading-relaxed mb-4">
+                           To combat this, I applied principles from workflow thinking and cognitive load theory, breaking down the experience into smaller, actionable steps:
+                         </p>
+                         <div className="grid md:grid-cols-3 gap-4">
+                           <div className="flex items-start space-x-3">
+                             <div className="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                               <span className="text-white text-xs font-bold">1</span>
+                             </div>
+                             <div>
+                               <h5 className="font-semibold text-gray-900">Background module</h5>
+                               <p className="text-sm text-gray-600">to gather life experiences</p>
+                             </div>
+                           </div>
+                           <div className="flex items-start space-x-3">
+                             <div className="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                               <span className="text-white text-xs font-bold">2</span>
+                             </div>
+                             <div>
+                               <h5 className="font-semibold text-gray-900">Brainstorm prompts</h5>
+                               <p className="text-sm text-gray-600">that scaffolded idea generation</p>
+                             </div>
+                           </div>
+                           <div className="flex items-start space-x-3">
+                             <div className="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                               <span className="text-white text-xs font-bold">3</span>
+                             </div>
+                             <div>
+                               <h5 className="font-semibold text-gray-900">Structured outline templates</h5>
+                               <p className="text-sm text-gray-600">to help organize thoughts</p>
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                       
+                       <div className="bg-green-50 rounded-lg p-6 border border-green-200">
+                         <h4 className="text-lg font-semibold text-green-900 mb-3">AI as Coach, Not Writer</h4>
+                         <p className="text-gray-600 leading-relaxed">
+                           Rather than having AI write for the student, I designed it to act like a coach—offering sentence starters, templates, and examples that empowered students to shape their own stories.
+                         </p>
+                       </div>
+                       
+                       <div className="bg-purple-50 rounded-lg p-6 border border-purple-200">
+                         <h4 className="text-lg font-semibold text-purple-900 mb-4">Impact Results</h4>
+                         <div className="grid md:grid-cols-2 gap-6">
+                           <div className="text-center">
+                             <div className="text-3xl font-bold text-purple-600 mb-2">40%</div>
+                             <p className="text-sm text-gray-600">reduction in time-to-first-draft</p>
+                             <p className="text-xs text-gray-500">(from 5 hours to 3)</p>
+                           </div>
+                           <div className="text-center">
+                             <div className="text-3xl font-bold text-purple-600 mb-2">75%</div>
+                             <p className="text-sm text-gray-600">boost in confidence</p>
+                           </div>
+                         </div>
+                         <p className="text-gray-600 leading-relaxed mt-4 text-center">
+                           This validates that structured guidance beats open-ended AI generation when it comes to deeply personal writing tasks.
+                         </p>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+
                  {/* Phase 4 - Validation & Iteration */}
                  <div className="space-y-6">
                    <div className="flex items-center space-x-3 mb-4">
@@ -467,6 +536,130 @@ export default function Aispire() {
                      </div>
                    </div>
                  </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Design System Section */}
+          <section id="design-system" className="px-6 py-16 border-t border-gray-200">
+            <div className="max-w-4xl">
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">Design System</h2>
+              
+              <div className="space-y-8">
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  The design system for Aispire was built with accessibility and clarity in mind. Here are the key style guidelines and components that shaped the user experience.
+                </p>
+                
+                {/* Color Use */}
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Color Use</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-[#FAFCFF] rounded-lg mx-auto mb-2 border border-gray-200"></div>
+                      <p className="text-sm font-medium text-gray-900">Background</p>
+                      <p className="text-xs text-gray-600">#FAFCFF</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-[#DCE6FF] rounded-lg mx-auto mb-2"></div>
+                      <p className="text-sm font-medium text-gray-900">Upload/Letter</p>
+                      <p className="text-xs text-gray-600">#DCE6FF</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-[#6B7B9F] rounded-lg mx-auto mb-2"></div>
+                      <p className="text-sm font-medium text-gray-900">Naming</p>
+                      <p className="text-xs text-gray-600">#6B7B9F</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-[#417BFF] rounded-lg mx-auto mb-2"></div>
+                      <p className="text-sm font-medium text-gray-900">Blue Highlight</p>
+                      <p className="text-xs text-gray-600">#417BFF</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Typography */}
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Typography</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="text-2xl font-bold text-gray-900 mb-2">Headings</h4>
+                      <p className="text-sm text-gray-600">Font: Inter, Weight: 700, Line-height: 1.2</p>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 mb-2">Body Text</h4>
+                      <p className="text-sm text-gray-600">Font: Inter, Weight: 400, Line-height: 1.6</p>
+                    </div>
+                    <div>
+                      <h4 className="text-base font-medium text-gray-900 mb-2">UI Elements</h4>
+                      <p className="text-sm text-gray-600">Font: Inter, Weight: 500, Line-height: 1.4</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Elements */}
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Elements</h3>
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="font-semibold text-gray-900 mb-3">Background</h4>
+                        <Image 
+                          src="/background-stylesheet.png"
+                          alt="Background stylesheet showing design system elements"
+                          width={300}
+                          height={200}
+                          className="w-full h-auto object-contain rounded-lg border border-gray-200"
+                        />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-gray-900 mb-3">Brainstorm</h4>
+                        <Image 
+                          src="/brainstorm-stylesheet.png"
+                          alt="Brainstorm stylesheet showing design system elements"
+                          width={300}
+                          height={200}
+                          className="w-full h-auto object-contain rounded-lg border border-gray-200"
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="font-semibold text-gray-900 mb-3">Outline</h4>
+                        <Image 
+                          src="/outline-stylesheet.png"
+                          alt="Outline stylesheet showing design system elements"
+                          width={300}
+                          height={200}
+                          className="w-full h-auto object-contain rounded-lg border border-gray-200"
+                        />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-gray-900 mb-3">Writing</h4>
+                        <Image 
+                          src="/writing-stylesheet.png"
+                          alt="Writing stylesheet showing design system elements"
+                          width={300}
+                          height={200}
+                          className="w-full h-auto object-contain rounded-lg border border-gray-200"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                {/* Accessibility Guidelines */}
+                <div className="bg-green-50 rounded-xl p-6 border border-green-200">
+                  <h3 className="text-xl font-semibold text-green-800 mb-4">Accessibility Guidelines</h3>
+                  <ul className="space-y-2 text-green-700">
+                    <li>• Minimum contrast ratio of 4.5:1 for all text</li>
+                    <li>• Focus indicators for keyboard navigation</li>
+                    <li>• Semantic HTML structure for screen readers</li>
+                    <li>• Touch targets minimum 44px for mobile</li>
+                    <li>• Color not used as the only visual indicator</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </section>

@@ -201,7 +201,7 @@ export default function Offerplz() {
                 <div className="bg-green-50 rounded-lg p-6 border border-green-100 transform hover:scale-105 transition-all duration-300">
                   <h3 className="text-lg font-bold text-gray-900 mb-3">Impact</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
-                    80% faster tailoring, 50+ early adopters in the first month, and higher recruiter callback rates.
+                    Target 10,000 registered users within 6 months, maintain 85% user satisfaction for AI suggestions, and achieve 25% monthly retention rate.
                   </p>
                 </div>
               </div>
@@ -296,15 +296,22 @@ export default function Offerplz() {
                         <span className="mr-2">⚡</span> Action
                       </h4>
                       <ul className="list-disc list-inside space-y-1 text-gray-600">
-                        <li>Conducted interviews with job seekers to uncover pain points.</li>
-                        <li>Benchmarked AI resume builders; confirmed none supported JD-based keyword tailoring.</li>
+                        <li>Conducted 1:1 interviews with job seekers from different industries to uncover common frustrations in resume writing.</li>
+                        <li>Ran a comparative usability audit on 6 leading AI resume tools to identify market blind spots.</li>
+                        <li>Synthesized findings into an affinity map highlighting the biggest friction points: difficulty quantifying achievements, lack of role-specific language, and low trust in generic AI outputs.</li>
                       </ul>
                     </div>
                   </div>
                   
                   <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                    <div className="w-full h-64 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
-                      <div className="text-white text-4xl">📋</div>
+                    <div className="w-full h-64 flex items-center justify-center bg-gray-50">
+                      <Image
+                        src="/offer_affinity.png"
+                        alt="Affinity mapping board with job seeker pain points and competitor analysis"
+                        width={600}
+                        height={256}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
                     <div className="p-4">
                       <p className="text-sm text-gray-600 font-medium">Affinity mapping board with job seeker pain points and competitor analysis</p>
@@ -331,26 +338,78 @@ export default function Offerplz() {
                       <h4 className="font-semibold mb-3 flex items-center text-gray-900">
                         <span className="mr-2">🎯</span> Objective
                       </h4>
-                      <p className="text-gray-600">Create a resume editor that balances AI assistance with professional formatting and recruiter readability.</p>
+                      <p className="text-gray-600">Translate findings into a minimum viable product that balances AI assistance with professional formatting and recruiter readability.</p>
                     </div>
                     <div>
                       <h4 className="font-semibold mb-3 flex items-center text-gray-900">
                         <span className="mr-2">⚡</span> Action
                       </h4>
                       <ul className="list-disc list-inside space-y-1 text-gray-600">
-                        <li>Defined MVP scope: bullet generator, JD alignment, LaTeX export.</li>
-                        <li>Built high-fidelity prototypes of a distraction-free editor with side-by-side bullet suggestions.</li>
-                        <li>Iterated AI prompts to ensure authentic yet impactful tone.</li>
+                        <li>Defined MVP scope: bullet generator, job description alignment, distraction-free editor, and LaTeX export.</li>
+                        <li>Prototyped a side-by-side editor that lets users review and edit AI-generated bullets in real time.</li>
+                        <li>Iterated AI prompt structures to improve tone, specificity, and action-result clarity.</li>
+                        <li>Integrated a &quot;JD upload&quot; mechanism and preview to drive role-specific tailoring.</li>
                       </ul>
                     </div>
                   </div>
                   
                   <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                    <div className="w-full h-64 bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center">
-                      <div className="text-white text-4xl">🎨</div>
+                    <div className="p-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-3">
+                          <Image
+                            src="/offerlanding.png"
+                            alt="Offerplz Landing Page Interface"
+                            width={400}
+                            height={300}
+                            className="w-full h-auto object-contain rounded-lg border border-gray-200"
+                          />
+                          <p className="text-xs text-gray-600 text-center">Landing Page</p>
+                        </div>
+                        <div className="space-y-3">
+                          <Image
+                            src="/offer_chat.png"
+                            alt="Offerplz Chat Interface"
+                            width={400}
+                            height={300}
+                            className="w-full h-auto object-contain rounded-lg border border-gray-200"
+                          />
+                          <p className="text-xs text-gray-600 text-center">Chat Interface</p>
+                        </div>
+                        <div className="space-y-3">
+                          <Image
+                            src="/offer_jd.jpg"
+                            alt="Offerplz Job Description Interface"
+                            width={400}
+                            height={300}
+                            className="w-full h-auto object-contain rounded-lg border border-gray-200"
+                          />
+                          <p className="text-xs text-gray-600 text-center">Job Description</p>
+                        </div>
+                        <div className="space-y-3">
+                          <Image
+                            src="/offer_generate.jpg"
+                            alt="Offerplz Generation Interface"
+                            width={400}
+                            height={300}
+                            className="w-full h-auto object-contain rounded-lg border border-gray-200"
+                          />
+                          <p className="text-xs text-gray-600 text-center">Generation Interface</p>
+                        </div>
+                        <div className="space-y-3">
+                          <Image
+                            src="/offer_after.PNG"
+                            alt="Offerplz Resume Builder Interface"
+                            width={400}
+                            height={300}
+                            className="w-full h-auto object-contain rounded-lg border border-gray-200"
+                          />
+                          <p className="text-xs text-gray-600 text-center">Resume Builder</p>
+                        </div>
+                      </div>
                     </div>
-                    <div className="p-4">
-                      <p className="text-sm text-gray-600 font-medium">User flow diagram showing job description input to bullet suggestions to export process</p>
+                    <div className="p-4 border-t border-gray-100">
+                      <p className="text-sm text-gray-600 font-medium">Key interface designs showing the complete user journey from landing to AI-powered resume generation</p>
                     </div>
                   </div>
                   
@@ -389,11 +448,35 @@ export default function Offerplz() {
                   </div>
                   
                   <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                    <div className="w-full h-64 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center">
-                      <div className="text-white text-4xl">📈</div>
+                    <div className="p-6">
+                      <div className="flex justify-center">
+                        <div className="relative group cursor-pointer">
+                          <div className="w-full max-w-4xl h-[500px] flex items-center justify-center bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+                            {/* Before Image */}
+                            <Image
+                              src="/IMG_9628.png"
+                              alt="Resume Before Offerplz"
+                              width={600}
+                              height={400}
+                              className="w-full h-full object-contain rounded-lg transition-opacity duration-500 group-hover:opacity-0"
+                            />
+                            {/* After Image - Hidden by default, shown on hover */}
+                            <Image
+                              src="/offer_afterr.PNG"
+                              alt="Resume After Offerplz"
+                              width={600}
+                              height={400}
+                              className="absolute inset-0 w-full h-full object-contain rounded-lg opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                            />
+                          </div>
+                          <div className="absolute bottom-4 left-4 bg-black bg-opacity-75 text-white px-3 py-1 rounded text-sm">
+                            Hover to see After →
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="p-4">
-                      <p className="text-sm text-gray-600 font-medium">Before and after comparison of resume bullet points with performance metrics</p>
+                    <div className="p-4 border-t border-gray-100">
+                      <p className="text-sm text-gray-600 font-medium text-center">Interactive before/after comparison - hover over the image to see the transformation from generic bullet points to impactful, quantified achievements</p>
                     </div>
                   </div>
                   
@@ -414,19 +497,19 @@ export default function Offerplz() {
               
               <div className="grid md:grid-cols-3 gap-6 mb-12">
                 <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-200 text-center transform hover:scale-105 transition-all duration-300">
-                  <div className="text-4xl font-bold text-indigo-600 mb-3">80%</div>
-                  <div className="font-semibold text-lg mb-2 text-gray-900">Faster Tailoring</div>
-                  <div className="text-sm text-gray-600">Job seekers cut resume tailoring time from ~5 hours to under 1 hour on average.</div>
+                  <div className="text-4xl font-bold text-indigo-600 mb-3">10,000</div>
+                  <div className="font-semibold text-lg mb-2 text-gray-900">Registered Users</div>
+                  <div className="text-sm text-gray-600">Achieve 10,000 registered users within 6 months of launch</div>
                 </div>
                 <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-200 text-center transform hover:scale-105 transition-all duration-300">
-                  <div className="text-4xl font-bold text-green-600 mb-3">50+</div>
-                  <div className="font-semibold text-lg mb-2 text-gray-900">Early Adopters</div>
-                  <div className="text-sm text-gray-600">Within the first month, over 50 candidates actively used Offerplz to generate tailored resumes.</div>
+                  <div className="text-4xl font-bold text-green-600 mb-3">85%</div>
+                  <div className="font-semibold text-lg mb-2 text-gray-900">User Satisfaction</div>
+                  <div className="text-sm text-gray-600">Maintain 85% user satisfaction score for AI-generated bullet suggestions</div>
                 </div>
                 <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-200 text-center transform hover:scale-105 transition-all duration-300">
-                  <div className="text-4xl font-bold text-cyan-600 mb-3">Higher</div>
-                  <div className="font-semibold text-lg mb-2 text-gray-900">Callback Rates</div>
-                  <div className="text-sm text-gray-600">Users reported stronger recruiter engagement, with more interviews and positive feedback.</div>
+                  <div className="text-4xl font-bold text-cyan-600 mb-3">25%</div>
+                  <div className="font-semibold text-lg mb-2 text-gray-900">Monthly Retention</div>
+                  <div className="text-sm text-gray-600">Reach 25% monthly active user retention rate</div>
                 </div>
               </div>
 
