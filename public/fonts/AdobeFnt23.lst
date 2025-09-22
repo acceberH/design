@@ -1,0 +1,100 @@
+%!Adobe-FontList 1.23
+%Locale:0x409
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MinionPro-Regular
+FamilyName:Minion Pro
+StyleName:Regular
+FullName:Minion Pro
+MenuName:Minion Pro
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:E:\temp doc\visual id\Cycle_brandguideline Folder\Document fonts\MinionPro-Regular.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:218640
+FileModTime:1679510639
+WeightClass:400
+WidthClass:5
+AngleClass:0
+DesignSize:110
+NameArray:0,Mac,4,Minion Pro
+NameArray:0,Win,1,Minion Pro
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MinionVariableConcept-Roman
+FamilyName:Minion Variable Concept
+StyleName:Roman
+FullName:Minion Variable Concept Roman
+MenuName:Minion Variable Concept
+FamilyPrefix:MinionConceptRoman
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:E:\temp doc\visual id\Cycle_brandguideline Folder\Document fonts\MinionVariableConcept-Roman.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:CFF2VariableFont
+FileLength:298864
+FileModTime:1679510639
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Win,1,Minion Variable Concept
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:SometimesTimes-Italic
+FamilyName:Sometimes Times
+StyleName:Italic
+FullName:Sometimes Times Italic
+MenuName:Sometimes Times
+StyleBits:1
+WritingScript:Roman
+OutlineFileName:E:\temp doc\visual id\Cycle_brandguideline Folder\Document fonts\Sometimes Times Italic.ttf
+DataFormat:sfntData
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:66024
+FileModTime:1582777453
+WeightClass:400
+WidthClass:5
+AngleClass:1
+NameArray:0,Mac,4,Sometimes Times Italic
+NameArray:0,Win,1,Sometimes Times
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:ArialMT
+FamilyName:Arial
+StyleName:Regular
+FullName:Arial
+MenuName:Arial
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:E:\temp doc\visual id\Cycle_brandguideline Folder\Document fonts\arial.ttf
+DataFormat:sfntData
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:1036584
+FileModTime:1575713306
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,Arial
+NameArray:0,Win,1,Arial
+%EndFont
+

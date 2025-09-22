@@ -319,152 +319,284 @@ export default function BarBuddyCaseStudy() {
             <div className="max-w-4xl">
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Approach</h2>
               
-              {/* IMU Prototype Phase */}
-              <div id="phase-imu" className="mb-16">
+              {/* Iteration 1 */}
+              <div className="mb-16">
                 <div className="mb-6">
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">IMU Prototype</h3>
-                  <p className="text-lg text-gray-600">Initial sensor-only approach with OLED display</p>
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">Iteration 1 — IMU-only Prototype</h3>
+                  <p className="text-lg text-gray-600">Idea: Use a single IMU sensor to determine whether exercises are performed correctly.</p>
                 </div>
                 
-                <div className="grid lg:grid-cols-2 gap-8 mb-8">
-                  <div className="space-y-4">
-                    <p className="text-gray-600">Captured acceleration and rotation data from IMU sensors and displayed results on a small OLED screen attached to the ESP32.</p>
-                    
+                {/* Idea Sketches */}
+                <div className="mb-8">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4">Our Idea Sketches</h4>
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    <div className="h-48 bg-gray-100 rounded-lg p-2">
+                      <Image
+                        src="/bar_sketch1.jpg"
+                        alt="Initial design sketches for BarBuddy device"
+                        width={400}
+                        height={192}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <div className="h-48 bg-gray-100 rounded-lg p-2">
+                      <Image
+                        src="/bar_sketch2.jpg"
+                        alt="Magnetic attachment mechanism sketches"
+                        width={400}
+                        height={192}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Implementation and Problem */}
+                <div className="flex items-start gap-6 mb-8">
+                  <div className="w-3/5 space-y-4">
                     <div className="bg-red-50 rounded-lg p-4 border border-red-200">
                       <div className="flex items-center mb-2">
                         <svg className="text-red-500 mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 512 512">
                           <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/>
                         </svg>
-                        <span className="font-semibold text-red-800">Problem Identified</span>
+                        <span className="font-semibold text-red-800">Problem</span>
                       </div>
-                      <p className="text-red-700 text-sm">Lacked context; didn&apos;t generalize beyond our team&apos;s specific movements.</p>
+                      <p className="text-red-700 text-sm">External feedback and testing showed IMU data lacked context, and the model couldn&apos;t generalize beyond a few individuals.</p>
                     </div>
                   </div>
                   
-                  <div className="bg-gray-100 rounded-xl p-4">
-                    <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
-                      <p className="text-gray-500">ESP32 with IMU sensor and OLED display</p>
+                  <div className="w-2/5">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="h-48 bg-gray-100 rounded-lg p-2">
+                        <Image
+                          src="/bar_v0.jpeg"
+                          alt="IMU-only prototype showing ESP32-C3 with sensors and OLED display"
+                          width={400}
+                          height={192}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      <div className="h-48 bg-gray-100 rounded-lg p-2">
+                        <Image
+                          src="/bar_pcb.jpg"
+                          alt="PCB design schematic showing circuit layout"
+                          width={400}
+                          height={192}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
               
-              {/* ESP32-Sense Attempt */}
-              <div id="phase-sense" className="mb-16">
+              {/* Iteration 2 */}
+              <div className="mb-16">
                 <div className="mb-6">
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">ESP32-Sense Attempt</h3>
-                  <p className="text-lg text-gray-600">Exploring camera integration for visual context</p>
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">Iteration 2 — ESP32-CAM (ESP32-Sense)</h3>
+                  <p className="text-lg text-gray-600">Attempt: Add a camera on ESP32 to bring in visual information.</p>
                 </div>
                 
-                <div className="grid lg:grid-cols-2 gap-8 mb-8">
-                  <div className="space-y-4">
-                    <p className="text-gray-600">Tried ESP32-Sense camera module combined with IMU to get both visual and motion data.</p>
-                    
+                <div className="flex items-start gap-6 mb-8">
+                  <div className="w-3/5 space-y-4">
                     <div className="bg-red-50 rounded-lg p-4 border border-red-200">
                       <div className="flex items-center mb-2">
                         <svg className="text-red-500 mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 512 512">
                           <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/>
                         </svg>
-                        <span className="font-semibold text-red-800">Technical Limitations</span>
+                        <span className="font-semibold text-red-800">Issues</span>
                       </div>
-                      <p className="text-red-700 text-sm">Poor camera resolution + two boards = impractical design for real-world use.</p>
+                      <ul className="text-red-700 text-sm space-y-1">
+                        <li>• Very low resolution, unable to capture movement details.</li>
+                        <li>• Required two boards (one for IMU, one for camera), making the design bulky.</li>
+                        <li>• Conclusion: Not a practical solution.</li>
+                      </ul>
                     </div>
                   </div>
                   
-                  <div className="bg-gray-100 rounded-xl p-4">
-                    <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
-                      <p className="text-gray-500">ESP32-CAM module with IMU sensor</p>
-                    </div>
+                  <div className="w-2/5 h-48 bg-gray-100 rounded-lg p-2">
+                    <Image
+                      src="/bar_badcam.jpg"
+                      alt="ESP32-CAM setup showing low resolution camera issues"
+                      width={400}
+                      height={192}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                 </div>
               </div>
               
-              {/* USB Webcam Pivot */}
-              <div id="phase-webcam" className="mb-16">
+              {/* Iteration 3 */}
+              <div className="mb-16">
                 <div className="mb-6">
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">USB Webcam Pivot</h3>
-                  <p className="text-lg text-gray-600">Switching to computer vision with MediaPipe</p>
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">Iteration 3 — USB Webcam + MediaPipe</h3>
+                  <p className="text-lg text-gray-600">Improvement: Switched to a standard USB webcam combined with MediaPipe for skeleton keypoint detection.</p>
                 </div>
                 
-                <div className="grid lg:grid-cols-2 gap-8 mb-8">
-                  <div className="space-y-4">
-                    <p className="text-gray-600">Switched to USB webcam connected to laptop, using MediaPipe Pose for body landmark detection.</p>
-                    
-                    <div className="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
-                      <div className="flex items-center mb-2">
-                        <svg className="text-yellow-600 mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 640 512">
-                          <path d="M384 32H512c17.7 0 32 14.3 32 32s-14.3 32-32 32H398.4c-5.2 25.8-22.9 47.1-46.4 57.3V448H512c17.7 0 32 14.3 32 32s-14.3 32-32 32H320 128c-17.7 0-32-14.3-32-32s14.3-32 32-32H288V153.3c-23.5-10.3-41.2-31.6-46.4-57.3H128c-17.7 0-32-14.3-32-32s14.3-32 32-32H256c14.6-19.4 37.8-32 64-32s49.4 12.6 64 32zm55.6 288H584.4L512 195.8 439.6 320zM512 416c-62.9 0-115.2-34-126-78.9c-2.6-11 1-22.3 6.7-32.1l95.2-163.2c5-8.6 14.2-13.8 24.1-13.8s19.1 5.3 24.1 13.8l95.2 163.2c5.7 9.8 9.3 21.1 6.7 32.1C627.2 382 574.9 416 512 416zM126.8 195.8L54.4 320H199.3L126.8 195.8zM.9 337.1c-2.6-11 1-22.3 6.7-32.1l95.2-163.2c5-8.6 14.2-13.8 24.1-13.8s19.1 5.3 24.1 13.8l95.2 163.2c5.7 9.8 9.3 21.1 6.7 32.1C242 382 189.7 416 126.8 416S11.7 382 .9 337.1z"/>
-                        </svg>
-                        <span className="font-semibold text-yellow-800">Tradeoff</span>
-                      </div>
-                      <p className="text-yellow-700 text-sm">Camera angle had to match training setup, limiting flexibility.</p>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-gray-100 rounded-xl p-4">
-                    <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
-                      <p className="text-gray-500">MediaPipe pose detection with skeleton overlay</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Feedback Redesign */}
-              <div id="phase-feedback" className="mb-16">
-                <div className="mb-6">
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">Feedback Redesign</h3>
-                  <p className="text-lg text-gray-600">Moving from hardware display to web interface</p>
-                </div>
-                
-                <div className="grid lg:grid-cols-2 gap-8 mb-8">
-                  <div className="space-y-4">
-                    <p className="text-gray-600">OLED screen was too small for practical use during workouts.</p>
-                    
+                <div className="flex items-start gap-6 mb-8">
+                  <div className="w-3/5 space-y-4">
                     <div className="bg-green-50 rounded-lg p-4 border border-green-200">
                       <div className="flex items-center mb-2">
                         <svg className="text-green-500 mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 512 512">
                           <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/>
                         </svg>
-                        <span className="font-semibold text-green-800">Solution</span>
+                        <span className="font-semibold text-green-800">Results</span>
                       </div>
-                      <p className="text-green-700 text-sm">Built a web interface with live feed, pose overlay, IMU data, and text feedback.</p>
+                      <ul className="text-green-700 text-sm space-y-1">
+                        <li>• Clear posture estimation, much better exercise recognition.</li>
+                        <li>• Combined with IMU data, the system provided richer contextual feedback.</li>
+                        <li>• Tradeoff: Camera angle must stay consistent between training and inference.</li>
+                      </ul>
                     </div>
                   </div>
                   
-                  <div className="bg-gray-100 rounded-xl p-4">
-                    <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
-                      <p className="text-gray-500">Modern web interface with live video feed</p>
-                    </div>
+                  <div className="w-2/5 h-48 bg-gray-100 rounded-lg p-2">
+                    <Image
+                      src="/bar_mediapipe.jpg"
+                      alt="MediaPipe skeleton detection showing pose estimation with keypoints"
+                      width={400}
+                      height={192}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                 </div>
               </div>
               
-              {/* ML Offloading */}
-              <div id="phase-ml" className="mb-8">
+              {/* Iteration 4 */}
+              <div className="mb-16">
                 <div className="mb-6">
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">Offloading ML</h3>
-                  <p className="text-lg text-gray-600">Solving computational limitations</p>
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">Iteration 4 — Display & Computation Upgrade</h3>
+                  <p className="text-lg text-gray-600">Problems: The OLED screen was too small, feedback wasn&apos;t user-friendly. ESP32 lacked the compute power to run ML models.</p>
                 </div>
                 
-                <div className="grid lg:grid-cols-2 gap-8">
-                  <div className="space-y-4">
-                    <p className="text-gray-600">ESP32 couldn&apos;t handle machine learning inference in real-time.</p>
-                    
-                    <div className="bg-green-50 rounded-lg p-4 border border-green-200">
-                      <div className="flex items-center mb-2">
-                        <svg className="text-green-500 mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 512 512">
-                          <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/>
-                        </svg>
-                        <span className="font-semibold text-green-800">Final Solution</span>
+                <div className="space-y-6 mb-8">
+                  <div className="grid lg:grid-cols-2 gap-8">
+                    <div className="space-y-4">
+                      <div className="bg-green-50 rounded-lg p-4 border border-green-200">
+                        <div className="flex items-center mb-2">
+                          <svg className="text-green-500 mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 512 512">
+                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/>
+                          </svg>
+                          <span className="font-semibold text-green-800">Improvements</span>
+                        </div>
+                        <ul className="text-green-700 text-sm space-y-1">
+                          <li>• Built a web interface to display real-time video, skeleton overlay, IMU data, and predictions.</li>
+                          <li>• Shifted training and inference to a local computer.</li>
+                        </ul>
                       </div>
-                      <p className="text-green-700 text-sm">Ran models on laptop; 3,600+ samples trained, achieving ~91–98% accuracy.</p>
+                      
+                      <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                        <div className="flex items-center mb-2">
+                          <svg className="text-blue-500 mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 512 512">
+                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/>
+                          </svg>
+                          <span className="font-semibold text-blue-800">Results</span>
+                        </div>
+                        <ul className="text-blue-700 text-sm space-y-1">
+                          <li>• Collected 3,600+ data samples.</li>
+                          <li>• Achieved 91–98% accuracy in real-time exercise classification.</li>
+                        </ul>
+                      </div>
                     </div>
+                    
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-gray-100 rounded-xl p-4">
+                        <div className="w-full h-48 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden">
+                          <video
+                            src="/bar_demo.MP4"
+                            controls
+                            className="w-full h-full object-contain"
+                            preload="metadata"
+                          >
+                            Your browser does not support the video tag.
+                          </video>
+                        </div>
+                        <p className="text-xs text-gray-500 mt-2 text-center">Live Demo</p>
+                      </div>
+                      
+                      <div className="bg-gray-100 rounded-lg p-2">
+                        <div className="w-full h-48 flex items-center justify-center bg-gray-50 rounded">
+                          <Image
+                            src="/bar_data.png"
+                            alt="Data collection and performance metrics visualization"
+                            width={300}
+                            height={192}
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                        <p className="text-xs text-gray-500 mt-2 text-center">Data Collection & Performance</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Final Outcome Section */}
+          <section id="final-outcome" className="px-6 py-16 border-t border-gray-200">
+            <div className="max-w-4xl">
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">Final Outcome</h2>
+              
+              {/* Sensor and Circuit */}
+              <div className="mt-6">
+                <h3 className="text-xl font-semibold text-gray-900 mb-6">Sensor and Circuit</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="bg-gray-100 rounded-xl p-4">
+                    <div className="w-full h-64 flex items-center justify-center bg-gray-50 rounded-lg">
+                      <Image
+                        src="/bar_realpcb.jpg"
+                        alt="Physical PCB implementation with ESP32-C3 and IMU sensor"
+                        width={400}
+                        height={256}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2 text-center">Physical Implementation</p>
                   </div>
                   
                   <div className="bg-gray-100 rounded-xl p-4">
-                    <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
-                      <p className="text-gray-500">Machine learning pipeline diagram</p>
+                    <div className="w-full h-64 flex items-center justify-center bg-gray-50 rounded-lg">
+                      <Image
+                        src="/bar_3d.jpg"
+                        alt="3D printed box that will be attached on the barbell"
+                        width={400}
+                        height={256}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
+                    <p className="text-xs text-gray-500 mt-2 text-center">3D Printed Housing</p>
+                  </div>
+                  
+                  <div className="bg-gray-100 rounded-xl p-4">
+                    <div className="w-full h-64 flex items-center justify-center bg-gray-50 rounded-lg">
+                      <Image
+                        src="/bar_3dpcb.jpg"
+                        alt="PCB integrated with 3D printed housing showing complete assembly"
+                        width={400}
+                        height={256}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2 text-center">Complete Assembly</p>
+                  </div>
+                </div>
+                
+                {/* App Demo Video */}
+                <div className="mt-8">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4">App Demo</h4>
+                  <div className="bg-gray-100 rounded-xl p-4">
+                    <div className="w-full h-96 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden">
+                      <video 
+                        src="/bar_appdemo.mov" 
+                        controls 
+                        className="w-full h-full object-contain"
+                        preload="metadata"
+                      >
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2 text-center">Live application demonstration</p>
                   </div>
                 </div>
               </div>
