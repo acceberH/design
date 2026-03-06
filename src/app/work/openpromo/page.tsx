@@ -118,8 +118,18 @@ export default function OpenPromoCaseStudy() {
               
               {/* Hero Visual */}
               <div className="bg-gray-50 rounded-xl shadow-lg overflow-hidden p-8">
-                <div className="w-full h-80 bg-gray-200 rounded-lg flex items-center justify-center">
-                  <p className="text-gray-500">Social Media Dashboard Mockup</p>
+                <div className="w-full aspect-video rounded-lg overflow-hidden bg-black">
+                  <video
+                    className="w-full h-full object-contain"
+                    src="/openpromo_dashboard_demo.mov"
+                    poster="/394shots_so.png"
+                    controls
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                  />
                 </div>
               </div>
             </div>
@@ -134,14 +144,14 @@ export default function OpenPromoCaseStudy() {
                 <div className="bg-red-50 rounded-lg p-6 border border-red-100">
                   <h3 className="text-lg font-bold text-gray-900 mb-3">Problem</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
-                    Businesses and creators spend excessive time managing multiple platforms with little clarity on growth. Current tools like Buffer or Hootsuite focus only on posting.
+                    Businesses spend excessive time managing multiple social media platforms and switching between tools to publish content. Meanwhile, creating marketing videos is costly and time-consuming, making it difficult for small businesses to produce content consistentl
                   </p>
                 </div>
                 
                 <div className="bg-sky-50 rounded-lg p-6 border border-sky-100">
                   <h3 className="text-lg font-bold text-gray-900 mb-3">Solution</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
-                    OpenPromo unifies scheduling and publishing across platforms and introduces AI-driven boosting to amplify reach.
+                    OpenPromo enables businesses to generate marketing videos from product images in minutes while managing and publishing content across multiple social platforms from a single interface.
                   </p>
                 </div>
                 
@@ -164,43 +174,19 @@ export default function OpenPromoCaseStudy() {
               
               <div className="space-y-8">
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  The social media management market is saturated with tools that solve only part of the problem. While platforms like Buffer and Hootsuite excel at scheduling, they fail to address the fundamental challenge: helping content creators and businesses actually grow their reach.
-                </p>
-                
-                <div className="flex justify-center my-12">
-                  <div className="w-full max-w-lg">
-                    <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
-                      <p className="text-gray-500">Frustrated creator illustration</p>
-                    </div>
-                    <p className="text-sm text-gray-600 text-center mt-4 italic">Small businesses and creators struggle to manage multiple platforms effectively.</p>
-                  </div>
-                </div>
-                
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  Small businesses and creators often lack ad expertise or budgets, making boosting and promotion inaccessible. They&apos;re forced to choose between expensive agency services or DIY approaches that rarely deliver results. Current limitations include:
+                  OpenPromo is a platform designed to help businesses create and distribute marketing content across social media more efficiently.
                 </p>
 
-                <div className="grid md:grid-cols-2 gap-6 my-8">
-                  <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                    <h4 className="font-semibold text-gray-900 mb-3">Fragmented Workflows</h4>
-                    <p className="text-gray-600 text-sm">Users switch between 3-5 different tools for scheduling, analytics, and promotion.</p>
-                  </div>
-                  <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                    <h4 className="font-semibold text-gray-900 mb-3">Limited Growth Tools</h4>
-                    <p className="text-gray-600 text-sm">Existing platforms focus on posting, not on amplifying reach or engagement.</p>
-                  </div>
-                  <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                    <h4 className="font-semibold text-gray-900 mb-3">Expensive Ad Management</h4>
-                    <p className="text-gray-600 text-sm">Professional ad services cost $2,000+ monthly, beyond most SMB budgets.</p>
-                  </div>
-                  <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                    <h4 className="font-semibold text-gray-900 mb-3">Complex Analytics</h4>
-                    <p className="text-gray-600 text-sm">Data scattered across platforms makes it difficult to understand what&apos;s working.</p>
-                  </div>
-                </div>
-                
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  OpenPromo addresses this by embedding AI-driven promotion into everyday workflows, making growth accessible to creators and businesses of all sizes.
+                  For many small businesses, producing video content remains one of the biggest barriers to effective social media marketing, often requiring costly influencer collaborations or professional production.
+                </p>
+
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  At the same time, managing multiple platforms fragments the publishing workflow, forcing businesses to switch between tools to create, schedule, and distribute content.
+                </p>
+
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  This project explores how AI-generated video creation combined with unified multi-platform publishing can simplify and scale social media marketing for businesses.
                 </p>
               </div>
             </div>

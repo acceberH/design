@@ -229,24 +229,24 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* FileGPT */}
             <Link href="/work/filegpt" className="group">
-              <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-105 animate-fade-in-up hover:rotate-1">
-                <div className="h-64 relative overflow-hidden">
+              <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-105 animate-fade-in-up h-full flex flex-col">
+                <div className="h-64 relative overflow-hidden bg-gray-50 flex items-center justify-center">
                   <Image 
-                    src="/filegpt_mockup.png"
+                    src="/415shots_so.png"
                     alt="FileGPT Application Mockup"
-                    width={400}
-                    height={256}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    width={1920}
+                    height={1080}
+                    className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.01]"
                   />
-                  <div className="absolute bottom-4 right-4 text-white text-2xl font-bold drop-shadow-lg">
+                  <div className="absolute bottom-4 right-4 text-gray-700 text-2xl font-bold drop-shadow-lg">
                     →
                   </div>
                 </div>
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-1">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
                     FileGPT
                   </h3>
-                  <p className="text-gray-600 mb-4">
+                  <p className="text-gray-600 mb-4 flex-1">
                     AI-powered document analysis and knowledge extraction platform that transforms complex files into actionable insights.
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -258,24 +258,53 @@ export default function Home() {
               </div>
             </Link>
 
-            {/* Offerplz */}
-            <Link href="/work/offerplz" className="group">
-              <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-105 animate-fade-in-up hover:rotate-1" style={{animationDelay: '0.1s'}}>
+            {/* OpenPromo */}
+            <Link href="/work/openpromo" className="group">
+              <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-105 animate-fade-in-up h-full flex flex-col" style={{animationDelay: '0.1s'}}>
                 <div className="h-64 relative overflow-hidden bg-gray-50 flex items-center justify-center">
-                  <Image 
-                    src="/offer_mock.png"
-                    alt="Offerplz Application Mockup"
-                    width={400}
-                    height={256}
-                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                  <Image
+                    src="/394shots_so.png"
+                    alt="OpenPromo Application Mockup"
+                    width={1920}
+                    height={1080}
+                    className="w-full h-full object-contain p-1 md:p-2 group-hover:scale-[1.01] transition-transform duration-300"
                   />
                   <div className="absolute bottom-4 right-4 text-gray-700 text-2xl font-bold drop-shadow-lg">→</div>
                 </div>
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
+                    OpenPromo
+                  </h3>
+                  <p className="text-gray-600 mb-4 flex-1">
+                    Multi-tenant social content management platform for marketing teams with advanced analytics and collaboration tools.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Product Design</span>
+                    <span className="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded">SaaS</span>
+                    <span className="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">B2B</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+
+            {/* Offerplz */}
+            <Link href="/work/offerplz" className="group">
+              <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-105 animate-fade-in-up h-full flex flex-col" style={{animationDelay: '0.2s'}}>
+                <div className="h-64 relative overflow-hidden bg-gray-50 flex items-center justify-center">
+                  <Image 
+                    src="/362shots_so.png"
+                    alt="Offerplz Application Mockup"
+                    width={1920}
+                    height={1080}
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute bottom-4 right-4 text-gray-700 text-2xl font-bold drop-shadow-lg">→</div>
+                </div>
+                <div className="p-6 flex flex-col flex-1">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
                     Offerplz
                   </h3>
-                  <p className="text-gray-600 mb-4">
+                  <p className="text-gray-600 mb-4 flex-1">
                     Streamlined job offer management platform that simplifies the hiring process for both employers and candidates.
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -286,62 +315,6 @@ export default function Home() {
                 </div>
               </div>
             </Link>
-
-            {/* Aispire */}
-            <Link href="/work/aispire" className="group">
-              <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-105 animate-fade-in-up hover:rotate-1" style={{animationDelay: '0.2s'}}>
-                <div className="h-64 relative overflow-hidden bg-gray-50 flex items-center justify-center">
-            <Image
-                    src="/aispire_mock.png"
-                    alt="Aispire Application Mockup"
-                    width={400}
-                    height={256}
-                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute bottom-4 right-4 text-gray-700 text-2xl font-bold drop-shadow-lg">
-                    →
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
-                    Aispire
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    AI-driven inspiration and creativity platform that helps users discover new ideas and generate innovative solutions.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">UX Design&Research</span>
-                    <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">AI/ML</span>
-                    <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Education</span>
-                  </div>
-                </div>
-              </div>
-            </Link>
-
-            {/* OpenPromo */}
-            <div className="group cursor-not-allowed">
-              <div className="bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-500 animate-fade-in-up opacity-75" style={{animationDelay: '0.3s'}}>
-                <div className="h-64 bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center relative">
-                  <div className="text-white text-6xl mb-4 opacity-50">📊</div>
-                  <div className="absolute top-4 right-4 bg-white text-orange-600 px-3 py-1 rounded-full text-xs font-semibold">
-                    Coming Soon
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-500 mb-2">
-                    OpenPromo
-                  </h3>
-                  <p className="text-gray-400 mb-4">
-                    Multi-tenant social content management platform for marketing teams with advanced analytics and collaboration tools.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded">Product Design</span>
-                    <span className="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded">SaaS</span>
-                    <span className="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded">B2B</span>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>

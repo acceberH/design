@@ -2,28 +2,17 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, MouseEvent } from "react";
 
 export default function FileGPT() {
+  const scrollToSection = (id: string) => (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
   useEffect(() => {
     // Smooth scrolling and active navigation
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section[id]');
-    
-    navLinks.forEach(link => {
-      link.addEventListener('click', (e: Event) => {
-        e.preventDefault();
-        const targetId = (e.target as HTMLAnchorElement).getAttribute('href')?.substring(1);
-        const targetSection = document.getElementById(targetId || '');
-        
-        if (targetSection) {
-          targetSection.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
     
     // Highlight active section
     function updateActiveNav() {
@@ -111,12 +100,12 @@ export default function FileGPT() {
         <aside className="w-56 bg-gray-50 h-screen sticky top-20 hidden lg:block">
           <nav className="p-6">
             <ul className="space-y-2">
-              <li><a href="#tldr" className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">TL;DR</a></li>
-              <li><a href="#context" className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">Context</a></li>
-              <li><a href="#goal" className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">Goal</a></li>
-              <li><a href="#approach" className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">Approach</a></li>
-              <li><a href="#impact" className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">Impact</a></li>
-              <li><a href="#reflect" className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">Reflect</a></li>
+              <li><a href="#tldr" onClick={scrollToSection("tldr")} className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">TL;DR</a></li>
+              <li><a href="#impact" onClick={scrollToSection("impact")} className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">Impact</a></li>
+              <li><a href="#context" onClick={scrollToSection("context")} className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">Context</a></li>
+              <li><a href="#goal" onClick={scrollToSection("goal")} className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">Goal</a></li>
+              <li><a href="#approach" onClick={scrollToSection("approach")} className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">Approach</a></li>
+              <li><a href="#reflect" onClick={scrollToSection("reflect")} className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">Reflect</a></li>
             </ul>
           </nav>
         </aside>
@@ -178,30 +167,39 @@ export default function FileGPT() {
                 </p>
               </div>
               
-              <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-red-50 rounded-lg p-6 border border-red-100 transform hover:scale-105 transition-all duration-300">
                   <h3 className="text-lg font-bold text-gray-900 mb-3">Problem</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
                     Most researchers and students lacked effective tools to summarize academic papers or lectures. They spent hours extracting insights manually, reducing efficiency and slowing progress.
                   </p>
                 </div>
-                
+
                 <div className="bg-sky-50 rounded-lg p-6 border border-sky-100 transform hover:scale-105 transition-all duration-300">
                   <h3 className="text-lg font-bold text-gray-900 mb-3">Solution</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
                     Designed a GPT-powered conversational tool where users could upload files and &quot;chat with documents.&quot; The UI prioritized clarity, persistent context, and inline citations to build trust.
                   </p>
                 </div>
-                
-                <div className="bg-green-50 rounded-lg p-6 border border-green-100 transform hover:scale-105 transition-all duration-300">
-                  <h3 className="text-lg font-bold text-gray-900 mb-3">Impact</h3>
-                  <div className="text-sm text-gray-600 leading-relaxed space-y-1">
-                    <p>• 10,000+ monthly active users in the first month</p>
-                    <p>• 87% user satisfaction in early surveys</p>
-                    <p>• 30–40 minutes saved per paper on average</p>
+              </div>
+
+              <section id="impact" className="mt-8 bg-white rounded-xl p-6 border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-5">Impact</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="rounded-lg bg-indigo-50 p-4 text-center">
+                    <p className="text-2xl font-bold text-indigo-600">10,000+</p>
+                    <p className="text-xs text-gray-600 mt-1">Monthly active users in month one</p>
+                  </div>
+                  <div className="rounded-lg bg-cyan-50 p-4 text-center">
+                    <p className="text-2xl font-bold text-cyan-600">87%</p>
+                    <p className="text-xs text-gray-600 mt-1">User satisfaction in early surveys</p>
+                  </div>
+                  <div className="rounded-lg bg-green-50 p-4 text-center">
+                    <p className="text-2xl font-bold text-green-600">30-40 min</p>
+                    <p className="text-xs text-gray-600 mt-1">Average time saved per paper</p>
                   </div>
                 </div>
-              </div>
+              </section>
             </div>
           </section>
 
@@ -211,30 +209,38 @@ export default function FileGPT() {
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Context</h2>
               
               <div className="space-y-8">
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  At the time, researchers and students struggled with overwhelming volumes of academic papers, lecture recordings, and transcripts. Reading and note-taking consumed hours every week, leaving little time for higher-value tasks like analysis and synthesis.
-                </p>
-                
-                <div className="flex justify-center my-12">
-                  <div className="w-full max-w-lg">
-                    <Image 
-                      src="/filegpt_illus.png"
-                      alt="Person overwhelmed by academic workload and research papers"
-                      width={500}
-                      height={400}
-                      className="w-full h-auto rounded-lg shadow-lg"
+
+                <div className="my-12 space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] items-start gap-4 md:gap-6">
+                    <blockquote className="rounded-2xl bg-white/90 px-5 py-3 text-gray-700 shadow-sm ring-1 ring-gray-200 max-w-[760px]">
+                      <p className="text-sm md:text-base font-medium leading-relaxed">
+                        "I spend 6-8 hours every week reading papers and still miss key insights."
+                      </p>
+                    </blockquote>
+
+                    <Image
+                      src="/filegpt_headache.png"
+                      alt="Person feeling overwhelmed while studying"
+                      width={1000}
+                      height={760}
+                      className="w-40 md:w-48 h-auto object-contain md:mt-1"
                     />
-                    <p className="text-sm text-gray-600 text-center mt-4 italic">Students often spend hours just trying to extract key points from dense documents.</p>
+                  </div>
+
+                  <div className="grid grid-cols-[78px_1fr] md:grid-cols-[110px_1fr] items-center gap-3 md:gap-5">
+                    <Image
+                      src="/filegpt_ideas.svg"
+                      alt="Ideas and planning illustration"
+                      width={220}
+                      height={220}
+                      className="w-16 md:w-24 h-auto object-contain"
+                    />
+                    <p className="text-lg text-gray-800 leading-relaxed font-medium">
+                      <span className="text-indigo-700">Design Opportunity:</span> How might we help people extract insights from complex research materials in minutes rather than hours?
+                    </p>
                   </div>
                 </div>
                 
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  A survey of graduate students showed that <span className="font-semibold text-indigo-600">65% spent 5+ hours per week</span> skimming papers for relevance, and <span className="font-semibold text-indigo-600">47% admitted they rarely finished</span> full articles, relying only on abstracts or notes. Early testers also reported that generic AI chat tools were not sufficient, since they couldn&apos;t process PDFs, transcripts, or lecture videos directly.
-                </p>
-                
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  All signals pointed to the same need: a smarter assistant that could summarize diverse content formats and surface insights in minutes instead of hours.
-                </p>
               </div>
             </div>
           </section>
@@ -313,7 +319,8 @@ export default function FileGPT() {
                     <p className="text-gray-600">Compared ChatPDF, ChatDoc, SciSummary → Found missing audio/video support and source references.</p>
                   </div>
                 </div>
-                
+
+
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
                   <div className="w-full h-96 bg-white p-6">
                     <Image 
@@ -336,6 +343,19 @@ export default function FileGPT() {
                   </div>
                   <p className="text-gray-600">Multi-format support + trust-building features (sources) would define FileGPT&apos;s differentiation.</p>
                 </div>
+
+                <div className="mt-6 bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Design Solution 1</h4>
+                  <p className="text-gray-600 mb-4">Support multiple file types and merged uploads so users can process PDFs, transcripts, and lecture materials together in one workflow.</p>
+
+                  <div className="rounded-lg border border-gray-200 bg-gray-50 overflow-hidden">
+                    <img
+                      src="/filegpt_solution1.gif"
+                      alt="Multi-file and merged-upload design solution demo"
+                      className="w-full h-auto object-contain"
+                    />
+                  </div>
+                </div>
               </div>
               
               {/* Phase 2 - User Test & Iteration */}
@@ -345,95 +365,32 @@ export default function FileGPT() {
                   <p className="text-lg text-gray-600">Validating flows with users and refining based on feedback</p>
                 </div>
                 
-                <div className="grid lg:grid-cols-2 gap-8 mb-8">
-                  <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                    <div className="flex items-center mb-4">
-                      <span className="text-2xl mr-3">🎯</span>
-                      <h4 className="text-lg font-semibold text-gray-900">Objective</h4>
-                    </div>
-                    <p className="text-gray-600">Make file upload seamless and responses credible.</p>
-                  </div>
-                  
-                  <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                    <div className="flex items-center mb-4">
-                      <span className="text-2xl mr-3">⚡</span>
-                      <h4 className="text-lg font-semibold text-gray-900">Action</h4>
-                    </div>
-                    <div className="text-gray-600 space-y-2">
-                      <p>Built clickable prototype → Tested with early adopters → Feedback:</p>
-                      <p>• Wanted multi-file summarization</p>
-                      <p>• Needed trust via source references</p>
-                    </div>
-                  </div>
+                <div className="mb-6 grid grid-cols-1 md:grid-cols-[130px_1fr] items-center gap-4 md:gap-5">
+                  <Image
+                    src="/filegpt_trust.svg"
+                    alt="User questioning response credibility"
+                    width={220}
+                    height={220}
+                    className="w-24 md:w-28 h-auto object-contain"
+                  />
+                  <blockquote className="rounded-2xl bg-white/95 px-5 py-3 text-gray-700 shadow-sm ring-1 ring-gray-200">
+                    <p className="text-sm md:text-base font-medium leading-relaxed">
+                      "How can I trust that this response is grounded in the materials I uploaded?"
+                    </p>
+                  </blockquote>
                 </div>
                 
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
                   <div className="w-full p-6">
-                    <div className="grid grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <Image 
-                          src="/filegpt_landing.png"
-                          alt="FileGPT Landing Page"
-                          width={400}
-                          height={300}
-                          className="w-full h-auto object-contain rounded-lg border border-gray-200"
-                        />
-                        <p className="text-xs text-gray-600 text-center">Landing Page</p>
-                      </div>
-                      <div className="space-y-2">
-                        <Image 
-                          src="/filegpt_signin.png"
-                          alt="FileGPT Sign In"
-                          width={400}
-                          height={300}
-                          className="w-full h-auto object-contain rounded-lg border border-gray-200"
-                        />
-                        <p className="text-xs text-gray-600 text-center">Sign In Flow</p>
-                      </div>
-                      <div className="space-y-2">
-                        <Image 
-                          src="/filegpt_upload.png"
-                          alt="FileGPT Upload Interface"
-                          width={400}
-                          height={300}
-                          className="w-full h-auto object-contain rounded-lg border border-gray-200"
-                        />
-                        <p className="text-xs text-gray-600 text-center">Upload Interface</p>
-                      </div>
-                      <div className="space-y-2">
-                        <Image 
-                          src="/filegpt_convo.png"
-                          alt="FileGPT Conversation Interface"
-                          width={400}
-                          height={300}
-                          className="w-full h-auto object-contain rounded-lg border border-gray-200"
-                        />
-                        <p className="text-xs text-gray-600 text-center">Conversation UI</p>
-                      </div>
-                      <div className="space-y-2">
-                        <Image 
-                          src="/filegpt_source.png"
-                          alt="FileGPT Source Citations"
-                          width={400}
-                          height={300}
-                          className="w-full h-auto object-contain rounded-lg border border-gray-200"
-                        />
-                        <p className="text-xs text-gray-600 text-center">Source Citations</p>
-                      </div>
-                      <div className="space-y-2">
-                        <Image 
-                          src="/filegpt_profile.png"
-                          alt="FileGPT User Profile"
-                          width={400}
-                          height={300}
-                          className="w-full h-auto object-contain rounded-lg border border-gray-200"
-                        />
-                        <p className="text-xs text-gray-600 text-center">User Profile</p>
-                      </div>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-3">Design Solution 2</h4>
+                    <p className="text-gray-600 mb-4">Use source-grounded response panels so users can trace generated insights back to the exact file segments.</p>
+                    <div className="rounded-lg border border-gray-200 bg-gray-50 overflow-hidden">
+                      <img
+                        src="/filegpt_solution2.gif"
+                        alt="Design Solution 2 demo"
+                        className="w-full h-auto object-contain"
+                      />
                     </div>
-                  </div>
-                  <div className="p-4">
-                    <p className="text-sm text-gray-600 italic">Key interface iterations showcasing the complete user journey from landing to profile management.</p>
                   </div>
                 </div>
                 
@@ -443,34 +400,11 @@ export default function FileGPT() {
                     <h4 className="text-lg font-semibold text-gray-900">Key Outcomes</h4>
                   </div>
                   <div className="space-y-2 text-gray-600">
-                    <p><strong>Reduced upload friction</strong></p>
-                    <p><strong>Expanded use cases</strong> (multi-file workflows)</p>
-                    <p><strong>Improved trust</strong> with inline sources</p>
+                    <p>The design introduced three key capabilities that reshaped how users interact with research materials.</p>
+                    <p>• Conversational exploration of documents</p>
+                    <p>• Multi-format research ingestion</p>
+                    <p>• Trust through verifiable citations</p>
                   </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Impact Section */}
-          <section id="impact" className="px-6 py-16 border-t border-gray-200">
-            <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Impact</h2>
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-indigo-600 mb-2">10,000+</div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Rapid Adoption</h3>
-                  <p className="text-sm text-gray-600">Monthly active users within the first month, validating market demand.</p>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-cyan-600 mb-2">87%</div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">High Satisfaction</h3>
-                  <p className="text-sm text-gray-600">Early surveys showed high satisfaction rate, with users praising time savings and ease of use.</p>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-indigo-600 mb-2">30-40min</div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Time Saved</h3>
-                  <p className="text-sm text-gray-600">Users reported saving time per paper by using summaries and key takeaways.</p>
                 </div>
               </div>
             </div>
@@ -482,27 +416,17 @@ export default function FileGPT() {
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Reflect</h2>
               
               <div className="space-y-8">
-                <p className="text-xl font-bold text-gray-900 leading-relaxed">
-                  Designing FileGPT taught me how AI reshapes design thinking and the realities of product development beyond the classroom.
-                </p>
-                
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Working on FileGPT when UX Pilot had just gained public attention revealed a new set of challenges for design. Unlike traditional UX flows, generative AI created unpredictable outputs, requiring me to prioritize credibility, transparency, and adaptability as part of the design.
+                  Working on FileGPT when generative AI had just gained public attention revealed a new set of challenges for design. Unlike traditional UX flows, generative AI created unpredictable outputs, requiring me to prioritize credibility, transparency, and adaptability as part of the design.
                 </p>
-                
+
                 <p className="text-lg text-gray-600 leading-relaxed">
                   This experience also highlighted the gap between academic UX training and real-world product development. In school, I was taught to conduct comprehensive, rigorous research, but I quickly realized that such methods were too time-intensive for a startup environment. Instead, I learned to adapt by running lightweight, rapid validations that still informed impactful decisions.
                 </p>
-                
+
                 <p className="text-lg text-gray-600 leading-relaxed">
                   Working closely with developers showed me that design cannot be separated from technical feasibility. Many user flows and trust features, such as source traceability, depended on implementation details. This collaboration gave me a deeper appreciation for how design and engineering shape each other.
                 </p>
-                
-                <div className="bg-indigo-50 rounded-xl p-6 border-l-4 border-indigo-600">
-                  <p className="text-lg font-semibold text-indigo-600">
-                    Key Learning: Designing for AI requires balancing speed and rigor, embracing uncertainty, and collaborating deeply with engineering to turn ideas into real user value.
-                  </p>
-                </div>
               </div>
             </div>
           </section>

@@ -8,20 +8,26 @@ export default function Offerplz() {
   useEffect(() => {
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('.nav-link');
+    const handleNavClick = function(this: HTMLElement, e: Event) {
+      e.preventDefault();
+      const targetId = this.getAttribute('data-section');
+      const targetSection = targetId ? document.getElementById(targetId) : null;
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
     navLinks.forEach(link => {
-      link.addEventListener('click', function(this: HTMLElement, e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('data-section');
-        const targetSection = document.getElementById(targetId!);
-        if (targetSection) {
-          targetSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
+      link.addEventListener('click', handleNavClick);
     });
 
     // Active navigation highlighting
-    const sections = document.querySelectorAll('section[id]');
     const navLinksArray = Array.from(navLinks);
+    const sections = navLinksArray
+      .map(link => (link as HTMLElement).getAttribute('data-section'))
+      .filter((id): id is string => Boolean(id))
+      .map(id => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section));
 
     const observerOptions = { threshold: 0.3, rootMargin: '-20% 0px -35% 0px' };
     const observer = new IntersectionObserver((entries) => {
@@ -67,7 +73,7 @@ export default function Offerplz() {
 
     return () => {
       navLinks.forEach(link => {
-        link.removeEventListener('click', function() {});
+        link.removeEventListener('click', handleNavClick);
       });
       observer.disconnect();
       observer2.disconnect();
@@ -106,10 +112,10 @@ export default function Offerplz() {
           <nav className="p-6">
             <ul className="space-y-2">
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="tldr">TL;DR</span></li>
+              <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="impact">Impact</span></li>
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="context">Context</span></li>
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="goals">Goals</span></li>
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="approach">Approach</span></li>
-              <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="impact">Impact</span></li>
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="reflect">Reflect</span></li>
             </ul>
           </nav>
@@ -185,7 +191,7 @@ export default function Offerplz() {
                   Offerplz redefines resume creation with an AI-driven platform that transforms raw experience into polished, recruiter-ready narratives in minutes. As the UX Designer, I led user research, defined the MVP scope, and designed the end-to-end product experience from editor to export.
                 </p>
               </div>
-              <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-red-50 rounded-lg p-6 border border-red-100 transform hover:scale-105 transition-all duration-300">
                   <h3 className="text-lg font-bold text-gray-900 mb-3">Problem</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
@@ -198,11 +204,23 @@ export default function Offerplz() {
                     Offerplz uses AI to generate tailored, results-driven project bullets in a clean, distraction-free resume editor.
                   </p>
                 </div>
-                <div className="bg-green-50 rounded-lg p-6 border border-green-100 transform hover:scale-105 transition-all duration-300">
-                  <h3 className="text-lg font-bold text-gray-900 mb-3">Impact</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
-                    Target 10,000 registered users within 6 months, maintain 85% user satisfaction for AI suggestions, and achieve 25% monthly retention rate.
-                  </p>
+              </div>
+
+              <div id="impact" className="mt-8 bg-white rounded-xl p-6 border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-5">Impact</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
+                  <div className="rounded-lg bg-indigo-50 p-4 text-center">
+                    <p className="text-2xl font-bold text-indigo-600">10,000</p>
+                    <p className="text-xs text-gray-600 mt-1">Registered users in 6 months</p>
+                  </div>
+                  <div className="rounded-lg bg-green-50 p-4 text-center">
+                    <p className="text-2xl font-bold text-green-600">85%</p>
+                    <p className="text-xs text-gray-600 mt-1">Satisfaction with AI suggestions</p>
+                  </div>
+                  <div className="rounded-lg bg-cyan-50 p-4 text-center">
+                    <p className="text-2xl font-bold text-cyan-600">25%</p>
+                    <p className="text-xs text-gray-600 mt-1">Monthly retention target</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -276,7 +294,7 @@ export default function Offerplz() {
                   </div>
                   <p className="text-lg text-gray-600">Understanding job seeker frustrations and market blind spots</p>
                   
-                  <div className="grid md:grid-cols-2 gap-8 mb-8">
+                  <div className="grid grid-cols-1 gap-6 mb-8">
                     <div>
                       <h4 className="font-semibold mb-3 flex items-center text-gray-900">
                         <span className="mr-2">🎯</span> Objective
@@ -325,7 +343,7 @@ export default function Offerplz() {
                   </div>
                   <p className="text-lg text-gray-600">Defining MVP and prototyping a professional, AI-driven editor</p>
                   
-                  <div className="grid md:grid-cols-2 gap-8 mb-8">
+                  <div className="grid grid-cols-1 gap-6 mb-8">
                     <div>
                       <h4 className="font-semibold mb-3 flex items-center text-gray-900">
                         <span className="mr-2">🎯</span> Objective
@@ -347,56 +365,56 @@ export default function Offerplz() {
                   
                   <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     <div className="p-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 gap-8">
                         <div className="space-y-3">
                           <Image
                             src="/offerlanding.png"
                             alt="Offerplz Landing Page Interface"
-                            width={400}
-                            height={300}
-                            className="w-full h-auto object-contain rounded-lg border border-gray-200"
+                            width={1400}
+                            height={900}
+                            className="w-full h-auto object-cover rounded-lg border border-gray-200"
                           />
-                          <p className="text-xs text-gray-600 text-center">Landing Page</p>
+                          <p className="text-sm text-gray-600 text-center">Landing Page</p>
                         </div>
                         <div className="space-y-3">
                           <Image
                             src="/offer_chat.png"
                             alt="Offerplz Chat Interface"
-                            width={400}
-                            height={300}
-                            className="w-full h-auto object-contain rounded-lg border border-gray-200"
+                            width={1400}
+                            height={900}
+                            className="w-full h-auto object-cover rounded-lg border border-gray-200"
                           />
-                          <p className="text-xs text-gray-600 text-center">Chat Interface</p>
+                          <p className="text-sm text-gray-600 text-center">Chat Interface</p>
                         </div>
                         <div className="space-y-3">
                           <Image
                             src="/offer_jd.jpg"
                             alt="Offerplz Job Description Interface"
-                            width={400}
-                            height={300}
-                            className="w-full h-auto object-contain rounded-lg border border-gray-200"
+                            width={1400}
+                            height={900}
+                            className="w-full h-auto object-cover rounded-lg border border-gray-200"
                           />
-                          <p className="text-xs text-gray-600 text-center">Job Description</p>
+                          <p className="text-sm text-gray-600 text-center">Job Description</p>
                         </div>
                         <div className="space-y-3">
                           <Image
                             src="/offer_generate.jpg"
                             alt="Offerplz Generation Interface"
-                            width={400}
-                            height={300}
-                            className="w-full h-auto object-contain rounded-lg border border-gray-200"
+                            width={1400}
+                            height={900}
+                            className="w-full h-auto object-cover rounded-lg border border-gray-200"
                           />
-                          <p className="text-xs text-gray-600 text-center">Generation Interface</p>
+                          <p className="text-sm text-gray-600 text-center">Generation Interface</p>
                         </div>
                         <div className="space-y-3">
                           <Image
                             src="/offer_after.PNG"
                             alt="Offerplz Resume Builder Interface"
-                            width={400}
-                            height={300}
-                            className="w-full h-auto object-contain rounded-lg border border-gray-200"
+                            width={1400}
+                            height={900}
+                            className="w-full h-auto object-cover rounded-lg border border-gray-200"
                           />
-                          <p className="text-xs text-gray-600 text-center">Resume Builder</p>
+                          <p className="text-sm text-gray-600 text-center">Resume Builder</p>
                         </div>
                       </div>
                     </div>
@@ -476,51 +494,6 @@ export default function Offerplz() {
                     <p className="font-medium text-gray-700">
                       ✅ <strong>Offerplz reduced tailoring time by ~80%, boosted recruiter callbacks, and validated JD keyword tailoring as a differentiator.</strong>
                     </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Impact Section */}
-          <section id="impact" className="px-6 py-16 border-t border-gray-200">
-            <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Impact</h2>
-              
-              <div className="grid md:grid-cols-3 gap-6 mb-12">
-                <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-200 text-center transform hover:scale-105 transition-all duration-300">
-                  <div className="text-4xl font-bold text-indigo-600 mb-3">10,000</div>
-                  <div className="font-semibold text-lg mb-2 text-gray-900">Registered Users</div>
-                  <div className="text-sm text-gray-600">Achieve 10,000 registered users within 6 months of launch</div>
-                </div>
-                <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-200 text-center transform hover:scale-105 transition-all duration-300">
-                  <div className="text-4xl font-bold text-green-600 mb-3">85%</div>
-                  <div className="font-semibold text-lg mb-2 text-gray-900">User Satisfaction</div>
-                  <div className="text-sm text-gray-600">Maintain 85% user satisfaction score for AI-generated bullet suggestions</div>
-                </div>
-                <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-200 text-center transform hover:scale-105 transition-all duration-300">
-                  <div className="text-4xl font-bold text-cyan-600 mb-3">25%</div>
-                  <div className="font-semibold text-lg mb-2 text-gray-900">Monthly Retention</div>
-                  <div className="text-sm text-gray-600">Reach 25% monthly active user retention rate</div>
-                </div>
-              </div>
-
-              <div className="space-y-8">
-                <h3 className="text-2xl font-bold text-gray-900">What Users Said</h3>
-                
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="bg-gray-50 border-l-4 border-indigo-500 p-6 rounded-r-lg">
-                    <blockquote className="italic text-gray-700">
-                      &quot;Offerplz transformed my generic project descriptions into compelling bullet points that actually got recruiters&apos; attention. I landed 3 interviews in two weeks.&quot;
-                    </blockquote>
-                    <footer className="text-sm mt-3 text-gray-600">— Sarah Chen, Product Manager</footer>
-                  </div>
-                  
-                  <div className="bg-gray-50 border-l-4 border-cyan-500 p-6 rounded-r-lg">
-                    <blockquote className="italic text-gray-700">
-                      &quot;The AI suggestions helped me articulate impact I didn&apos;t even realize I had. My resume finally tells a story recruiters want to hear.&quot;
-                    </blockquote>
-                    <footer className="text-sm mt-3 text-gray-600">— Marcus Johnson, Software Engineer</footer>
                   </div>
                 </div>
               </div>
