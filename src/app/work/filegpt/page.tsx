@@ -128,7 +128,7 @@ export default function FileGPT() {
               
               {/* One-liner Description */}
               <p className="text-lg lg:text-xl text-gray-600 mb-6 leading-relaxed">
-                Enabling researchers and students to chat with papers, videos, and audio using GPT-powered summarization.
+                FileGPT is an AI-powered platform that allows users to interact with documents, videos, and audio through conversation, turning complex content into accessible insights.
               </p>
               
               {/* Metadata Row */}
@@ -183,20 +183,20 @@ export default function FileGPT() {
                 </div>
               </div>
 
-              <section id="impact" className="mt-8 bg-white rounded-xl p-6 border border-gray-200">
-                <h3 className="text-xl font-bold text-gray-900 mb-5">Impact</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="rounded-lg bg-indigo-50 p-4 text-center">
-                    <p className="text-2xl font-bold text-indigo-600">10,000+</p>
-                    <p className="text-xs text-gray-600 mt-1">Monthly active users in month one</p>
+              <section id="impact" className="mt-10">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Impact</h3>
+                <div className="space-y-3 text-gray-700">
+                  <div className="flex items-baseline justify-between gap-4 border-b border-gray-200 pb-3">
+                    <p className="text-sm text-gray-600">Monthly active users in month one</p>
+                    <p className="text-2xl font-semibold text-gray-900">10,000+</p>
                   </div>
-                  <div className="rounded-lg bg-cyan-50 p-4 text-center">
-                    <p className="text-2xl font-bold text-cyan-600">87%</p>
-                    <p className="text-xs text-gray-600 mt-1">User satisfaction in early surveys</p>
+                  <div className="flex items-baseline justify-between gap-4 border-b border-gray-200 pb-3">
+                    <p className="text-sm text-gray-600">User satisfaction in early surveys</p>
+                    <p className="text-2xl font-semibold text-gray-900">87%</p>
                   </div>
-                  <div className="rounded-lg bg-green-50 p-4 text-center">
-                    <p className="text-2xl font-bold text-green-600">30-40 min</p>
-                    <p className="text-xs text-gray-600 mt-1">Average time saved per paper</p>
+                  <div className="flex items-baseline justify-between gap-4 border-b border-gray-200 pb-3">
+                    <p className="text-sm text-gray-600">Average time saved per paper</p>
+                    <p className="text-2xl font-semibold text-gray-900">30-40 min</p>
                   </div>
                 </div>
               </section>
@@ -338,7 +338,7 @@ export default function FileGPT() {
                 
                 <div className="bg-green-50 rounded-xl p-6 border-l-4 border-indigo-600">
                   <div className="flex items-center mb-3">
-                    <span className="text-xl mr-3">✅</span>
+                    <span className="text-xl mr-3"></span>
                     <h4 className="text-lg font-semibold text-gray-900">Key Insight</h4>
                   </div>
                   <p className="text-gray-600">Multi-format support + trust-building features (sources) would define FileGPT&apos;s differentiation.</p>
@@ -396,7 +396,7 @@ export default function FileGPT() {
                 
                 <div className="bg-green-50 rounded-xl p-6 border-l-4 border-indigo-600">
                   <div className="flex items-center mb-3">
-                    <span className="text-xl mr-3">✅</span>
+                    <span className="text-xl mr-3"></span>
                     <h4 className="text-lg font-semibold text-gray-900">Key Outcomes</h4>
                   </div>
                   <div className="space-y-2 text-gray-600">
@@ -453,7 +453,7 @@ export default function FileGPT() {
           </div>
           <div className="text-center">
             <div className="flex justify-center space-x-6 mb-4">
-              <a href="https://linkedin.com/in/rebecca-huang" className="text-gray-600 hover:text-indigo-600 transition-colors">
+              <a href="https://www.linkedin.com/in/rebecca-huang-a60388249/" className="text-gray-600 hover:text-indigo-600 transition-colors">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" />
                 </svg>
