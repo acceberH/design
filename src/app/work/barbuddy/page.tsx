@@ -57,7 +57,7 @@ export default function BarBuddyCaseStudy() {
             <nav className="hidden md:flex space-x-8">
               <Link href="/" className="text-gray-600 hover:text-indigo-600 transition-colors">Home</Link>
               <Link href="/" className="text-gray-600 hover:text-indigo-600 transition-colors">Work</Link>
-              <Link href="/" className="text-gray-600 hover:text-indigo-600 transition-colors">About</Link>
+              <Link href="/about" className="text-gray-600 hover:text-indigo-600 transition-colors">About</Link>
               <Link href="/" className="text-gray-600 hover:text-indigo-600 transition-colors">Contact</Link>
             </nav>
           </div>

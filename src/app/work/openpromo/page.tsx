@@ -57,7 +57,7 @@ export default function OpenPromoCaseStudy() {
             <nav className="hidden md:flex space-x-8">
               <Link href="/" className="text-gray-600 hover:text-indigo-600 transition-colors">Home</Link>
               <Link href="/" className="text-gray-600 hover:text-indigo-600 transition-colors">Work</Link>
-              <Link href="/" className="text-gray-600 hover:text-indigo-600 transition-colors">About</Link>
+              <Link href="/about" className="text-gray-600 hover:text-indigo-600 transition-colors">About</Link>
               <Link href="/" className="text-gray-600 hover:text-indigo-600 transition-colors">Contact</Link>
             </nav>
           </div>
@@ -141,14 +141,14 @@ export default function OpenPromoCaseStudy() {
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-red-50 rounded-lg p-6 border border-red-100">
-                  <h3 className="text-lg font-bold text-gray-900 mb-3">Problem</h3>
+                  <h3 className="text-[12px] font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-3">Problem</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
                     Small businesses struggle to manage multiple social platforms and produce marketing content efficiently.
                   </p>
                 </div>
 
                 <div className="bg-sky-50 rounded-lg p-6 border border-sky-100">
-                  <h3 className="text-lg font-bold text-gray-900 mb-3">Solution</h3>
+                  <h3 className="text-[12px] font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-3">Solution</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
                     An AI-powered growth platform that helps small businesses create promotional content, manage social accounts, and learn from competitors in one place.
                   </p>
@@ -158,17 +158,17 @@ export default function OpenPromoCaseStudy() {
               <div className="mt-8">
                 <h3 className="text-3xl font-bold text-gray-900 mb-5">Impact</h3>
                 <div className="border-b border-gray-300">
-                  <div className="py-5 border-t border-gray-300 grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] items-center gap-4 md:gap-6">
+                  <div className="py-[20px] border-t border-gray-300 grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] items-center gap-4 md:gap-6">
                     <p className="text-3xl font-bold text-gray-900">90%</p>
-                    <p className="text-lg text-gray-600 leading-relaxed">Cost reduction in content production</p>
+                    <p className="text-lg text-[#334155] leading-relaxed">Cost reduction in content production</p>
                   </div>
-                  <div className="py-5 border-t border-gray-300 grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] items-center gap-4 md:gap-6">
+                  <div className="py-[20px] border-t border-gray-300 grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] items-center gap-4 md:gap-6">
                     <p className="text-3xl font-bold text-gray-900">3×</p>
-                    <p className="text-lg text-gray-600 leading-relaxed">Faster ad creation workflow</p>
+                    <p className="text-lg text-[#334155] leading-relaxed">Faster ad creation workflow</p>
                   </div>
-                  <div className="py-5 border-t border-gray-300 grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] items-center gap-4 md:gap-6">
+                  <div className="py-[20px] border-t border-gray-300 grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] items-center gap-4 md:gap-6">
                     <p className="text-3xl font-bold text-gray-900">70%</p>
-                    <p className="text-lg text-gray-600 leading-relaxed">Faster cross-platform publishing</p>
+                    <p className="text-lg text-[#334155] leading-relaxed">Faster cross-platform publishing</p>
                   </div>
                 </div>
               </div>

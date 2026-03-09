@@ -90,7 +90,7 @@ export default function Offerplz() {
             <nav className="hidden md:flex space-x-8">
               <span className="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">Home</span>
               <span className="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">Work</span>
-              <span className="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">About</span>
+              <Link href="/about" className="text-gray-600 hover:text-indigo-600 transition-colors">About</Link>
               <span className="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">Contact</span>
             </nav>
           </div>

@@ -11,7 +11,7 @@ export default function SchoolProject1() {
             <nav className="hidden md:flex space-x-8">
               <Link href="/" className="text-gray-700 hover:text-gray-900 transition-colors">Home</Link>
               <Link href="/#work" className="text-gray-700 hover:text-gray-900 transition-colors">Work</Link>
-              <Link href="/#about" className="text-gray-700 hover:text-gray-900 transition-colors">About</Link>
+              <Link href="/about" className="text-gray-700 hover:text-gray-900 transition-colors">About</Link>
               <Link href="/#contact" className="text-gray-700 hover:text-gray-900 transition-colors">Contact</Link>
             </nav>
           </div>
@@ -280,7 +280,7 @@ export default function SchoolProject1() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-xl font-bold mb-4 md:mb-0">Rebecca Huang</div>
             <div className="flex space-x-8 mb-4 md:mb-0">
-              <Link href="/#about" className="hover:text-gray-300 transition-colors">About</Link>
+              <Link href="/about" className="hover:text-gray-300 transition-colors">About</Link>
               <Link href="/#work" className="hover:text-gray-300 transition-colors">Work</Link>
               <Link href="/#contact" className="hover:text-gray-300 transition-colors">Contact</Link>
             </div>

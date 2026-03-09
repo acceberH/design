@@ -12,7 +12,7 @@ export default function Home() {
             <nav className="hidden md:flex space-x-8">
               <Link href="/" className="text-gray-700 hover:text-gray-900 transition-colors">Home</Link>
               <Link href="#work" className="text-gray-700 hover:text-gray-900 transition-colors">Work</Link>
-              <Link href="#about" className="text-gray-700 hover:text-gray-900 transition-colors">About</Link>
+              <Link href="/about" className="text-gray-700 hover:text-gray-900 transition-colors">About</Link>
               <Link href="#contact" className="text-gray-700 hover:text-gray-900 transition-colors">Contact</Link>
             </nav>
             <div className="flex space-x-4">
@@ -268,7 +268,7 @@ export default function Home() {
                     width={1920}
                     height={1080}
                     unoptimized
-                    className="w-full h-full object-cover object-[50%_18%] scale-[1.14] group-hover:scale-[1.16] transition-transform duration-300"
+                    className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.01]"
                   />
                   <div className="absolute bottom-4 right-4 text-gray-700 text-2xl font-bold drop-shadow-lg">→</div>
                 </div>
@@ -293,11 +293,12 @@ export default function Home() {
               <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-105 animate-fade-in-up h-full flex flex-col" style={{animationDelay: '0.2s'}}>
                 <div className="h-64 relative overflow-hidden bg-gray-50 flex items-center justify-center">
                   <Image 
-                    src="/362shots_so.png"
+                    src="/offerplz_new_cover_2x.png"
                     alt="Offerplz Application Mockup"
-                    width={1920}
-                    height={1080}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    width={1248}
+                    height={512}
+                    unoptimized
+                    className="w-full h-full object-cover object-center group-hover:scale-[1.01] transition-transform duration-300"
                   />
                   <div className="absolute bottom-4 right-4 text-gray-700 text-2xl font-bold drop-shadow-lg">→</div>
                 </div>
@@ -467,7 +468,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-xl font-bold mb-4 md:mb-0">Rebecca Huang</div>
             <div className="flex space-x-8 mb-4 md:mb-0">
-              <Link href="#about" className="hover:text-gray-300 transition-colors">About</Link>
+              <Link href="/about" className="hover:text-gray-300 transition-colors">About</Link>
               <Link href="#work" className="hover:text-gray-300 transition-colors">Work</Link>
               <Link href="#contact" className="hover:text-gray-300 transition-colors">Contact</Link>
             </div>

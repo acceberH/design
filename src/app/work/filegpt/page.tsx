@@ -2,13 +2,18 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, MouseEvent } from "react";
+import { useEffect, MouseEvent, useRef, useState } from "react";
 
 export default function FileGPT() {
+  const impactAnimatedRef = useRef(false);
+  const [impactUsers, setImpactUsers] = useState(0);
+  const [impactSatisfaction, setImpactSatisfaction] = useState(0);
+
   const scrollToSection = (id: string) => (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
+
   useEffect(() => {
     // Smooth scrolling and active navigation
     const navLinks = document.querySelectorAll('.nav-link');
@@ -50,11 +55,12 @@ export default function FileGPT() {
     }, observerOptions);
     
     // Observe all sections
-    sections.forEach(section => {
+    sections.forEach((section, index) => {
       const sectionElement = section as HTMLElement;
       sectionElement.style.opacity = '0';
-      sectionElement.style.transform = 'translateY(30px)';
-      sectionElement.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+      sectionElement.style.transform = 'translateY(40px)';
+      sectionElement.style.transition = 'opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
+      sectionElement.style.transitionDelay = `${index * 100}ms`;
       observer.observe(section);
     });
     
@@ -68,6 +74,54 @@ export default function FileGPT() {
     };
   }, []);
 
+  useEffect(() => {
+    const impactSection = document.getElementById('impact');
+    if (!impactSection) return;
+
+    const duration = 1500;
+    const easeOutQuart = (progress: number) => 1 - Math.pow(1 - progress, 4);
+
+    const animateValue = (
+      setter: (value: number) => void,
+      endValue: number
+    ) => {
+      const startTime = performance.now();
+
+      const step = (currentTime: number) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = easeOutQuart(progress);
+        setter(endValue * easedProgress);
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        }
+      };
+
+      requestAnimationFrame(step);
+    };
+
+    const impactObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !impactAnimatedRef.current) {
+            impactAnimatedRef.current = true;
+            animateValue(setImpactUsers, 10000);
+            animateValue(setImpactSatisfaction, 87);
+            impactObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    impactObserver.observe(impactSection);
+
+    return () => {
+      impactObserver.disconnect();
+    };
+  }, []);
+
   return (
     <div className="bg-gray-50 font-sans">
       {/* Header */}
@@ -78,7 +132,7 @@ export default function FileGPT() {
             <nav className="hidden md:flex space-x-8">
               <Link href="/" className="text-gray-600 hover:text-indigo-600 transition-colors">Home</Link>
               <Link href="/#work" className="text-gray-600 hover:text-indigo-600 transition-colors">Work</Link>
-              <Link href="/#about" className="text-gray-600 hover:text-indigo-600 transition-colors">About</Link>
+              <Link href="/about" className="text-gray-600 hover:text-indigo-600 transition-colors">About</Link>
               <Link href="/#contact" className="text-gray-600 hover:text-indigo-600 transition-colors">Contact</Link>
             </nav>
           </div>
@@ -103,7 +157,6 @@ export default function FileGPT() {
               <li><a href="#tldr" onClick={scrollToSection("tldr")} className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">TL;DR</a></li>
               <li><a href="#impact" onClick={scrollToSection("impact")} className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">Impact</a></li>
               <li><a href="#context" onClick={scrollToSection("context")} className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">Context</a></li>
-              <li><a href="#goal" onClick={scrollToSection("goal")} className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">Goal</a></li>
               <li><a href="#approach" onClick={scrollToSection("approach")} className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">Approach</a></li>
               <li><a href="#reflect" onClick={scrollToSection("reflect")} className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer">Reflect</a></li>
             </ul>
@@ -160,7 +213,7 @@ export default function FileGPT() {
           {/* TL;DR Section */}
           <section id="tldr" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">TL;DR</h2>
+              <h2 className="text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 mb-8">TL;DR</h2>
               <div className="mb-8">
                 <p className="text-lg text-gray-600 leading-relaxed mb-4">
                   FileGPT is an AI-powered platform that help users summarize and interact with research papers, videos, and audio files. As UX Designer & Researcher, I led research, interaction design, and usability testing to transform a raw API into a usable, intuitive product.
@@ -169,14 +222,14 @@ export default function FileGPT() {
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-red-50 rounded-lg p-6 border border-red-100 transform hover:scale-105 transition-all duration-300">
-                  <h3 className="text-lg font-bold text-gray-900 mb-3">Problem</h3>
+                  <h3 className="text-xs font-bold tracking-widest uppercase text-gray-900 mb-3">Problem</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
                     Most researchers and students lacked effective tools to summarize academic papers or lectures. They spent hours extracting insights manually, reducing efficiency and slowing progress.
                   </p>
                 </div>
 
                 <div className="bg-sky-50 rounded-lg p-6 border border-sky-100 transform hover:scale-105 transition-all duration-300">
-                  <h3 className="text-lg font-bold text-gray-900 mb-3">Solution</h3>
+                  <h3 className="text-xs font-bold tracking-widest uppercase text-gray-900 mb-3">Solution</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
                     Designed a GPT-powered conversational tool where users could upload files and &quot;chat with documents.&quot; The UI prioritized clarity, persistent context, and inline citations to build trust.
                   </p>
@@ -186,17 +239,17 @@ export default function FileGPT() {
               <section id="impact" className="mt-10">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Impact</h3>
                 <div className="space-y-3 text-gray-700">
-                  <div className="flex items-baseline justify-between gap-4 border-b border-gray-200 pb-3">
-                    <p className="text-sm text-gray-600">Monthly active users in month one</p>
-                    <p className="text-2xl font-semibold text-gray-900">10,000+</p>
+                  <div className="flex items-baseline justify-between gap-4 border-b border-gray-200 py-5">
+                    <p className="text-sm text-gray-800">Monthly active users in month one</p>
+                    <p className="text-3xl font-extrabold tracking-tight text-gray-900">{Math.floor(impactUsers).toLocaleString()}+</p>
                   </div>
-                  <div className="flex items-baseline justify-between gap-4 border-b border-gray-200 pb-3">
-                    <p className="text-sm text-gray-600">User satisfaction in early surveys</p>
-                    <p className="text-2xl font-semibold text-gray-900">87%</p>
+                  <div className="flex items-baseline justify-between gap-4 border-b border-gray-200 py-5">
+                    <p className="text-sm text-gray-800">User satisfaction in early surveys</p>
+                    <p className="text-3xl font-extrabold tracking-tight text-gray-900">{Math.floor(impactSatisfaction)}%</p>
                   </div>
-                  <div className="flex items-baseline justify-between gap-4 border-b border-gray-200 pb-3">
-                    <p className="text-sm text-gray-600">Average time saved per paper</p>
-                    <p className="text-2xl font-semibold text-gray-900">30-40 min</p>
+                  <div className="flex items-baseline justify-between gap-4 border-b border-gray-200 py-5">
+                    <p className="text-sm text-gray-800">Average time saved per paper</p>
+                    <p className="text-3xl font-extrabold tracking-tight text-gray-900">30-40 min</p>
                   </div>
                 </div>
               </section>
@@ -206,7 +259,8 @@ export default function FileGPT() {
           {/* Context Section */}
           <section id="context" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Context</h2>
+              <span className="text-xs font-bold tracking-widest uppercase text-indigo-500 mb-3 block">Research</span>
+              <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 mb-8">Context</h2>
               
               <div className="space-y-8">
 
@@ -245,59 +299,16 @@ export default function FileGPT() {
             </div>
           </section>
 
-          {/* Goal Section */}
-          <section id="goal" className="px-6 py-16 border-t border-gray-200">
-            <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Goal</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 transform hover:scale-105 transition-all duration-300">
-                  <div className="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Multi-format Support</h3>
-                  <p className="text-gray-600">Support multiple file formats (PDF, DOC, TXT, audio, video, links).</p>
-                </div>
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 transform hover:scale-105 transition-all duration-300">
-                  <div className="w-12 h-12 bg-cyan-600 rounded-lg flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Simplified Interaction</h3>
-                  <p className="text-gray-600">Simplify &quot;chat with files&quot; interaction.</p>
-                </div>
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 transform hover:scale-105 transition-all duration-300">
-                  <div className="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Reduce Cognitive Load</h3>
-                  <p className="text-gray-600">Reduce cognitive load with clear summaries.</p>
-                </div>
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 transform hover:scale-105 transition-all duration-300">
-                  <div className="w-12 h-12 bg-cyan-600 rounded-lg flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Build Trust</h3>
-                  <p className="text-gray-600">Build trust with minimal, credible UI.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
           {/* Approach Section */}
           <section id="approach" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Approach</h2>
+              <span className="text-xs font-bold tracking-widest uppercase text-indigo-500 mb-3 block">Design Process</span>
+              <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 mb-8">Approach</h2>
               
               {/* Phase 1 - Competitive Analysis */}
               <div className="mb-16">
                 <div className="mb-6">
+                  <span className="text-xs font-bold tracking-widest uppercase text-indigo-500 bg-indigo-50 px-3 py-1 rounded-full mb-3 inline-block">Step 01</span>
                   <h3 className="text-2xl font-semibold text-gray-900 mb-2">1. Competitive Analysis</h3>
                   <p className="text-lg text-gray-600">Mapping existing solutions and identifying differentiation opportunities</p>
                 </div>
@@ -361,6 +372,7 @@ export default function FileGPT() {
               {/* Phase 2 - User Test & Iteration */}
               <div className="mb-8">
                 <div className="mb-6">
+                  <span className="text-xs font-bold tracking-widest uppercase text-indigo-500 bg-indigo-50 px-3 py-1 rounded-full mb-3 inline-block">Step 02</span>
                   <h3 className="text-2xl font-semibold text-gray-900 mb-2">2. User Test & Iteration</h3>
                   <p className="text-lg text-gray-600">Validating flows with users and refining based on feedback</p>
                 </div>
@@ -380,14 +392,63 @@ export default function FileGPT() {
                   </blockquote>
                 </div>
                 
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
-                  <div className="w-full p-6">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-3">Design Solution 2</h4>
-                    <p className="text-gray-600 mb-4">Use source-grounded response panels so users can trace generated insights back to the exact file segments.</p>
-                    <div className="rounded-lg border border-gray-200 bg-gray-50 overflow-hidden">
+                <div className="mb-6">
+                  <div className="w-full">
+                    <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <img
+                          src="/filegpt_idea1.png"
+                          alt="Idea 1 preview"
+                          className="w-full h-auto object-contain"
+                        />
+                        <div className="mt-3">
+                          <p className="text-sm text-gray-500">Idea 1</p>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-red-100 text-red-600 text-xs font-bold">x</span>
+                            <p className="text-sm font-semibold text-gray-900">Footnote-style Citations</p>
+                          </div>
+                          <p className="text-sm text-gray-600 mt-1">User must scroll to bottom to find sources - interrupts reading flow and adds friction.</p>
+                        </div>
+                      </div>
+                      <div>
+                        <img
+                          src="/filegpt_idea2.png"
+                          alt="Idea 2 preview"
+                          className="w-full h-auto object-contain"
+                        />
+                        <div className="mt-3">
+                          <p className="text-sm text-gray-500">Idea 2</p>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-red-100 text-red-600 text-xs font-bold">x</span>
+                            <p className="text-sm font-semibold text-gray-900">Highlight-only</p>
+                          </div>
+                          <p className="text-sm text-gray-600 mt-1">User must switch between two panels to verify - high cognitive load, breaks conversation context.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                      <div>
+                        <p className="text-sm text-gray-500">Idea 3</p>
+                        <div className="flex items-center gap-2 mt-1">
+                          <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">✓</span>
+                          <p className="text-sm font-semibold text-gray-900">Inline Expandable Sources</p>
+                        </div>
+                        <p className="text-sm text-gray-600 mt-1">Sources verify inline - no context switching. Builds trust without disrupting conversation flow.</p>
+                      </div>
+                      <div>
+                        <img
+                          src="/filegpt_idea3.png"
+                          alt="Idea 3 preview"
+                          className="w-full h-auto object-contain"
+                        />
+                      </div>
+                    </div>
+                    <div className="mt-6">
+                      <h4 className="text-lg font-semibold text-gray-900 mb-3">Design Solution 2</h4>
+                      <p className="text-gray-600 mb-4">Use source-grounded response panels so users can trace generated insights back to the exact file segments.</p>
                       <img
                         src="/filegpt_solution2.gif"
-                        alt="Design Solution 2 demo"
+                        alt="Design Solution 2 high-fidelity demo"
                         className="w-full h-auto object-contain"
                       />
                     </div>
@@ -413,7 +474,8 @@ export default function FileGPT() {
           {/* Reflect Section */}
           <section id="reflect" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Reflect</h2>
+              <span className="text-xs font-bold tracking-widest uppercase text-indigo-500 mb-3 block">Learnings</span>
+              <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 mb-8">Reflect</h2>
               
               <div className="space-y-8">
                 <p className="text-lg text-gray-600 leading-relaxed">
@@ -472,4 +534,3 @@ export default function FileGPT() {
     </div>
   );
 }
-

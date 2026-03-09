@@ -65,7 +65,7 @@ export default function CyclePage() {
             <nav className="hidden md:flex space-x-8">
               <a href="/" className="text-gray-600 hover:text-indigo-600 transition-colors">Home</a>
               <a href="/#work" className="text-gray-600 hover:text-indigo-600 transition-colors">Work</a>
-              <a href="/#about" className="text-gray-600 hover:text-indigo-600 transition-colors">About</a>
+              <a href="/about" className="text-gray-600 hover:text-indigo-600 transition-colors">About</a>
               <a href="/#contact" className="text-gray-600 hover:text-indigo-600 transition-colors">Contact</a>
             </nav>
           </div>
