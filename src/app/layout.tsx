@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+import BrandFacehash from "@/components/BrandFacehash";
+import GlobalDock from "@/components/GlobalDock";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <BrandFacehash />
+        {children}
+        <GlobalDock />
+        <Analytics />
+      </body>
     </html>
   );
 }

@@ -83,28 +83,6 @@ export default function Offerplz() {
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div className="text-xl font-bold text-gray-900">Rebecca Huang</div>
-            <nav className="hidden md:flex space-x-8">
-              <span className="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">Home</span>
-              <span className="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">Work</span>
-              <Link href="/about" className="text-gray-600 hover:text-indigo-600 transition-colors">About</Link>
-              <span className="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">Contact</span>
-            </nav>
-          </div>
-          <div className="mt-3">
-            <Link href="/" className="text-cyan-600 hover:text-indigo-600 transition-colors text-sm flex items-center">
-              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-              </svg>
-              Back to Portfolio
-            </Link>
-          </div>
-        </div>
-      </header>
-
       {/* Main Layout */}
       <div className="flex max-w-7xl mx-auto">
         {/* Left Navigation */}
@@ -128,10 +106,10 @@ export default function Offerplz() {
             <div className="max-w-4xl">
               {/* Tag Row */}
               <div className="flex flex-wrap gap-3 mb-6">
-                <span className="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium shadow-sm">UX Research</span>
-                <span className="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm font-medium shadow-sm">CareerTech</span>
-                <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium shadow-sm">AI/ML</span>
-                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium shadow-sm">0→1 Product Build</span>
+                <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm font-medium shadow-sm">UX Research</span>
+                <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm font-medium shadow-sm">CareerTech</span>
+                <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm font-medium shadow-sm">AI/ML</span>
+                <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm font-medium shadow-sm">0→1 Product Build</span>
               </div>
               
               {/* Project Title */}
@@ -192,13 +170,13 @@ export default function Offerplz() {
                 </p>
               </div>
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-red-50 rounded-lg p-6 border border-red-100 transform hover:scale-105 transition-all duration-300">
+                <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 transform hover:scale-105 transition-all duration-300">
                   <h3 className="text-lg font-bold text-gray-900 mb-3">Problem</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
                     Job seekers struggle to craft impactful project bullet points; generic task lists dominate resumes, weakening recruiter appeal.
                   </p>
                 </div>
-                <div className="bg-blue-50 rounded-lg p-6 border border-blue-100 transform hover:scale-105 transition-all duration-300">
+                <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 transform hover:scale-105 transition-all duration-300">
                   <h3 className="text-lg font-bold text-gray-900 mb-3">Solution</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
                     Offerplz uses AI to generate tailored, results-driven project bullets in a clean, distraction-free resume editor.
@@ -209,16 +187,16 @@ export default function Offerplz() {
               <div id="impact" className="mt-8 bg-white rounded-xl p-6 border border-gray-200">
                 <h3 className="text-xl font-bold text-gray-900 mb-5">Impact</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
-                  <div className="rounded-lg bg-indigo-50 p-4 text-center">
-                    <p className="text-2xl font-bold text-indigo-600">10,000</p>
+                  <div className="rounded-lg bg-gray-50 p-4 text-center">
+                    <p className="text-2xl font-bold text-gray-900">10,000</p>
                     <p className="text-xs text-gray-600 mt-1">Registered users in 6 months</p>
                   </div>
-                  <div className="rounded-lg bg-green-50 p-4 text-center">
-                    <p className="text-2xl font-bold text-green-600">85%</p>
+                  <div className="rounded-lg bg-gray-50 p-4 text-center">
+                    <p className="text-2xl font-bold text-gray-900">85%</p>
                     <p className="text-xs text-gray-600 mt-1">Satisfaction with AI suggestions</p>
                   </div>
-                  <div className="rounded-lg bg-cyan-50 p-4 text-center">
-                    <p className="text-2xl font-bold text-cyan-600">25%</p>
+                  <div className="rounded-lg bg-gray-50 p-4 text-center">
+                    <p className="text-2xl font-bold text-gray-900">25%</p>
                     <p className="text-xs text-gray-600 mt-1">Monthly retention target</p>
                   </div>
                 </div>
@@ -245,7 +223,7 @@ export default function Offerplz() {
                   Frustration is compounded by <strong>flashy, template-heavy builders that sacrifice clarity and professionalism for style</strong>—creating resumes that look busy but don&apos;t convert into callbacks.
                 </p>
                 
-                <div className="bg-indigo-50 rounded-xl p-6 border-l-4 border-indigo-500">
+                <div className="bg-gray-50 rounded-xl p-6 border-l-4 border-gray-300">
                   <p className="text-lg font-medium text-gray-700">
                     <strong>All the signals tell us – job seekers need a professional, fixed-format resume tool powered by AI to generate results-driven project bullets that recruiters actually value.</strong>
                   </p>
@@ -260,19 +238,19 @@ export default function Offerplz() {
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Goals</h2>
               
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 border-l-4 border-l-indigo-600 transform hover:scale-105 transition-all duration-300">
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 border-l-4 border-l-gray-300 transform hover:scale-105 transition-all duration-300">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Precise Bullet Tailoring</h3>
                   <p className="text-gray-600">Enable candidates to craft impactful project bullet points that emphasize results and recruiter value.</p>
                 </div>
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 border-l-4 border-l-cyan-600 transform hover:scale-105 transition-all duration-300">
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 border-l-4 border-l-gray-300 transform hover:scale-105 transition-all duration-300">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Faster Resume Editing</h3>
                   <p className="text-gray-600">Reduce tailoring time from hours to minutes with AI-driven bullet generation and streamlined workflows.</p>
                 </div>
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 border-l-4 border-l-green-500 transform hover:scale-105 transition-all duration-300">
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 border-l-4 border-l-gray-300 transform hover:scale-105 transition-all duration-300">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Professional, Fixed Formatting</h3>
                   <p className="text-gray-600">Deliver consistent LaTeX-quality resumes that prioritize clarity and recruiter readability over flashy templates.</p>
                 </div>
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 border-l-4 border-l-purple-500 transform hover:scale-105 transition-all duration-300">
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 border-l-4 border-l-gray-300 transform hover:scale-105 transition-all duration-300">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Boost Candidate Outcomes</h3>
                   <p className="text-gray-600">Increase candidate confidence and recruiter response rates by producing polished, results-driven resumes.</p>
                 </div>
@@ -289,7 +267,7 @@ export default function Offerplz() {
                 {/* Phase 1 - Identifying the Gap */}
                 <div className="space-y-6">
                   <div className="flex items-center space-x-3 mb-4">
-                    <span className="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">1</span>
+                    <span className="bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">1</span>
                     <h3 className="text-2xl font-bold text-gray-900">Phase 1 — Identifying the Gap</h3>
                   </div>
                   <p className="text-lg text-gray-600">Understanding job seeker frustrations and market blind spots</p>
@@ -338,7 +316,7 @@ export default function Offerplz() {
                 {/* Phase 2 - Designing the Solution */}
                 <div className="space-y-6">
                   <div className="flex items-center space-x-3 mb-4">
-                    <span className="bg-cyan-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">2</span>
+                    <span className="bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">2</span>
                     <h3 className="text-2xl font-bold text-gray-900">Phase 2 — Designing the Solution</h3>
                   </div>
                   <p className="text-lg text-gray-600">Defining MVP and prototyping a professional, AI-driven editor</p>
@@ -528,13 +506,13 @@ export default function Offerplz() {
         <div className="max-w-7xl mx-auto px-6 py-12">
           {/* Navigation Links */}
           <div className="flex justify-between items-center mb-8">
-            <Link href="/work/aispire" className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors">
+            <Link href="/work/aispire" className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
               <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               Previous Project
             </Link>
-            <Link href="/work/openpromo" className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors">
+            <Link href="/work/openpromo" className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
               Next Project
               <svg className="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
@@ -544,12 +522,12 @@ export default function Offerplz() {
 
           {/* Social Links */}
           <div className="flex justify-center space-x-6 mb-6">
-            <a href="https://www.linkedin.com/in/rebecca-huang-a60388249/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-indigo-600 transition-colors">
+            <a href="https://www.linkedin.com/in/rebecca-huang-a60388249/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors">
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
               </svg>
             </a>
-            <a href="mailto:rebecca@example.com" className="text-gray-600 hover:text-indigo-600 transition-colors">
+            <a href="mailto:rebecca@example.com" className="text-gray-600 hover:text-gray-900 transition-colors">
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>

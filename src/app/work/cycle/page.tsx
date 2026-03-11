@@ -58,28 +58,6 @@ export default function CyclePage() {
   return (
     <div className="bg-gray-50 font-sans">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div className="text-xl font-bold text-gray-900">Rebecca Huang</div>
-            <nav className="hidden md:flex space-x-8">
-              <a href="/" className="text-gray-600 hover:text-indigo-600 transition-colors">Home</a>
-              <a href="/#work" className="text-gray-600 hover:text-indigo-600 transition-colors">Work</a>
-              <a href="/about" className="text-gray-600 hover:text-indigo-600 transition-colors">About</a>
-              <a href="/#contact" className="text-gray-600 hover:text-indigo-600 transition-colors">Contact</a>
-            </nav>
-          </div>
-          <div className="mt-3">
-            <a href="/#work" className="text-cyan-600 hover:text-indigo-600 transition-colors text-sm flex items-center">
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Back to Portfolio
-            </a>
-          </div>
-        </div>
-      </header>
-
       {/* Main Layout */}
       <div className="flex max-w-7xl mx-auto">
         

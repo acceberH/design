@@ -77,28 +77,6 @@ export default function Aispire() {
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div className="text-xl font-bold text-gray-900">Rebecca Huang</div>
-            <nav className="hidden md:flex space-x-8">
-              <span className="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">Home</span>
-              <span className="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">Work</span>
-              <Link href="/about" className="text-gray-600 hover:text-indigo-600 transition-colors">About</Link>
-              <span className="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">Contact</span>
-            </nav>
-          </div>
-          <div className="mt-3">
-            <Link href="/" className="text-cyan-600 hover:text-indigo-600 transition-colors text-sm flex items-center">
-              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-              </svg>
-              Back to Portfolio
-            </Link>
-          </div>
-        </div>
-      </header>
-
       {/* Main Layout */}
       <div className="flex max-w-7xl mx-auto">
         {/* Left Navigation */}

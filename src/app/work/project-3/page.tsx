@@ -4,20 +4,6 @@ export default function Project3() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="text-xl font-bold text-gray-900">Rebecca Huang</Link>
-            <nav className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-gray-900 transition-colors">Home</Link>
-              <Link href="/#work" className="text-gray-700 hover:text-gray-900 transition-colors">Work</Link>
-              <Link href="/about" className="text-gray-700 hover:text-gray-900 transition-colors">About</Link>
-              <Link href="/#contact" className="text-gray-700 hover:text-gray-900 transition-colors">Contact</Link>
-            </nav>
-          </div>
-        </div>
-      </header>
-
       {/* Hero Section */}
       <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
