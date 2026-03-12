@@ -142,7 +142,6 @@ function DockBtn({
         {tooltip}
       </span>
 
-      {/* @ts-expect-error dynamic tag */}
       <Tag
         href={href}
         className="h-[52px] w-[52px] rounded-[14px] flex items-center justify-center transition-all duration-200 cursor-pointer group-hover:-translate-y-2 group-hover:scale-110"
