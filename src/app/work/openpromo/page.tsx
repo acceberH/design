@@ -59,7 +59,9 @@ export default function OpenPromoCaseStudy() {
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="tldr">TL;DR</span></li>
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="tldr">Impact</span></li>
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="context">Context</span></li>
-              <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="approach">Approach</span></li>
+              <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="research">Research</span></li>
+              <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="key-features">Key Features</span></li>
+              <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="approach">Design Process</span></li>
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="reflection">Reflection</span></li>
             </ul>
           </nav>
@@ -72,9 +74,9 @@ export default function OpenPromoCaseStudy() {
             <div className="max-w-4xl">
               {/* Tag Row */}
               <div className="flex flex-wrap gap-3 mb-6">
-                <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm font-medium">UX Research</span>
-                <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm font-medium">AI/ML</span>
                 <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm font-medium">Product Design</span>
+                <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm font-medium">UX Research</span>
+                <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm font-medium">B2B</span>
                 <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm font-medium">Social Media Tech</span>
               </div>
               
@@ -82,10 +84,6 @@ export default function OpenPromoCaseStudy() {
               <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">OpenPromo</h1>
               
               {/* One-liner Description */}
-              <p className="text-lg lg:text-xl text-gray-600 mb-6 leading-relaxed">
-                Redefining how businesses and creators manage and amplify their content.
-              </p>
-              
               {/* Metadata Row */}
               <div className="flex flex-wrap gap-6 text-sm text-gray-600 mb-8">
                 <span><strong>Company:</strong> OpenPromo</span>
@@ -121,7 +119,7 @@ export default function OpenPromoCaseStudy() {
                 <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
                   <h3 className="text-[12px] font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-3">Problem</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
-                    Small businesses struggle to manage multiple social platforms and produce marketing content efficiently.
+                    Small businesses are creating content constantly, but without strategic direction — they don&apos;t know what to create, when to post, or whether any of it is working.
                   </p>
                 </div>
 
@@ -137,8 +135,8 @@ export default function OpenPromoCaseStudy() {
                 <h3 className="text-3xl font-bold text-gray-900 mb-5">Impact</h3>
                 <div className="border-b border-gray-300">
                   <div className="py-[20px] border-t border-gray-300 grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] items-center gap-4 md:gap-6">
-                    <p className="text-3xl font-bold text-gray-900">90%</p>
-                    <p className="text-lg text-[#334155] leading-relaxed">Cost reduction in content production</p>
+                    <p className="text-3xl font-bold text-gray-900">0→1</p>
+                    <p className="text-lg text-[#334155] leading-relaxed">Designed a full-stack growth intelligence platform from scratch</p>
                   </div>
                   <div className="py-[20px] border-t border-gray-300 grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] items-center gap-4 md:gap-6">
                     <p className="text-3xl font-bold text-gray-900">3×</p>
@@ -157,114 +155,26 @@ export default function OpenPromoCaseStudy() {
           <section id="context" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Context</h2>
-              
-              <div className="space-y-8">
+              <div className="space-y-6">
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  OpenPromo is a platform designed to help businesses create and distribute marketing content across social media more efficiently.
+                  OpenPromo is a 0→1 platform designed to give small businesses the strategic intelligence that was previously only available to enterprise marketing teams.
                 </p>
-
                 <p className="text-lg text-gray-600 leading-relaxed">
                   For many small businesses, producing video content remains one of the biggest barriers to effective social media marketing, often requiring costly influencer collaborations or professional production.
                 </p>
-
-                <div className="pt-2 space-y-5">
-                  <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] items-start gap-4 md:gap-6">
-                    <blockquote className="rounded-2xl bg-white px-5 py-4 text-gray-700 shadow-sm ring-1 ring-gray-200 max-w-[760px]">
-                      <p className="text-base md:text-lg font-medium leading-relaxed">
-                        "How am I gonna manage all of these social media accounts at a time?"
-                      </p>
-                    </blockquote>
-
-                    <Image
-                      src="/openpromo_confused.png"
-                      alt="Creator feeling overwhelmed by multiple social media tasks"
-                      width={900}
-                      height={900}
-                      className="w-40 md:w-52 h-auto object-contain"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-[78px_1fr] md:grid-cols-[110px_1fr] items-center gap-3 md:gap-5">
-                    <Image
-                      src="/filegpt_ideas.svg"
-                      alt="Ideas and planning illustration"
-                      width={220}
-                      height={220}
-                      className="w-16 md:w-24 h-auto object-contain"
-                    />
-                    <p className="text-lg text-gray-800 leading-relaxed font-medium">
-                      <span className="text-gray-700">Design Opportunity:</span> How might we help businesses manage content across multiple social platforms without constantly switching between different apps?
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
           </section>
 
-          {/* Approach Section */}
-          <section id="approach" className="px-6 py-16 border-t border-gray-200">
+          {/* Early Research Section */}
+          <section id="research" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Solutions</h2>
-              
-              {/* Phase 1 */}
-              <div id="phase-one" className="mb-16">
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">Research</h2>
 
-              </div>
-              
-              <div id="solution-one" className="mb-16">
-                <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 items-start">
+              <div className="space-y-8">
+                <div className="space-y-8">
                   <div>
-                    <p className="text-sm font-semibold text-gray-500 mb-2">Solution 1</p>
-                    <h3 className="text-base font-medium text-gray-700 mb-2">Multi Platform Publishing</h3>
-                    <p className="text-base text-gray-700">
-                      Manage all social accounts and posts.<br />
-                      Auto-resize and format for each platform
-                    </p>
-                  </div>
-
-                  <Image
-                    src="/openpromo_solution1_main.png"
-                    alt="Publishing Scheduler Design"
-                    width={2128}
-                    height={1552}
-                    unoptimized
-                    sizes="(max-width: 1024px) 96vw, 980px"
-                    className="w-full max-w-[980px] h-auto rounded-2xl shadow-lg mx-auto"
-                  />
-                </div>
-
-                <div className="mt-8 space-y-4">
-                  <h4 className="text-base font-medium text-gray-700 mb-2">Unified Inbox</h4>
-
-                  <Image
-                    src="/openpromo_scheduler_detail.png"
-                    alt="Unified Inbox"
-                    width={2160}
-                    height={1374}
-                    unoptimized
-                    sizes="(max-width: 1024px) 96vw, 1080px"
-                    className="w-full max-w-[1080px] h-auto rounded-2xl shadow-lg mx-auto"
-                  />
-                </div>
-
-                <div className="mt-8 space-y-4">
-                  <h4 className="text-lg font-medium text-gray-800">Cross Platform Analytics</h4>
-
-                  <Image
-                    src="/openpromo_cross_platform_analytics.png"
-                    alt="Cross Platform Analytics"
-                    width={1320}
-                    height={986}
-                    unoptimized
-                    sizes="(max-width: 1024px) 96vw, 660px"
-                    className="w-full max-w-[660px] h-auto rounded-2xl shadow-lg mx-auto"
-                  />
-                </div>
-
-                <div className="mt-12 space-y-8">
-                  <div>
-                    <p className="text-sm font-semibold text-gray-500 mb-2">Interview Insights</p>
-                    <p className="text-base text-gray-700">I interviewed small business owners to understand their daily publishing and growth pain points.</p>
+                    <p className="text-base text-gray-700">I interviewed small business owners to understand their daily social media workflow and marketing challenges.</p>
                   </div>
 
                   <div className="grid grid-cols-1 lg:grid-cols-[180px_1fr] gap-6 items-start">
@@ -276,67 +186,354 @@ export default function OpenPromoCaseStudy() {
                       className="w-36 h-auto"
                     />
                     <div className="space-y-4">
-                      <p className="text-lg text-gray-800 leading-relaxed border-l-2 border-gray-300 pl-4">&quot;We need tools that let us manage everything in one place, not across five different apps.&quot;</p>
-                      <p className="text-lg text-gray-800 leading-relaxed border-l-2 border-gray-300 pl-4">&quot;I&apos;m spending too much on creators and influencers. How am I supposed to stay profitable?&quot;</p>
+                      <p className="mt-2 text-lg text-gray-800 leading-relaxed border-l-2 border-gray-300 pl-4">&quot;We spend hours making posts, but we don&apos;t know if any of it is actually working.&quot;</p>
                     </div>
                   </div>
-
                 </div>
 
-                <div className="mt-12 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  Most businesses spend significant time producing content but struggle to determine what content actually drives growth.
+                </p>
+
+                {/* Key insights */}
+                <div>
+                  <p className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-4">Research Insights</p>
+                  <div className="border-t border-gray-200">
+                    <div className="py-5 border-b border-gray-200 grid grid-cols-[100px_1fr] md:grid-cols-[140px_1fr] items-start gap-4">
+                      <p className="text-2xl font-bold text-gray-900">73%</p>
+                      <p className="text-base text-gray-600 leading-relaxed pt-1">of small businesses are not confident their marketing strategy is working.</p>
+                    </div>
+                    <div className="py-5 border-b border-gray-200 grid grid-cols-[100px_1fr] md:grid-cols-[140px_1fr] items-start gap-4">
+                      <p className="text-2xl font-bold text-gray-900">56%</p>
+                      <p className="text-base text-gray-600 leading-relaxed pt-1">of SMBs spend one hour or less per day on marketing.</p>
+                    </div>
+                    <div className="py-5 border-b border-gray-200 grid grid-cols-[100px_1fr] md:grid-cols-[140px_1fr] items-start gap-4">
+                      <p className="text-2xl font-bold text-gray-900">54%</p>
+                      <p className="text-base text-gray-600 leading-relaxed pt-1">of SMBs struggle to produce content consistently.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-3">Key Insight</h4>
+                  <p className="text-lg text-gray-600 leading-relaxed">
+                    The real bottleneck for small businesses is not content creation tools. It is <strong>decision-making</strong>.
+                  </p>
+                </div>
+
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                   <Image
-                    src="/comanalysis_openpromo.png"
-                    alt="Competitive analysis matrix"
+                    src="/b927e770173c1c8012e2191e2d7237bb.png"
+                    alt="Competitive analysis"
                     width={5945}
                     height={5314}
                     unoptimized
                     sizes="(max-width: 1024px) 86vw, 900px"
-                    className="w-full max-w-[900px] h-auto mx-auto"
+                    className="w-full max-w-[450px] h-auto mx-auto"
                   />
                   <div className="p-4">
                     <p className="text-sm text-gray-600 italic">Competitive landscape showing gaps in AI-driven growth features.</p>
+                    <p className="text-base text-gray-700 leading-relaxed mt-3">Most products fall into two extremes:</p>
+                    <ul className="list-disc pl-5 space-y-1 text-base text-gray-700 mt-2">
+                      <li>Low-cost schedulers that help businesses publish content but provide little strategic guidance.</li>
+                      <li>Enterprise marketing platforms that offer advanced analytics and strategy insights but are priced beyond what most SMBs can afford.</li>
+                    </ul>
                   </div>
                 </div>
 
-                <div className="mt-8 mb-2">
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-3">Key Insight</h4>
-                    <p className="text-lg text-gray-600 leading-relaxed">None of the existing social media management platforms had growth-focused features built in.</p>
-                  </div>
-                </div>
-
-                <div id="solution-two" className="mt-12 space-y-4">
-                  <p className="text-sm font-semibold text-gray-500">Solution 2</p>
-                  <h3 className="text-2xl font-semibold text-gray-900 leading-tight">Instant Ad Creation</h3>
-
+                {/* Design opportunity */}
+                <div className="grid grid-cols-[78px_1fr] md:grid-cols-[110px_1fr] items-center gap-3 md:gap-5 pt-2">
                   <Image
-                    src="/openpromo_instant_ad.png"
-                    alt="Instant Ad Creation"
-                    width={1332}
-                    height={1250}
-                    unoptimized
-                    sizes="(max-width: 1024px) 96vw, 666px"
-                    className="w-full max-w-[666px] h-auto rounded-2xl shadow-lg mx-auto"
+                    src="/filegpt_ideas.svg"
+                    alt="Design opportunity"
+                    width={220}
+                    height={220}
+                    className="w-16 md:w-24 h-auto object-contain"
                   />
+                  <p className="text-lg text-gray-800 leading-relaxed font-medium">
+                    <span className="text-gray-700">Design Opportunity:</span> How might we help small businesses decide what content to create next using signals from competitors, performance analytics, and emerging trends?
+                  </p>
                 </div>
 
-                <div id="solution-three" className="mt-12 grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 items-center">
-                  <div className="space-y-3">
-                    <p className="text-sm font-semibold text-gray-500">Solution 3</p>
-                    <h3 className="text-2xl font-semibold text-gray-900 leading-tight">Competitor Radar</h3>
-                    <p className="text-base text-gray-700">From a business owner perspective, growth comes from learning what competitors are doing right and responding faster.</p>
-                    <p className="text-base text-gray-700">Our platform helps businesses track competitor profiles, post performance, and viral content patterns to guide smarter content decisions.</p>
-                  </div>
+              </div>
+            </div>
+          </section>
 
-                  <Image
-                    src="/openpromo_competitor_radar.png"
-                    alt="Competitor Radar"
-                    width={1392}
-                    height={820}
-                    unoptimized
-                    sizes="(max-width: 1024px) 96vw, 696px"
-                    className="w-full max-w-[696px] h-auto rounded-2xl shadow-lg mx-auto"
-                  />
+          {/* Approach Section */}
+          <section id="approach" className="px-6 py-16 border-t border-gray-200">
+            <div className="max-w-4xl">
+              <h2 id="key-features" className="text-3xl font-bold text-gray-900 mb-4">Key Features</h2>
+              <div className="w-fit max-w-full mb-6 rounded-xl border border-gray-200 overflow-hidden">
+                <Image
+                  src="/astro-island.png?v=2"
+                  alt="Key features"
+                  width={1400}
+                  height={900}
+                  unoptimized
+                  className="w-auto max-w-full h-auto"
+                />
+              </div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Design Process</h2>
+              
+              <div id="solution-one" className="mb-16 relative">
+                <div>
+                  <div id="solution-two" className="">
+                    <div className="px-6 py-3">
+                      <h3 className="text-2xl font-semibold text-gray-900 leading-tight">Instant Ad Creation</h3>
+                    </div>
+                    <div className="px-6 pb-6">
+                      <div className="grid gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-[6fr_4fr] gap-5 items-start">
+                          <Image
+                            src="/opwireframe1.png?v=2"
+                            alt="opwireframe1.png"
+                            width={420}
+                            height={300}
+                            className="w-full h-auto rounded-xl border border-gray-200"
+                          />
+                          <div>
+                            <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-2">Version 1</h4>
+                            <p className="text-base text-gray-700 leading-relaxed">
+                              Instant Ad is a standalone workspace accessible from the left menu bar. If users want to create ads, they go there first, then switch to Create Post to publish.
+                            </p>
+                            <h5 className="text-xs font-bold uppercase tracking-[0.1em] text-[#fca5a5] mt-4 mb-2">Problem</h5>
+                            <p className="text-base text-gray-700 leading-relaxed">
+                              The workflow is fragmented. Users have to move back and forth between two separate areas to complete one task.
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-[6fr_4fr] gap-5 items-start">
+                          <Image
+                            src="/opwireframe2.png"
+                            alt="Version 2 wireframe"
+                            width={1332}
+                            height={1250}
+                            unoptimized
+                            sizes="(max-width: 1024px) 96vw, 666px"
+                            className="w-full h-auto rounded-xl shadow-lg"
+                          />
+                          <div>
+                            <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-2">Version 2</h4>
+                            <p className="text-base text-gray-700 leading-relaxed">
+                              During design, we considered using a modal or a drawer. We chose tabs because a modal interrupts the flow, a drawer adds another layer of hierarchy, and tabs keep both creation modes equally visible with the lowest switching cost. We also explored a step-by-step wizard for the Create Ad page, but decided against it because ad creation is non-linear. A wizard increases backtracking cost, while a single-page layout lets users revise any step at any time.
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-[2fr_10fr] gap-5 items-center">
+                          <p className="text-lg font-semibold text-gray-700">Final Design</p>
+                          <Image
+                            src="/opinstantad1.png"
+                            alt="opinstantad1.png"
+                            width={1332}
+                            height={1250}
+                            unoptimized
+                            sizes="(max-width: 1024px) 96vw, 1200px"
+                            className="w-full h-auto rounded-xl shadow-lg"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <div id="solution-three" className="">
+                    <div className="px-6 py-5">
+                      <h3 className="text-2xl font-semibold text-gray-900 leading-tight">Competitor Tracking</h3>
+                    </div>
+                    <div className="px-6 pb-6 space-y-6">
+                      <div className="grid grid-cols-1 md:grid-cols-[6fr_4fr] gap-5 items-start">
+                        <div className="w-full overflow-hidden rounded-xl border border-gray-200">
+                          <Image
+                            src="/trackingv1.png"
+                            alt="Tracking version 1"
+                            width={1200}
+                            height={760}
+                            unoptimized
+                            sizes="(max-width: 1024px) 96vw, 900px"
+                            className="block w-[165%] max-w-none h-auto"
+                          />
+                        </div>
+                        <div>
+                          <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-2">Version 1</h4>
+                          <p className="text-base text-gray-700 leading-relaxed mb-3">
+                            <span className="font-semibold">Design Goal:</span> Solve the most basic question first: can users see what their competitors are posting?
+                          </p>
+                          <p className="text-sm font-semibold text-gray-600 mb-2">Features</p>
+                          <ul className="list-disc pl-5 space-y-1 text-base text-gray-700">
+                            <li>Add competitor accounts</li>
+                            <li>View competitors&apos; latest posts</li>
+                          </ul>
+                          <p className="text-sm font-semibold text-[#fca5a5] mt-4 mb-2">Limitations</p>
+                          <ul className="list-disc pl-5 space-y-1 text-base text-gray-700">
+                            <li>Users can only view content</li>
+                            <li>Trend judgment is fully manual</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-[6fr_4fr] gap-5 items-start">
+                        <Image
+                          src="/trackingv3.png"
+                          alt="Tracking version 2"
+                          width={1200}
+                          height={760}
+                          unoptimized
+                          sizes="(max-width: 1024px) 96vw, 900px"
+                          className="w-full h-auto rounded-xl border border-gray-200"
+                        />
+                        <div>
+                          <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-2">Version 2</h4>
+                          <p className="text-base text-gray-700 leading-relaxed mb-3">
+                            <span className="font-semibold">Added basic analytics</span>
+                          </p>
+                          <p className="text-base text-gray-700 leading-relaxed mb-2">
+                            The design goal shifted from only viewing content to understanding performance data.
+                          </p>
+                          <p className="text-sm font-semibold text-gray-600 mb-2">Users can</p>
+                          <ul className="list-disc pl-5 space-y-1 text-base text-gray-700">
+                            <li>Quickly identify top-performing posts</li>
+                            <li>Find high-engagement content</li>
+                          </ul>
+                          <p className="text-sm font-semibold text-[#fca5a5] mt-4 mb-2">Limitations</p>
+                          <ul className="list-disc pl-5 space-y-1 text-base text-gray-700">
+                            <li>Manually summarize trends</li>
+                            <li>Manually analyze changes</li>
+                          </ul>
+                          <p className="text-base text-gray-700 leading-relaxed mt-3">There are still no actionable insights.</p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <div>
+                          <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-2">Version 3</h4>
+                          <p className="text-base text-gray-700 leading-relaxed">
+                            <span className="font-semibold">Design Goal:</span> Let the system automatically tell users what&apos;s happening.
+                          </p>
+                          <p className="text-base text-gray-700 leading-relaxed mt-3">
+                            From V2 to V3, we added an <span className="font-semibold">Anomalies</span> tab. We chose a dedicated tab instead of a filter because filters support passive discovery, while anomalies are proactive signals. Placing it at the tab level ensures users see the most important changes immediately every time they enter the page.
+                          </p>
+                        </div>
+                        <Image
+                          src="/trackingv4.png?v=2"
+                          alt="Tracking version 3"
+                          width={1200}
+                          height={760}
+                          unoptimized
+                          sizes="(max-width: 1024px) 96vw, 1200px"
+                          className="w-full h-auto rounded-xl border border-gray-200"
+                        />
+                      </div>
+
+                      <div className="space-y-3">
+                        <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a]">Final Design</h4>
+                        <Image
+                          src="/trackingdemo.gif"
+                          alt="Tracking demo final outcome"
+                          width={960}
+                          height={553}
+                          unoptimized
+                          className="w-full max-w-[900px] h-auto rounded-xl border border-gray-200"
+                        />
+                        <p className="text-base text-gray-700 leading-relaxed">
+                          From a business owner perspective, growth comes from learning what competitors are doing right and responding faster.
+                        </p>
+                        <p className="text-base text-gray-700 leading-relaxed">
+                          This feature helps businesses track competitor profiles, post performance, and viral content patterns to guide smarter content decisions.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <div id="performance-analytics" className="">
+                    <div className="px-6 py-5">
+                      <h3 className="text-2xl font-semibold text-gray-900 leading-tight">Performance Analytics</h3>
+                    </div>
+                    <div className="px-6 pb-6 space-y-6">
+                      <div className="space-y-3">
+                        <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a]">Version 1</h4>
+                        <p className="text-sm font-semibold text-[#fca5a5]">Problem</p>
+                        <p className="text-base text-gray-700 leading-relaxed">
+                          Users can see that Impressions increased by xx%, but they do not know why it increased or what to do next. The data is there, but the insight is missing. After viewing this page, users still do not know what they should change.
+                        </p>
+                        <Image
+                          src="/performancev1.png?v=2"
+                          alt="Performance version 1"
+                          width={1400}
+                          height={900}
+                          className="w-full max-w-[900px] h-auto rounded-xl border border-gray-200"
+                        />
+                      </div>
+
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-5 items-start">
+                          <Image
+                            src="/performancev2.png?v=2"
+                            alt="Performance version 2"
+                            width={1400}
+                            height={900}
+                            className="w-full max-w-[450px] h-auto rounded-xl border border-gray-200"
+                          />
+                          <div>
+                            <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] md:pt-1">Version 2</h4>
+                            <p className="text-base text-gray-700 leading-relaxed mt-3">
+                              We added Top Content and Content Type, so users can see which content performs well. But the page still ends there. After reviewing the data, users must manually switch to Create Post or Create Ad, and the two actions are completely disconnected.
+                            </p>
+                            <p className="text-base text-[#fca5a5] font-semibold mt-3">Problem</p>
+                            <p className="text-base text-gray-700 leading-relaxed">1. There is a disconnect between data and action.</p>
+                            <p className="text-base text-gray-700 leading-relaxed">2. Users still have to interpret the data themselves and decide what to do next.</p>
+                            <p className="text-base text-gray-700 leading-relaxed">The system provides data and entry points, but it still doesn&apos;t tell users: &ldquo;This is what you should do now.&rdquo;</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-5 items-start">
+                          <Image
+                            src="/performancev3.png"
+                            alt="Performance version 3"
+                            width={1400}
+                            height={900}
+                            className="w-full max-w-[450px] h-auto rounded-xl border border-gray-200"
+                          />
+                          <div>
+                            <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] md:pt-1">Version 3</h4>
+                            <p className="text-base text-gray-700 leading-relaxed mt-3">
+                              Added AI Recommendations, Goal Progress, and a bottom CTA.
+                            </p>
+                            <p className="text-base text-gray-700 leading-relaxed">
+                              The system proactively tells users:
+                            </p>
+                            <ul className="list-disc pl-5 space-y-1 text-base text-gray-700">
+                              <li>High Priority: Create a &quot;3 Steps to...&quot; video</li>
+                              <li>Trending: Use the &quot;Nobody talks about...&quot; hook</li>
+                              <li>Opportunity: Post BTS content on Thursday from 6-8 PM</li>
+                            </ul>
+                            <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mt-3 mb-2">Reason</p>
+                            <p className="text-base text-gray-700 leading-relaxed">
+                              We considered placing recommendations on the Competitor Tracking page. However, recommendations are generated from each business&apos;s own account data, and placing them under Competitors would create context confusion. We placed AI Recommendations at the top of Performance so &ldquo;what to do next&rdquo; is prioritized over &ldquo;what the numbers are.&rdquo;
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a]">Final Design</h4>
+                        <Image
+                          src="/performance_final_design.gif"
+                          alt="Performance final design"
+                          width={960}
+                          height={553}
+                          unoptimized
+                          className="w-full max-w-[900px] h-auto rounded-xl border border-gray-200"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

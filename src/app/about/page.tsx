@@ -21,7 +21,7 @@ export default function AboutPage() {
                 Hi, I&apos;m Rebecca
               </h1>
               <p className="text-[16px] leading-relaxed text-gray-500">
-                I grew up in Shanghai, China, and lived in downtown Brooklyn when I moved to New York to study Integrated Design &amp; Media at NYU. That&apos;s where my UX journey began. After graduating I came to Seattle to pursue my master&apos;s in Innovation Technology at UW.
+                I was born in Wenzhou, grown up in Shanghai, and made in Brooklyn. I studied Integrated Design &amp; Media at NYU. That&apos;s where my UX journey began. After graduating I came to Seattle to pursue my master&apos;s in Innovation Technology at UW.
               </p>
               <p className="mt-3 text-[16px] leading-relaxed text-gray-500">
                 Design wasn&apos;t my first instinct. I almost went into data science. I had a real passion for statistics, and that analytical side still shapes how I work. I treat design decisions like hypotheses: tested, iterated, and grounded in data.
@@ -30,6 +30,36 @@ export default function AboutPage() {
                 Outside of work I&apos;m usually on a tennis court, chasing a dark roast, or planning a trip somewhere warm. Hawaii, Puerto Rico, anywhere with a good beach. I&apos;m an INTJ, currently on a 784-day Duolingo streak learning Spanish. 🎾☕🌊
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* Education */}
+        <section className="mb-24">
+          <h2 className="text-[20px] font-bold text-gray-900 mb-8">Education</h2>
+          <div className="border-t border-gray-200">
+            {[
+              {
+                period: "2024 – 2026",
+                school: "University of Washington",
+                degree: "MS Innovation Technology",
+                description: "Focusing on human-computer interaction, AI product design, and design systems. Coursework bridges technical depth with user-centered practice.",
+              },
+              {
+                period: "2021 – 2024",
+                school: "New York University",
+                degree: "BS Integrated Design & Media",
+                description: "Interdisciplinary program spanning UX, visual design, and media technology. Where I discovered the intersection of design and data that still defines how I work.",
+              },
+            ].map(({ period, school, degree, description }) => (
+              <div key={school} className="grid grid-cols-[200px_1fr] gap-8 border-b border-gray-200 py-8">
+                <p className="text-[14px] text-gray-400 pt-0.5">{period}</p>
+                <div>
+                  <p className="font-semibold text-gray-900 text-[15px]">{school}</p>
+                  <p className="text-[14px] text-gray-500 mb-3">{degree}</p>
+                  <p className="text-[14px] text-gray-500 leading-relaxed">{description}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -82,36 +112,6 @@ export default function AboutPage() {
                 <div>
                   <p className="font-semibold text-gray-900 text-[15px]">{company}</p>
                   <p className="text-[14px] text-gray-500 mb-3">{role}</p>
-                  <p className="text-[14px] text-gray-500 leading-relaxed">{description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Education */}
-        <section className="mb-24">
-          <h2 className="text-[20px] font-bold text-gray-900 mb-8">Education</h2>
-          <div className="border-t border-gray-200">
-            {[
-              {
-                period: "2024 – 2026",
-                school: "University of Washington",
-                degree: "MS Innovation Technology",
-                description: "Focusing on human-computer interaction, AI product design, and design systems. Coursework bridges technical depth with user-centered practice.",
-              },
-              {
-                period: "2021 – 2024",
-                school: "New York University",
-                degree: "BS Integrated Design & Media",
-                description: "Interdisciplinary program spanning UX, visual design, and media technology. Where I discovered the intersection of design and data that still defines how I work.",
-              },
-            ].map(({ period, school, degree, description }) => (
-              <div key={school} className="grid grid-cols-[200px_1fr] gap-8 border-b border-gray-200 py-8">
-                <p className="text-[14px] text-gray-400 pt-0.5">{period}</p>
-                <div>
-                  <p className="font-semibold text-gray-900 text-[15px]">{school}</p>
-                  <p className="text-[14px] text-gray-500 mb-3">{degree}</p>
                   <p className="text-[14px] text-gray-500 leading-relaxed">{description}</p>
                 </div>
               </div>
