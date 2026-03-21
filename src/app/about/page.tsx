@@ -1,4 +1,14 @@
+"use client";
 import Image from "next/image";
+
+function DuolingoStreak() {
+  // Streak was 791 on 2026-03-18
+  const knownDate = new Date("2026-03-18");
+  const knownStreak = 791;
+  const today = new Date();
+  const diffDays = Math.floor((today.getTime() - knownDate.getTime()) / (1000 * 60 * 60 * 24));
+  return <>{knownStreak + diffDays}</>;
+}
 
 export default function AboutPage() {
   return (
@@ -18,16 +28,22 @@ export default function AboutPage() {
             />
             <div>
               <h1 className="mb-4 text-[32px] font-bold tracking-tight text-gray-900 leading-tight">
-                Hi, I&apos;m Rebecca
+                I design with a hypothesis, not a hunch.
               </h1>
               <p className="text-[16px] leading-relaxed text-gray-500">
-                I was born in Wenzhou, grown up in Shanghai, and made in Brooklyn. I studied Integrated Design &amp; Media at NYU. That&apos;s where my UX journey began. After graduating I came to Seattle to pursue my master&apos;s in Innovation Technology at UW.
+                Born in Wenzhou, raised in Shanghai, and shaped in Brooklyn, my path into design wasn&apos;t linear. I studied Integrated Design &amp; Media at NYU, where I discovered UX — but I almost chose data science instead. That decision never really left. It became the foundation of how I think.
               </p>
               <p className="mt-3 text-[16px] leading-relaxed text-gray-500">
-                Design wasn&apos;t my first instinct. I almost went into data science. I had a real passion for statistics, and that analytical side still shapes how I work. I treat design decisions like hypotheses: tested, iterated, and grounded in data.
+                Today, I approach design like an experiment. Every interaction is a hypothesis. Every iteration is a test. I care less about how something looks in isolation, and more about what it actually does — how it influences behavior, drives engagement, or changes outcomes.
               </p>
               <p className="mt-3 text-[16px] leading-relaxed text-gray-500">
-                Outside of work I&apos;m usually on a tennis court, chasing a dark roast, or planning a trip somewhere warm. Hawaii, Puerto Rico, anywhere with a good beach. I&apos;m an INTJ, currently on a 784-day Duolingo streak learning Spanish. 🎾☕🌊
+                I&apos;m especially drawn to problems where design meets ambiguity: unclear requirements, conflicting constraints, or high-stakes decisions. That&apos;s where structured thinking, data, and iteration make the biggest difference.
+              </p>
+              <p className="mt-3 text-[16px] leading-relaxed text-gray-500">
+                Currently, I&apos;m in Seattle pursuing a master&apos;s in Innovation Technology at the University of Washington, continuing to explore how design, systems, and emerging technologies intersect.
+              </p>
+              <p className="mt-3 text-[16px] leading-relaxed text-gray-500">
+                Outside of work, I play tennis, chase good coffee, and plan trips somewhere warm — Hawaii, Miami, Puerto Rico, anywhere with a beach. I&apos;m an INTJ, and currently on a <DuolingoStreak />-day Duolingo streak learning Spanish.
               </p>
             </div>
           </div>
