@@ -129,9 +129,7 @@ export default function BioVisionCaseStudy() {
               </div>
 
               {/* Hero Visual */}
-              <div className="bg-neutral-100 rounded-xl overflow-hidden flex items-center justify-center p-[2.5%]">
-                <Image src="/749shots_so.png" alt="BioVision" width={1920} height={1080} unoptimized className="w-full h-auto rounded-lg" />
-              </div>
+              <Image src="/biovision-intro.png?v=2" alt="BioVision" width={1920} height={1080} unoptimized className="w-full h-auto rounded-xl" />
             </div>
           </section>
 
@@ -554,6 +552,15 @@ export default function BioVisionCaseStudy() {
             </div>
           </section>
         </main>
+      </div>
+
+      {/* Next Project */}
+      <div className="py-20 px-6 text-center border-t border-gray-100">
+        <p className="text-[11px] uppercase tracking-widest text-gray-400 mb-4">Next Project</p>
+        <a href="/work/filegpt" className="group inline-flex items-center gap-3 text-[28px] font-bold text-gray-900 hover:text-gray-400 transition-colors duration-200">
+          FileGPT
+          <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
+        </a>
       </div>
 
       {/* Footer */}

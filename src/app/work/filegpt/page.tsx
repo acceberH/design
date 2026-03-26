@@ -474,6 +474,15 @@ export default function FileGPT() {
         </main>
       </div>
 
+      {/* Next Project */}
+      <div className="py-20 px-6 text-center border-t border-gray-100">
+        <p className="text-[11px] uppercase tracking-widest text-gray-400 mb-4">Next Project</p>
+        <a href="/work/offerplz" className="group inline-flex items-center gap-3 text-[28px] font-bold text-gray-900 hover:text-gray-400 transition-colors duration-200">
+          OfferPlz
+          <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
+        </a>
+      </div>
+
       {/* Footer */}
       <footer className="bg-white border-t border-gray-200 mt-16">
         <div className="max-w-7xl mx-auto px-6 py-12">
@@ -484,7 +493,7 @@ export default function FileGPT() {
               </svg>
               Previous Project
             </Link>
-            <Link href="/work/aispire" className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
+            <Link href="/work/offerplz" className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
               Next Project
               <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

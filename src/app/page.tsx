@@ -15,11 +15,9 @@ export default function Home() {
             </span>
           </div>
           <h1 className="text-[48px] sm:text-[56px] font-bold text-gray-900 mb-7 leading-[1.1] tracking-tight">
-            I speak both designer and engineer, and I use that to build products that actually<br />
-            ship well.
+            I own ambiguity, drive direction, and build AI systems that actually matter.
           </h1>
           <p className="text-[17px] text-gray-400 mb-9 leading-relaxed">
-            I specialize in enterprise SaaS and AI-powered products where the complexity is real and the stakes are high.
           </p>
         </div>
       </section>
@@ -27,12 +25,13 @@ export default function Home() {
       {/* Work Section — sticky stack */}
       <section id="work" className="pt-8 pb-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-5xl mx-auto">
+          <p className="text-[13px] font-semibold uppercase tracking-widest text-gray-400 mb-6">Selected Work</p>
           <div className="relative">
 
             {/* OpenPromo — z-10, sticks at 24px */}
             <div className="sticky top-6 z-10">
               <Link href="/work/openpromo" className="group block">
-                <div className="bg-neutral-50 rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_4px_24px_rgba(0,0,0,0.11)] transition-shadow flex flex-col md:flex-row-reverse h-[420px]">
+                <div className="bg-neutral-50 rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.13)] transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]">
                   <div className="md:w-[55%] relative overflow-hidden flex-shrink-0">
                     <Image src="/656shots_so.png" alt="OpenPromo" width={1920} height={1080} unoptimized className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]" />
                   </div>
@@ -48,7 +47,7 @@ export default function Home() {
             {/* BioVision — z-20, sticks at 40px */}
             <div className="sticky top-10 z-20 mt-4">
               <Link href="/work/biovision" className="group block">
-                <div className="bg-neutral-50 rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_4px_24px_rgba(0,0,0,0.11)] transition-shadow flex flex-col md:flex-row-reverse h-[420px]">
+                <div className="bg-neutral-50 rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.13)] transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]">
                   <div className="md:w-[55%] relative overflow-hidden flex-shrink-0 bg-neutral-100 p-[2.5%]">
                     <Image src="/749shots_so.png" alt="BioVision" width={1920} height={1080} unoptimized className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]" />
                   </div>
@@ -71,7 +70,7 @@ export default function Home() {
             {/* FileGPT — z-30, sticks at 56px */}
             <div className="sticky top-14 z-30 mt-4">
               <Link href="/work/filegpt" className="group block">
-                <div className="bg-neutral-50 rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_4px_24px_rgba(0,0,0,0.11)] transition-shadow flex flex-col md:flex-row-reverse h-[420px]">
+                <div className="bg-neutral-50 rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.13)] transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]">
                   <div className="md:w-[55%] relative overflow-hidden flex-shrink-0">
                     <Image src="/253shots_so.png" alt="FileGPT" width={1920} height={1080} className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]" />
                   </div>
@@ -87,7 +86,7 @@ export default function Home() {
             {/* Offerplz — z-40, sticks at 72px */}
             <div className="sticky top-[72px] z-40 mt-4">
               <Link href="/work/offerplz" className="group block">
-                <div className="bg-neutral-50 rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_4px_24px_rgba(0,0,0,0.11)] transition-shadow flex flex-col md:flex-row-reverse h-[420px]">
+                <div className="bg-neutral-50 rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.13)] transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]">
                   <div className="md:w-[55%] relative overflow-hidden flex-shrink-0">
                     <Image src="/639shots_so.png" alt="Offerplz" width={1248} height={512} unoptimized className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]" />
                   </div>
@@ -103,7 +102,7 @@ export default function Home() {
             {/* BarBuddy — z-50, sticks at 88px */}
             <div className="sticky top-[88px] z-50 mt-4">
               <Link href="/work/barbuddy" className="group block">
-                <div className="bg-neutral-50 rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_4px_24px_rgba(0,0,0,0.11)] transition-shadow flex flex-col md:flex-row-reverse h-[420px]">
+                <div className="bg-neutral-50 rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.13)] transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]">
                   <div className="md:w-[55%] relative overflow-hidden flex-shrink-0">
                     <Image src="/bar_mockup.png" alt="BarBuddy" width={400} height={256} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
                   </div>
@@ -119,7 +118,7 @@ export default function Home() {
             {/* Cycle — z-[60], sticks at 104px */}
             <div className="sticky top-[104px] z-[60] mt-4">
               <Link href="/work/cycle" className="group block">
-                <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_4px_24px_rgba(0,0,0,0.11)] transition-shadow flex flex-col md:flex-row-reverse h-[420px]" style={{ backgroundColor: '#FFF8FA' }}>
+                <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.13)] transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]" style={{ backgroundColor: '#FFF8FA' }}>
                   <div className="md:w-[55%] relative overflow-hidden flex-shrink-0">
                     <div className="flex items-center justify-center h-full">
                       <Image src="/lockup_red.png" alt="Cycle" width={300} height={200} className="w-auto h-40 object-contain transition-transform duration-500 group-hover:scale-[1.02]" />

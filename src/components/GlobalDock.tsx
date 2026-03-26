@@ -64,6 +64,41 @@ const ITEMS = [
   },
 ];
 
+const PROJECTS = [
+  { name: "OpenPromo", href: "/work/openpromo" },
+  { name: "BioVision", href: "/work/biovision" },
+  { name: "FileGPT", href: "/work/filegpt" },
+  { name: "OfferPlz", href: "/work/offerplz" },
+  { name: "BarBuddy", href: "/work/barbuddy" },
+  { name: "Cycle NYC", href: "/work/cycle" },
+];
+
+function NavArrow({ href, tooltip, dir }: { href: string; tooltip: string; dir: "prev" | "next" }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div className="relative flex flex-col items-center" style={{ width: BASE }}>
+      {hovered && (
+        <span className="absolute whitespace-nowrap rounded-lg px-2.5 py-1 text-xs font-medium pointer-events-none"
+          style={{ bottom: BASE + 12, left: "50%", transform: "translateX(-50%)", background: "rgba(255,255,255,0.95)", backdropFilter: "blur(10px)", color: "#111", boxShadow: "0 2px 8px rgba(0,0,0,0.10)" }}>
+          {tooltip}
+        </span>
+      )}
+      <Link href={href}
+        className="flex items-center justify-center rounded-[14px] cursor-pointer"
+        style={{ width: BASE, height: BASE, background: "linear-gradient(160deg, rgba(255,255,255,0.55) 0%, rgba(120,120,120,0.06) 100%)", border: "1px solid rgba(255,255,255,0.72)", boxShadow: "inset 0 1.5px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.08)", color: "#6b7280", transition: "transform 0.15s ease" }}
+        onMouseEnter={e => { setHovered(true); (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
+        onMouseLeave={e => { setHovered(false); (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
+      >
+        {dir === "prev" ? (
+          <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+        ) : (
+          <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+        )}
+      </Link>
+    </div>
+  );
+}
+
 const BASE = 52;
 const MAX = 80;
 const SPREAD = 120; // px radius of magnification effect
@@ -82,6 +117,11 @@ export default function GlobalDock() {
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [mouseX, setMouseX] = useState<number | null>(null);
   const [scales, setScales] = useState<number[]>(ITEMS.map(() => 1));
+
+  const currentProjectIdx = PROJECTS.findIndex(p => pathname === p.href);
+  const isOnProject = currentProjectIdx !== -1;
+  const prevProject = isOnProject ? PROJECTS[(currentProjectIdx - 1 + PROJECTS.length) % PROJECTS.length] : null;
+  const nextProject = isOnProject ? PROJECTS[(currentProjectIdx + 1) % PROJECTS.length] : null;
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const mx = e.clientX;
@@ -119,6 +159,13 @@ export default function GlobalDock() {
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[1.5px] rounded-t-[22px]"
           style={{ background: "linear-gradient(90deg, transparent 5%, rgba(255,255,255,0.95) 30%, rgba(255,255,255,0.95) 70%, transparent 95%)" }}
         />
+
+        {isOnProject && prevProject && (
+          <>
+            <NavArrow href={prevProject.href} tooltip={prevProject.name} dir="prev" />
+            <div className="mx-0.5 h-8 w-px self-center" style={{ background: "rgba(0,0,0,0.08)" }} />
+          </>
+        )}
 
         {ITEMS.map((item, i) => {
           if (item.key === "divider") {
@@ -185,6 +232,13 @@ export default function GlobalDock() {
             </div>
           );
         })}
+
+        {isOnProject && nextProject && (
+          <>
+            <div className="mx-0.5 h-8 w-px self-center" style={{ background: "rgba(0,0,0,0.08)" }} />
+            <NavArrow href={nextProject.href} tooltip={nextProject.name} dir="next" />
+          </>
+        )}
       </div>
     </div>
   );

@@ -92,21 +92,11 @@ export default function OpenPromoCaseStudy() {
               </div>
               
               {/* Hero Visual */}
-              <div className="bg-gray-50 rounded-xl shadow-lg overflow-hidden p-8">
-                <div className="w-full aspect-video rounded-lg overflow-hidden bg-black">
-                  <video
-                    className="w-full h-full object-contain"
-                    src="/openpromo_dashboard_demo.mov"
-                    poster="/394shots_so.png"
-                    controls
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
-                  />
-                </div>
-              </div>
+              <img
+                className="w-full rounded-xl"
+                src="/openpromo_demo.gif"
+                alt="OpenPromo dashboard demo"
+              />
             </div>
           </section>
 
@@ -551,6 +541,15 @@ export default function OpenPromoCaseStudy() {
         </main>
       </div>
 
+      {/* Next Project */}
+      <div className="py-20 px-6 text-center border-t border-gray-100">
+        <p className="text-[11px] uppercase tracking-widest text-gray-400 mb-4">Next Project</p>
+        <a href="/work/biovision" className="group inline-flex items-center gap-3 text-[28px] font-bold text-gray-900 hover:text-gray-400 transition-colors duration-200">
+          BioVision
+          <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
+        </a>
+      </div>
+
       {/* Footer */}
       <footer id="footer" className="bg-white border-t border-gray-200 mt-16">
         <div className="max-w-7xl mx-auto px-6 py-12">
@@ -561,7 +560,7 @@ export default function OpenPromoCaseStudy() {
               </svg>
               Previous Project
             </Link>
-            <Link href="/work/filegpt" className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
+            <Link href="/work/biovision" className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
               Next Project
               <svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 448 512">
                 <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
