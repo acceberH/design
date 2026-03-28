@@ -17,6 +17,8 @@ export default function Tracker() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // Don't track dashboard visits
+    if (pathname.startsWith("/dashboard")) return;
     try {
       const sessionId = getSessionId();
       const referrer = document.referrer || "";
