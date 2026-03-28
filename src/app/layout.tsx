@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import BrandFacehash from "@/components/BrandFacehash";
 import GlobalDock from "@/components/GlobalDock";
+import Tracker from "@/components/Tracker";
 
 export const metadata: Metadata = {
   title: "Rebecca Huang",
@@ -33,6 +34,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <BrandFacehash />
+        <Tracker />
         {children}
         <GlobalDock />
         <Analytics />

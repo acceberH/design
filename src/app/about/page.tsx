@@ -1,5 +1,58 @@
 "use client";
 import Image from "next/image";
+import { useState, useEffect, useRef } from "react";
+
+const PHOTOS = [
+  "/514d680ecbc8f49f2cd0527b63cf87c5.jpg",
+  "/a10cc4a8bd13c770bbc63ec8813df604.jpg",
+  "/b248dfaf4b13879cfc2979583f25e86d.jpg",
+  "/2b1e547573eb590e4d56b8c9733f7047.jpg",
+];
+
+function PhotoSlider() {
+  const [current, setCurrent] = useState(0);
+  const [animating, setAnimating] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setAnimating(true);
+      setTimeout(() => {
+        setCurrent(c => (c + 1) % PHOTOS.length);
+        setAnimating(false);
+      }, 300);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="relative w-[280px] h-[380px] flex-shrink-0">
+      <div
+        className="w-full h-full rounded-2xl overflow-hidden shadow-md"
+        style={{ transition: "opacity 0.3s ease", opacity: animating ? 0 : 1 }}
+      >
+        <Image
+          src={PHOTOS[current]}
+          alt="Rebecca"
+          width={560}
+          height={760}
+          unoptimized
+          className="w-full h-full object-cover"
+          priority
+        />
+      </div>
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+        {PHOTOS.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            className="rounded-full transition-all duration-300"
+            style={{ width: i === current ? 16 : 6, height: 6, background: i === current ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.5)" }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function DuolingoStreak() {
   // Streak was 791 on 2026-03-18
@@ -10,132 +63,123 @@ function DuolingoStreak() {
   return <>{knownStreak + diffDays}</>;
 }
 
+function ExpandRow({ period, title, sub, desc, border }: { period: string; title: string; sub: string; desc: string; border: boolean }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div
+      className={`px-5 py-4 bg-white cursor-pointer transition-colors duration-150 ${border ? "border-t border-gray-100" : ""} ${open ? "bg-gray-50" : "hover:bg-gray-50"}`}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-[15px] font-medium text-gray-900">{title}</p>
+          <p className="text-[13px] text-gray-400">{sub}</p>
+        </div>
+        <p className="text-[13px] text-gray-400 ml-6 flex-shrink-0">{period}</p>
+      </div>
+      <div
+        className="overflow-hidden transition-all duration-300 ease-in-out"
+        style={{ maxHeight: open ? 80 : 0, opacity: open ? 1 : 0 }}
+      >
+        <p className="text-[13px] text-gray-500 leading-relaxed mt-2">{desc}</p>
+      </div>
+    </div>
+  );
+}
+
+function RisingCard({ children, zIndex }: { children: React.ReactNode; zIndex: number }) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [ty, setTy] = useState(100);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (!wrapperRef.current) return;
+      const top = wrapperRef.current.getBoundingClientRect().top;
+      const vh = window.innerHeight;
+      // When top === vh: card just entering from bottom (ty = 100)
+      // When top === 0: card fully risen to top (ty = 0)
+      const progress = Math.max(0, Math.min(1, (vh - top) / vh));
+      setTy((1 - progress) * 100);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <div ref={wrapperRef} style={{ height: "200vh" }}>
+      <div
+        className="sticky top-0 w-full"
+        style={{ zIndex, transform: `translateY(${ty}vh)` }}
+      >
+        <div className="w-full bg-white rounded-t-3xl shadow-[0_-12px_60px_rgba(0,0,0,0.12)] px-12 py-10 min-h-screen">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <main className="mx-auto max-w-3xl px-6 py-20 sm:px-8">
+    <div className="bg-white">
 
-        {/* Intro */}
-        <section className="mb-24">
-          <div className="flex flex-col gap-8 md:flex-row md:items-start">
-            <Image
-              src="/IMG_2878.jpg"
-              alt="Rebecca Huang"
-              width={915}
-              height={1339}
-              className="w-[150px] h-[200px] rounded-2xl object-cover shadow-md flex-shrink-0"
-              priority
-            />
-            <div>
-              <h1 className="mb-4 text-[32px] font-bold tracking-tight text-gray-900 leading-tight">
-                I design with a hypothesis, not a hunch.
-              </h1>
-              <p className="text-[16px] leading-relaxed text-gray-500">
-                Born in Wenzhou, raised in Shanghai, and shaped in Brooklyn, my path into design wasn&apos;t linear. I studied Integrated Design &amp; Media at NYU, where I discovered UX — but I almost chose data science instead. That decision never really left. It became the foundation of how I think.
-              </p>
-              <p className="mt-3 text-[16px] leading-relaxed text-gray-500">
-                Today, I approach design like an experiment. Every interaction is a hypothesis. Every iteration is a test. I care less about how something looks in isolation, and more about what it actually does — how it influences behavior, drives engagement, or changes outcomes.
-              </p>
-              <p className="mt-3 text-[16px] leading-relaxed text-gray-500">
-                I&apos;m especially drawn to problems where design meets ambiguity: unclear requirements, conflicting constraints, or high-stakes decisions. That&apos;s where structured thinking, data, and iteration make the biggest difference.
-              </p>
-              <p className="mt-3 text-[16px] leading-relaxed text-gray-500">
-                Currently, I&apos;m in Seattle pursuing a master&apos;s in Innovation Technology at the University of Washington, continuing to explore how design, systems, and emerging technologies intersect.
-              </p>
-              <p className="mt-3 text-[16px] leading-relaxed text-gray-500">
-                Outside of work, I play tennis, chase good coffee, and plan trips somewhere warm — Hawaii, Miami, Puerto Rico, anywhere with a beach. I&apos;m an INTJ, and currently on a <DuolingoStreak />-day Duolingo streak learning Spanish.
-              </p>
-            </div>
+      {/* Intro — plain page, no card */}
+      <div className="min-h-screen flex items-center px-8 sm:px-16 lg:px-24">
+        <div className="max-w-3xl w-full mx-auto flex flex-col gap-8 md:flex-row md:items-start pt-24 pb-16">
+          <PhotoSlider />
+          <div>
+            <h1 className="mb-6 text-[32px] font-bold tracking-tight text-gray-900 leading-tight">
+              I design with a hypothesis,<br />not a hunch.
+            </h1>
+            <p className="text-[16px] leading-relaxed text-gray-500">
+              Born in Wenzhou, raised in Shanghai, shaped in Brooklyn. My path into design wasn&apos;t linear. I studied Integrated Design &amp; Media at NYU, and almost chose data science instead. That decision never really left, it became the foundation of how I think.
+            </p>
+            <p className="mt-3 text-[16px] leading-relaxed text-gray-500">
+              I approach design like an experiment. Every interaction is a hypothesis, every iteration is a test. I care less about how something looks in isolation, and more about what it actually does, how it influences behavior, drives engagement, or changes outcomes.
+            </p>
+            <p className="mt-3 text-[16px] leading-relaxed text-gray-500">
+              I&apos;m drawn to problems where design meets ambiguity, unclear requirements, conflicting constraints, high-stakes decisions. That&apos;s where structured thinking and iteration make the biggest difference.
+            </p>
           </div>
-        </section>
+        </div>
+      </div>
 
-        {/* Education */}
-        <section className="mb-24">
-          <h2 className="text-[20px] font-bold text-gray-900 mb-8">Education</h2>
-          <div className="border-t border-gray-200">
-            {[
-              {
-                period: "2024 – 2026",
-                school: "University of Washington",
-                degree: "MS Innovation Technology",
-                description: "Focusing on human-computer interaction, AI product design, and design systems. Coursework bridges technical depth with user-centered practice.",
-              },
-              {
-                period: "2021 – 2024",
-                school: "New York University",
-                degree: "BS Integrated Design & Media",
-                description: "Interdisciplinary program spanning UX, visual design, and media technology. Where I discovered the intersection of design and data that still defines how I work.",
-              },
-            ].map(({ period, school, degree, description }) => (
-              <div key={school} className="grid grid-cols-[200px_1fr] gap-8 border-b border-gray-200 py-8">
-                <p className="text-[14px] text-gray-400 pt-0.5">{period}</p>
-                <div>
-                  <p className="font-semibold text-gray-900 text-[15px]">{school}</p>
-                  <p className="text-[14px] text-gray-500 mb-3">{degree}</p>
-                  <p className="text-[14px] text-gray-500 leading-relaxed">{description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+      {/* Education card — rises from below */}
+      <RisingCard zIndex={20}>
+        <h2 className="text-[13px] font-semibold uppercase tracking-widest text-gray-400 mb-6">Education</h2>
+        <div className="rounded-2xl border border-gray-100 overflow-hidden max-w-2xl">
+          {[
+            { period: "2024 – 2026", title: "University of Washington", sub: "MS Innovation Technology", desc: "Focusing on human-computer interaction, AI product design, and design systems." },
+            { period: "2021 – 2024", title: "New York University", sub: "BS Integrated Design & Media", desc: "Interdisciplinary program spanning UX, visual design, and media technology." },
+          ].map(({ period, title, sub, desc }, i) => (
+            <ExpandRow key={title} period={period} title={title} sub={sub} desc={desc} border={i > 0} />
+          ))}
+        </div>
+      </RisingCard>
 
-        {/* Experience */}
-        <section className="mb-24">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-[20px] font-bold text-gray-900">Experience</h2>
-            <a
-              href="/v1%20(3).pdf"
-              className="border border-gray-200 text-gray-600 px-5 py-2 rounded-full text-[13px] font-medium hover:border-gray-400 hover:text-gray-900 transition-colors"
-            >
-              Download CV
-            </a>
-          </div>
-          <div className="border-t border-gray-200">
-            {[
-              {
-                period: "Sep 2025 – Present",
-                company: "OpenPromo",
-                role: "Product Designer",
-                description: "Leading end-to-end product design for a multi-tenant social content management platform, working closely with engineering and growth teams to ship a scalable B2B SaaS experience.",
-              },
-              {
-                period: "Sep 2025 – Mar 2026",
-                company: "Amazon Web Services",
-                role: "Product Designer",
-                description: "Designed complex enterprise tooling for internal AWS teams, translating dense technical workflows into clear, usable interfaces grounded in user research and systems thinking.",
-              },
-              {
-                period: "Jun 2025 – Aug 2025",
-                company: "AISPIRE",
-                role: "UX Design Intern",
-                description: "Conducted user research and prototyped AI-assisted features, collaborating with product managers and engineers to validate concepts through rapid iterative testing.",
-              },
-              {
-                period: "Nov 2024 – Mar 2025",
-                company: "OfferPlz",
-                role: "Product Designer",
-                description: "Redesigned the core hiring flow from offer creation to candidate acceptance, reducing friction across both employer and candidate journeys through research-backed design decisions.",
-              },
-              {
-                period: "Feb 2023 – Aug 2024",
-                company: "FileGPT",
-                role: "Product Designer",
-                description: "Shaped the UX of an AI-powered document analysis platform from early-stage MVP to a polished product, driving adoption through clear information architecture and interaction design.",
-              },
-            ].map(({ period, company, role, description }) => (
-              <div key={company} className="grid grid-cols-[200px_1fr] gap-8 border-b border-gray-200 py-8">
-                <p className="text-[14px] text-gray-400 pt-0.5">{period}</p>
-                <div>
-                  <p className="font-semibold text-gray-900 text-[15px]">{company}</p>
-                  <p className="text-[14px] text-gray-500 mb-3">{role}</p>
-                  <p className="text-[14px] text-gray-500 leading-relaxed">{description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+      {/* Experience card — rises over education */}
+      <RisingCard zIndex={30}>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-[13px] font-semibold uppercase tracking-widest text-gray-400">Experience</h2>
+          <a href="/v1%20(3).pdf" className="border border-gray-200 text-gray-500 px-4 py-1.5 rounded-full text-[12px] font-medium hover:border-gray-400 hover:text-gray-900 transition-colors">
+            Download CV
+          </a>
+        </div>
+        <div className="rounded-2xl border border-gray-100 overflow-hidden max-w-2xl">
+          {[
+            { period: "2025 – Now", title: "OpenPromo", sub: "Product Designer", desc: "Leading end-to-end product design for a multi-tenant social content management platform." },
+            { period: "2025 – 2026", title: "Amazon Web Services", sub: "Product Designer", desc: "Designed complex enterprise tooling for internal AWS teams, translating dense technical workflows into clear, usable interfaces." },
+            { period: "2025", title: "AISPIRE", sub: "UX Design Intern", desc: "Conducted user research and prototyped AI-assisted features through rapid iterative testing." },
+            { period: "2024 – 2025", title: "OfferPlz", sub: "Product Designer", desc: "Redesigned the core hiring flow from offer creation to candidate acceptance." },
+            { period: "2023 – 2024", title: "FileGPT", sub: "Product Designer", desc: "Shaped the UX of an AI-powered document analysis platform from early-stage MVP to polished product." },
+          ].map(({ period, title, sub, desc }, i) => (
+            <ExpandRow key={title} period={period} title={title} sub={sub} desc={desc} border={i > 0} />
+          ))}
+        </div>
+      </RisingCard>
 
-      </main>
     </div>
   );
 }
