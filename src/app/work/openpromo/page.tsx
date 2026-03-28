@@ -141,6 +141,23 @@ export default function OpenPromoCaseStudy() {
             </div>
           </section>
 
+          {/* Key Features Section */}
+          <section id="key-features" className="px-6 py-16 border-t border-gray-200">
+            <div className="max-w-4xl">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Key Features</h2>
+              <div className="w-fit max-w-full mb-6 rounded-xl border border-gray-200 overflow-hidden">
+                <Image
+                  src="/astro-island.png?v=2"
+                  alt="Key features"
+                  width={1400}
+                  height={900}
+                  unoptimized
+                  className="w-auto max-w-full h-auto"
+                />
+              </div>
+            </div>
+          </section>
+
                     {/* Context Section */}
           <section id="context" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
@@ -252,17 +269,6 @@ export default function OpenPromoCaseStudy() {
           {/* Approach Section */}
           <section id="approach" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
-              <h2 id="key-features" className="text-3xl font-bold text-gray-900 mb-4">Key Features</h2>
-              <div className="w-fit max-w-full mb-6 rounded-xl border border-gray-200 overflow-hidden">
-                <Image
-                  src="/astro-island.png?v=2"
-                  alt="Key features"
-                  width={1400}
-                  height={900}
-                  unoptimized
-                  className="w-auto max-w-full h-auto"
-                />
-              </div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Design Process</h2>
               
               <div id="solution-one" className="mb-16 relative">

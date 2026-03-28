@@ -7,17 +7,20 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white scroll-smooth">
       {/* Hero Section - Full Screen */}
-      <section id="hero-section" className="flex items-center justify-center pt-32 pb-16 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-5xl mx-auto w-full text-center">
-          <div className="mb-6">
-            <span className="inline-flex items-center rounded-full border border-blue-100/80 bg-gradient-to-r from-slate-100/80 via-blue-50/70 to-indigo-100/80 backdrop-blur-md px-6 py-2.5 text-[18px] font-medium text-gray-800 tracking-tight shadow-[0_2px_16px_rgba(99,102,241,0.12)]">
+      <section id="hero-section" className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-[600px] mx-auto w-full text-center">
+          <div className="flex justify-center mb-8">
+            <span className="inline-flex items-center rounded-full border border-blue-100/80 bg-gradient-to-r from-slate-100/80 via-blue-50/70 to-indigo-100/80 backdrop-blur-md px-5 py-2 text-[15px] font-medium text-gray-800 tracking-tight shadow-[0_2px_16px_rgba(99,102,241,0.12)]">
               Hi, I&apos;m Rebecca 👋
             </span>
           </div>
-          <h1 className="text-[48px] sm:text-[56px] font-bold text-gray-900 mb-7 leading-[1.1] tracking-tight">
-            I own ambiguity, drive direction, and build AI systems that actually matter.
+          <h1 className="text-[36px] font-medium text-gray-900 mb-4 leading-[1.15] tracking-tight">
+            Engineering brain.<br />
+            Design instinct.<br />
+            <span style={{ background: "linear-gradient(90deg, #94a3b8 0%, #818cf8 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>AI moves fast, so do I.</span>
           </h1>
-          <p className="text-[17px] text-gray-400 mb-9 leading-relaxed">
+          <p className="text-[16px] text-gray-400 leading-relaxed whitespace-nowrap">
+            Product designer who owns ambiguity and drives direction, building AI-powered products from zero to real.
           </p>
         </div>
       </section>

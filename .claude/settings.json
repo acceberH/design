@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ffmpeg -i /Users/qiongran.h/design/public/biovisiondemo1.mov -vf \"fps=12,scale=900:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=128[p];[s1][p]paletteuse=dither=bayer\" -loop 0 /Users/qiongran.h/design/public/biovisiondemo1.gif)"
+    ]
+  }
+}
