@@ -13,9 +13,9 @@ export async function GET(req: NextRequest) {
   }
 
   const raw = await kv.lrange("pageviews", 0, 999);
-  const visits = raw.map((v) =>
-    typeof v === "string" ? JSON.parse(v) : v
-  );
+  const visits = raw
+    .map((v) => (typeof v === "string" ? JSON.parse(v) : v))
+    .filter((v) => !v.page?.startsWith("/dashboard"));
 
   return NextResponse.json(visits);
 }
