@@ -144,15 +144,8 @@ export default function AboutPage() {
         </div>
 
         {/* CARDS SECTION — higher z-index, slides up over hero as user scrolls */}
-        <div style={{ position: "relative", zIndex: 10 }}>
-          {/* White sheet that covers the hero */}
-          <div className="bg-white px-8 sm:px-16 lg:px-24 pb-32"
-            style={{ borderRadius: "28px 28px 0 0", boxShadow: "0 -4px 40px rgba(0,0,0,0.07)" }}>
-
-            {/* Drag handle aesthetic */}
-            <div className="flex justify-center pt-4 pb-8">
-              <div className="w-10 h-1 rounded-full bg-gray-200" />
-            </div>
+        <div style={{ position: "relative", zIndex: 10, background: "white" }}>
+          <div className="px-8 sm:px-16 lg:px-24 pb-32 pt-12">
 
             {/* Stacked scroll container */}
             <div ref={stackRef} className="max-w-2xl mx-auto"
