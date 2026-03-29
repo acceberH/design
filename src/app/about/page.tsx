@@ -91,15 +91,15 @@ export default function AboutPage() {
   // Track scroll through the stacked section to animate card 0 scaling down
   const { scrollYProgress } = useScroll({
     target: stackRef,
-    offset: ["start start", "end end"],
+    offset: ["start start", "end start"], // range = full STACK_HEIGHT px
   });
 
-  // Education card scales + fades as Experience slides over it
-  const eduScale   = useTransform(scrollYProgress, [0.4, 0.75], [1, 0.94]);
-  const eduOpacity = useTransform(scrollYProgress, [0.4, 0.75], [1, 0.55]);
+  // Education scales/fades as Experience slides over it
+  // Experience marginTop is 480px → appears at ~480/1400 ≈ 0.34
+  const eduScale   = useTransform(scrollYProgress, [0.32, 0.52], [1, 0.94]);
+  const eduOpacity = useTransform(scrollYProgress, [0.32, 0.52], [1, 0.50]);
 
-  // Container height: hero (100vh) + scroll room for 2 cards stacking
-  const STACK_HEIGHT = 900; // px of scroll room inside the sticky container
+  const STACK_HEIGHT = 1400; // enough scroll room for both cards
 
   return (
     <div className="bg-white">
@@ -166,7 +166,7 @@ export default function AboutPage() {
               </div>
 
               {/* Card 1 — Experience (sticky below, slides over Education) */}
-              <div style={{ position: "sticky", top: 108, zIndex: 2, marginTop: 340 }}>
+              <div style={{ position: "sticky", top: 108, zIndex: 2, marginTop: 480 }}>
                 <motion.div
                   className="bg-white rounded-2xl border border-gray-100 px-8 py-7"
                   initial={{ boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}
