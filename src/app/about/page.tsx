@@ -112,10 +112,8 @@ export default function AboutPage() {
     offset: ["start start", "end start"], // range = full STACK_HEIGHT px
   });
 
-  // Education scales/fades as Experience slides over it
-  // Experience marginTop is 480px → appears at ~480/1400 ≈ 0.34
-  const eduScale   = useTransform(scrollYProgress, [0.32, 0.52], [1, 0.94]);
-  const eduOpacity = useTransform(scrollYProgress, [0.32, 0.52], [1, 0.50]);
+  // Education scales down slightly as Experience slides over it
+  const eduScale = useTransform(scrollYProgress, [0.32, 0.52], [1, 0.94]);
 
   const STACK_HEIGHT = 1400; // enough scroll room for both cards
 
@@ -172,7 +170,7 @@ export default function AboutPage() {
               {/* Card 0 — Education — parks to cover hero text */}
               <div style={{ position: "sticky", top: "12vh", zIndex: 1 }}>
                 <motion.div
-                  style={{ scale: eduScale, opacity: eduOpacity, transformOrigin: "top center" }}
+                  style={{ scale: eduScale, transformOrigin: "top center" }}
                   className="bg-white rounded-2xl border border-gray-100 px-8 py-7"
                   initial={{ boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}
                   whileHover={{ boxShadow: "0 8px 32px rgba(0,0,0,0.10)" }}
