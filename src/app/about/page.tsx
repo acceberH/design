@@ -144,7 +144,7 @@ export default function AboutPage() {
         </div>
 
         {/* CARDS SECTION — higher z-index, slides up over hero as user scrolls */}
-        <div style={{ position: "relative", zIndex: 10, background: "white" }}>
+        <div style={{ position: "relative", zIndex: 10 }}>
           <div className="px-8 sm:px-16 lg:px-24 pb-32 pt-12">
 
             {/* Stacked scroll container */}
