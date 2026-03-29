@@ -15,12 +15,10 @@ export default function Home() {
             </span>
           </div>
           <h1 className="text-[36px] font-medium text-gray-900 mb-4 leading-[1.15] tracking-tight">
-            Engineering brain.<br />
-            Design instinct.<br />
-            <span style={{ background: "linear-gradient(90deg, #94a3b8 0%, #818cf8 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>AI moves fast, so do I.</span>
+            I speak both designer and engineer,<br />and I use that to build products that actually ship well.
           </h1>
-          <p className="text-[16px] text-gray-400 leading-relaxed whitespace-nowrap">
-            Product designer who owns ambiguity and drives direction, building AI-powered products from zero to real.
+          <p className="text-[16px] text-gray-400 leading-relaxed">
+            I specialize in enterprise SaaS and AI-powered products where the complexity is real and the stakes are high.
           </p>
         </div>
       </section>
