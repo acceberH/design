@@ -165,12 +165,12 @@ export default function AboutPage() {
         <div style={{ position: "relative", zIndex: 10 }}>
           <div className="px-8 sm:px-16 lg:px-24 pb-32 pt-12">
 
-            {/* Stacked scroll container */}
-            <div ref={stackRef} className="max-w-2xl mx-auto"
-              style={{ height: STACK_HEIGHT, position: "relative" }}>
+            {/* Stacked scroll container — aligned to hero text column */}
+            <div ref={stackRef} className="max-w-3xl mx-auto"
+              style={{ height: STACK_HEIGHT, position: "relative", paddingLeft: "calc(280px + 2rem)" }}>
 
-              {/* Card 0 — Education — parks at 45vh (screen middle) */}
-              <div style={{ position: "sticky", top: "45vh", zIndex: 1 }}>
+              {/* Card 0 — Education — parks to cover hero text */}
+              <div style={{ position: "sticky", top: "12vh", zIndex: 1 }}>
                 <motion.div
                   style={{ scale: eduScale, opacity: eduOpacity, transformOrigin: "top center" }}
                   className="bg-white rounded-2xl border border-gray-100 px-8 py-7"
@@ -183,8 +183,8 @@ export default function AboutPage() {
                 </motion.div>
               </div>
 
-              {/* Card 1 — Experience — parks just below Education */}
-              <div style={{ position: "sticky", top: "calc(45vh + 20px)", zIndex: 2, marginTop: 480 }}>
+              {/* Card 1 — Experience */}
+              <div style={{ position: "sticky", top: "calc(12vh + 20px)", zIndex: 2, marginTop: 480 }}>
                 <motion.div
                   className="bg-white rounded-2xl border border-gray-100 px-8 py-7"
                   initial={{ boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}
