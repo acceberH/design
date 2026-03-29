@@ -18,7 +18,7 @@ export default function Home() {
             I speak both designer and engineer,<br />and I use that to build products that actually ship well.
           </h1>
           <p className="text-[16px] text-gray-400 leading-relaxed">
-            I specialize in enterprise SaaS and AI-powered products where the complexity is real and the stakes are high.
+            I specialize in AI-powered products where the complexity is real and the stakes are high.
           </p>
         </div>
       </section>
