@@ -165,9 +165,9 @@ export default function AboutPage() {
         <div style={{ position: "relative", zIndex: 10 }}>
           <div className="px-8 sm:px-16 lg:px-24 pb-32 pt-12">
 
-            {/* Stacked scroll container — aligned to hero text column */}
-            <div ref={stackRef} className="max-w-3xl mx-auto"
-              style={{ height: STACK_HEIGHT, position: "relative", paddingLeft: "calc(280px + 2rem)" }}>
+            {/* Stacked scroll container */}
+            <div ref={stackRef} className="max-w-2xl mx-auto"
+              style={{ height: STACK_HEIGHT, position: "relative" }}>
 
               {/* Card 0 — Education — parks to cover hero text */}
               <div style={{ position: "sticky", top: "12vh", zIndex: 1 }}>
