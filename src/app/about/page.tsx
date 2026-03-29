@@ -168,6 +168,32 @@ export default function AboutPage() {
         </div>
       </div>
 
+      {/* ── SKILLS ── */}
+      <div className="px-8 sm:px-16 lg:px-24 py-16 border-t border-gray-100">
+        <div className="max-w-2xl mx-auto">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400 mb-8">Skills</p>
+          <div className="flex flex-col gap-5">
+            {[
+              { label: "Design", items: ["Product Design", "User Experience", "Interaction Design", "Visual Design", "Wireframing", "Lo-Fi / Hi-Fi Mockups", "Web Design"] },
+              { label: "Research", items: ["User Interviews", "User Testing", "A/B Testing", "Journey Mapping", "Competitor Analysis", "Information Architecture", "Quantitative Analysis"] },
+              { label: "Development", items: ["HTML / CSS", "Python", "Java", "SQL", "API Integration", "GitHub"] },
+            ].map(({ label, items }) => (
+              <div key={label} className="flex gap-6">
+                <p className="text-[12px] text-gray-400 w-24 flex-shrink-0 pt-0.5">{label}</p>
+                <div className="flex flex-wrap gap-2">
+                  {items.map(skill => (
+                    <span key={skill}
+                      className="px-3 py-1 rounded-full text-[12px] text-gray-600 bg-gray-50 border border-gray-100">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 }
