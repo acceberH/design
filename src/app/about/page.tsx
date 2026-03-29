@@ -169,8 +169,8 @@ export default function AboutPage() {
             <div ref={stackRef} className="max-w-2xl mx-auto"
               style={{ height: STACK_HEIGHT, position: "relative" }}>
 
-              {/* Card 0 — Education (sticky, scales as Experience slides over) */}
-              <div style={{ position: "sticky", top: 88, zIndex: 1 }}>
+              {/* Card 0 — Education — parks at 45vh (screen middle) */}
+              <div style={{ position: "sticky", top: "45vh", zIndex: 1 }}>
                 <motion.div
                   style={{ scale: eduScale, opacity: eduOpacity, transformOrigin: "top center" }}
                   className="bg-white rounded-2xl border border-gray-100 px-8 py-7"
@@ -183,8 +183,8 @@ export default function AboutPage() {
                 </motion.div>
               </div>
 
-              {/* Card 1 — Experience (sticky below, slides over Education) */}
-              <div style={{ position: "sticky", top: 108, zIndex: 2, marginTop: 480 }}>
+              {/* Card 1 — Experience — parks just below Education */}
+              <div style={{ position: "sticky", top: "calc(45vh + 20px)", zIndex: 2, marginTop: 480 }}>
                 <motion.div
                   className="bg-white rounded-2xl border border-gray-100 px-8 py-7"
                   initial={{ boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}
