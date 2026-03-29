@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const PHOTOS = [
   "/514d680ecbc8f49f2cd0527b63cf87c5.jpg",
@@ -79,10 +79,9 @@ function SectionCard({
   total: number;
   scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
 }) {
-  const TOP_BASE   = 88;
+  const TOP_BASE    = 88;
   const CARD_STAGGER = 20;
 
-  // This card scales down when the next card scrolls over it
   const scaleFrom = (index + 1) / total;
   const scaleTo   = Math.min((index + 1.5) / total, 1);
   const scale = useTransform(
@@ -110,13 +109,11 @@ function SectionCard({
         whileHover={{ boxShadow: "0 8px 32px rgba(0,0,0,0.10)" }}
         transition={{ duration: 0.25 }}
       >
-        {/* Card header */}
         <div className="flex items-center justify-between mb-6">
           <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">{label}</p>
           {extra}
         </div>
 
-        {/* Items list */}
         <div className="flex flex-col divide-y divide-gray-50">
           {items.map((item, i) => (
             <div key={item.title} className={i === 0 ? "pb-5" : i === items.length - 1 ? "pt-5" : "py-5"}>
@@ -144,8 +141,7 @@ export default function AboutPage() {
   const stackRef = useRef<HTMLDivElement>(null);
 
   const SCROLL_PER_CARD = 280;
-  const CARDS = 2; // Education + Experience
-  const containerHeight = (CARDS - 1) * SCROLL_PER_CARD + 600;
+  const containerHeight = SCROLL_PER_CARD + 700; // space for 2 cards
 
   const { scrollYProgress } = useScroll({
     target: stackRef,
@@ -155,49 +151,50 @@ export default function AboutPage() {
   return (
     <div className="bg-white">
 
-      {/* ── HERO ── */}
-      <div className="min-h-screen flex items-center px-8 sm:px-16 lg:px-24">
-        <div className="max-w-3xl w-full mx-auto flex flex-col gap-8 md:flex-row md:items-start pt-24 pb-16">
+      {/* ── HERO — sticky, cards will slide over it ── */}
+      <div style={{ height: "100vh" }}>
+        <div className="flex items-center px-8 sm:px-16 lg:px-24"
+          style={{ position: "sticky", top: 0, height: "100vh", zIndex: 1 }}>
+          <div className="max-w-3xl w-full mx-auto flex flex-col gap-8 md:flex-row md:items-start pt-24 pb-16">
 
-          {/* Photo — tilts into place on load */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92, rotate: -3, y: 24 }}
-            animate={{ opacity: 1, scale: 1,    rotate: 0,  y: 0  }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-          >
-            <PhotoSlider />
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, rotate: -3, y: 24 }}
+              animate={{ opacity: 1, scale: 1,    rotate: 0,  y: 0  }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            >
+              <PhotoSlider />
+            </motion.div>
 
-          {/* Text — staggered on load */}
-          <motion.div variants={containerVariants} initial="hidden" animate="visible">
-            <motion.h1 variants={itemVariants}
-              className="mb-6 text-[32px] font-bold tracking-tight text-gray-900 leading-tight">
-              I design with a hypothesis,<br />not a hunch.
-            </motion.h1>
-            <motion.p variants={itemVariants} className="text-[16px] leading-relaxed text-gray-500">
-              Born in Wenzhou, raised in Shanghai, shaped in Brooklyn. My path into design wasn&apos;t linear.
-              I studied Integrated Design &amp; Media at NYU, and almost chose data science instead.
-              That decision never really left — it became the foundation of how I think.
-            </motion.p>
-            <motion.p variants={itemVariants} className="mt-3 text-[16px] leading-relaxed text-gray-500">
-              I approach design like an experiment. Every interaction is a hypothesis, every iteration is a test.
-              I care less about how something looks in isolation, and more about what it actually does —
-              how it influences behavior, drives engagement, or changes outcomes.
-            </motion.p>
-            <motion.p variants={itemVariants} className="mt-3 text-[16px] leading-relaxed text-gray-500">
-              I&apos;m drawn to problems where design meets ambiguity — unclear requirements, conflicting constraints,
-              high-stakes decisions. That&apos;s where structured thinking and iteration make the biggest difference.
-            </motion.p>
-          </motion.div>
+            <motion.div variants={containerVariants} initial="hidden" animate="visible">
+              <motion.h1 variants={itemVariants}
+                className="mb-6 text-[32px] font-bold tracking-tight text-gray-900 leading-tight">
+                I design with a hypothesis,<br />not a hunch.
+              </motion.h1>
+              <motion.p variants={itemVariants} className="text-[16px] leading-relaxed text-gray-500">
+                Born in Wenzhou, raised in Shanghai, shaped in Brooklyn. My path into design wasn&apos;t linear.
+                I studied Integrated Design &amp; Media at NYU, and almost chose data science instead.
+                That decision never really left — it became the foundation of how I think.
+              </motion.p>
+              <motion.p variants={itemVariants} className="mt-3 text-[16px] leading-relaxed text-gray-500">
+                I approach design like an experiment. Every interaction is a hypothesis, every iteration is a test.
+                I care less about how something looks in isolation, and more about what it actually does —
+                how it influences behavior, drives engagement, or changes outcomes.
+              </motion.p>
+              <motion.p variants={itemVariants} className="mt-3 text-[16px] leading-relaxed text-gray-500">
+                I&apos;m drawn to problems where design meets ambiguity — unclear requirements, conflicting constraints,
+                high-stakes decisions. That&apos;s where structured thinking and iteration make the biggest difference.
+              </motion.p>
+            </motion.div>
+          </div>
         </div>
       </div>
 
-      {/* ── STACKED SECTION CARDS ── */}
-      <div className="px-8 sm:px-16 lg:px-24 py-20 border-t border-gray-100">
+      {/* ── CARDS — scroll over the hero ── */}
+      <div style={{ position: "relative", zIndex: 10 }}
+        className="bg-white px-8 sm:px-16 lg:px-24 pb-32 pt-8">
         <div className="max-w-2xl mx-auto">
           <div ref={stackRef} style={{ height: containerHeight, position: "relative" }}>
 
-            {/* Card 1 — Education */}
             <SectionCard
               label="Education"
               accent="#6366f1"
@@ -207,7 +204,6 @@ export default function AboutPage() {
               scrollYProgress={scrollYProgress}
             />
 
-            {/* Card 2 — Experience */}
             <SectionCard
               label="Experience"
               accent="#64748b"
