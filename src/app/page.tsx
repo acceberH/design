@@ -140,6 +140,13 @@ export default function Home() {
         </div>
       </section>
 
+      {/* CTA */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 border-t border-gray-100">
+        <div className="max-w-5xl mx-auto">
+          <p className="text-[28px] font-medium text-gray-900 tracking-tight">Do meaningful work, and do it fast enough to matter.</p>
+        </div>
+      </section>
+
       {/* Skills Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 border-t border-gray-100">
         <div className="max-w-5xl mx-auto">
