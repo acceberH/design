@@ -67,12 +67,18 @@ const EXPERIENCE = [
     desc: "Shaped the UX of an AI-powered document analysis platform from early-stage MVP to polished product." },
 ];
 
-function CardItem({ item, accent }: { item: typeof EDUCATION[0]; accent: string }) {
+function CardItem({ item, accent, hoverDesc = false }: { item: typeof EDUCATION[0]; accent: string; hoverDesc?: boolean }) {
+  const [hovered, setHovered] = useState(false);
   return (
-    <div className="py-5 first:pt-0 last:pb-0 border-b border-gray-50 last:border-0">
+    <div
+      className="py-4 first:pt-0 last:pb-0 border-b border-gray-50 last:border-0 cursor-default"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
-          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[6px]" style={{ background: accent }} />
+          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[6px] transition-transform duration-200"
+            style={{ background: accent, transform: hovered ? "scale(1.4)" : "scale(1)" }} />
           <div>
             <p className="text-[15px] font-semibold text-gray-900 leading-snug">{item.title}</p>
             <p className="text-[13px] text-gray-400 mt-0.5">{item.sub}</p>
@@ -80,7 +86,19 @@ function CardItem({ item, accent }: { item: typeof EDUCATION[0]; accent: string 
         </div>
         <p className="text-[12px] text-gray-400 flex-shrink-0 mt-0.5 tabular-nums">{item.period}</p>
       </div>
-      <p className="text-[13px] text-gray-500 leading-relaxed mt-2 pl-[18px]">{item.desc}</p>
+      {hoverDesc && (
+        <div style={{
+          maxHeight: hovered ? 80 : 0,
+          opacity: hovered ? 1 : 0,
+          overflow: "hidden",
+          transition: "max-height 0.3s ease, opacity 0.25s ease",
+        }}>
+          <p className="text-[13px] text-gray-500 leading-relaxed mt-2 pl-[18px]">{item.desc}</p>
+        </div>
+      )}
+      {!hoverDesc && (
+        <p className="text-[13px] text-gray-500 leading-relaxed mt-2 pl-[18px]">{item.desc}</p>
+      )}
     </div>
   );
 }
@@ -180,7 +198,7 @@ export default function AboutPage() {
                       Download CV
                     </a>
                   </div>
-                  {EXPERIENCE.map(item => <CardItem key={item.title} item={item} accent="#64748b" />)}
+                  {EXPERIENCE.map(item => <CardItem key={item.title} item={item} accent="#64748b" hoverDesc />)}
                 </motion.div>
               </div>
 
