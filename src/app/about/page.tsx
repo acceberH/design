@@ -67,72 +67,20 @@ const EXPERIENCE = [
     desc: "Shaped the UX of an AI-powered document analysis platform from early-stage MVP to polished product." },
 ];
 
-function SectionCard({
-  label, items, accent, extra,
-  index, total, scrollYProgress,
-}: {
-  label: string;
-  items: { title: string; sub: string; period: string; desc: string }[];
-  accent: string;
-  extra?: React.ReactNode;
-  index: number;
-  total: number;
-  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
-}) {
-  const TOP_BASE    = 88;
-  const CARD_STAGGER = 20;
-
-  const scaleFrom = (index + 1) / total;
-  const scaleTo   = Math.min((index + 1.5) / total, 1);
-  const scale = useTransform(
-    scrollYProgress,
-    [scaleFrom, scaleTo],
-    [1, index < total - 1 ? 0.94 : 1]
-  );
-  const opacity = useTransform(
-    scrollYProgress,
-    [scaleFrom, scaleTo],
-    [1, index < total - 1 ? 0.65 : 1]
-  );
-
+function CardItem({ item, accent }: { item: typeof EDUCATION[0]; accent: string }) {
   return (
-    <div style={{
-      position: "sticky",
-      top: TOP_BASE + index * CARD_STAGGER,
-      zIndex: index + 1,
-      marginTop: index === 0 ? 0 : 280,
-    }}>
-      <motion.div
-        style={{ scale, opacity, transformOrigin: "top center" }}
-        className="bg-white rounded-2xl border border-gray-100 px-8 py-7"
-        initial={{ boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}
-        whileHover={{ boxShadow: "0 8px 32px rgba(0,0,0,0.10)" }}
-        transition={{ duration: 0.25 }}
-      >
-        <div className="flex items-center justify-between mb-6">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">{label}</p>
-          {extra}
+    <div className="py-5 first:pt-0 last:pb-0 border-b border-gray-50 last:border-0">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[6px]" style={{ background: accent }} />
+          <div>
+            <p className="text-[15px] font-semibold text-gray-900 leading-snug">{item.title}</p>
+            <p className="text-[13px] text-gray-400 mt-0.5">{item.sub}</p>
+          </div>
         </div>
-
-        <div className="flex flex-col divide-y divide-gray-50">
-          {items.map((item, i) => (
-            <div key={item.title} className={i === 0 ? "pb-5" : i === items.length - 1 ? "pt-5" : "py-5"}>
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[6px]"
-                    style={{ background: accent }} />
-                  <div>
-                    <p className="text-[15px] font-semibold text-gray-900 leading-snug">{item.title}</p>
-                    <p className="text-[13px] text-gray-400 mt-0.5">{item.sub}</p>
-                  </div>
-                </div>
-                <p className="text-[12px] text-gray-400 flex-shrink-0 mt-0.5 tabular-nums">{item.period}</p>
-              </div>
-              <p className="text-[13px] text-gray-500 leading-relaxed mt-2 pl-[18px]">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </motion.div>
+        <p className="text-[12px] text-gray-400 flex-shrink-0 mt-0.5 tabular-nums">{item.period}</p>
+      </div>
+      <p className="text-[13px] text-gray-500 leading-relaxed mt-2 pl-[18px]">{item.desc}</p>
     </div>
   );
 }
@@ -140,23 +88,30 @@ function SectionCard({
 export default function AboutPage() {
   const stackRef = useRef<HTMLDivElement>(null);
 
-  const SCROLL_PER_CARD = 280;
-  const containerHeight = SCROLL_PER_CARD + 700; // space for 2 cards
-
+  // Track scroll through the stacked section to animate card 0 scaling down
   const { scrollYProgress } = useScroll({
     target: stackRef,
     offset: ["start start", "end end"],
   });
 
+  // Education card scales + fades as Experience slides over it
+  const eduScale   = useTransform(scrollYProgress, [0.4, 0.75], [1, 0.94]);
+  const eduOpacity = useTransform(scrollYProgress, [0.4, 0.75], [1, 0.55]);
+
+  // Container height: hero (100vh) + scroll room for 2 cards stacking
+  const STACK_HEIGHT = 900; // px of scroll room inside the sticky container
+
   return (
     <div className="bg-white">
 
-      {/* ── HERO — sticky, cards will slide over it ── */}
-      <div style={{ height: "100vh" }}>
-        <div className="flex items-center px-8 sm:px-16 lg:px-24"
-          style={{ position: "sticky", top: 0, height: "100vh", zIndex: 1 }}>
-          <div className="max-w-3xl w-full mx-auto flex flex-col gap-8 md:flex-row md:items-start pt-24 pb-16">
+      {/* ── Outer scroll container ── */}
+      {/* Hero is sticky; as you scroll, cards section slides up over it */}
+      <div style={{ position: "relative" }}>
 
+        {/* HERO — sticks while cards scroll over */}
+        <div style={{ position: "sticky", top: 0, height: "100vh", zIndex: 1 }}
+          className="flex items-center px-8 sm:px-16 lg:px-24">
+          <div className="max-w-3xl w-full mx-auto flex flex-col gap-8 md:flex-row md:items-start pt-24 pb-16">
             <motion.div
               initial={{ opacity: 0, scale: 0.92, rotate: -3, y: 24 }}
               animate={{ opacity: 1, scale: 1,    rotate: 0,  y: 0  }}
@@ -187,42 +142,60 @@ export default function AboutPage() {
             </motion.div>
           </div>
         </div>
-      </div>
 
-      {/* ── CARDS — scroll over the hero ── */}
-      <div style={{ position: "relative", zIndex: 10 }}
-        className="bg-white px-8 sm:px-16 lg:px-24 pb-32 pt-8">
-        <div className="max-w-2xl mx-auto">
-          <div ref={stackRef} style={{ height: containerHeight, position: "relative" }}>
+        {/* CARDS SECTION — higher z-index, slides up over hero as user scrolls */}
+        <div style={{ position: "relative", zIndex: 10 }}>
+          {/* White sheet that covers the hero */}
+          <div className="bg-white px-8 sm:px-16 lg:px-24 pb-32"
+            style={{ borderRadius: "28px 28px 0 0", boxShadow: "0 -4px 40px rgba(0,0,0,0.07)" }}>
 
-            <SectionCard
-              label="Education"
-              accent="#6366f1"
-              items={EDUCATION}
-              index={0}
-              total={2}
-              scrollYProgress={scrollYProgress}
-            />
+            {/* Drag handle aesthetic */}
+            <div className="flex justify-center pt-4 pb-8">
+              <div className="w-10 h-1 rounded-full bg-gray-200" />
+            </div>
 
-            <SectionCard
-              label="Experience"
-              accent="#64748b"
-              extra={
-                <a href="/v1%20(3).pdf"
-                  className="border border-gray-200 text-gray-500 px-4 py-1.5 rounded-full text-[12px] font-medium hover:border-gray-400 hover:text-gray-900 transition-colors">
-                  Download CV
-                </a>
-              }
-              items={EXPERIENCE}
-              index={1}
-              total={2}
-              scrollYProgress={scrollYProgress}
-            />
+            {/* Stacked scroll container */}
+            <div ref={stackRef} className="max-w-2xl mx-auto"
+              style={{ height: STACK_HEIGHT, position: "relative" }}>
 
+              {/* Card 0 — Education (sticky, scales as Experience slides over) */}
+              <div style={{ position: "sticky", top: 88, zIndex: 1 }}>
+                <motion.div
+                  style={{ scale: eduScale, opacity: eduOpacity, transformOrigin: "top center" }}
+                  className="bg-white rounded-2xl border border-gray-100 px-8 py-7"
+                  initial={{ boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}
+                  whileHover={{ boxShadow: "0 8px 32px rgba(0,0,0,0.10)" }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400 mb-6">Education</p>
+                  {EDUCATION.map(item => <CardItem key={item.title} item={item} accent="#6366f1" />)}
+                </motion.div>
+              </div>
+
+              {/* Card 1 — Experience (sticky below, slides over Education) */}
+              <div style={{ position: "sticky", top: 108, zIndex: 2, marginTop: 340 }}>
+                <motion.div
+                  className="bg-white rounded-2xl border border-gray-100 px-8 py-7"
+                  initial={{ boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}
+                  whileHover={{ boxShadow: "0 8px 32px rgba(0,0,0,0.10)" }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">Experience</p>
+                    <a href="/v1%20(3).pdf"
+                      className="border border-gray-200 text-gray-500 px-4 py-1.5 rounded-full text-[12px] font-medium hover:border-gray-400 hover:text-gray-900 transition-colors">
+                      Download CV
+                    </a>
+                  </div>
+                  {EXPERIENCE.map(item => <CardItem key={item.title} item={item} accent="#64748b" />)}
+                </motion.div>
+              </div>
+
+            </div>
           </div>
         </div>
-      </div>
 
+      </div>
     </div>
   );
 }
