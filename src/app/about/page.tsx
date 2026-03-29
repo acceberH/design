@@ -44,7 +44,7 @@ const containerVariants = {
 };
 const itemVariants = {
   hidden:  { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
 
 const EDUCATION = [
@@ -177,6 +177,7 @@ export default function AboutPage() {
               { label: "Design", items: ["Product Design", "User Experience", "Interaction Design", "Visual Design", "Wireframing", "Lo-Fi / Hi-Fi Mockups", "Web Design"] },
               { label: "Research", items: ["User Interviews", "User Testing", "A/B Testing", "Journey Mapping", "Competitor Analysis", "Information Architecture", "Quantitative Analysis"] },
               { label: "Development", items: ["HTML / CSS", "Python", "Java", "SQL", "API Integration", "GitHub"] },
+              { label: "Tools", items: ["Figma", "Notion", "Jira", "Miro", "Adobe Illustrator", "Adobe Photoshop", "Webflow", "Maze"] },
             ].map(({ label, items }) => (
               <div key={label} className="flex gap-6">
                 <p className="text-[12px] text-gray-400 w-24 flex-shrink-0 pt-0.5">{label}</p>
