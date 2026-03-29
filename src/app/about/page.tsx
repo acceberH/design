@@ -47,119 +47,111 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
 };
 
-// Single stacked card — reads scroll progress from parent container
-function StackCard({
-  title, sub, period, desc,
-  index, total, scrollYProgress, accent,
+const EDUCATION = [
+  { period: "2024 – 2026", title: "University of Washington", sub: "MS Innovation Technology",
+    desc: "Focusing on human-computer interaction, AI product design, and design systems." },
+  { period: "2021 – 2024", title: "New York University", sub: "BS Integrated Design & Media",
+    desc: "Interdisciplinary program spanning UX, visual design, and media technology." },
+];
+
+const EXPERIENCE = [
+  { period: "2025 – Now",  title: "OpenPromo",           sub: "Product Designer",
+    desc: "Leading end-to-end product design for a multi-tenant social content management platform." },
+  { period: "2025 – 2026", title: "Amazon Web Services", sub: "Product Designer",
+    desc: "Designed complex enterprise tooling for internal AWS teams, translating dense technical workflows into clear, usable interfaces." },
+  { period: "2025",        title: "AISPIRE",             sub: "UX Design Intern",
+    desc: "Conducted user research and prototyped AI-assisted features through rapid iterative testing." },
+  { period: "2024 – 2025", title: "OfferPlz",            sub: "Product Designer",
+    desc: "Redesigned the core hiring flow from offer creation to candidate acceptance." },
+  { period: "2023 – 2024", title: "FileGPT",             sub: "Product Designer",
+    desc: "Shaped the UX of an AI-powered document analysis platform from early-stage MVP to polished product." },
+];
+
+function SectionCard({
+  label, items, accent, extra,
+  index, total, scrollYProgress,
 }: {
-  title: string; sub: string; period: string; desc: string;
-  index: number; total: number; scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"]; accent: string;
+  label: string;
+  items: { title: string; sub: string; period: string; desc: string }[];
+  accent: string;
+  extra?: React.ReactNode;
+  index: number;
+  total: number;
+  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
 }) {
-  // Card i scales down when card i+1 slides over it
+  const TOP_BASE   = 88;
+  const CARD_STAGGER = 20;
+
+  // This card scales down when the next card scrolls over it
   const scaleFrom = (index + 1) / total;
-  const scaleTo   = Math.min((index + 1.6) / total, 1);
+  const scaleTo   = Math.min((index + 1.5) / total, 1);
   const scale = useTransform(
     scrollYProgress,
     [scaleFrom, scaleTo],
-    [1, index < total - 1 ? 0.95 : 1]
+    [1, index < total - 1 ? 0.94 : 1]
   );
   const opacity = useTransform(
     scrollYProgress,
     [scaleFrom, scaleTo],
-    [1, index < total - 1 ? 0.7 : 1]
+    [1, index < total - 1 ? 0.65 : 1]
   );
-
-  const TOP_BASE    = 88;   // px — clears the navbar/dock area
-  const CARD_STAGGER = 18;  // px — how much each previous card peeks out
 
   return (
     <div style={{
       position: "sticky",
       top: TOP_BASE + index * CARD_STAGGER,
       zIndex: index + 1,
-      marginTop: index === 0 ? 0 : 220,
+      marginTop: index === 0 ? 0 : 280,
     }}>
       <motion.div
         style={{ scale, opacity, transformOrigin: "top center" }}
-        className="bg-white rounded-2xl border border-gray-100 px-6 py-5"
-        initial={{ boxShadow: "0 1px 4px rgba(0,0,0,0.05)" }}
+        className="bg-white rounded-2xl border border-gray-100 px-8 py-7"
+        initial={{ boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}
         whileHover={{ boxShadow: "0 8px 32px rgba(0,0,0,0.10)" }}
         transition={{ duration: 0.25 }}
       >
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px]"
-              style={{ background: accent }} />
-            <div>
-              <p className="text-[15px] font-semibold text-gray-900 leading-snug">{title}</p>
-              <p className="text-[13px] text-gray-400 mt-0.5">{sub}</p>
-            </div>
-          </div>
-          <p className="text-[12px] text-gray-400 flex-shrink-0 mt-0.5 tabular-nums">{period}</p>
+        {/* Card header */}
+        <div className="flex items-center justify-between mb-6">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">{label}</p>
+          {extra}
         </div>
-        <p className="text-[13px] text-gray-500 leading-relaxed mt-3 pl-[18px]">{desc}</p>
+
+        {/* Items list */}
+        <div className="flex flex-col divide-y divide-gray-50">
+          {items.map((item, i) => (
+            <div key={item.title} className={i === 0 ? "pb-5" : i === items.length - 1 ? "pt-5" : "py-5"}>
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[6px]"
+                    style={{ background: accent }} />
+                  <div>
+                    <p className="text-[15px] font-semibold text-gray-900 leading-snug">{item.title}</p>
+                    <p className="text-[13px] text-gray-400 mt-0.5">{item.sub}</p>
+                  </div>
+                </div>
+                <p className="text-[12px] text-gray-400 flex-shrink-0 mt-0.5 tabular-nums">{item.period}</p>
+              </div>
+              <p className="text-[13px] text-gray-500 leading-relaxed mt-2 pl-[18px]">{item.desc}</p>
+            </div>
+          ))}
+        </div>
       </motion.div>
     </div>
   );
 }
 
-// Section wrapper — tracks its own scroll progress
-function StackedSection({
-  label, items, accent, extra,
-}: {
-  label: string;
-  items: { title: string; sub: string; period: string; desc: string }[];
-  accent: string;
-  extra?: React.ReactNode;
-}) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const labelRef     = useRef<HTMLDivElement>(null);
-  const labelInView  = useInView(labelRef, { once: true, margin: "-60px" });
+export default function AboutPage() {
+  const stackRef = useRef<HTMLDivElement>(null);
+
+  const SCROLL_PER_CARD = 280;
+  const CARDS = 2; // Education + Experience
+  const containerHeight = (CARDS - 1) * SCROLL_PER_CARD + 600;
 
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: stackRef,
     offset: ["start start", "end end"],
   });
 
-  // Total height = space for (n-1) card reveals + last card height + bottom breathing room
-  const SCROLL_PER_CARD = 220;
-  const containerHeight = (items.length - 1) * SCROLL_PER_CARD + 380;
-
-  return (
-    <div className="px-8 sm:px-16 lg:px-24 py-20 border-t border-gray-100">
-      <div className="max-w-2xl mx-auto">
-
-        {/* Label */}
-        <motion.div
-          ref={labelRef}
-          initial={{ opacity: 0, y: 16 }}
-          animate={labelInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="flex items-center justify-between mb-10"
-        >
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">{label}</p>
-          {extra}
-        </motion.div>
-
-        {/* Stacked cards container */}
-        <div ref={containerRef} style={{ height: containerHeight, position: "relative" }}>
-          {items.map((item, i) => (
-            <StackCard
-              key={item.title}
-              {...item}
-              index={i}
-              total={items.length}
-              scrollYProgress={scrollYProgress}
-              accent={accent}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default function AboutPage() {
   return (
     <div className="bg-white">
 
@@ -200,41 +192,40 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* ── EDUCATION — stacked cards ── */}
-      <StackedSection
-        label="Education"
-        accent="#6366f1"
-        items={[
-          { period: "2024 – 2026", title: "University of Washington", sub: "MS Innovation Technology",
-            desc: "Focusing on human-computer interaction, AI product design, and design systems." },
-          { period: "2021 – 2024", title: "New York University", sub: "BS Integrated Design & Media",
-            desc: "Interdisciplinary program spanning UX, visual design, and media technology." },
-        ]}
-      />
+      {/* ── STACKED SECTION CARDS ── */}
+      <div className="px-8 sm:px-16 lg:px-24 py-20 border-t border-gray-100">
+        <div className="max-w-2xl mx-auto">
+          <div ref={stackRef} style={{ height: containerHeight, position: "relative" }}>
 
-      {/* ── EXPERIENCE — stacked cards ── */}
-      <StackedSection
-        label="Experience"
-        accent="#64748b"
-        extra={
-          <a href="/v1%20(3).pdf"
-            className="border border-gray-200 text-gray-500 px-4 py-1.5 rounded-full text-[12px] font-medium hover:border-gray-400 hover:text-gray-900 transition-colors">
-            Download CV
-          </a>
-        }
-        items={[
-          { period: "2025 – Now",  title: "OpenPromo",           sub: "Product Designer",
-            desc: "Leading end-to-end product design for a multi-tenant social content management platform." },
-          { period: "2025 – 2026", title: "Amazon Web Services", sub: "Product Designer",
-            desc: "Designed complex enterprise tooling for internal AWS teams, translating dense technical workflows into clear, usable interfaces." },
-          { period: "2025",        title: "AISPIRE",             sub: "UX Design Intern",
-            desc: "Conducted user research and prototyped AI-assisted features through rapid iterative testing." },
-          { period: "2024 – 2025", title: "OfferPlz",            sub: "Product Designer",
-            desc: "Redesigned the core hiring flow from offer creation to candidate acceptance." },
-          { period: "2023 – 2024", title: "FileGPT",             sub: "Product Designer",
-            desc: "Shaped the UX of an AI-powered document analysis platform from early-stage MVP to polished product." },
-        ]}
-      />
+            {/* Card 1 — Education */}
+            <SectionCard
+              label="Education"
+              accent="#6366f1"
+              items={EDUCATION}
+              index={0}
+              total={2}
+              scrollYProgress={scrollYProgress}
+            />
+
+            {/* Card 2 — Experience */}
+            <SectionCard
+              label="Experience"
+              accent="#64748b"
+              extra={
+                <a href="/v1%20(3).pdf"
+                  className="border border-gray-200 text-gray-500 px-4 py-1.5 rounded-full text-[12px] font-medium hover:border-gray-400 hover:text-gray-900 transition-colors">
+                  Download CV
+                </a>
+              }
+              items={EXPERIENCE}
+              index={1}
+              total={2}
+              scrollYProgress={scrollYProgress}
+            />
+
+          </div>
+        </div>
+      </div>
 
     </div>
   );
