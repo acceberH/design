@@ -9,21 +9,21 @@ export default function Home() {
       {/* Floating gradient orbs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
         <div style={{
-          position: "absolute", width: 600, height: 600, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 70%)",
-          top: "-10%", left: "-5%",
+          position: "absolute", width: 800, height: 800, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 65%)",
+          top: "-15%", left: "-10%",
           animation: "orb1 12s ease-in-out infinite alternate",
         }} />
         <div style={{
-          position: "absolute", width: 500, height: 500, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 70%)",
-          top: "30%", right: "-8%",
+          position: "absolute", width: 700, height: 700, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(139,92,246,0.14) 0%, transparent 65%)",
+          top: "20%", right: "-12%",
           animation: "orb2 15s ease-in-out infinite alternate",
         }} />
         <div style={{
-          position: "absolute", width: 400, height: 400, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(99,102,241,0.05) 0%, transparent 70%)",
-          bottom: "10%", left: "20%",
+          position: "absolute", width: 600, height: 600, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 65%)",
+          bottom: "5%", left: "15%",
           animation: "orb3 10s ease-in-out infinite alternate",
         }} />
       </div>
