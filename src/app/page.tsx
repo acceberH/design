@@ -5,11 +5,34 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white scroll-smooth" style={{
-      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E")`,
-      backgroundRepeat: "repeat",
-      backgroundSize: "128px 128px",
-    }}>
+    <div className="min-h-screen bg-white scroll-smooth">
+      {/* Floating gradient orbs */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+        <div style={{
+          position: "absolute", width: 600, height: 600, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 70%)",
+          top: "-10%", left: "-5%",
+          animation: "orb1 12s ease-in-out infinite alternate",
+        }} />
+        <div style={{
+          position: "absolute", width: 500, height: 500, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 70%)",
+          top: "30%", right: "-8%",
+          animation: "orb2 15s ease-in-out infinite alternate",
+        }} />
+        <div style={{
+          position: "absolute", width: 400, height: 400, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(99,102,241,0.05) 0%, transparent 70%)",
+          bottom: "10%", left: "20%",
+          animation: "orb3 10s ease-in-out infinite alternate",
+        }} />
+      </div>
+      <style>{`
+        @keyframes orb1 { from { transform: translate(0, 0); } to { transform: translate(40px, 60px); } }
+        @keyframes orb2 { from { transform: translate(0, 0); } to { transform: translate(-50px, 40px); } }
+        @keyframes orb3 { from { transform: translate(0, 0); } to { transform: translate(30px, -40px); } }
+      `}</style>
+      <div style={{ position: "relative", zIndex: 1 }}>
       {/* Hero Section - Full Screen */}
       <section id="hero-section" className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-[600px] mx-auto w-full text-center">
@@ -192,6 +215,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      </div>
 
     </div>
   );
