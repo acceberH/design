@@ -125,15 +125,15 @@ export default function AboutPage() {
             <motion.p variants={itemVariants} className="text-[16px] leading-relaxed text-gray-500">
               Born in Wenzhou, raised in Shanghai, shaped in Brooklyn. My path into design wasn&apos;t linear.
               I studied Integrated Design &amp; Media at NYU, and almost chose data science instead.
-              That decision never really left — it became the foundation of how I think.
+              That decision never really left. It became the foundation of how I think.
             </motion.p>
             <motion.p variants={itemVariants} className="mt-3 text-[16px] leading-relaxed text-gray-500">
               I approach design like an experiment. Every interaction is a hypothesis, every iteration is a test.
               I care less about how something looks in isolation, and more about what it actually does —
-              how it influences behavior, drives engagement, or changes outcomes.
+              how it influences behavior, drives engagement, and changes outcomes.
             </motion.p>
             <motion.p variants={itemVariants} className="mt-3 text-[16px] leading-relaxed text-gray-500">
-              I&apos;m drawn to problems where design meets ambiguity — unclear requirements, conflicting constraints,
+              I&apos;m drawn to problems where design meets ambiguity: unclear requirements, conflicting constraints,
               high-stakes decisions. That&apos;s where structured thinking and iteration make the biggest difference.
             </motion.p>
           </motion.div>
