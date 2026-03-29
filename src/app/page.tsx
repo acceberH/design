@@ -17,7 +17,7 @@ export default function Home() {
           <h1 className="text-[36px] font-medium text-gray-900 mb-4 leading-[1.15] tracking-tight">
             I speak both designer and engineer,<br />and I use that to build products that actually ship well.
           </h1>
-          <p className="text-[16px] text-gray-400 leading-relaxed">
+          <p className="text-[16px] text-gray-400 leading-relaxed whitespace-nowrap">
             I specialize in AI-powered products where the complexity is real and the stakes are high.
           </p>
         </div>
