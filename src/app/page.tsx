@@ -34,7 +34,7 @@ export default function Home() {
             {/* OpenPromo — z-10, sticks at 24px */}
             <div className="sticky top-6 z-10">
               <Link href="/work/openpromo" className="group block">
-                <div className="bg-neutral-50 rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.13)] transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]">
+                <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]" style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(248,248,252,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
                   <div className="md:w-[55%] relative overflow-hidden flex-shrink-0">
                     <Image src="/656shots_so.png" alt="OpenPromo" width={1920} height={1080} unoptimized className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]" />
                   </div>
@@ -50,7 +50,7 @@ export default function Home() {
             {/* BioVision — z-20, sticks at 40px */}
             <div className="sticky top-10 z-20 mt-4">
               <Link href="/work/biovision" className="group block">
-                <div className="bg-neutral-50 rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.13)] transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]">
+                <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]" style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(248,248,252,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
                   <div className="md:w-[55%] relative overflow-hidden flex-shrink-0 bg-neutral-100 p-[2.5%]">
                     <Image src="/749shots_so.png" alt="BioVision" width={1920} height={1080} unoptimized className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]" />
                   </div>
@@ -73,7 +73,7 @@ export default function Home() {
             {/* FileGPT — z-30, sticks at 56px */}
             <div className="sticky top-14 z-30 mt-4">
               <Link href="/work/filegpt" className="group block">
-                <div className="bg-neutral-50 rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.13)] transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]">
+                <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]" style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(248,248,252,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
                   <div className="md:w-[55%] relative overflow-hidden flex-shrink-0">
                     <Image src="/253shots_so.png" alt="FileGPT" width={1920} height={1080} className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]" />
                   </div>
@@ -89,7 +89,7 @@ export default function Home() {
             {/* Offerplz — z-40, sticks at 72px */}
             <div className="sticky top-[72px] z-40 mt-4">
               <Link href="/work/offerplz" className="group block">
-                <div className="bg-neutral-50 rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.13)] transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]">
+                <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]" style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(248,248,252,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
                   <div className="md:w-[55%] relative overflow-hidden flex-shrink-0">
                     <Image src="/639shots_so.png" alt="Offerplz" width={1248} height={512} unoptimized className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]" />
                   </div>
@@ -105,7 +105,7 @@ export default function Home() {
             {/* BarBuddy — z-50, sticks at 88px */}
             <div className="sticky top-[88px] z-50 mt-4">
               <Link href="/work/barbuddy" className="group block">
-                <div className="bg-neutral-50 rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.13)] transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]">
+                <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]" style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(248,248,252,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
                   <div className="md:w-[55%] relative overflow-hidden flex-shrink-0">
                     <Image src="/bar_mockup.png" alt="BarBuddy" width={400} height={256} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
                   </div>
@@ -121,7 +121,7 @@ export default function Home() {
             {/* Cycle — z-[60], sticks at 104px */}
             <div className="sticky top-[104px] z-[60] mt-4">
               <Link href="/work/cycle" className="group block">
-                <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.13)] transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]" style={{ backgroundColor: '#FFF8FA' }}>
+                <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]" style={{ background: "linear-gradient(160deg, rgba(255,252,253,0.95) 0%, rgba(255,248,250,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
                   <div className="md:w-[55%] relative overflow-hidden flex-shrink-0">
                     <div className="flex items-center justify-center h-full">
                       <Image src="/lockup_red.png" alt="Cycle" width={300} height={200} className="w-auto h-40 object-contain transition-transform duration-500 group-hover:scale-[1.02]" />

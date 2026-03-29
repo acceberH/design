@@ -192,10 +192,11 @@ export default function GlobalDock() {
                   bottom: BASE + 12,
                   left: "50%",
                   transform: "translateX(-50%)",
-                  background: "rgba(255,255,255,0.95)",
-                  backdropFilter: "blur(10px)",
+                  background: "rgba(255,255,255,0.75)",
+                  backdropFilter: "blur(16px) saturate(180%)",
+                  WebkitBackdropFilter: "blur(16px) saturate(180%)",
                   color: "#111",
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.10)",
+                  boxShadow: "0 2px 12px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.90)",
                   opacity: scale > 1.2 ? 1 : 0,
                 }}
               >
@@ -210,9 +211,11 @@ export default function GlobalDock() {
                   height: BASE,
                   transform: `translateY(${translateY}px)`,
                   transition: mouseX === null ? "transform 0.3s ease" : "transform 0.1s ease",
-                  background: `linear-gradient(160deg, rgba(255,255,255,0.55) 0%, rgba(${item.tintRgb},${isActive ? "0.14" : "0.06"}) 100%)`,
-                  border: "1px solid rgba(255,255,255,0.72)",
-                  boxShadow: "inset 0 1.5px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.08)",
+                  background: `linear-gradient(160deg, rgba(255,255,255,0.60) 0%, rgba(${item.tintRgb},${isActive ? "0.18" : "0.08"}) 100%)`,
+                  backdropFilter: "blur(8px) saturate(160%)",
+                  WebkitBackdropFilter: "blur(8px) saturate(160%)",
+                  border: "1px solid rgba(255,255,255,0.75)",
+                  boxShadow: "inset 0 1.5px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(0,0,0,0.04), 0 2px 10px rgba(0,0,0,0.08)",
                   color: item.iconColor,
                 }}
               >

@@ -122,19 +122,19 @@ export default function OpenPromoCaseStudy() {
               </div>
 
               <div className="mt-8">
-                <h3 className="text-3xl font-bold text-gray-900 mb-5">Impact</h3>
+                <p className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-3">Impact</p>
                 <div className="border-b border-gray-300">
                   <div className="py-[20px] border-t border-gray-300 grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] items-center gap-4 md:gap-6">
                     <p className="text-3xl font-bold text-gray-900">0→1</p>
-                    <p className="text-lg text-[#334155] leading-relaxed">Designed a full-stack growth intelligence platform from scratch</p>
+                    <p className="text-base text-[#334155] leading-relaxed">Designed a full-stack growth intelligence platform from scratch</p>
                   </div>
                   <div className="py-[20px] border-t border-gray-300 grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] items-center gap-4 md:gap-6">
                     <p className="text-3xl font-bold text-gray-900">3×</p>
-                    <p className="text-lg text-[#334155] leading-relaxed">Faster ad creation workflow</p>
+                    <p className="text-base text-[#334155] leading-relaxed">Faster ad creation workflow</p>
                   </div>
                   <div className="py-[20px] border-t border-gray-300 grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] items-center gap-4 md:gap-6">
                     <p className="text-3xl font-bold text-gray-900">70%</p>
-                    <p className="text-lg text-[#334155] leading-relaxed">Faster cross-platform publishing</p>
+                    <p className="text-base text-[#334155] leading-relaxed">Faster cross-platform publishing</p>
                   </div>
                 </div>
               </div>
@@ -163,10 +163,10 @@ export default function OpenPromoCaseStudy() {
             <div className="max-w-4xl">
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Context</h2>
               <div className="space-y-6">
-                <p className="text-lg text-gray-600 leading-relaxed">
+                <p className="text-base text-gray-600 leading-relaxed">
                   OpenPromo is a 0→1 platform designed to give small businesses the strategic intelligence that was previously only available to enterprise marketing teams.
                 </p>
-                <p className="text-lg text-gray-600 leading-relaxed">
+                <p className="text-base text-gray-600 leading-relaxed">
                   For many small businesses, producing video content remains one of the biggest barriers to effective social media marketing, often requiring costly influencer collaborations or professional production.
                 </p>
               </div>
@@ -198,7 +198,7 @@ export default function OpenPromoCaseStudy() {
                   </div>
                 </div>
 
-                <p className="text-lg text-gray-600 leading-relaxed">
+                <p className="text-base text-gray-600 leading-relaxed">
                   Most businesses spend significant time producing content but struggle to determine what content actually drives growth.
                 </p>
 
@@ -223,7 +223,7 @@ export default function OpenPromoCaseStudy() {
 
                 <div>
                   <h4 className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-3">Key Insight</h4>
-                  <p className="text-lg text-gray-600 leading-relaxed">
+                  <p className="text-base text-gray-600 leading-relaxed">
                     The real bottleneck for small businesses is not content creation tools. It is <strong>decision-making</strong>.
                   </p>
                 </div>
@@ -257,7 +257,7 @@ export default function OpenPromoCaseStudy() {
                     height={220}
                     className="w-16 md:w-24 h-auto object-contain"
                   />
-                  <p className="text-lg text-gray-800 leading-relaxed font-medium">
+                  <p className="text-base text-gray-800 leading-relaxed font-medium">
                     <span className="text-gray-700">Design Opportunity:</span> How might we help small businesses decide what content to create next using signals from competitors, performance analytics, and emerging trends?
                   </p>
                 </div>
@@ -275,7 +275,7 @@ export default function OpenPromoCaseStudy() {
                 <div>
                   <div id="solution-two" className="">
                     <div className="px-6 py-3">
-                      <h3 className="text-2xl font-semibold text-gray-900 leading-tight">Instant Ad Creation</h3>
+                      <h3 className="text-xl font-semibold text-gray-900 leading-tight">Instant Ad Creation</h3>
                     </div>
                     <div className="px-6 pb-6">
                       <div className="grid gap-6">
@@ -337,7 +337,7 @@ export default function OpenPromoCaseStudy() {
                 <div className="mt-4">
                   <div id="solution-three" className="">
                     <div className="px-6 py-5">
-                      <h3 className="text-2xl font-semibold text-gray-900 leading-tight">Competitor Tracking</h3>
+                      <h3 className="text-xl font-semibold text-gray-900 leading-tight">Competitor Tracking</h3>
                     </div>
                     <div className="px-6 pb-6 space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-[6fr_4fr] gap-5 items-start">
@@ -447,7 +447,7 @@ export default function OpenPromoCaseStudy() {
                 <div className="mt-4">
                   <div id="performance-analytics" className="">
                     <div className="px-6 py-5">
-                      <h3 className="text-2xl font-semibold text-gray-900 leading-tight">Performance Analytics</h3>
+                      <h3 className="text-xl font-semibold text-gray-900 leading-tight">Performance Analytics</h3>
                     </div>
                     <div className="px-6 pb-6 space-y-6">
                       <div className="space-y-3">
