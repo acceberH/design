@@ -170,6 +170,7 @@ export default function OpenPromoCaseStudy() {
                       <li>Low-cost schedulers that help businesses publish content but provide little strategic guidance.</li>
                       <li>Enterprise marketing platforms that offer advanced analytics and strategy insights but are priced beyond what most SMBs can afford.</li>
                     </ul>
+                    <p className="text-base text-gray-700 leading-relaxed mt-4">This is the gap OpenPromo was designed to fill — the intelligence layer that SMBs have never had access to.</p>
                   </div>
                 </div>
               </div>
