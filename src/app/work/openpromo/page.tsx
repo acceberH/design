@@ -183,17 +183,17 @@ export default function OpenPromoCaseStudy() {
                     <p className="text-base text-gray-700">I interviewed small business owners to understand their daily social media workflow and marketing challenges.</p>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                    {[
-                      { quote: "We spend hours making posts, but we don't know if any of it is actually working.", role: "Boutique owner, 3 years on Instagram" },
-                      { quote: "I look at what my competitors post and just copy the format. There's no better system.", role: "Food truck operator, Chicago" },
-                      { quote: "I know I should be posting more consistently, but figuring out what to say every day is exhausting.", role: "Local service business owner" },
-                    ].map(({ quote, role }) => (
-                      <div key={role} className="bg-white rounded-xl border border-gray-200 p-5">
-                        <p className="text-[15px] text-gray-800 leading-relaxed">&ldquo;{quote}&rdquo;</p>
-                        <p className="text-[12px] text-gray-400 mt-3">— {role}</p>
-                      </div>
-                    ))}
+                  <div className="grid grid-cols-1 lg:grid-cols-[180px_1fr] gap-6 items-start">
+                    <Image
+                      src="/openpromo_confused.png"
+                      alt="Small business owner interview illustration"
+                      width={180}
+                      height={180}
+                      className="w-36 h-auto"
+                    />
+                    <div className="space-y-4">
+                      <p className="mt-2 text-lg text-gray-800 leading-relaxed border-l-2 border-gray-300 pl-4">&quot;We spend hours making posts, but we don&apos;t know if any of it is actually working.&quot;</p>
+                    </div>
                   </div>
                 </div>
 
