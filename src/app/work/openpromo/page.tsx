@@ -29,12 +29,12 @@ export default function OpenPromoCaseStudy() {
     function updateActiveNav() {
       let current = '';
       sections.forEach(section => {
-        const sectionTop = (section as HTMLElement).offsetTop - 100;
-        if (window.pageYOffset >= sectionTop) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 160) {
           current = section.getAttribute('id') || '';
         }
       });
-      
+
       navLinks.forEach(link => {
         link.classList.remove('bg-gray-200', 'text-primary');
         if (link.getAttribute('data-section') === current) {
