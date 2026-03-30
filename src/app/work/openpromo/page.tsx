@@ -63,6 +63,7 @@ export default function OpenPromoCaseStudy() {
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="key-features">Key Features</span></li>
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="approach">Design Process</span></li>
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="reflection">Reflection</span></li>
+
             </ul>
           </nav>
         </aside>
@@ -161,7 +162,7 @@ export default function OpenPromoCaseStudy() {
                     {/* Context Section */}
           <section id="context" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Context</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">Small businesses are flying blind</h2>
               <div className="space-y-6">
                 <p className="text-base text-gray-600 leading-relaxed">
                   OpenPromo is a 0→1 platform designed to give small businesses the strategic intelligence that was previously only available to enterprise marketing teams.
@@ -176,7 +177,7 @@ export default function OpenPromoCaseStudy() {
           {/* Early Research Section */}
           <section id="research" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Research</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">The real bottleneck isn&apos;t tools — it&apos;s decisions</h2>
 
               <div className="space-y-8">
                 <div className="space-y-8">
@@ -269,7 +270,7 @@ export default function OpenPromoCaseStudy() {
           {/* Approach Section */}
           <section id="approach" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Design Process</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">From fragmented tools to one unified workflow</h2>
               
               <div id="solution-one" className="mb-16 relative">
                 <div>
@@ -538,7 +539,7 @@ export default function OpenPromoCaseStudy() {
                     {/* Reflection Section */}
           <section id="reflection" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Reflection</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">AI doesn&apos;t replace strategy — it enables it</h2>
               <p className="text-lg text-gray-700 leading-relaxed">
                 This project highlighted how generative AI is reshaping marketing workflows. Small businesses traditionally rely on agencies to produce advertising content, which is both expensive and slow. As AI generation tools mature, the barrier to creating promotional content is rapidly decreasing. However, AI alone does not solve the problem. The real opportunity lies in integrating AI into the full promotion workflow - from content creation to publishing and competitive insights. I believe future marketing platforms will evolve from simple management dashboards into growth intelligence systems that help businesses understand what content to create next.
               </p>
