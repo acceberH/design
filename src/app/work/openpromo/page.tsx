@@ -270,7 +270,7 @@ export default function OpenPromoCaseStudy() {
           {/* Approach Section */}
           <section id="approach" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">From fragmented tools to one unified workflow</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Design Process</h2>
               
               <div id="solution-one" className="mb-16 relative">
                 <div>
