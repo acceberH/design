@@ -117,10 +117,7 @@ function VersionSlider({
                       v.isLast ? "bg-gray-900 text-white" : "bg-white border border-gray-200 text-gray-500"
                     }`}>{v.label}</span>
                   </div>
-                  <div
-                    className="p-5 md:p-6 overflow-y-auto overscroll-contain"
-                    style={{ maxHeight: "calc(100vh - 320px)" }}
-                  >{v.content}</div>
+                  <div className="p-5 md:p-6">{v.content}</div>
                 </div>
               </div>
             ))}
