@@ -142,7 +142,7 @@ export default function GlobalDock() {
   };
 
   return (
-    <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 transform">
+    <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 transform opacity-30 hover:opacity-100 transition-opacity duration-300">
       <div
         ref={dockRef}
         className="relative flex items-end gap-1.5 rounded-[22px] px-3 py-2.5"
