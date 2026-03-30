@@ -76,7 +76,7 @@ function VersionSlider({
     // Tall container — height drives the scroll budget
     <div ref={ref} id={id} style={{ height: `${count * 65}vh` }}>
       {/* Sticky wrapper — stays pinned while outer div scrolls past */}
-      <div className="sticky" style={{ top: 80 }}>
+      <div className="sticky" style={{ top: 24 }}>
 
         {/* Title + step indicator */}
         <div className="bg-gray-50 pb-4">
