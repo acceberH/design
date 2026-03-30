@@ -2,30 +2,75 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
+
+// Reusable fade-in + slide-up on scroll
+function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, y: 22 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// Image reveal with subtle scale
+function ImageReveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, scale: 0.98, y: 18 }}
+      animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
+      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// Staggered row — slides in from left with index-based delay
+function StatRow({ children, index }: { children: React.ReactNode; index: number }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: -14 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 0.45, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default function OpenPromoCaseStudy() {
   useEffect(() => {
-    // Smooth scrolling and active navigation
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section[id]');
-    
+
     navLinks.forEach(link => {
       link.addEventListener('click', function(this: HTMLElement, e) {
         e.preventDefault();
         const targetId = this.getAttribute('data-section');
         const targetSection = document.getElementById(targetId!);
-        
         if (targetSection) {
-          targetSection.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     });
-    
-    // Highlight active section
+
     function updateActiveNav() {
       let current = '';
       sections.forEach(section => {
@@ -34,7 +79,6 @@ export default function OpenPromoCaseStudy() {
           current = section.getAttribute('id') || '';
         }
       });
-
       navLinks.forEach(link => {
         link.classList.remove('bg-gray-200', 'text-primary');
         if (link.getAttribute('data-section') === current) {
@@ -42,15 +86,13 @@ export default function OpenPromoCaseStudy() {
         }
       });
     }
-    
+
     window.addEventListener('scroll', updateActiveNav);
     updateActiveNav();
   }, []);
 
   return (
     <div className="bg-gray-50 font-sans">
-      {/* Header */}
-      {/* Main Layout */}
       <div className="flex max-w-7xl mx-auto">
         {/* Left Navigation */}
         <aside id="left-nav" className="w-56 bg-gray-50 h-screen sticky top-20 hidden lg:block">
@@ -61,266 +103,349 @@ export default function OpenPromoCaseStudy() {
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="research">Research</span></li>
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="approach">Design Process</span></li>
               <li><span className="nav-link block py-2 px-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" data-section="reflection">Reflection</span></li>
-
             </ul>
           </nav>
         </aside>
 
         {/* Right Content */}
         <main id="main-content" className="flex-1 lg:ml-8">
-          {/* Hero Section */}
+
+          {/* ── HERO ── */}
           <section id="hero" className="px-6 py-16">
             <div className="max-w-4xl">
-              {/* Tag Row */}
-              <div className="flex flex-wrap gap-3 mb-6">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="flex flex-wrap gap-3 mb-6"
+              >
                 <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm font-medium">Product Design</span>
                 <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm font-medium">UX Research</span>
                 <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm font-medium">B2B</span>
                 <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm font-medium">Social Media Tech</span>
-              </div>
-              
-              {/* Project Title */}
-              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">OpenPromo</h1>
-              
-              {/* One-liner Description */}
-              {/* Metadata Row */}
-              <div className="flex flex-wrap gap-6 text-sm text-gray-600 mb-8">
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+                className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
+              >
+                OpenPromo
+              </motion.h1>
+
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                className="flex flex-wrap gap-6 text-sm text-gray-600 mb-8"
+              >
                 <span><strong>Company:</strong> OpenPromo</span>
                 <span><strong>Role:</strong> UX Designer, Researcher</span>
                 <span><strong>Duration:</strong> Ongoing</span>
-              </div>
-              
-              {/* Hero Visual */}
-              <img
-                className="w-full rounded-xl"
-                src="/openpromo_demo.gif"
-                alt="OpenPromo dashboard demo"
-              />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.97, y: 24 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.75, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <img
+                  className="w-full rounded-xl"
+                  src="/openpromo_demo.gif"
+                  alt="OpenPromo dashboard demo"
+                />
+              </motion.div>
             </div>
           </section>
 
-          {/* TL;DR Section */}
+          {/* ── TL;DR ── */}
           <section id="tldr" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">TL;DR</h2>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                  <h3 className="text-[12px] font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-3">Problem</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
-                    Small businesses are creating content constantly, but without strategic direction — they don&apos;t know what to create, when to post, or whether any of it is working.
-                  </p>
-                </div>
+              <FadeIn>
+                <h2 className="text-3xl font-bold text-gray-900 mb-8">TL;DR</h2>
+              </FadeIn>
 
-                <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                  <h3 className="text-[12px] font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-3">Solution</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
-                    An AI-powered growth platform that helps small businesses create promotional content, manage social accounts, and learn from competitors in one place.
-                  </p>
-                </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                <FadeIn delay={0.05}>
+                  <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                    <h3 className="text-[12px] font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-3">Problem</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      Small businesses are creating content constantly, but without strategic direction — they don&apos;t know what to create, when to post, or whether any of it is working.
+                    </p>
+                  </div>
+                </FadeIn>
+                <FadeIn delay={0.12}>
+                  <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                    <h3 className="text-[12px] font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-3">Solution</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      An AI-powered growth platform that helps small businesses create promotional content, manage social accounts, and learn from competitors in one place.
+                    </p>
+                  </div>
+                </FadeIn>
               </div>
 
               <div className="mt-8">
-                <p className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-3">Impact</p>
+                <FadeIn delay={0.05}>
+                  <p className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-3">Impact</p>
+                </FadeIn>
                 <div className="border-b border-gray-300">
-                  <div className="py-[20px] border-t border-gray-300 grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] items-center gap-4 md:gap-6">
-                    <p className="text-3xl font-bold text-gray-900">0→1</p>
-                    <p className="text-base text-[#334155] leading-relaxed">Designed a full-stack growth intelligence platform from scratch</p>
-                  </div>
-                  <div className="py-[20px] border-t border-gray-300 grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] items-center gap-4 md:gap-6">
-                    <p className="text-3xl font-bold text-gray-900">3×</p>
-                    <p className="text-base text-[#334155] leading-relaxed">Faster ad creation workflow</p>
-                  </div>
-                  <div className="py-[20px] border-t border-gray-300 grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] items-center gap-4 md:gap-6">
-                    <p className="text-3xl font-bold text-gray-900">70%</p>
-                    <p className="text-base text-[#334155] leading-relaxed">Faster cross-platform publishing</p>
-                  </div>
+                  <StatRow index={0}>
+                    <div className="py-[20px] border-t border-gray-300 grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] items-center gap-4 md:gap-6">
+                      <p className="text-3xl font-bold text-gray-900">0→1</p>
+                      <p className="text-base text-[#334155] leading-relaxed">Designed a full-stack growth intelligence platform from scratch</p>
+                    </div>
+                  </StatRow>
+                  <StatRow index={1}>
+                    <div className="py-[20px] border-t border-gray-300 grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] items-center gap-4 md:gap-6">
+                      <p className="text-3xl font-bold text-gray-900">3×</p>
+                      <p className="text-base text-[#334155] leading-relaxed">Faster ad creation workflow</p>
+                    </div>
+                  </StatRow>
+                  <StatRow index={2}>
+                    <div className="py-[20px] border-t border-gray-300 grid grid-cols-[120px_1fr] md:grid-cols-[140px_1fr] items-center gap-4 md:gap-6">
+                      <p className="text-3xl font-bold text-gray-900">70%</p>
+                      <p className="text-base text-[#334155] leading-relaxed">Faster cross-platform publishing</p>
+                    </div>
+                  </StatRow>
                 </div>
               </div>
             </div>
           </section>
 
-
-                    {/* Context Section */}
+          {/* ── CONTEXT ── */}
           <section id="context" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Small businesses are flying blind</h2>
+              <FadeIn>
+                <h2 className="text-3xl font-bold text-gray-900 mb-8">Small businesses are flying blind</h2>
+              </FadeIn>
               <div className="space-y-6">
-                <p className="text-base text-gray-600 leading-relaxed">
-                  Small businesses are outgunned. Enterprise brands have dedicated marketing teams, agency partnerships, and data analysts telling them exactly what content to create next. Small businesses have none of that — just a phone, a few hours a week, and a lot of guessing.
-                </p>
-                <p className="text-base text-gray-600 leading-relaxed">
-                  The real cost isn&apos;t production — it&apos;s the hours spent deciding what to create, manually posting to eight platforms, and staring at analytics that don&apos;t tell you what to do next.
-                </p>
+                <FadeIn delay={0.05}>
+                  <p className="text-base text-gray-600 leading-relaxed">
+                    Small businesses are outgunned. Enterprise brands have dedicated marketing teams, agency partnerships, and data analysts telling them exactly what content to create next. Small businesses have none of that — just a phone, a few hours a week, and a lot of guessing.
+                  </p>
+                </FadeIn>
+                <FadeIn delay={0.1}>
+                  <p className="text-base text-gray-600 leading-relaxed">
+                    The real cost isn&apos;t production — it&apos;s the hours spent deciding what to create, manually posting to eight platforms, and staring at analytics that don&apos;t tell you what to do next.
+                  </p>
+                </FadeIn>
 
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                  <Image
-                    src="/b927e770173c1c8012e2191e2d7237bb.png"
-                    alt="Competitive analysis"
-                    width={5945}
-                    height={5314}
-                    unoptimized
-                    sizes="(max-width: 1024px) 86vw, 900px"
-                    className="w-full max-w-[450px] h-auto mx-auto"
-                  />
-                  <div className="p-4">
-                    <p className="text-sm text-gray-600 italic">Competitive landscape showing gaps in AI-driven growth features.</p>
-                    <p className="text-base text-gray-700 leading-relaxed mt-4">This is the gap OpenPromo was designed to fill — the intelligence layer that SMBs have never had access to.</p>
+                <ImageReveal delay={0.08}>
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <Image
+                      src="/b927e770173c1c8012e2191e2d7237bb.png"
+                      alt="Competitive analysis"
+                      width={5945}
+                      height={5314}
+                      unoptimized
+                      sizes="(max-width: 1024px) 86vw, 900px"
+                      className="w-full max-w-[450px] h-auto mx-auto"
+                    />
+                    <div className="p-4">
+                      <p className="text-sm text-gray-600 italic">Competitive landscape showing gaps in AI-driven growth features.</p>
+                      <p className="text-base text-gray-700 leading-relaxed mt-4">This is the gap OpenPromo was designed to fill — the intelligence layer that SMBs have never had access to.</p>
+                    </div>
                   </div>
-                </div>
+                </ImageReveal>
               </div>
             </div>
           </section>
 
-          {/* Early Research Section */}
+          {/* ── RESEARCH ── */}
           <section id="research" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">The real bottleneck isn&apos;t tools — it&apos;s decisions</h2>
+              <FadeIn>
+                <h2 className="text-3xl font-bold text-gray-900 mb-8">The real bottleneck isn&apos;t tools — it&apos;s decisions</h2>
+              </FadeIn>
 
               <div className="space-y-8">
                 <div className="space-y-8">
-                  <div>
+                  <FadeIn delay={0.05}>
                     <p className="text-base text-gray-700">I interviewed small business owners to understand their daily social media workflow and marketing challenges.</p>
-                  </div>
+                  </FadeIn>
 
                   <div className="grid grid-cols-1 lg:grid-cols-[180px_1fr] gap-6 items-start">
-                    <Image
-                      src="/openpromo_confused.png"
-                      alt="Small business owner interview illustration"
-                      width={180}
-                      height={180}
-                      className="w-36 h-auto"
-                    />
-                    <div className="space-y-4">
-                      <p className="mt-2 text-lg text-gray-800 leading-relaxed border-l-2 border-gray-300 pl-4">&quot;We spend hours making posts, but we don&apos;t know if any of it is actually working.&quot;</p>
-                    </div>
+                    <ImageReveal>
+                      <Image
+                        src="/openpromo_confused.png"
+                        alt="Small business owner interview illustration"
+                        width={180}
+                        height={180}
+                        className="w-36 h-auto"
+                      />
+                    </ImageReveal>
+                    <FadeIn delay={0.1}>
+                      <div className="space-y-4">
+                        <p className="mt-2 text-lg text-gray-800 leading-relaxed border-l-2 border-gray-300 pl-4">&quot;We spend hours making posts, but we don&apos;t know if any of it is actually working.&quot;</p>
+                      </div>
+                    </FadeIn>
                   </div>
                 </div>
 
-                <p className="text-base text-gray-600 leading-relaxed">
-                  Most businesses spend significant time producing content but struggle to determine what content actually drives growth.
-                </p>
-
-                {/* Key insights */}
-                <div>
-                  <p className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-4">Research Insights</p>
-                  <div className="border-t border-gray-200">
-                    <div className="py-5 border-b border-gray-200 grid grid-cols-[100px_1fr] md:grid-cols-[140px_1fr] items-start gap-4">
-                      <p className="text-2xl font-bold text-gray-900">73%</p>
-                      <p className="text-base text-gray-600 leading-relaxed pt-1">of small businesses are not confident their marketing strategy is working.</p>
-                    </div>
-                    <div className="py-5 border-b border-gray-200 grid grid-cols-[100px_1fr] md:grid-cols-[140px_1fr] items-start gap-4">
-                      <p className="text-2xl font-bold text-gray-900">56%</p>
-                      <p className="text-base text-gray-600 leading-relaxed pt-1">of SMBs spend one hour or less per day on marketing.</p>
-                    </div>
-                    <div className="py-5 border-b border-gray-200 grid grid-cols-[100px_1fr] md:grid-cols-[140px_1fr] items-start gap-4">
-                      <p className="text-2xl font-bold text-gray-900">54%</p>
-                      <p className="text-base text-gray-600 leading-relaxed pt-1">of SMBs struggle to produce content consistently.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <h4 className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-3">Key Insight</h4>
+                <FadeIn delay={0.05}>
                   <p className="text-base text-gray-600 leading-relaxed">
-                    The real bottleneck for small businesses is not content creation tools. It is <strong>decision-making</strong>.
+                    Most businesses spend significant time producing content but struggle to determine what content actually drives growth.
                   </p>
+                </FadeIn>
+
+                <div>
+                  <FadeIn>
+                    <p className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-4">Research Insights</p>
+                  </FadeIn>
+                  <div className="border-t border-gray-200">
+                    <StatRow index={0}>
+                      <div className="py-5 border-b border-gray-200 grid grid-cols-[100px_1fr] md:grid-cols-[140px_1fr] items-start gap-4">
+                        <p className="text-2xl font-bold text-gray-900">73%</p>
+                        <p className="text-base text-gray-600 leading-relaxed pt-1">of small businesses are not confident their marketing strategy is working.</p>
+                      </div>
+                    </StatRow>
+                    <StatRow index={1}>
+                      <div className="py-5 border-b border-gray-200 grid grid-cols-[100px_1fr] md:grid-cols-[140px_1fr] items-start gap-4">
+                        <p className="text-2xl font-bold text-gray-900">56%</p>
+                        <p className="text-base text-gray-600 leading-relaxed pt-1">of SMBs spend one hour or less per day on marketing.</p>
+                      </div>
+                    </StatRow>
+                    <StatRow index={2}>
+                      <div className="py-5 border-b border-gray-200 grid grid-cols-[100px_1fr] md:grid-cols-[140px_1fr] items-start gap-4">
+                        <p className="text-2xl font-bold text-gray-900">54%</p>
+                        <p className="text-base text-gray-600 leading-relaxed pt-1">of SMBs struggle to produce content consistently.</p>
+                      </div>
+                    </StatRow>
+                  </div>
                 </div>
 
-                {/* Design opportunity */}
+                <FadeIn delay={0.05}>
+                  <div>
+                    <h4 className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-3">Key Insight</h4>
+                    <p className="text-base text-gray-600 leading-relaxed">
+                      The real bottleneck for small businesses is not content creation tools. It is <strong>decision-making</strong>.
+                    </p>
+                  </div>
+                </FadeIn>
+
                 <div className="grid grid-cols-[78px_1fr] md:grid-cols-[110px_1fr] items-center gap-3 md:gap-5 pt-2">
-                  <Image
-                    src="/filegpt_ideas.svg"
-                    alt="Design opportunity"
-                    width={220}
-                    height={220}
-                    className="w-16 md:w-24 h-auto object-contain"
-                  />
-                  <p className="text-base text-gray-800 leading-relaxed font-medium">
-                    <span className="text-gray-700">Design Opportunity:</span> How might we help small businesses decide what content to create next using signals from competitors, performance analytics, and emerging trends?
-                  </p>
+                  <ImageReveal>
+                    <Image
+                      src="/filegpt_ideas.svg"
+                      alt="Design opportunity"
+                      width={220}
+                      height={220}
+                      className="w-16 md:w-24 h-auto object-contain"
+                    />
+                  </ImageReveal>
+                  <FadeIn delay={0.1}>
+                    <p className="text-base text-gray-800 leading-relaxed font-medium">
+                      <span className="text-gray-700">Design Opportunity:</span> How might we help small businesses decide what content to create next using signals from competitors, performance analytics, and emerging trends?
+                    </p>
+                  </FadeIn>
                 </div>
-
               </div>
             </div>
           </section>
 
-          {/* Approach Section */}
+          {/* ── DESIGN PROCESS ── */}
           <section id="approach" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Design Process</h2>
-              
+              <FadeIn>
+                <h2 className="text-3xl font-bold text-gray-900 mb-6">Design Process</h2>
+              </FadeIn>
+
               {/* Starting Assumption */}
               <div className="mb-12">
-                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-4">Starting Assumption</p>
+                <FadeIn>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-4">Starting Assumption</p>
+                </FadeIn>
                 <div className="space-y-4 text-base text-gray-600 leading-relaxed">
-                  <p>When I first joined OpenPromo, my assumption was straightforward: small businesses need better content creation tools. Specifically, I believed AI video generation would be the highest-value feature — if we could help them produce professional video ads without a production team, that would remove the biggest barrier.</p>
-                  <p className="font-semibold text-gray-900">This assumption was wrong.</p>
-                  <p>Through user interviews, a different picture emerged. Small businesses weren&apos;t struggling to create content — many were already posting every day. The real problem was that they had no idea whether any of it was working, or what to create next. The bottleneck wasn&apos;t production. It was decision-making.</p>
-                  <p>This shifted the entire product direction: from a content creation tool to a growth intelligence platform. AI generation stayed — but as one part of a larger system designed to answer a harder question: what should I create next, and why?</p>
+                  <FadeIn delay={0.05}>
+                    <p>When I first joined OpenPromo, my assumption was straightforward: small businesses need better content creation tools. Specifically, I believed AI video generation would be the highest-value feature — if we could help them produce professional video ads without a production team, that would remove the biggest barrier.</p>
+                  </FadeIn>
+                  <FadeIn delay={0.1}>
+                    <p className="font-semibold text-gray-900">This assumption was wrong.</p>
+                  </FadeIn>
+                  <FadeIn delay={0.15}>
+                    <p>Through user interviews, a different picture emerged. Small businesses weren&apos;t struggling to create content — many were already posting every day. The real problem was that they had no idea whether any of it was working, or what to create next. The bottleneck wasn&apos;t production. It was decision-making.</p>
+                  </FadeIn>
+                  <FadeIn delay={0.2}>
+                    <p>This shifted the entire product direction: from a content creation tool to a growth intelligence platform. AI generation stayed — but as one part of a larger system designed to answer a harder question: what should I create next, and why?</p>
+                  </FadeIn>
                 </div>
-                <div className="mt-8 rounded-2xl overflow-hidden border border-gray-100">
+                <ImageReveal delay={0.1} className="mt-8 rounded-2xl overflow-hidden border border-gray-100">
                   <img src="/user_journey.svg" alt="User journey map" className="w-full" />
-                </div>
+                </ImageReveal>
               </div>
 
               <div id="solution-one" className="mb-16 relative">
                 <div>
                   <div id="solution-two" className="">
                     <div className="px-6 py-3">
-                      <h3 className="text-xl font-semibold text-gray-900 leading-tight">From brief to live ad in under 5 minutes</h3>
+                      <FadeIn>
+                        <h3 className="text-xl font-semibold text-gray-900 leading-tight">From brief to live ad in under 5 minutes</h3>
+                      </FadeIn>
                     </div>
                     <div className="px-6 pb-6">
                       <div className="grid gap-6">
                         <div className="grid grid-cols-1 md:grid-cols-[6fr_4fr] gap-5 items-start">
-                          <Image
-                            src="/opwireframe1.png?v=2"
-                            alt="opwireframe1.png"
-                            width={420}
-                            height={300}
-                            className="w-full h-auto rounded-xl border border-gray-200"
-                          />
-                          <div>
-                            <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-2">Version 1</h4>
-                            <p className="text-base text-gray-700 leading-relaxed">
-                              Instant Ad is a standalone workspace accessible from the left menu bar. If users want to create ads, they go there first, then switch to Create Post to publish.
-                            </p>
-                            <h5 className="text-xs font-bold uppercase tracking-[0.1em] text-[#fca5a5] mt-4 mb-2">Problem</h5>
-                            <p className="text-base text-gray-700 leading-relaxed">
-                              The workflow is fragmented. Users have to move back and forth between two separate areas to complete one task.
-                            </p>
-                          </div>
+                          <ImageReveal>
+                            <Image
+                              src="/opwireframe1.png?v=2"
+                              alt="opwireframe1.png"
+                              width={420}
+                              height={300}
+                              className="w-full h-auto rounded-xl border border-gray-200"
+                            />
+                          </ImageReveal>
+                          <FadeIn delay={0.1}>
+                            <div>
+                              <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-2">Version 1</h4>
+                              <p className="text-base text-gray-700 leading-relaxed">
+                                Instant Ad is a standalone workspace accessible from the left menu bar. If users want to create ads, they go there first, then switch to Create Post to publish.
+                              </p>
+                              <h5 className="text-xs font-bold uppercase tracking-[0.1em] text-[#fca5a5] mt-4 mb-2">Problem</h5>
+                              <p className="text-base text-gray-700 leading-relaxed">
+                                The workflow is fragmented. Users have to move back and forth between two separate areas to complete one task.
+                              </p>
+                            </div>
+                          </FadeIn>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-[6fr_4fr] gap-5 items-start">
-                          <Image
-                            src="/opwireframe2.png"
-                            alt="Version 2 wireframe"
-                            width={1332}
-                            height={1250}
-                            unoptimized
-                            sizes="(max-width: 1024px) 96vw, 666px"
-                            className="w-full h-auto rounded-xl shadow-lg"
-                          />
-                          <div>
-                            <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-2">Version 2</h4>
-                            <p className="text-base text-gray-700 leading-relaxed">
-                              During design, we considered using a modal or a drawer. We chose tabs because a modal interrupts the flow, a drawer adds another layer of hierarchy, and tabs keep both creation modes equally visible with the lowest switching cost. We also explored a step-by-step wizard for the Create Ad page, but decided against it because ad creation is non-linear. A wizard increases backtracking cost, while a single-page layout lets users revise any step at any time.
-                            </p>
-                          </div>
+                          <ImageReveal>
+                            <Image
+                              src="/opwireframe2.png"
+                              alt="Version 2 wireframe"
+                              width={1332}
+                              height={1250}
+                              unoptimized
+                              sizes="(max-width: 1024px) 96vw, 666px"
+                              className="w-full h-auto rounded-xl shadow-lg"
+                            />
+                          </ImageReveal>
+                          <FadeIn delay={0.1}>
+                            <div>
+                              <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-2">Version 2</h4>
+                              <p className="text-base text-gray-700 leading-relaxed">
+                                During design, we considered using a modal or a drawer. We chose tabs because a modal interrupts the flow, a drawer adds another layer of hierarchy, and tabs keep both creation modes equally visible with the lowest switching cost. We also explored a step-by-step wizard for the Create Ad page, but decided against it because ad creation is non-linear. A wizard increases backtracking cost, while a single-page layout lets users revise any step at any time.
+                              </p>
+                            </div>
+                          </FadeIn>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-[2fr_10fr] gap-5 items-center">
-                          <p className="text-lg font-semibold text-gray-700">Final Design</p>
-                          <Image
-                            src="/opinstantad1.png"
-                            alt="opinstantad1.png"
-                            width={1332}
-                            height={1250}
-                            unoptimized
-                            sizes="(max-width: 1024px) 96vw, 1200px"
-                            className="w-full h-auto rounded-xl shadow-lg"
-                          />
+                          <FadeIn>
+                            <p className="text-lg font-semibold text-gray-700">Final Design</p>
+                          </FadeIn>
+                          <ImageReveal delay={0.08}>
+                            <Image
+                              src="/opinstantad1.png"
+                              alt="opinstantad1.png"
+                              width={1332}
+                              height={1250}
+                              unoptimized
+                              sizes="(max-width: 1024px) 96vw, 1200px"
+                              className="w-full h-auto rounded-xl shadow-lg"
+                            />
+                          </ImageReveal>
                         </div>
                       </div>
                     </div>
@@ -330,108 +455,128 @@ export default function OpenPromoCaseStudy() {
                 <div className="mt-4">
                   <div id="solution-three" className="">
                     <div className="px-6 py-5">
-                      <h3 className="text-xl font-semibold text-gray-900 leading-tight">Learning from competitors, not just watching them</h3>
+                      <FadeIn>
+                        <h3 className="text-xl font-semibold text-gray-900 leading-tight">Learning from competitors, not just watching them</h3>
+                      </FadeIn>
                     </div>
                     <div className="px-6 pb-6 space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-[6fr_4fr] gap-5 items-start">
-                        <div className="w-full overflow-hidden rounded-xl border border-gray-200">
+                        <ImageReveal>
+                          <div className="w-full overflow-hidden rounded-xl border border-gray-200">
+                            <Image
+                              src="/trackingv1.png"
+                              alt="Tracking version 1"
+                              width={1200}
+                              height={760}
+                              unoptimized
+                              sizes="(max-width: 1024px) 96vw, 900px"
+                              className="block w-[165%] max-w-none h-auto"
+                            />
+                          </div>
+                        </ImageReveal>
+                        <FadeIn delay={0.1}>
+                          <div>
+                            <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-2">Version 1</h4>
+                            <p className="text-base text-gray-700 leading-relaxed mb-3">
+                              <span className="font-semibold">Design Goal:</span> Solve the most basic question first: can users see what their competitors are posting?
+                            </p>
+                            <p className="text-sm font-semibold text-gray-600 mb-2">Features</p>
+                            <ul className="list-disc pl-5 space-y-1 text-base text-gray-700">
+                              <li>Add competitor accounts</li>
+                              <li>View competitors&apos; latest posts</li>
+                            </ul>
+                            <p className="text-sm font-semibold text-[#fca5a5] mt-4 mb-2">Limitations</p>
+                            <ul className="list-disc pl-5 space-y-1 text-base text-gray-700">
+                              <li>Users can only view content</li>
+                              <li>Trend judgment is fully manual</li>
+                            </ul>
+                          </div>
+                        </FadeIn>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-[6fr_4fr] gap-5 items-start">
+                        <ImageReveal>
                           <Image
-                            src="/trackingv1.png"
-                            alt="Tracking version 1"
+                            src="/trackingv3.png"
+                            alt="Tracking version 2"
                             width={1200}
                             height={760}
                             unoptimized
                             sizes="(max-width: 1024px) 96vw, 900px"
-                            className="block w-[165%] max-w-none h-auto"
+                            className="w-full h-auto rounded-xl border border-gray-200"
                           />
-                        </div>
-                        <div>
-                          <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-2">Version 1</h4>
-                          <p className="text-base text-gray-700 leading-relaxed mb-3">
-                            <span className="font-semibold">Design Goal:</span> Solve the most basic question first: can users see what their competitors are posting?
-                          </p>
-                          <p className="text-sm font-semibold text-gray-600 mb-2">Features</p>
-                          <ul className="list-disc pl-5 space-y-1 text-base text-gray-700">
-                            <li>Add competitor accounts</li>
-                            <li>View competitors&apos; latest posts</li>
-                          </ul>
-                          <p className="text-sm font-semibold text-[#fca5a5] mt-4 mb-2">Limitations</p>
-                          <ul className="list-disc pl-5 space-y-1 text-base text-gray-700">
-                            <li>Users can only view content</li>
-                            <li>Trend judgment is fully manual</li>
-                          </ul>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-[6fr_4fr] gap-5 items-start">
-                        <Image
-                          src="/trackingv3.png"
-                          alt="Tracking version 2"
-                          width={1200}
-                          height={760}
-                          unoptimized
-                          sizes="(max-width: 1024px) 96vw, 900px"
-                          className="w-full h-auto rounded-xl border border-gray-200"
-                        />
-                        <div>
-                          <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-2">Version 2</h4>
-                          <p className="text-base text-gray-700 leading-relaxed mb-3">
-                            <span className="font-semibold">Added basic analytics</span>
-                          </p>
-                          <p className="text-base text-gray-700 leading-relaxed mb-2">
-                            The design goal shifted from only viewing content to understanding performance data.
-                          </p>
-                          <p className="text-sm font-semibold text-gray-600 mb-2">Users can</p>
-                          <ul className="list-disc pl-5 space-y-1 text-base text-gray-700">
-                            <li>Quickly identify top-performing posts</li>
-                            <li>Find high-engagement content</li>
-                          </ul>
-                          <p className="text-sm font-semibold text-[#fca5a5] mt-4 mb-2">Limitations</p>
-                          <ul className="list-disc pl-5 space-y-1 text-base text-gray-700">
-                            <li>Manually summarize trends</li>
-                            <li>Manually analyze changes</li>
-                          </ul>
-                          <p className="text-base text-gray-700 leading-relaxed mt-3">There are still no actionable insights.</p>
-                        </div>
+                        </ImageReveal>
+                        <FadeIn delay={0.1}>
+                          <div>
+                            <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-2">Version 2</h4>
+                            <p className="text-base text-gray-700 leading-relaxed mb-3">
+                              <span className="font-semibold">Added basic analytics</span>
+                            </p>
+                            <p className="text-base text-gray-700 leading-relaxed mb-2">
+                              The design goal shifted from only viewing content to understanding performance data.
+                            </p>
+                            <p className="text-sm font-semibold text-gray-600 mb-2">Users can</p>
+                            <ul className="list-disc pl-5 space-y-1 text-base text-gray-700">
+                              <li>Quickly identify top-performing posts</li>
+                              <li>Find high-engagement content</li>
+                            </ul>
+                            <p className="text-sm font-semibold text-[#fca5a5] mt-4 mb-2">Limitations</p>
+                            <ul className="list-disc pl-5 space-y-1 text-base text-gray-700">
+                              <li>Manually summarize trends</li>
+                              <li>Manually analyze changes</li>
+                            </ul>
+                            <p className="text-base text-gray-700 leading-relaxed mt-3">There are still no actionable insights.</p>
+                          </div>
+                        </FadeIn>
                       </div>
 
                       <div className="space-y-3">
-                        <div>
-                          <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-2">Version 3</h4>
+                        <FadeIn>
+                          <div>
+                            <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-2">Version 3</h4>
+                            <p className="text-base text-gray-700 leading-relaxed">
+                              <span className="font-semibold">Design Goal:</span> Let the system automatically tell users what&apos;s happening.
+                            </p>
+                            <p className="text-base text-gray-700 leading-relaxed mt-3">
+                              From V2 to V3, we added an <span className="font-semibold">Anomalies</span> tab. We chose a dedicated tab instead of a filter because filters support passive discovery, while anomalies are proactive signals. Placing it at the tab level ensures users see the most important changes immediately every time they enter the page.
+                            </p>
+                          </div>
+                        </FadeIn>
+                        <ImageReveal delay={0.08}>
+                          <Image
+                            src="/trackingv4.png?v=2"
+                            alt="Tracking version 3"
+                            width={1200}
+                            height={760}
+                            unoptimized
+                            sizes="(max-width: 1024px) 96vw, 1200px"
+                            className="w-full h-auto rounded-xl border border-gray-200"
+                          />
+                        </ImageReveal>
+                      </div>
+
+                      <div className="space-y-3">
+                        <FadeIn>
+                          <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a]">Final Design</h4>
+                        </FadeIn>
+                        <ImageReveal delay={0.06}>
+                          <Image
+                            src="/trackingdemo.gif"
+                            alt="Tracking demo final outcome"
+                            width={960}
+                            height={553}
+                            unoptimized
+                            className="w-full max-w-[900px] h-auto rounded-xl border border-gray-200"
+                          />
+                        </ImageReveal>
+                        <FadeIn delay={0.08}>
                           <p className="text-base text-gray-700 leading-relaxed">
-                            <span className="font-semibold">Design Goal:</span> Let the system automatically tell users what&apos;s happening.
+                            From a business owner perspective, growth comes from learning what competitors are doing right and responding faster.
                           </p>
-                          <p className="text-base text-gray-700 leading-relaxed mt-3">
-                            From V2 to V3, we added an <span className="font-semibold">Anomalies</span> tab. We chose a dedicated tab instead of a filter because filters support passive discovery, while anomalies are proactive signals. Placing it at the tab level ensures users see the most important changes immediately every time they enter the page.
+                          <p className="text-base text-gray-700 leading-relaxed">
+                            This feature helps businesses track competitor profiles, post performance, and viral content patterns to guide smarter content decisions.
                           </p>
-                        </div>
-                        <Image
-                          src="/trackingv4.png?v=2"
-                          alt="Tracking version 3"
-                          width={1200}
-                          height={760}
-                          unoptimized
-                          sizes="(max-width: 1024px) 96vw, 1200px"
-                          className="w-full h-auto rounded-xl border border-gray-200"
-                        />
-                      </div>
-
-                      <div className="space-y-3">
-                        <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a]">Final Design</h4>
-                        <Image
-                          src="/trackingdemo.gif"
-                          alt="Tracking demo final outcome"
-                          width={960}
-                          height={553}
-                          unoptimized
-                          className="w-full max-w-[900px] h-auto rounded-xl border border-gray-200"
-                        />
-                        <p className="text-base text-gray-700 leading-relaxed">
-                          From a business owner perspective, growth comes from learning what competitors are doing right and responding faster.
-                        </p>
-                        <p className="text-base text-gray-700 leading-relaxed">
-                          This feature helps businesses track competitor profiles, post performance, and viral content patterns to guide smarter content decisions.
-                        </p>
+                        </FadeIn>
                       </div>
                     </div>
                   </div>
@@ -440,86 +585,104 @@ export default function OpenPromoCaseStudy() {
                 <div className="mt-4">
                   <div id="performance-analytics" className="">
                     <div className="px-6 py-5">
-                      <h3 className="text-xl font-semibold text-gray-900 leading-tight">Data that tells you what to do next, not just what happened</h3>
+                      <FadeIn>
+                        <h3 className="text-xl font-semibold text-gray-900 leading-tight">Data that tells you what to do next, not just what happened</h3>
+                      </FadeIn>
                     </div>
                     <div className="px-6 pb-6 space-y-6">
                       <div className="space-y-3">
-                        <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a]">Version 1</h4>
-                        <p className="text-sm font-semibold text-[#fca5a5]">Problem</p>
-                        <p className="text-base text-gray-700 leading-relaxed">
-                          Users can see that Impressions increased by xx%, but they do not know why it increased or what to do next. The data is there, but the insight is missing. After viewing this page, users still do not know what they should change.
-                        </p>
-                        <Image
-                          src="/performancev1.png?v=2"
-                          alt="Performance version 1"
-                          width={1400}
-                          height={900}
-                          className="w-full max-w-[900px] h-auto rounded-xl border border-gray-200"
-                        />
+                        <FadeIn>
+                          <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a]">Version 1</h4>
+                          <p className="text-sm font-semibold text-[#fca5a5]">Problem</p>
+                          <p className="text-base text-gray-700 leading-relaxed">
+                            Users can see that Impressions increased by xx%, but they do not know why it increased or what to do next. The data is there, but the insight is missing. After viewing this page, users still do not know what they should change.
+                          </p>
+                        </FadeIn>
+                        <ImageReveal delay={0.08}>
+                          <Image
+                            src="/performancev1.png?v=2"
+                            alt="Performance version 1"
+                            width={1400}
+                            height={900}
+                            className="w-full max-w-[900px] h-auto rounded-xl border border-gray-200"
+                          />
+                        </ImageReveal>
                       </div>
 
                       <div className="space-y-3">
                         <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-5 items-start">
-                          <Image
-                            src="/performancev2.png?v=2"
-                            alt="Performance version 2"
-                            width={1400}
-                            height={900}
-                            className="w-full max-w-[450px] h-auto rounded-xl border border-gray-200"
-                          />
-                          <div>
-                            <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] md:pt-1">Version 2</h4>
-                            <p className="text-base text-gray-700 leading-relaxed mt-3">
-                              We added Top Content and Content Type, so users can see which content performs well. But the page still ends there. After reviewing the data, users must manually switch to Create Post or Create Ad, and the two actions are completely disconnected.
-                            </p>
-                            <p className="text-base text-[#fca5a5] font-semibold mt-3">Problem</p>
-                            <p className="text-base text-gray-700 leading-relaxed">1. There is a disconnect between data and action.</p>
-                            <p className="text-base text-gray-700 leading-relaxed">2. Users still have to interpret the data themselves and decide what to do next.</p>
-                            <p className="text-base text-gray-700 leading-relaxed">The system provides data and entry points, but it still doesn&apos;t tell users: &ldquo;This is what you should do now.&rdquo;</p>
-                          </div>
+                          <ImageReveal>
+                            <Image
+                              src="/performancev2.png?v=2"
+                              alt="Performance version 2"
+                              width={1400}
+                              height={900}
+                              className="w-full max-w-[450px] h-auto rounded-xl border border-gray-200"
+                            />
+                          </ImageReveal>
+                          <FadeIn delay={0.1}>
+                            <div>
+                              <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] md:pt-1">Version 2</h4>
+                              <p className="text-base text-gray-700 leading-relaxed mt-3">
+                                We added Top Content and Content Type, so users can see which content performs well. But the page still ends there. After reviewing the data, users must manually switch to Create Post or Create Ad, and the two actions are completely disconnected.
+                              </p>
+                              <p className="text-base text-[#fca5a5] font-semibold mt-3">Problem</p>
+                              <p className="text-base text-gray-700 leading-relaxed">1. There is a disconnect between data and action.</p>
+                              <p className="text-base text-gray-700 leading-relaxed">2. Users still have to interpret the data themselves and decide what to do next.</p>
+                              <p className="text-base text-gray-700 leading-relaxed">The system provides data and entry points, but it still doesn&apos;t tell users: &ldquo;This is what you should do now.&rdquo;</p>
+                            </div>
+                          </FadeIn>
                         </div>
                       </div>
 
                       <div className="space-y-3">
                         <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-5 items-start">
-                          <Image
-                            src="/performancev3.png"
-                            alt="Performance version 3"
-                            width={1400}
-                            height={900}
-                            className="w-full max-w-[450px] h-auto rounded-xl border border-gray-200"
-                          />
-                          <div>
-                            <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] md:pt-1">Version 3</h4>
-                            <p className="text-base text-gray-700 leading-relaxed mt-3">
-                              Added AI Recommendations, Goal Progress, and a bottom CTA.
-                            </p>
-                            <p className="text-base text-gray-700 leading-relaxed">
-                              The system proactively tells users:
-                            </p>
-                            <ul className="list-disc pl-5 space-y-1 text-base text-gray-700">
-                              <li>High Priority: Create a &quot;3 Steps to...&quot; video</li>
-                              <li>Trending: Use the &quot;Nobody talks about...&quot; hook</li>
-                              <li>Opportunity: Post BTS content on Thursday from 6-8 PM</li>
-                            </ul>
-                            <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mt-3 mb-2">Reason</p>
-                            <p className="text-base text-gray-700 leading-relaxed">
-                              We considered placing recommendations on the Competitor Tracking page. However, recommendations are generated from each business&apos;s own account data, and placing them under Competitors would create context confusion. We placed AI Recommendations at the top of Performance so &ldquo;what to do next&rdquo; is prioritized over &ldquo;what the numbers are.&rdquo;
-                            </p>
-                          </div>
+                          <ImageReveal>
+                            <Image
+                              src="/performancev3.png"
+                              alt="Performance version 3"
+                              width={1400}
+                              height={900}
+                              className="w-full max-w-[450px] h-auto rounded-xl border border-gray-200"
+                            />
+                          </ImageReveal>
+                          <FadeIn delay={0.1}>
+                            <div>
+                              <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] md:pt-1">Version 3</h4>
+                              <p className="text-base text-gray-700 leading-relaxed mt-3">
+                                Added AI Recommendations, Goal Progress, and a bottom CTA.
+                              </p>
+                              <p className="text-base text-gray-700 leading-relaxed">
+                                The system proactively tells users:
+                              </p>
+                              <ul className="list-disc pl-5 space-y-1 text-base text-gray-700">
+                                <li>High Priority: Create a &quot;3 Steps to...&quot; video</li>
+                                <li>Trending: Use the &quot;Nobody talks about...&quot; hook</li>
+                                <li>Opportunity: Post BTS content on Thursday from 6-8 PM</li>
+                              </ul>
+                              <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mt-3 mb-2">Reason</p>
+                              <p className="text-base text-gray-700 leading-relaxed">
+                                We considered placing recommendations on the Competitor Tracking page. However, recommendations are generated from each business&apos;s own account data, and placing them under Competitors would create context confusion. We placed AI Recommendations at the top of Performance so &ldquo;what to do next&rdquo; is prioritized over &ldquo;what the numbers are.&rdquo;
+                              </p>
+                            </div>
+                          </FadeIn>
                         </div>
                       </div>
 
                       <div className="space-y-3">
-                        <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a]">Final Design</h4>
-                        <Image
-                          src="/performance_final_design.gif"
-                          alt="Performance final design"
-                          width={960}
-                          height={553}
-                          unoptimized
-                          className="w-full max-w-[900px] h-auto rounded-xl border border-gray-200"
-                        />
+                        <FadeIn>
+                          <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a]">Final Design</h4>
+                        </FadeIn>
+                        <ImageReveal delay={0.06}>
+                          <Image
+                            src="/performance_final_design.gif"
+                            alt="Performance final design"
+                            width={960}
+                            height={553}
+                            unoptimized
+                            className="w-full max-w-[900px] h-auto rounded-xl border border-gray-200"
+                          />
+                        </ImageReveal>
                       </div>
                     </div>
                   </div>
@@ -528,26 +691,30 @@ export default function OpenPromoCaseStudy() {
             </div>
           </section>
 
-                    {/* Reflection Section */}
+          {/* ── REFLECTION ── */}
           <section id="reflection" className="px-6 py-16 border-t border-gray-200">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">AI doesn&apos;t replace strategy — it enables it</h2>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                This project highlighted how generative AI is reshaping marketing workflows. Small businesses traditionally rely on agencies to produce advertising content, which is both expensive and slow. As AI generation tools mature, the barrier to creating promotional content is rapidly decreasing. However, AI alone does not solve the problem. The real opportunity lies in integrating AI into the full promotion workflow - from content creation to publishing and competitive insights. I believe future marketing platforms will evolve from simple management dashboards into growth intelligence systems that help businesses understand what content to create next.
-              </p>
+              <FadeIn>
+                <h2 className="text-3xl font-bold text-gray-900 mb-8">AI doesn&apos;t replace strategy — it enables it</h2>
+              </FadeIn>
+              <FadeIn delay={0.08}>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  This project highlighted how generative AI is reshaping marketing workflows. Small businesses traditionally rely on agencies to produce advertising content, which is both expensive and slow. As AI generation tools mature, the barrier to creating promotional content is rapidly decreasing. However, AI alone does not solve the problem. The real opportunity lies in integrating AI into the full promotion workflow - from content creation to publishing and competitive insights. I believe future marketing platforms will evolve from simple management dashboards into growth intelligence systems that help businesses understand what content to create next.
+                </p>
+              </FadeIn>
             </div>
           </section>
         </main>
       </div>
 
       {/* Next Project */}
-      <div className="py-20 px-6 text-center border-t border-gray-100">
+      <FadeIn className="py-20 px-6 text-center border-t border-gray-100">
         <p className="text-[11px] uppercase tracking-widest text-gray-400 mb-4">Next Project</p>
         <a href="/work/biovision" className="group inline-flex items-center gap-3 text-[28px] font-bold text-gray-900 hover:text-gray-400 transition-colors duration-200">
           BioVision
           <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
         </a>
-      </div>
+      </FadeIn>
 
       {/* Footer */}
       <footer id="footer" className="bg-white border-t border-gray-200 mt-16">
