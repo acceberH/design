@@ -165,11 +165,6 @@ export default function OpenPromoCaseStudy() {
                   />
                   <div className="p-4">
                     <p className="text-sm text-gray-600 italic">Competitive landscape showing gaps in AI-driven growth features.</p>
-                    <p className="text-base text-gray-700 leading-relaxed mt-3">Most products fall into two extremes:</p>
-                    <ul className="list-disc pl-5 space-y-1 text-base text-gray-700 mt-2">
-                      <li>Low-cost schedulers that help businesses publish content but provide little strategic guidance.</li>
-                      <li>Enterprise marketing platforms that offer advanced analytics and strategy insights but are priced beyond what most SMBs can afford.</li>
-                    </ul>
                     <p className="text-base text-gray-700 leading-relaxed mt-4">This is the gap OpenPromo was designed to fill — the intelligence layer that SMBs have never had access to.</p>
                   </div>
                 </div>
