@@ -250,6 +250,17 @@ export default function OpenPromoCaseStudy() {
             <div className="max-w-4xl">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Design Process</h2>
               
+              {/* Starting Assumption */}
+              <div className="mb-12">
+                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-4">Starting Assumption</p>
+                <div className="space-y-4 text-base text-gray-600 leading-relaxed">
+                  <p>When I first joined OpenPromo, my assumption was straightforward: small businesses need better content creation tools. Specifically, I believed AI video generation would be the highest-value feature — if we could help them produce professional video ads without a production team, that would remove the biggest barrier.</p>
+                  <p className="font-semibold text-gray-900">This assumption was wrong.</p>
+                  <p>Through user interviews, a different picture emerged. Small businesses weren&apos;t struggling to create content — many were already posting every day. The real problem was that they had no idea whether any of it was working, or what to create next. The bottleneck wasn&apos;t production. It was decision-making.</p>
+                  <p>This shifted the entire product direction: from a content creation tool to a growth intelligence platform. AI generation stayed — but as one part of a larger system designed to answer a harder question: what should I create next, and why?</p>
+                </div>
+              </div>
+
               <div id="solution-one" className="mb-16 relative">
                 <div>
                   <div id="solution-two" className="">
