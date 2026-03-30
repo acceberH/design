@@ -147,10 +147,7 @@ export default function OpenPromoCaseStudy() {
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Small businesses are flying blind</h2>
               <div className="space-y-6">
                 <p className="text-base text-gray-600 leading-relaxed">
-                  OpenPromo is a 0→1 platform designed to give small businesses the strategic intelligence that was previously only available to enterprise marketing teams.
-                </p>
-                <p className="text-base text-gray-600 leading-relaxed">
-                  For many small businesses, producing video content remains one of the biggest barriers to effective social media marketing, often requiring costly influencer collaborations or professional production.
+                  Small businesses are outgunned. Enterprise brands have dedicated marketing teams, agency partnerships, and data analysts telling them exactly what content to create next. Small businesses have none of that — just a phone, a few hours a week, and a lot of guessing.
                 </p>
 
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
