@@ -276,7 +276,7 @@ export default function OpenPromoCaseStudy() {
                 <div>
                   <div id="solution-two" className="">
                     <div className="px-6 py-3">
-                      <h3 className="text-xl font-semibold text-gray-900 leading-tight">Instant Ad Creation</h3>
+                      <h3 className="text-xl font-semibold text-gray-900 leading-tight">From brief to live ad in under 5 minutes</h3>
                     </div>
                     <div className="px-6 pb-6">
                       <div className="grid gap-6">
@@ -338,7 +338,7 @@ export default function OpenPromoCaseStudy() {
                 <div className="mt-4">
                   <div id="solution-three" className="">
                     <div className="px-6 py-5">
-                      <h3 className="text-xl font-semibold text-gray-900 leading-tight">Competitor Tracking</h3>
+                      <h3 className="text-xl font-semibold text-gray-900 leading-tight">Learning from competitors, not just watching them</h3>
                     </div>
                     <div className="px-6 pb-6 space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-[6fr_4fr] gap-5 items-start">
@@ -448,7 +448,7 @@ export default function OpenPromoCaseStudy() {
                 <div className="mt-4">
                   <div id="performance-analytics" className="">
                     <div className="px-6 py-5">
-                      <h3 className="text-xl font-semibold text-gray-900 leading-tight">Performance Analytics</h3>
+                      <h3 className="text-xl font-semibold text-gray-900 leading-tight">Data that tells you what to do next, not just what happened</h3>
                     </div>
                     <div className="px-6 pb-6 space-y-6">
                       <div className="space-y-3">
