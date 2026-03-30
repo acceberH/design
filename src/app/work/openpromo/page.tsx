@@ -149,6 +149,9 @@ export default function OpenPromoCaseStudy() {
                 <p className="text-base text-gray-600 leading-relaxed">
                   Small businesses are outgunned. Enterprise brands have dedicated marketing teams, agency partnerships, and data analysts telling them exactly what content to create next. Small businesses have none of that — just a phone, a few hours a week, and a lot of guessing.
                 </p>
+                <p className="text-base text-gray-600 leading-relaxed">
+                  The real cost isn&apos;t production — it&apos;s the hours spent deciding what to create, manually posting to eight platforms, and staring at analytics that don&apos;t tell you what to do next.
+                </p>
 
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                   <Image
