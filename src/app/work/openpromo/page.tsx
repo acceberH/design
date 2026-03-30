@@ -98,7 +98,7 @@ function VersionSlider({
         </div>
 
         {/* Horizontal sliding track — overflow hidden clips cards off-screen */}
-        <div className="overflow-hidden rounded-2xl">
+        <div className="overflow-hidden">
           <motion.div
             className="flex"
             style={{ x, width: `${count * 100}%` }}
@@ -109,9 +109,7 @@ function VersionSlider({
                   className="bg-white rounded-2xl overflow-hidden"
                   style={{
                     border: "1px solid rgba(0,0,0,0.07)",
-                    boxShadow: v.isLast
-                      ? "0 8px 40px rgba(0,0,0,0.10)"
-                      : "0 2px 12px rgba(0,0,0,0.06)",
+                    boxShadow: "0 1px 6px rgba(0,0,0,0.06)",
                   }}
                 >
                   <div className="flex items-center gap-2 px-5 py-2.5 border-b border-gray-100 bg-gray-50/60">
