@@ -274,9 +274,9 @@ export default function OpenPromoCaseStudy() {
 
               {/* ── FEATURE 1: Instant Ad ── */}
               <div className="mb-2" id="solution-one">
-                <FadeIn className="mb-6">
+                <div className="sticky z-50 bg-gray-50 pt-1 pb-4 mb-0" style={{ top: 18 }}>
                   <h3 className="text-xl font-semibold text-gray-900">From brief to live ad in under 5 minutes</h3>
-                </FadeIn>
+                </div>
                 {/* Stacked version cards */}
                 <div style={{ isolation: "isolate", position: "relative" }}>
                   {/* V1 */}
@@ -310,9 +310,9 @@ export default function OpenPromoCaseStudy() {
 
               {/* ── FEATURE 2: Competitor Tracking ── */}
               <div className="mt-24 mb-2" id="solution-three">
-                <FadeIn className="mb-6">
+                <div className="sticky z-50 bg-gray-50 pt-1 pb-4 mb-0" style={{ top: 18 }}>
                   <h3 className="text-xl font-semibold text-gray-900">Learning from competitors, not just watching them</h3>
-                </FadeIn>
+                </div>
                 <div style={{ isolation: "isolate", position: "relative" }}>
                   {/* V1 */}
                   <VersionCard index={0} total={4} label="V1">
@@ -365,9 +365,9 @@ export default function OpenPromoCaseStudy() {
 
               {/* ── FEATURE 3: Performance Analytics ── */}
               <div className="mt-24 mb-2" id="performance-analytics">
-                <FadeIn className="mb-6">
+                <div className="sticky z-50 bg-gray-50 pt-1 pb-4 mb-0" style={{ top: 18 }}>
                   <h3 className="text-xl font-semibold text-gray-900">Data that tells you what to do next, not just what happened</h3>
-                </FadeIn>
+                </div>
                 <div style={{ isolation: "isolate", position: "relative" }}>
                   {/* V1 */}
                   <VersionCard index={0} total={4} label="V1">
