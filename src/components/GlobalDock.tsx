@@ -147,11 +147,11 @@ export default function GlobalDock() {
         ref={dockRef}
         className="relative flex items-end gap-1.5 rounded-[22px] px-3 py-2.5"
         style={{
-          background: "rgba(255,255,255,0.18)",
-          backdropFilter: "blur(36px) saturate(2.0) brightness(1.08)",
-          WebkitBackdropFilter: "blur(36px) saturate(2.0) brightness(1.08)",
-          border: "1px solid rgba(255,255,255,0.70)",
-          boxShadow: "0 20px 60px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06), inset 0 1.5px 0 rgba(255,255,255,0.90), inset 0 -1px 0 rgba(0,0,0,0.03)",
+          background: "rgba(255,255,255,0.08)",
+          backdropFilter: "blur(20px) saturate(1.6) brightness(1.04)",
+          WebkitBackdropFilter: "blur(20px) saturate(1.6) brightness(1.04)",
+          border: "1px solid rgba(255,255,255,0.30)",
+          boxShadow: "0 8px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.60)",
         }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
