@@ -428,76 +428,68 @@ export default function OpenPromoCaseStudy() {
                     <div className="px-6 py-5">
                       <h3 className="text-xl font-semibold text-gray-900 leading-tight">Data that tells you what to do next, not just what happened</h3>
                     </div>
-                    <div className="px-6 pb-6 space-y-6">
+                    <div className="px-6 pb-6 space-y-10">
+
+                      {/* V1 */}
                       <div className="space-y-3">
-                        <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a]">Version 1</h4>
-                        <p className="text-sm font-semibold text-[#fca5a5]">Problem</p>
-                        <p className="text-base text-gray-700 leading-relaxed">
-                          Users can see that Impressions increased by xx%, but they do not know why it increased or what to do next. The data is there, but the insight is missing. After viewing this page, users still do not know what they should change.
-                        </p>
-                        <Image
-                          src="/performancev1.png?v=2"
-                          alt="Performance version 1"
-                          width={1400}
-                          height={900}
-                          className="w-full max-w-[900px] h-auto rounded-xl border border-gray-200"
-                        />
+                        <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">Version 1</p>
+                        <div className="relative">
+                          <Image
+                            src="/performancev1.png?v=2"
+                            alt="Performance version 1"
+                            width={1400}
+                            height={900}
+                            className="w-full h-auto rounded-xl border border-gray-200"
+                          />
+                          <span className="absolute top-3 left-3 bg-[#c2410c] text-white text-[11px] font-semibold px-2.5 py-1 rounded-full">Only numbers — no direction</span>
+                        </div>
+                        <div className="border-l-2 border-red-200 pl-4 py-1 bg-red-50 rounded-r-lg">
+                          <p className="text-[14px] text-gray-700">Data is there — but users still don&apos;t know what to do next.</p>
+                        </div>
                       </div>
 
+                      {/* V2 */}
                       <div className="space-y-3">
-                        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-5 items-start">
+                        <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">Version 2</p>
+                        <div className="relative">
                           <Image
                             src="/performancev2.png?v=2"
                             alt="Performance version 2"
                             width={1400}
                             height={900}
-                            className="w-full max-w-[450px] h-auto rounded-xl border border-gray-200"
+                            className="w-full h-auto rounded-xl border border-gray-200"
                           />
-                          <div>
-                            <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] md:pt-1">Version 2</h4>
-                            <p className="text-base text-gray-700 leading-relaxed mt-3">
-                              We added Top Content and Content Type, so users can see which content performs well. But the page still ends there. After reviewing the data, users must manually switch to Create Post or Create Ad, and the two actions are completely disconnected.
-                            </p>
-                            <p className="text-base text-[#fca5a5] font-semibold mt-3">Problem</p>
-                            <p className="text-base text-gray-700 leading-relaxed">1. There is a disconnect between data and action.</p>
-                            <p className="text-base text-gray-700 leading-relaxed">2. Users still have to interpret the data themselves and decide what to do next.</p>
-                            <p className="text-base text-gray-700 leading-relaxed">The system provides data and entry points, but it still doesn&apos;t tell users: &ldquo;This is what you should do now.&rdquo;</p>
-                          </div>
+                          <span className="absolute top-3 left-3 bg-[#c2410c] text-white text-[11px] font-semibold px-2.5 py-1 rounded-full">Added: Top Content</span>
+                          <span className="absolute top-3 left-[170px] bg-[#c2410c] text-white text-[11px] font-semibold px-2.5 py-1 rounded-full">Added: Content Type</span>
+                        </div>
+                        <div className="border-l-2 border-red-200 pl-4 py-1 bg-red-50 rounded-r-lg">
+                          <p className="text-[14px] text-gray-700">Still missing: after seeing the data, users must manually decide what to do next.</p>
                         </div>
                       </div>
 
+                      {/* V3 */}
                       <div className="space-y-3">
-                        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-5 items-start">
+                        <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">Version 3</p>
+                        <div className="relative">
                           <Image
                             src="/performancev3.png"
                             alt="Performance version 3"
                             width={1400}
                             height={900}
-                            className="w-full max-w-[450px] h-auto rounded-xl border border-gray-200"
+                            className="w-full h-auto rounded-xl border border-gray-200"
                           />
-                          <div>
-                            <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] md:pt-1">Version 3</h4>
-                            <p className="text-base text-gray-700 leading-relaxed mt-3">
-                              Added AI Recommendations, Goal Progress, and a bottom CTA.
-                            </p>
-                            <p className="text-base text-gray-700 leading-relaxed">
-                              The system proactively tells users:
-                            </p>
-                            <ul className="list-disc pl-5 space-y-1 text-base text-gray-700">
-                              <li>High Priority: Create a &quot;3 Steps to...&quot; video</li>
-                              <li>Trending: Use the &quot;Nobody talks about...&quot; hook</li>
-                              <li>Opportunity: Post BTS content on Thursday from 6-8 PM</li>
-                            </ul>
-                            <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a] mt-3 mb-2">Reason</p>
-                            <p className="text-base text-gray-700 leading-relaxed">
-                              We considered placing recommendations on the Competitor Tracking page. However, recommendations are generated from each business&apos;s own account data, and placing them under Competitors would create context confusion. We placed AI Recommendations at the top of Performance so &ldquo;what to do next&rdquo; is prioritized over &ldquo;what the numbers are.&rdquo;
-                            </p>
-                          </div>
+                          <span className="absolute top-3 left-3 bg-[#15803d] text-white text-[11px] font-semibold px-2.5 py-1 rounded-full">Added: AI Recommendations</span>
+                          <span className="absolute top-3 left-[195px] bg-[#15803d] text-white text-[11px] font-semibold px-2.5 py-1 rounded-full">Added: Goal Progress</span>
                         </div>
+                        <div className="border-l-2 border-green-200 pl-4 py-1 bg-green-50 rounded-r-lg">
+                          <p className="text-[14px] text-gray-700">The system now tells users exactly what to do next — &ldquo;what to do&rdquo; is prioritized over &ldquo;what the numbers are.&rdquo;</p>
+                        </div>
+                        <p className="text-sm text-gray-500 leading-relaxed">We placed AI Recommendations at the top of Performance (not Competitor Tracking) because recommendations are generated from each business&apos;s own data — mixing them under Competitors would create context confusion.</p>
                       </div>
 
+                      {/* Final */}
                       <div className="space-y-3">
-                        <h4 className="text-xs font-bold uppercase tracking-[0.1em] text-[#0f172a]">Final Design</h4>
+                        <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">Final Design</p>
                         <Image
                           src="/performance_final_design.gif"
                           alt="Performance final design"
@@ -507,6 +499,7 @@ export default function OpenPromoCaseStudy() {
                           className="w-full max-w-[900px] h-auto rounded-xl border border-gray-200"
                         />
                       </div>
+
                     </div>
                   </div>
                 </div>
