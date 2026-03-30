@@ -104,7 +104,7 @@ function VersionSlider({
             style={{ x, width: `${count * 100}%` }}
           >
             {versions.map((v, i) => (
-              <div key={i} style={{ width: `${100 / count}%` }}>
+              <div key={i} style={{ width: `${100 / count}%` }} className="pr-6">
                 <div
                   className="bg-white rounded-2xl overflow-hidden"
                   style={{
