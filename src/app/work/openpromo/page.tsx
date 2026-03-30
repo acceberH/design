@@ -153,6 +153,26 @@ export default function OpenPromoCaseStudy() {
                 <p className="text-base text-gray-600 leading-relaxed">
                   For many small businesses, producing video content remains one of the biggest barriers to effective social media marketing, often requiring costly influencer collaborations or professional production.
                 </p>
+
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                  <Image
+                    src="/b927e770173c1c8012e2191e2d7237bb.png"
+                    alt="Competitive analysis"
+                    width={5945}
+                    height={5314}
+                    unoptimized
+                    sizes="(max-width: 1024px) 86vw, 900px"
+                    className="w-full max-w-[450px] h-auto mx-auto"
+                  />
+                  <div className="p-4">
+                    <p className="text-sm text-gray-600 italic">Competitive landscape showing gaps in AI-driven growth features.</p>
+                    <p className="text-base text-gray-700 leading-relaxed mt-3">Most products fall into two extremes:</p>
+                    <ul className="list-disc pl-5 space-y-1 text-base text-gray-700 mt-2">
+                      <li>Low-cost schedulers that help businesses publish content but provide little strategic guidance.</li>
+                      <li>Enterprise marketing platforms that offer advanced analytics and strategy insights but are priced beyond what most SMBs can afford.</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
@@ -210,26 +230,6 @@ export default function OpenPromoCaseStudy() {
                   <p className="text-base text-gray-600 leading-relaxed">
                     The real bottleneck for small businesses is not content creation tools. It is <strong>decision-making</strong>.
                   </p>
-                </div>
-
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                  <Image
-                    src="/b927e770173c1c8012e2191e2d7237bb.png"
-                    alt="Competitive analysis"
-                    width={5945}
-                    height={5314}
-                    unoptimized
-                    sizes="(max-width: 1024px) 86vw, 900px"
-                    className="w-full max-w-[450px] h-auto mx-auto"
-                  />
-                  <div className="p-4">
-                    <p className="text-sm text-gray-600 italic">Competitive landscape showing gaps in AI-driven growth features.</p>
-                    <p className="text-base text-gray-700 leading-relaxed mt-3">Most products fall into two extremes:</p>
-                    <ul className="list-disc pl-5 space-y-1 text-base text-gray-700 mt-2">
-                      <li>Low-cost schedulers that help businesses publish content but provide little strategic guidance.</li>
-                      <li>Enterprise marketing platforms that offer advanced analytics and strategy insights but are priced beyond what most SMBs can afford.</li>
-                    </ul>
-                  </div>
                 </div>
 
                 {/* Design opportunity */}
