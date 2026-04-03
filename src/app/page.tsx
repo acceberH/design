@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
@@ -19,7 +19,47 @@ function FadeIn({ children, delay = 0, className = "" }: { children: React.React
   );
 }
 
+const VERBS = ["design", "build", "ship"];
+
 export default function Home() {
+  const [displayed, setDisplayed] = useState("Design");
+  const [cursor, setCursor] = useState(true);
+
+  useEffect(() => {
+    let wordIdx = 0;
+    let charIdx = VERBS[0].length;
+    let deleting = false;
+    let timeout: ReturnType<typeof setTimeout>;
+
+    const tick = () => {
+      const word = VERBS[wordIdx];
+      if (!deleting) {
+        if (charIdx < word.length) {
+          charIdx++;
+          setDisplayed(word.slice(0, charIdx));
+          timeout = setTimeout(tick, 80);
+        } else {
+          deleting = true;
+          timeout = setTimeout(tick, 2000);
+        }
+      } else {
+        if (charIdx > 0) {
+          charIdx--;
+          setDisplayed(word.slice(0, charIdx));
+          timeout = setTimeout(tick, 50);
+        } else {
+          deleting = false;
+          wordIdx = (wordIdx + 1) % VERBS.length;
+          timeout = setTimeout(tick, 120);
+        }
+      }
+    };
+
+    timeout = setTimeout(tick, 2000);
+    const blink = setInterval(() => setCursor(c => !c), 530);
+    return () => { clearTimeout(timeout); clearInterval(blink); };
+  }, []);
+
   return (
     <div className="min-h-screen bg-white scroll-smooth">
       {/* Floating gradient orbs */}
@@ -32,51 +72,97 @@ export default function Home() {
         @keyframes orb1 { from { transform: translate(0, 0); } to { transform: translate(40px, 60px); } }
         @keyframes orb2 { from { transform: translate(0, 0); } to { transform: translate(-50px, 40px); } }
         @keyframes orb3 { from { transform: translate(0, 0); } to { transform: translate(30px, -40px); } }
+        @property --angle {
+          syntax: '<angle>';
+          initial-value: 0deg;
+          inherits: false;
+        }
+        @keyframes pill-spin { to { --angle: 360deg; } }
+        .pill-outer {
+          position: relative;
+          border-radius: 999px;
+          padding: 2px;
+          display: inline-flex;
+        }
+        .pill-outer::before {
+          content: '';
+          position: absolute;
+          inset: -1px;
+          border-radius: 999px;
+          padding: 1.5px;
+          background: conic-gradient(
+            from var(--angle, 0deg),
+            transparent 0%,
+            transparent 60%,
+            rgba(180,160,255,0.9) 75%,
+            white 82%,
+            rgba(180,160,255,0.9) 89%,
+            transparent 100%
+          );
+          -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                        linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          animation: pill-spin 2.4s linear infinite;
+        }
+        .pill-inner {
+          position: relative;
+          border-radius: 999px;
+          padding: 10px 28px;
+          background: #f5f5f7;
+          border: 1px solid rgba(0,0,0,0.06);
+        }
       `}</style>
 
       <div style={{ position: "relative", zIndex: 1 }}>
 
         {/* ── HERO ── */}
-        <section id="hero-section" className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 bg-white">
-          <div className="max-w-[600px] mx-auto w-full text-center">
+        <section id="hero-section" className="pt-40 pb-20 px-4 sm:px-6 lg:px-8 bg-white">
+          <div className="max-w-[1000px] mx-auto w-full text-center">
 
             {/* Badge */}
             <motion.div
-              className="flex justify-center mb-8"
+              className="flex justify-center mb-10"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease }}
             >
-              <span className="inline-flex items-center rounded-full border border-blue-100/80 bg-gradient-to-r from-slate-100/80 via-blue-50/70 to-indigo-100/80 backdrop-blur-md px-5 py-2 text-[15px] font-medium text-gray-800 tracking-tight shadow-[0_2px_16px_rgba(99,102,241,0.12)]">
-                Hi, I&apos;m Rebecca 👋
-              </span>
+              <div className="pill-outer">
+                <span className="pill-inner inline-flex items-center text-[14px] font-medium tracking-tight" style={{ color: "#1a1a2e" }}>
+                  Hi, I&apos;m Rebecca 👋
+                </span>
+              </div>
             </motion.div>
 
             {/* H1 */}
             <motion.h1
-              className="text-[36px] font-medium text-gray-900 mb-4 leading-[1.15] tracking-tight"
+              className="text-[42px] sm:text-[48px] font-semibold text-gray-900 mb-6 leading-[1.1] tracking-[-0.02em]"
               initial={{ opacity: 0, y: 22, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.65, delay: 0.1, ease }}
             >
-              I speak both designer and engineer,<br />and I use that to build products that actually ship well.
+              I{" "}
+              <span style={{ display: "inline-block", minWidth: "2ch", color: "#4F46E5", fontFamily: "var(--font-geist), sans-serif" }}>
+                {displayed}<span style={{ opacity: cursor ? 1 : 0, transition: "opacity 0.1s" }}>|</span>
+              </span>
+              {" "}AI products that bring clarity to complexity and drive real impact.
             </motion.h1>
 
             {/* Subtitle */}
             <motion.p
-              className="text-[16px] text-gray-400 leading-relaxed whitespace-nowrap"
+              className="text-[15px] text-gray-500 leading-relaxed text-center whitespace-nowrap mx-auto"
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.22, ease }}
             >
-              I specialize in AI-powered products where the complexity is real and the stakes are high.
+              3+ years designing and building AI-powered products, focusing on real-world workflows and impact.
             </motion.p>
           </div>
         </section>
 
         {/* ── WORK ── */}
         <section id="work" className="pt-8 pb-16 px-4 sm:px-6 lg:px-8 bg-white">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-[75vw] mx-auto">
             <FadeIn>
               <p className="text-[13px] font-semibold uppercase tracking-widest text-gray-400 mb-6">Selected Work</p>
             </FadeIn>
@@ -85,9 +171,9 @@ export default function Home() {
               {/* OpenPromo */}
               <div className="sticky top-6 z-10">
                 <Link href="/work/openpromo" className="group block">
-                  <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]" style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(248,248,252,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
-                    <div className="md:w-[55%] relative overflow-hidden flex-shrink-0">
-                      <Image src="/656shots_so.png" alt="OpenPromo" width={1920} height={1080} unoptimized className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]" />
+                  <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[500px]" style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(248,248,252,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
+                    <div className="md:w-[68%] relative overflow-hidden flex-shrink-0">
+                      <Image src="/op-previewnew.png" alt="OpenPromo" width={1920} height={1080} unoptimized className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]" />
                     </div>
                     <div className="flex flex-col justify-start p-8 flex-1 gap-2">
                       <p className="text-[12px] text-gray-400">Product Design · SaaS · B2B</p>
@@ -101,9 +187,9 @@ export default function Home() {
               {/* BioVision */}
               <div className="sticky top-10 z-20 mt-4">
                 <Link href="/work/biovision" className="group block">
-                  <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]" style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(248,248,252,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
-                    <div className="md:w-[55%] relative overflow-hidden flex-shrink-0 bg-neutral-100 p-[2.5%]">
-                      <Image src="/749shots_so.png" alt="BioVision" width={1920} height={1080} unoptimized className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]" />
+                  <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[500px]" style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(248,248,252,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
+                    <div className="md:w-[68%] relative overflow-hidden flex-shrink-0">
+                      <Image src="/bv-preview.png" alt="BioVision" width={1920} height={1080} unoptimized className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]" />
                     </div>
                     <div className="flex flex-col justify-start p-8 flex-1 gap-2">
                       <p className="text-[12px] text-gray-400">Product Design · AI/ML · Wildlife Research</p>
@@ -124,8 +210,8 @@ export default function Home() {
               {/* FileGPT */}
               <div className="sticky top-14 z-30 mt-4">
                 <Link href="/work/filegpt" className="group block">
-                  <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]" style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(248,248,252,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
-                    <div className="md:w-[55%] relative overflow-hidden flex-shrink-0">
+                  <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[500px]" style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(248,248,252,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
+                    <div className="md:w-[68%] relative overflow-hidden flex-shrink-0">
                       <Image src="/253shots_so.png" alt="FileGPT" width={1920} height={1080} className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]" />
                     </div>
                     <div className="flex flex-col justify-start p-8 flex-1 gap-2">
@@ -140,8 +226,8 @@ export default function Home() {
               {/* Offerplz */}
               <div className="sticky top-[72px] z-40 mt-4">
                 <Link href="/work/offerplz" className="group block">
-                  <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]" style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(248,248,252,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
-                    <div className="md:w-[55%] relative overflow-hidden flex-shrink-0">
+                  <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[500px]" style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(248,248,252,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
+                    <div className="md:w-[68%] relative overflow-hidden flex-shrink-0">
                       <Image src="/639shots_so.png" alt="Offerplz" width={1248} height={512} unoptimized className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]" />
                     </div>
                     <div className="flex flex-col justify-start p-8 flex-1 gap-2">
@@ -156,8 +242,8 @@ export default function Home() {
               {/* BarBuddy */}
               <div className="sticky top-[88px] z-50 mt-4">
                 <Link href="/work/barbuddy" className="group block">
-                  <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]" style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(248,248,252,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
-                    <div className="md:w-[55%] relative overflow-hidden flex-shrink-0">
+                  <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[500px]" style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(248,248,252,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
+                    <div className="md:w-[68%] relative overflow-hidden flex-shrink-0">
                       <Image src="/bar_mockup.png" alt="BarBuddy" width={400} height={256} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
                     </div>
                     <div className="flex flex-col justify-start p-8 flex-1 gap-2">
@@ -172,8 +258,8 @@ export default function Home() {
               {/* Cycle */}
               <div className="sticky top-[104px] z-[60] mt-4">
                 <Link href="/work/cycle" className="group block">
-                  <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[420px]" style={{ background: "linear-gradient(160deg, rgba(255,252,253,0.95) 0%, rgba(255,248,250,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
-                    <div className="md:w-[55%] relative overflow-hidden flex-shrink-0">
+                  <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[500px]" style={{ background: "linear-gradient(160deg, rgba(255,252,253,0.95) 0%, rgba(255,248,250,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
+                    <div className="md:w-[68%] relative overflow-hidden flex-shrink-0">
                       <div className="flex items-center justify-center h-full">
                         <Image src="/lockup_red.png" alt="Cycle" width={300} height={200} className="w-auto h-40 object-contain transition-transform duration-500 group-hover:scale-[1.02]" />
                       </div>
