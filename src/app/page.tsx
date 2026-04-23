@@ -203,18 +203,7 @@ export default function Home() {
                 </Link>
               </div>
 
-              {/* BarBuddy */}
-              <div className="sticky top-[88px] z-50 mt-4">
-                <Link href="/work/barbuddy" className="group block">
-                  <div className="relative rounded-2xl overflow-hidden h-[500px] transition-all duration-300 hover:-translate-y-2" style={{ boxShadow: "0 2px 16px rgba(0,0,0,0.07)" }}>
-                    <Image src="/bar_mockup.png" alt="BarBuddy" width={400} height={256} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
-                    <div className="absolute top-0 left-0 right-0 p-8" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%)" }}>
-                      <p className="text-[12px] text-white/60 mb-1">IoT · Computer Vision · Machine Learning</p>
-                      <h3 className="text-[22px] font-bold text-white">BarBuddy</h3>
-                    </div>
-                  </div>
-                </Link>
-              </div>
+              {/* BarBuddy — hidden */}
 
               {/* Cycle */}
               <div className="sticky top-[104px] z-[60] mt-4">
@@ -235,6 +224,32 @@ export default function Home() {
               </div>
 
               <div className="h-[440px]" />
+            </div>
+          </div>
+        </section>
+
+        {/* ── EXPERIENCE ── */}
+        <section className="pt-8 pb-16 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-[75vw] mx-auto">
+            <FadeIn>
+              <p className="text-[13px] font-semibold uppercase tracking-widest text-gray-400 mb-6">Experience</p>
+            </FadeIn>
+            <div className="flex flex-col">
+              {[
+                { period: "2025 — Now",  title: "OpenPromo",           sub: "Product Designer" },
+                { period: "2025 — 2026", title: "Amazon Web Services", sub: "Product Designer · Industry-sponsored Project" },
+                { period: "2025",        title: "AISPIRE",             sub: "UX Design Intern" },
+                { period: "2024 — 2025", title: "OfferPlz",            sub: "Product Designer" },
+                { period: "2023 — 2024", title: "FileGPT",             sub: "Product Designer" },
+              ].map((item, i, arr) => (
+                <FadeIn key={item.title} delay={i * 0.06}>
+                  <div className={`flex items-baseline gap-8 py-5 ${i < arr.length - 1 ? "border-b border-gray-200" : ""}`}>
+                    <p className="text-[13px] text-gray-400 tabular-nums w-[110px] flex-shrink-0">{item.period}</p>
+                    <p className="text-[16px] font-semibold text-gray-900">{item.title}</p>
+                    <p className="text-[13px] text-gray-400">{item.sub}</p>
+                  </div>
+                </FadeIn>
+              ))}
             </div>
           </div>
         </section>

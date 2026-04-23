@@ -2,246 +2,187 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
-const ITEMS = [
-  {
-    tooltip: "Home", href: "/#hero-section", key: "home",
-    tintRgb: "59,130,246", iconColor: "#2563eb",
-    icon: (
-      <svg className="w-full h-full" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 10.5L12 3l9 7.5V21a1 1 0 01-1 1h-5.5v-7h-5v7H4a1 1 0 01-1-1v-10.5z" />
-      </svg>
-    ),
-  },
-  {
-    tooltip: "Work", href: "/#work", key: "work",
-    tintRgb: "139,92,246", iconColor: "#7c3aed",
-    icon: (
-      <svg className="w-full h-full" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4 8h16a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 8V6a1 1 0 011-1h4a1 1 0 011 1v2" />
-      </svg>
-    ),
-  },
-  {
-    tooltip: "About", href: "/about", key: "about",
-    tintRgb: "16,185,129", iconColor: "#059669",
-    icon: (
-      <svg className="w-full h-full" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 12a4 4 0 100-8 4 4 0 000 8z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4 20a8 8 0 0116 0" />
-      </svg>
-    ),
-  },
-  { tooltip: "", href: "", key: "divider", tintRgb: "", iconColor: "", icon: null },
-  {
-    tooltip: "Email", href: "mailto:qiongran.huang@gmail.com", key: "email",
-    tintRgb: "249,115,22", iconColor: "#ea580c",
-    icon: (
-      <svg className="w-full h-full" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 7l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z" />
-      </svg>
-    ),
-  },
-  {
-    tooltip: "LinkedIn", href: "https://www.linkedin.com/in/rebecca-huang-a60388249/", key: "linkedin",
-    tintRgb: "14,165,233", iconColor: "#0284c7",
-    icon: (
-      <svg className="w-full h-full" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M6.94 8.5H3.56V20h3.38V8.5zM5.25 3A1.96 1.96 0 105.24 6.9 1.96 1.96 0 005.25 3zM20.44 13.41c0-3.4-1.82-4.98-4.24-4.98-1.95 0-2.82 1.07-3.31 1.82V8.5H9.51V20h3.38v-5.68c0-1.5.28-2.95 2.14-2.95 1.83 0 1.86 1.72 1.86 3.05V20h3.38v-6.59z" />
-      </svg>
-    ),
-  },
-  {
-    tooltip: "GitHub", href: "https://github.com/acceberH", key: "github",
-    tintRgb: "100,116,139", iconColor: "#475569",
-    icon: (
-      <svg className="w-full h-full" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M12 .5A12 12 0 000 12.8c0 5.4 3.44 9.98 8.2 11.6.6.12.82-.27.82-.58 0-.29-.01-1.07-.02-2.1-3.34.75-4.04-1.65-4.04-1.65-.55-1.44-1.34-1.83-1.34-1.83-1.1-.77.08-.75.08-.75 1.21.09 1.85 1.28 1.85 1.28 1.08 1.9 2.83 1.35 3.52 1.03.11-.82.42-1.35.76-1.66-2.67-.32-5.48-1.37-5.48-6.08 0-1.34.47-2.43 1.24-3.29-.12-.31-.54-1.56.12-3.25 0 0 1.01-.33 3.3 1.25A11.2 11.2 0 0112 6.4c.99 0 2 .14 2.94.41 2.29-1.58 3.3-1.25 3.3-1.25.66 1.69.24 2.94.12 3.25.77.86 1.24 1.95 1.24 3.29 0 4.72-2.82 5.76-5.5 6.08.43.38.82 1.13.82 2.29 0 1.66-.02 3-.02 3.4 0 .31.21.7.83.58A12.3 12.3 0 0024 12.8 12 12 0 0012 .5z" />
-      </svg>
-    ),
-  },
+const BASE = 44;
+const PEAK = 64;
+const NEIGHBOR = 52;
+const SPRING = "cubic-bezier(0.25, 1, 0.5, 1)";
+const DOCK_PADDING_V = 10;
+
+const PROJECT_ORDER = [
+  "/work/aispire",
+  "/work/openpromo",
+  "/work/biovision",
+  "/work/filegpt",
+  "/work/offerplz",
+  "/work/cycle",
 ];
 
-const PROJECTS = [
-  { name: "OpenPromo", href: "/work/openpromo" },
-  { name: "BioVision", href: "/work/biovision" },
-  { name: "FileGPT", href: "/work/filegpt" },
-  { name: "OfferPlz", href: "/work/offerplz" },
-  { name: "BarBuddy", href: "/work/barbuddy" },
-  { name: "Cycle NYC", href: "/work/cycle" },
+const NAV = [
+  { idx: 0, key: "home",  label: "Home",     href: "/#hero-section",
+    icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg> },
+  { idx: 1, key: "work",  label: "Work",     href: "/#work",
+    icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg> },
+  { idx: 2, key: "about", label: "About me", href: "/about",
+    icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg> },
 ];
 
-function NavArrow({ href, tooltip, dir }: { href: string; tooltip: string; dir: "prev" | "next" }) {
-  const [hovered, setHovered] = useState(false);
+const LINKS = [
+  { idx: 3, key: "email",    label: "Email",    href: "mailto:qiongran.huang@gmail.com",
+    icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> },
+  { idx: 4, key: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/rebecca-huang-a60388249/",
+    icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> },
+  { idx: 5, key: "github",   label: "GitHub",   href: "https://github.com/acceberH",
+    icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg> },
+];
+
+function getSize(itemIdx: number, hoveredIdx: number | null) {
+  if (hoveredIdx === null) return BASE;
+  const dist = Math.abs(itemIdx - hoveredIdx);
+  if (dist === 0) return PEAK;
+  if (dist === 1) return NEIGHBOR;
+  return BASE;
+}
+
+function DockIcon({
+  label, href, isLink, isActive, showPip, size,
+  onEnter, onLeave, children,
+}: {
+  label: string; href: string; isLink: boolean; isActive: boolean;
+  showPip: boolean; size: number;
+  onEnter: () => void; onLeave: () => void;
+  children: React.ReactNode;
+}) {
+  const iconStyle: React.CSSProperties = {
+    width: size, height: size,
+    borderRadius: size >= PEAK ? 16 : size >= NEIGHBOR ? 14 : 12,
+    display: "flex", alignItems: "center", justifyContent: "center",
+    background: isActive ? "rgba(0,0,0,0.09)" : "rgba(0,0,0,0.05)",
+    border: `0.5px solid ${isActive ? "rgba(0,0,0,0.12)" : "rgba(0,0,0,0.07)"}`,
+    color: "rgba(0,0,0,0.6)",
+    textDecoration: "none",
+    flexShrink: 0,
+    transition: `width 0.28s ${SPRING}, height 0.28s ${SPRING}, border-radius 0.28s ${SPRING}`,
+  };
+
   return (
-    <div className="relative flex flex-col items-center" style={{ width: BASE }}>
-      {hovered && (
-        <span className="absolute whitespace-nowrap rounded-lg px-2.5 py-1 text-xs font-medium pointer-events-none"
-          style={{ bottom: BASE + 12, left: "50%", transform: "translateX(-50%)", background: "rgba(255,255,255,0.95)", backdropFilter: "blur(10px)", color: "#111", boxShadow: "0 2px 8px rgba(0,0,0,0.10)" }}>
-          {tooltip}
-        </span>
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center", cursor: "pointer", position: "relative", alignSelf: "flex-end" }}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+    >
+      {/* Tooltip */}
+      <div style={{
+        position: "absolute",
+        bottom: size + 8,
+        left: "50%", transform: "translateX(-50%)",
+        background: "rgba(20,20,20,0.82)", backdropFilter: "blur(8px)",
+        border: "0.5px solid rgba(255,255,255,0.1)",
+        padding: "4px 10px", borderRadius: 8,
+        fontSize: 11, color: "rgba(255,255,255,0.9)",
+        whiteSpace: "nowrap", pointerEvents: "none",
+        opacity: size > BASE ? 1 : 0,
+        transition: `opacity 0.12s, bottom 0.2s ${SPRING}`,
+        zIndex: 10,
+      }}>
+        {label}
+      </div>
+
+      {isLink ? (
+        <a href={href} target="_blank" rel="noopener noreferrer" style={iconStyle}>{children}</a>
+      ) : (
+        <Link href={href} style={iconStyle}>{children}</Link>
       )}
-      <Link href={href}
-        className="flex items-center justify-center rounded-[14px] cursor-pointer"
-        style={{ width: BASE, height: BASE, background: "linear-gradient(160deg, rgba(255,255,255,0.55) 0%, rgba(120,120,120,0.06) 100%)", border: "1px solid rgba(255,255,255,0.72)", boxShadow: "inset 0 1.5px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.08)", color: "#6b7280", transition: "transform 0.15s ease" }}
-        onMouseEnter={e => { setHovered(true); (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
-        onMouseLeave={e => { setHovered(false); (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
-      >
-        {dir === "prev" ? (
-          <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-        ) : (
-          <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
-        )}
-      </Link>
+
+      {showPip && (
+        <div style={{ position: "absolute", bottom: -7, width: 3, height: 3, borderRadius: "50%", background: "rgba(0,0,0,0.5)", opacity: isActive ? 1 : 0, transition: "opacity 0.2s" }} />
+      )}
     </div>
   );
 }
 
-const BASE = 52;
-const MAX = 80;
-const SPREAD = 120; // px radius of magnification effect
-
-function getScale(itemCenterX: number, mouseX: number | null) {
-  if (mouseX === null) return 1;
-  const dist = Math.abs(itemCenterX - mouseX);
-  if (dist > SPREAD) return 1;
-  const t = 1 - dist / SPREAD;
-  return 1 + (MAX / BASE - 1) * t * t;
-}
-
 export default function GlobalDock() {
   const pathname = usePathname();
-  const dockRef = useRef<HTMLDivElement>(null);
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [mouseX, setMouseX] = useState<number | null>(null);
-  const [scales, setScales] = useState<number[]>(ITEMS.map(() => 1));
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
-  const currentProjectIdx = PROJECTS.findIndex(p => pathname === p.href);
-  const isOnProject = currentProjectIdx !== -1;
-  const prevProject = isOnProject ? PROJECTS[(currentProjectIdx - 1 + PROJECTS.length) % PROJECTS.length] : null;
-  const nextProject = isOnProject ? PROJECTS[(currentProjectIdx + 1) % PROJECTS.length] : null;
+  const activeKey = pathname === "/" ? "home" : pathname.startsWith("/work") ? "work" : pathname === "/about" ? "about" : null;
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const mx = e.clientX;
-    setMouseX(mx);
-    const newScales = ITEMS.map((_, i) => {
-      const el = itemRefs.current[i];
-      if (!el) return 1;
-      const rect = el.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      return getScale(centerX, mx);
-    });
-    setScales(newScales);
-  };
-
-  const handleMouseLeave = () => {
-    setMouseX(null);
-    setScales(ITEMS.map(() => 1));
-  };
+  const projectIdx = PROJECT_ORDER.indexOf(pathname);
+  const prevProject = projectIdx > 0 ? PROJECT_ORDER[projectIdx - 1] : null;
+  const nextProject = projectIdx !== -1 && projectIdx < PROJECT_ORDER.length - 1 ? PROJECT_ORDER[projectIdx + 1] : null;
+  const isProjectPage = projectIdx !== -1;
 
   return (
-    <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 transform opacity-30 hover:opacity-100 transition-opacity duration-300">
+    <div style={{ position: "fixed", bottom: 24, left: 0, right: 0, display: "flex", justifyContent: "center", zIndex: 100, pointerEvents: "none" }}>
       <div
-        ref={dockRef}
-        className="relative flex items-end gap-1.5 rounded-[22px] px-3 py-2.5"
         style={{
-          background: "rgba(255,255,255,0.08)",
-          backdropFilter: "blur(20px) saturate(1.6) brightness(1.04)",
-          WebkitBackdropFilter: "blur(20px) saturate(1.6) brightness(1.04)",
-          border: "1px solid rgba(255,255,255,0.30)",
-          boxShadow: "0 8px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.60)",
+          pointerEvents: "auto",
+          display: "flex", alignItems: "flex-end", gap: 8,
+          padding: `${DOCK_PADDING_V}px 14px`,
+          height: BASE + DOCK_PADDING_V * 2,
+          overflow: "visible",
+          borderRadius: 20,
+          background: "rgba(255,255,255,0.7)",
+          border: "0.5px solid rgba(0,0,0,0.08)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+          boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
         }}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
+        onMouseLeave={() => setHoveredIdx(null)}
       >
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[1.5px] rounded-t-[22px]"
-          style={{ background: "linear-gradient(90deg, transparent 5%, rgba(255,255,255,0.95) 30%, rgba(255,255,255,0.95) 70%, transparent 95%)" }}
-        />
-
-        {isOnProject && prevProject && (
+        {/* Prev/Next — only on project pages */}
+        {isProjectPage && (
           <>
-            <NavArrow href={prevProject.href} tooltip={prevProject.name} dir="prev" />
-            <div className="mx-0.5 h-8 w-px self-center" style={{ background: "rgba(0,0,0,0.08)" }} />
-          </>
-        )}
-
-        {ITEMS.map((item, i) => {
-          if (item.key === "divider") {
-            return <div key="divider" className="mx-0.5 h-8 w-px self-center" style={{ background: "rgba(0,0,0,0.08)" }} />;
-          }
-
-          const scale = scales[i] ?? 1;
-          const size = BASE * scale;
-          const translateY = -(size - BASE) * 0.5;
-          const isActive = item.key === "home" ? pathname === "/" : item.key === "work" ? pathname.startsWith("/work") : item.key === "about" ? pathname === "/about" : false;
-          const Tag = item.href.startsWith("mailto:") || item.href.startsWith("https:") ? "a" : Link;
-
-          return (
-            <div
-              key={item.key}
-              ref={el => { itemRefs.current[i] = el; }}
-              className="relative flex flex-col items-center"
-              style={{ width: BASE, alignItems: "center" }}
+            <DockIcon
+              label="Previous" href={prevProject ?? "#"}
+              isLink={false} isActive={false} showPip={false}
+              size={getSize(-2, hoveredIdx)}
+              onEnter={() => setHoveredIdx(-2)}
+              onLeave={() => setHoveredIdx(null)}
             >
-              {/* Tooltip */}
-              <span
-                className="absolute whitespace-nowrap rounded-lg px-2.5 py-1 text-xs font-medium pointer-events-none transition-opacity duration-150"
-                style={{
-                  bottom: BASE + 12,
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  background: "rgba(255,255,255,0.75)",
-                  backdropFilter: "blur(16px) saturate(180%)",
-                  WebkitBackdropFilter: "blur(16px) saturate(180%)",
-                  color: "#111",
-                  boxShadow: "0 2px 12px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.90)",
-                  opacity: scale > 1.2 ? 1 : 0,
-                }}
-              >
-                {item.tooltip}
-              </span>
-
-              <Tag
-                href={item.href}
-                className="flex items-center justify-center rounded-[14px] cursor-pointer overflow-hidden"
-                style={{
-                  width: BASE,
-                  height: BASE,
-                  transform: `translateY(${translateY}px)`,
-                  transition: mouseX === null ? "transform 0.3s ease" : "transform 0.1s ease",
-                  background: `linear-gradient(160deg, rgba(255,255,255,0.60) 0%, rgba(${item.tintRgb},${isActive ? "0.18" : "0.08"}) 100%)`,
-                  backdropFilter: "blur(8px) saturate(160%)",
-                  WebkitBackdropFilter: "blur(8px) saturate(160%)",
-                  border: "1px solid rgba(255,255,255,0.75)",
-                  boxShadow: "inset 0 1.5px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(0,0,0,0.04), 0 2px 10px rgba(0,0,0,0.08)",
-                  color: item.iconColor,
-                }}
-              >
-                <div style={{
-                  width: 24 * scale,
-                  height: 24 * scale,
-                  transition: mouseX === null ? "width 0.3s ease, height 0.3s ease" : "width 0.1s ease, height 0.1s ease",
-                  flexShrink: 0,
-                }}>
-                  {item.icon}
-                </div>
-              </Tag>
-
-              {isActive && (
-                <span className="h-1 w-1 rounded-full mt-0.5" style={{ background: item.iconColor, opacity: 0.5 }} />
-              )}
-            </div>
-          );
-        })}
-
-        {isOnProject && nextProject && (
-          <>
-            <div className="mx-0.5 h-8 w-px self-center" style={{ background: "rgba(0,0,0,0.08)" }} />
-            <NavArrow href={nextProject.href} tooltip={nextProject.name} dir="next" />
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: prevProject ? 1 : 0.3 }}><path d="M15 18l-6-6 6-6"/></svg>
+            </DockIcon>
+            <DockIcon
+              label="Next" href={nextProject ?? "#"}
+              isLink={false} isActive={false} showPip={false}
+              size={getSize(-1, hoveredIdx)}
+              onEnter={() => setHoveredIdx(-1)}
+              onLeave={() => setHoveredIdx(null)}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: nextProject ? 1 : 0.3 }}><path d="M9 18l6-6-6-6"/></svg>
+            </DockIcon>
+            <div style={{ width: 0.5, height: 32, background: "rgba(0,0,0,0.1)", alignSelf: "center", flexShrink: 0, margin: "0 2px" }} />
           </>
         )}
+
+        {NAV.map(item => (
+          <DockIcon
+            key={item.key}
+            label={item.label} href={item.href}
+            isLink={false} isActive={activeKey === item.key} showPip
+            size={getSize(item.idx, hoveredIdx)}
+            onEnter={() => setHoveredIdx(item.idx)}
+            onLeave={() => setHoveredIdx(null)}
+          >
+            {item.icon}
+          </DockIcon>
+        ))}
+
+        <div style={{ width: 0.5, height: 32, background: "rgba(0,0,0,0.1)", alignSelf: "center", flexShrink: 0, margin: "0 2px" }} />
+
+        {LINKS.map(item => (
+          <DockIcon
+            key={item.key}
+            label={item.label} href={item.href}
+            isLink isActive={false} showPip={false}
+            size={getSize(item.idx, hoveredIdx)}
+            onEnter={() => setHoveredIdx(item.idx)}
+            onLeave={() => setHoveredIdx(null)}
+          >
+            {item.icon}
+          </DockIcon>
+        ))}
       </div>
     </div>
   );

@@ -61,11 +61,11 @@ const BRINGS = [
   { title: "Outcome-driven mindset",        desc: "I design for outcomes, using data to connect product decisions with user behavior, growth, and real impact." },
 ];
 
-function Card({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+function Card({ children, className = "", delay = 0, style }: { children: React.ReactNode; className?: string; delay?: number; style?: React.CSSProperties }) {
   return (
     <motion.div
       className={`rounded-2xl border border-[#577D98]/[0.12] ${className}`}
-      style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}
+      style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", ...style }}
       initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay, ease }}
@@ -216,8 +216,8 @@ export default function AboutPage() {
             <div className="flex flex-col gap-3">
               {[
                 { trackId: "1NZs6n6hl8UuMaX0UC0YTz" },
-                { trackId: "0VjIjW4GlUZAMYd2vXMi3b" },
-                { trackId: "2rPE9A1vEgShuZxxzR2tZH" },
+                { trackId: "3azJifCSqg9fRij2yKIbWz" },
+                { trackId: "4gFEH7qv4GXgDz5FSgR7n2" },
               ].map((item) => (
                 <iframe
                   key={item.trackId}

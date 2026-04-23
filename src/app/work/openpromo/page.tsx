@@ -125,32 +125,27 @@ export default function OpenPromoCaseStudy() {
 
           {/* ── HERO ── */}
           <section id="hero" className="px-6 py-16">
-            <div className="relative w-full aspect-video rounded-2xl overflow-hidden">
-              {/* Full image */}
-              <motion.img
-                src="/openpromo_demo.gif" alt="OpenPromo dashboard demo"
-                className="absolute inset-0 w-full h-full object-cover"
-                initial={{ opacity: 0, scale: 1.02 }} animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.75, ease: [0.22,1,0.36,1] as [number,number,number,number] }}
-              />
-              {/* Text overlay */}
-              <motion.div
-                className="absolute bottom-0 left-0 right-0 p-8"
-                style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.0) 100%)" }}
-                initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3, ease: [0.22,1,0.36,1] as [number,number,number,number] }}
-              >
-                <div className="flex flex-wrap gap-2 mb-3">
-                  {["Product Design","UX Research","B2B","Social Media Tech"].map(t => (
-                    <span key={t} className="px-3 py-1 rounded-full text-xs font-medium text-white" style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)" }}>{t}</span>
-                  ))}
-                </div>
-                <h1 className={`${T.h1} text-white mb-2`}>OpenPromo</h1>
-                <div className="flex flex-wrap gap-4 text-sm text-white/70">
-                  <span>UX Designer, Researcher</span>
-                  <span>·</span>
-                  <span>7 months</span>
-                </div>
+            <div>
+              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: [0.22,1,0.36,1] as [number,number,number,number] }}
+                className="flex flex-wrap gap-3 mb-6">
+                {["Product Design","UX Research","B2B","Social Media Tech"].map(t => (
+                  <span key={t} className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm font-medium">{t}</span>
+                ))}
+              </motion.div>
+              <motion.h1 initial={{ opacity: 0, y: 20, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.08, ease: [0.22,1,0.36,1] as [number,number,number,number] }}
+                className={`${T.h1} text-gray-900 mb-4`}>OpenPromo</motion.h1>
+              <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.18, ease: [0.22,1,0.36,1] as [number,number,number,number] }}
+                className="flex flex-wrap gap-6 text-sm text-gray-600 mb-8">
+                <span><strong>Company:</strong> OpenPromo</span>
+                <span><strong>Role:</strong> UX Designer, Researcher</span>
+                <span><strong>Duration:</strong> 7 months</span>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, scale: 0.97, y: 24 }} animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.75, delay: 0.28, ease: [0.22,1,0.36,1] as [number,number,number,number] }}>
+                <img className="w-full rounded-xl" src="/openpromo_demo.gif" alt="OpenPromo dashboard demo" />
               </motion.div>
             </div>
           </section>
