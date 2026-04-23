@@ -113,27 +113,27 @@ export default function GlobalDock() {
   const nextProject = projectIdx !== -1 && projectIdx < PROJECT_ORDER.length - 1 ? PROJECT_ORDER[projectIdx + 1] : null;
   const isProjectPage = projectIdx !== -1;
 
+  const pillStyle: React.CSSProperties = {
+    pointerEvents: "auto",
+    display: "flex", alignItems: "flex-end", gap: 8,
+    padding: `${DOCK_PADDING_V}px 14px`,
+    height: BASE + DOCK_PADDING_V * 2,
+    overflow: "visible",
+    borderRadius: 20,
+    background: "rgba(255,255,255,0.7)",
+    border: "0.5px solid rgba(0,0,0,0.08)",
+    backdropFilter: "blur(16px)",
+    WebkitBackdropFilter: "blur(16px)",
+    boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
+  };
+
   return (
-    <div style={{ position: "fixed", bottom: 24, left: 0, right: 0, display: "flex", justifyContent: "center", zIndex: 100, pointerEvents: "none" }}>
-      <div
-        style={{
-          pointerEvents: "auto",
-          display: "flex", alignItems: "flex-end", gap: 8,
-          padding: `${DOCK_PADDING_V}px 14px`,
-          height: BASE + DOCK_PADDING_V * 2,
-          overflow: "visible",
-          borderRadius: 20,
-          background: "rgba(255,255,255,0.7)",
-          border: "0.5px solid rgba(0,0,0,0.08)",
-          backdropFilter: "blur(16px)",
-          WebkitBackdropFilter: "blur(16px)",
-          boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
-        }}
-        onMouseLeave={() => setHoveredIdx(null)}
-      >
-        {/* Prev/Next — only on project pages */}
-        {isProjectPage && (
-          <>
+    <div style={{ position: "fixed", bottom: 24, left: 0, right: 0, zIndex: 100, pointerEvents: "none" }}>
+
+      {/* Prev / Next — bottom left */}
+      {isProjectPage && (
+        <div style={{ position: "absolute", left: 24, bottom: 0, pointerEvents: "auto" }}>
+          <div style={pillStyle} onMouseLeave={() => setHoveredIdx(null)}>
             <DockIcon
               label="Previous" href={prevProject ?? "#"}
               isLink={false} isActive={false} showPip={false}
@@ -152,38 +152,43 @@ export default function GlobalDock() {
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: nextProject ? 1 : 0.3 }}><path d="M9 18l6-6-6-6"/></svg>
             </DockIcon>
-            <div style={{ width: 0.5, height: 32, background: "rgba(0,0,0,0.1)", alignSelf: "center", flexShrink: 0, margin: "0 2px" }} />
-          </>
-        )}
+          </div>
+        </div>
+      )}
 
-        {NAV.map(item => (
-          <DockIcon
-            key={item.key}
-            label={item.label} href={item.href}
-            isLink={false} isActive={activeKey === item.key} showPip
-            size={getSize(item.idx, hoveredIdx)}
-            onEnter={() => setHoveredIdx(item.idx)}
-            onLeave={() => setHoveredIdx(null)}
-          >
-            {item.icon}
-          </DockIcon>
-        ))}
+      {/* Main nav — bottom center */}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={pillStyle} onMouseLeave={() => setHoveredIdx(null)}>
+          {NAV.map(item => (
+            <DockIcon
+              key={item.key}
+              label={item.label} href={item.href}
+              isLink={false} isActive={activeKey === item.key} showPip
+              size={getSize(item.idx, hoveredIdx)}
+              onEnter={() => setHoveredIdx(item.idx)}
+              onLeave={() => setHoveredIdx(null)}
+            >
+              {item.icon}
+            </DockIcon>
+          ))}
 
-        <div style={{ width: 0.5, height: 32, background: "rgba(0,0,0,0.1)", alignSelf: "center", flexShrink: 0, margin: "0 2px" }} />
+          <div style={{ width: 0.5, height: 32, background: "rgba(0,0,0,0.1)", alignSelf: "center", flexShrink: 0, margin: "0 2px" }} />
 
-        {LINKS.map(item => (
-          <DockIcon
-            key={item.key}
-            label={item.label} href={item.href}
-            isLink isActive={false} showPip={false}
-            size={getSize(item.idx, hoveredIdx)}
-            onEnter={() => setHoveredIdx(item.idx)}
-            onLeave={() => setHoveredIdx(null)}
-          >
-            {item.icon}
-          </DockIcon>
-        ))}
+          {LINKS.map(item => (
+            <DockIcon
+              key={item.key}
+              label={item.label} href={item.href}
+              isLink isActive={false} showPip={false}
+              size={getSize(item.idx, hoveredIdx)}
+              onEnter={() => setHoveredIdx(item.idx)}
+              onLeave={() => setHoveredIdx(null)}
+            >
+              {item.icon}
+            </DockIcon>
+          ))}
+        </div>
       </div>
+
     </div>
   );
 }
