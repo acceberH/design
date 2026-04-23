@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rebecca Huang — Designer & Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F9F8F5;
+  --ink:#1A1916;
+  --muted:#877F73;
+  --accent:#B8642F;
+  --accent-light:rgba(184,100,47,.09);
+  --f:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--f);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* grain */
+body::after{content:'';position:fixed;inset:0;z-index:200;pointer-events:none;opacity:.028;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:160px 160px}
+
+/* NAV */
+nav{position:fixed;inset:0 0 auto;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(249,248,245,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,.05)}
+.logo{font-size:14px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:13.5px;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+
+/* HERO */
+.hero{min-height:100dvh;display:flex;align-items:center;padding:128px 48px 80px;max-width:1280px;margin:0 auto}
+.hero-inner{max-width:660px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:28px}
+.eyebrow::before{content:'';width:28px;height:1.5px;background:var(--accent);flex-shrink:0}
+h1{font-size:clamp(38px,5vw,62px);font-weight:800;line-height:1.08;letter-spacing:-.035em;color:var(--ink);margin-bottom:22px;text-wrap:balance}
+h1 span{color:var(--accent)}
+.hero-sub{font-size:17px;line-height:1.72;color:var(--muted);max-width:500px;margin-bottom:44px;text-wrap:pretty}
+.hero-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border-radius:100px;font-size:14px;font-weight:700;text-decoration:none;transition:all .25s cubic-bezier(.32,.72,0,1)}
+.btn-dark{background:var(--ink);color:var(--bg)}
+.btn-dark:hover{background:var(--accent);transform:translateY(-2px);box-shadow:0 10px 28px rgba(184,100,47,.28)}
+.btn-dark:active{transform:scale(.97)}
+.btn-text{font-size:14px;font-weight:600;color:var(--muted);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;transition:color .2s}
+.btn-text:hover{color:var(--ink)}
+
+/* WORK */
+.work{padding:0 48px 120px;max-width:1280px;margin:0 auto}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:36px}
+
+/* stacking cards */
+.stack{position:relative}
+.card-slot{position:sticky}
+.card{display:grid;grid-template-columns:55% 1fr;height:420px;border-radius:22px;overflow:hidden;text-decoration:none;color:inherit;cursor:pointer;transition:transform .3s cubic-bezier(.32,.72,0,1),box-shadow .3s cubic-bezier(.32,.72,0,1)}
+.card:hover{transform:translateY(-5px)}
+.card:hover .card-img img{transform:scale(1.04)}
+.card-img{overflow:hidden}
+.card-img img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .55s cubic-bezier(.32,.72,0,1)}
+.card-body{padding:48px 44px;display:flex;flex-direction:column;justify-content:center}
+.card-meta{font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;margin-bottom:12px;opacity:.55}
+.card-title{font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:14px}
+.card-desc{font-size:15px;line-height:1.7;color:var(--muted);flex:1;text-wrap:pretty}
+.card-arrow{margin-top:32px;display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;transition:gap .2s}
+.card-arrow svg{width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.07);padding:6px;transition:background .2s,transform .2s}
+.card:hover .card-arrow{gap:14px}
+.card:hover .card-arrow svg{background:var(--ink);color:var(--bg);transform:translate(2px,-2px)}
+
+/* card palettes — each project feels distinct */
+.c1{background:#FFFFFF;box-shadow:0 2px 28px rgba(0,0,0,.07)}
+.c2{background:#EEF3EE;box-shadow:0 2px 28px rgba(0,0,0,.07)}
+.c3{background:#EBF0F8;box-shadow:0 2px 28px rgba(0,0,0,.07)}
+.c4{background:#F9EEE6;box-shadow:0 2px 28px rgba(0,0,0,.07)}
+.c5{background:#EEEaf6;box-shadow:0 2px 28px rgba(0,0,0,.07)}
+.c6{background:#FBF0F3;box-shadow:0 2px 28px rgba(0,0,0,.07)}
+
+.img-pad{padding:20px;display:flex;align-items:center;justify-content:center}
+.img-contain img{object-fit:contain;width:auto;height:55%}
+
+.stack-spacer{height:440px}
+
+/* CTA */
+.cta{position:relative;background:var(--ink);color:var(--bg);padding:128px 48px;text-align:center;overflow:hidden}
+.cta::before{content:'';position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(184,100,47,.22) 0%,transparent 65%);top:-200px;left:50%;transform:translateX(-50%);pointer-events:none}
+.cta-inner{position:relative;max-width:600px;margin:0 auto}
+.cta h2{font-size:clamp(30px,4vw,52px);font-weight:800;letter-spacing:-.04em;line-height:1.08;margin-bottom:20px;text-wrap:balance}
+.cta-sub{font-size:16px;color:rgba(249,248,245,.45);margin-bottom:44px;line-height:1.6}
+.btn-accent{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border-radius:100px;background:var(--accent);color:#fff;font-size:15px;font-weight:700;text-decoration:none;transition:all .25s cubic-bezier(.32,.72,0,1)}
+.btn-accent:hover{background:#C9713A;transform:translateY(-2px);box-shadow:0 14px 36px rgba(184,100,47,.4)}
+.btn-accent:active{transform:scale(.97)}
+
+/* FOOTER */
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:36px 48px}
+.foot-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.foot-logo{font-size:13px;font-weight:800;color:rgba(249,248,245,.8)}
+.foot-links{display:flex;gap:24px}
+.foot-links a{font-size:13px;font-weight:500;color:rgba(249,248,245,.35);text-decoration:none;transition:color .2s}
+.foot-links a:hover{color:rgba(249,248,245,.75)}
+.foot-copy{font-size:12px;color:rgba(249,248,245,.28)}
+
+/* fade in */
+.fi{opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.32,.72,0,1),transform .6s cubic-bezier(.32,.72,0,1)}
+.fi.in{opacity:1;transform:none}
+
+@media(max-width:768px){
+  nav{padding:14px 20px}
+  .nav-links{display:none}
+  .hero{padding:100px 20px 60px}
+  .work{padding:0 20px 80px}
+  .card{grid-template-columns:1fr;height:auto}
+  .card-img{height:200px}
+  .card-body{padding:28px 24px}
+  .cta{padding:80px 20px}
+  footer{padding:28px 20px}
+  .foot-inner{flex-direction:column;text-align:center}
+  .foot-links{flex-wrap:wrap;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){
+  .fi{opacity:1;transform:none;transition:none}
+  .card,.card-img img,.btn,.btn-accent{transition:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Rebecca Huang</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="mailto:qiongran.huang@gmail.com">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Product Design &amp; Engineering</div>
+    <h1>I speak both designer and engineer — and build things that <span>actually ship.</span></h1>
+    <p class="hero-sub">Specializing in AI-powered products where the complexity is real and the stakes are high.</p>
+    <div class="hero-actions">
+      <a href="#work" class="btn btn-dark">
+        See my work
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4-4 4M3 12h18"/></svg>
+      </a>
+      <a href="/about" class="btn-text">About me</a>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <p class="section-label fi">Selected work</p>
+
+  <div class="stack">
+    <!-- 01 OpenPromo -->
+    <div class="card-slot fi" style="top:24px;z-index:10">
+      <a href="/work/openpromo" class="card c1">
+        <div class="card-img"><img src="/656shots_so.png" alt="OpenPromo social content platform"></div>
+        <div class="card-body">
+          <p class="card-meta">Product Design · SaaS · B2B</p>
+          <h3 class="card-title">OpenPromo</h3>
+          <p class="card-desc">Multi-tenant social content management for marketing teams — analytics, collaboration, and publishing without the chaos.</p>
+          <span class="card-arrow">
+            View case study
+            <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+
+    <!-- 02 BioVision -->
+    <div class="card-slot fi" style="top:40px;z-index:20;margin-top:16px">
+      <a href="/work/biovision" class="card c2">
+        <div class="card-img img-pad" style="background:#E0EAE0">
+          <img src="/749shots_so.png" alt="BioVision AI wildlife platform" style="width:100%;height:100%;object-fit:cover;object-position:top">
+        </div>
+        <div class="card-body">
+          <p class="card-meta">AI/ML · Wildlife Research · Product</p>
+          <h3 class="card-title">BioVision</h3>
+          <p class="card-desc">AI-powered wildlife image analysis — from raw trail camera footage to corrected, research-ready insights.</p>
+          <span class="card-arrow">
+            View case study
+            <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+
+    <!-- 03 FileGPT -->
+    <div class="card-slot fi" style="top:56px;z-index:30;margin-top:16px">
+      <a href="/work/filegpt" class="card c3">
+        <div class="card-img"><img src="/253shots_so.png" alt="FileGPT document analysis"></div>
+        <div class="card-body">
+          <p class="card-meta">UX Research · AI/ML · Product</p>
+          <h3 class="card-title">FileGPT</h3>
+          <p class="card-desc">Document analysis that turns dense files into structured, searchable knowledge — built for real research workflows.</p>
+          <span class="card-arrow">
+            View case study
+            <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+
+    <!-- 04 Offerplz -->
+    <div class="card-slot fi" style="top:72px;z-index:40;margin-top:16px">
+      <a href="/work/offerplz" class="card c4">
+        <div class="card-img"><img src="/639shots_so.png" alt="Offerplz hiring flow" style="object-position:center"></div>
+        <div class="card-body">
+          <p class="card-meta">UX Research · Product Strategy</p>
+          <h3 class="card-title">Offerplz</h3>
+          <p class="card-desc">Job offer management that removes the back-and-forth — a cleaner path from offer to acceptance for everyone involved.</p>
+          <span class="card-arrow">
+            View case study
+            <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+
+    <!-- 05 BarBuddy -->
+    <div class="card-slot fi" style="top:88px;z-index:50;margin-top:16px">
+      <a href="/work/barbuddy" class="card c5">
+        <div class="card-img img-pad img-contain" style="background:#E4E0F0">
+          <img src="/bar_mockup.png" alt="BarBuddy exercise system">
+        </div>
+        <div class="card-body">
+          <p class="card-meta">IoT · Computer Vision · ML</p>
+          <h3 class="card-title">BarBuddy</h3>
+          <p class="card-desc">Smart exercise guidance using computer vision and ML — real-time form feedback that lives between hardware and software.</p>
+          <span class="card-arrow">
+            View case study
+            <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+
+    <!-- 06 Cycle -->
+    <div class="card-slot fi" style="top:104px;z-index:60;margin-top:16px">
+      <a href="/work/cycle" class="card c6">
+        <div class="card-img img-pad img-contain" style="background:#FDE8EE">
+          <img src="/lockup_red.png" alt="Cycle brand identity">
+        </div>
+        <div class="card-body">
+          <p class="card-meta">Brand Identity · Visual Design · Wellness</p>
+          <h3 class="card-title">Cycle NYC</h3>
+          <p class="card-desc">A brand for women's wellness — visual identity that balances clinical clarity with genuine warmth and personal honesty.</p>
+          <span class="card-arrow">
+            View case study
+            <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+
+    <div class="stack-spacer"></div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="cta-inner">
+    <h2>Do meaningful work, and do it fast enough to matter.</h2>
+    <p class="cta-sub">Open to full-time roles and select freelance projects.</p>
+    <a href="mailto:qiongran.huang@gmail.com" class="btn-accent">
+      Get in touch
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4-4 4M3 12h18"/></svg>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <span class="foot-logo">Rebecca Huang</span>
+    <div class="foot-links">
+      <a href="/about">About</a>
+      <a href="#work">Work</a>
+      <a href="mailto:qiongran.huang@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/rebecca-huang-a60388249/">LinkedIn</a>
+      <a href="https://github.com/acceberH">GitHub</a>
+    </div>
+    <span class="foot-copy">© 2026 Rebecca Huang</span>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(
+  es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); }),
+  { threshold: 0.08, rootMargin: '-20px 0px' }
+);
+document.querySelectorAll('.fi').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

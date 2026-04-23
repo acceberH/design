@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rebecca Huang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F6F4F0;
+  --ink: #18170F;
+  --mid: #6E6B62;
+  --faint: #B0ADA6;
+  --rule: rgba(0,0,0,.09);
+  --accent: #C46B2A;
+  --f: 'Space Grotesk', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--f);
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* GRAIN */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: .026;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  padding: 22px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+.nav-right a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--mid);
+  text-decoration: none;
+  transition: color .18s;
+}
+.nav-right a:hover { color: var(--ink); }
+.nav-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  padding: 7px 14px;
+  border: 1px solid rgba(196,107,42,.25);
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all .2s cubic-bezier(.32,.72,0,1);
+}
+.nav-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .4; transform: scale(.7); }
+}
+.nav-badge:hover {
+  background: rgba(196,107,42,.07);
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100dvh;
+  padding: 140px 60px 100px;
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 60px;
+  align-items: end;
+}
+.hero-left {}
+
+.hero-kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 28px;
+}
+.hero-kicker-line {
+  width: 32px;
+  height: 1px;
+  background: var(--faint);
+}
+
+h1 {
+  font-size: clamp(56px, 8.5vw, 112px);
+  font-weight: 700;
+  line-height: .95;
+  letter-spacing: -.045em;
+  color: var(--ink);
+  margin-bottom: 0;
+}
+h1 .em { color: var(--accent); }
+
+.hero-footnote {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--rule);
+  align-items: end;
+}
+.hero-sub {
+  font-size: 16px;
+  line-height: 1.72;
+  color: var(--mid);
+  font-weight: 400;
+  text-wrap: pretty;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--ink);
+  padding-bottom: 3px;
+  width: max-content;
+  transition: opacity .18s;
+}
+.hero-cta:hover { opacity: .5; }
+
+/* hero right: vertical project strip */
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 8px;
+}
+.hero-strip-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--ink);
+  background: rgba(255,255,255,.5);
+  transition: all .22s cubic-bezier(.32,.72,0,1);
+}
+.hero-strip-item:hover {
+  background: #fff;
+  border-color: rgba(0,0,0,.14);
+  transform: translateX(-3px);
+}
+.strip-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.strip-tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--faint);
+}
+.strip-arrow {
+  font-size: 14px;
+  color: var(--faint);
+  transition: transform .2s, color .2s;
+}
+.hero-strip-item:hover .strip-arrow {
+  color: var(--accent);
+  transform: translate(2px, -2px);
+}
+
+/* ── PROJECTS ZIG-ZAG ── */
+.projects {
+  padding: 0 60px 140px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.projects-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 0;
+}
+.projects-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* each project row */
+.proj-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--rule);
+  min-height: 360px;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: background .2s;
+}
+.proj-row:hover { background: rgba(255,255,255,.6); }
+.proj-row.flipped { direction: rtl; }
+.proj-row.flipped > * { direction: ltr; }
+
+.proj-img {
+  overflow: hidden;
+  background: #E8E5DF;
+}
+.proj-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  transition: transform .6s cubic-bezier(.32,.72,0,1);
+}
+.proj-row:hover .proj-img img { transform: scale(1.04); }
+
+.proj-img-contain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+.proj-img-contain img {
+  width: auto;
+  height: 55%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.proj-body {
+  padding: 52px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.proj-number {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  color: var(--faint);
+  margin-bottom: 16px;
+}
+.proj-title {
+  font-size: clamp(26px, 3vw, 40px);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1.08;
+  margin-bottom: 16px;
+  transition: color .2s;
+}
+.proj-row:hover .proj-title { color: var(--accent); }
+.proj-meta-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 3px;
+  background: rgba(0,0,0,.05);
+  color: var(--mid);
+}
+.proj-desc {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--mid);
+  font-weight: 400;
+  text-wrap: pretty;
+  max-width: 380px;
+}
+.proj-link {
+  margin-top: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity .22s, transform .22s cubic-bezier(.32,.72,0,1);
+}
+.proj-row:hover .proj-link { opacity: 1; transform: none; }
+
+/* tinted bgs per project */
+.img-openpromo { background: #EEECF0; }
+.img-biovision { background: #E5EDE6; padding: 16px; }
+.img-filegpt   { background: #E6EBEF; }
+.img-offerplz  { background: #EFE9E3; }
+.img-barbuddy  { background: #ECEAF4; }
+.img-cycle     { background: #F4E8EC; }
+
+/* ── CTA ── */
+.cta {
+  padding: 120px 60px;
+  border-top: 1px solid var(--rule);
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.cta-left h2 {
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1.06;
+  text-wrap: balance;
+}
+.cta-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.cta-sub {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--mid);
+  text-wrap: pretty;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 22px;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--f);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 5px;
+  width: max-content;
+  transition: all .22s cubic-bezier(.32,.72,0,1);
+}
+.btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+.btn-primary:active { transform: scale(.97) translateY(0); }
+.cta-socials {
+  display: flex;
+  gap: 20px;
+}
+.cta-socials a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--faint);
+  text-decoration: none;
+  transition: color .18s;
+}
+.cta-socials a:hover { color: var(--ink); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 28px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.foot-logo {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--mid);
+}
+.foot-copy {
+  font-size: 12px;
+  color: var(--faint);
+}
+
+/* REVEAL */
+.s {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+}
+.s.in { opacity: 1; transform: none; }
+
+/* STAGGER */
+.s1 { transition-delay: .05s; }
+.s2 { transition-delay: .10s; }
+.s3 { transition-delay: .15s; }
+.s4 { transition-delay: .20s; }
+
+@media (max-width: 900px) {
+  nav { padding: 18px 20px; }
+  .nav-right li:not(:last-child) { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 110px 20px 60px; gap: 40px; }
+  .hero-right { display: none; }
+  .hero-footnote { grid-template-columns: 1fr; gap: 24px; }
+  .projects { padding: 0 20px 80px; }
+  .proj-row { grid-template-columns: 1fr; min-height: auto; }
+  .proj-row.flipped { direction: ltr; }
+  .proj-img { height: 220px; }
+  .proj-body { padding: 32px 24px; }
+  .cta { grid-template-columns: 1fr; padding: 80px 20px; gap: 36px; }
+  footer { flex-direction: column; gap: 12px; padding: 24px 20px; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .s { opacity: 1; transform: none; transition: none; }
+  .proj-img img, .btn-primary, .hero-strip-item { transition: none; }
+  @keyframes pulse { from { opacity: 1; } to { opacity: 1; } }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Rebecca Huang</a>
+  <ul class="nav-right">
+    <li><a href="#work">Work</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="mailto:qiongran.huang@gmail.com" class="nav-badge">Open to work</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-kicker s">
+      <span class="hero-kicker-line"></span>
+      Product Design &amp; Engineering
+    </div>
+    <h1 class="s s1">
+      I speak<br>
+      design<span class="em">.</span><br>
+      I speak<br>
+      code<span class="em">.</span>
+    </h1>
+    <div class="hero-footnote s s2">
+      <p class="hero-sub">Specializing in AI-powered products where the complexity is real and the stakes are high.</p>
+      <a href="#work" class="hero-cta">
+        Selected work
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4-4 4M3 12h18"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right s s3">
+    <a href="/work/openpromo" class="hero-strip-item">
+      <div>
+        <div class="strip-name">OpenPromo</div>
+        <div class="strip-tag">SaaS · B2B</div>
+      </div>
+      <span class="strip-arrow">↗</span>
+    </a>
+    <a href="/work/biovision" class="hero-strip-item">
+      <div>
+        <div class="strip-name">BioVision</div>
+        <div class="strip-tag">AI/ML · Research</div>
+      </div>
+      <span class="strip-arrow">↗</span>
+    </a>
+    <a href="/work/filegpt" class="hero-strip-item">
+      <div>
+        <div class="strip-name">FileGPT</div>
+        <div class="strip-tag">AI · Document</div>
+      </div>
+      <span class="strip-arrow">↗</span>
+    </a>
+    <a href="/work/offerplz" class="hero-strip-item">
+      <div>
+        <div class="strip-name">Offerplz</div>
+        <div class="strip-tag">Product Strategy</div>
+      </div>
+      <span class="strip-arrow">↗</span>
+    </a>
+    <a href="/work/barbuddy" class="hero-strip-item">
+      <div>
+        <div class="strip-name">BarBuddy</div>
+        <div class="strip-tag">IoT · CV</div>
+      </div>
+      <span class="strip-arrow">↗</span>
+    </a>
+    <a href="/work/cycle" class="hero-strip-item">
+      <div>
+        <div class="strip-name">Cycle NYC</div>
+        <div class="strip-tag">Brand Identity</div>
+      </div>
+      <span class="strip-arrow">↗</span>
+    </a>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="work">
+  <div class="projects-header s">
+    <span class="projects-label">Selected work</span>
+    <span class="projects-label">2022 – 2025</span>
+  </div>
+
+  <!-- 01 OpenPromo -->
+  <a href="/work/openpromo" class="proj-row s">
+    <div class="proj-img img-openpromo">
+      <img src="/656shots_so.png" alt="OpenPromo social content platform">
+    </div>
+    <div class="proj-body">
+      <p class="proj-number">01 / 06</p>
+      <h3 class="proj-title">OpenPromo</h3>
+      <div class="proj-meta-tags">
+        <span class="tag">Product Design</span>
+        <span class="tag">SaaS</span>
+        <span class="tag">B2B</span>
+      </div>
+      <p class="proj-desc">Multi-tenant social content management for marketing teams — analytics, collaboration, and publishing in one place.</p>
+      <span class="proj-link">
+        View case study
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+      </span>
+    </div>
+  </a>
+
+  <!-- 02 BioVision — flipped -->
+  <a href="/work/biovision" class="proj-row flipped s">
+    <div class="proj-img img-biovision">
+      <img src="/749shots_so.png" alt="BioVision wildlife AI">
+    </div>
+    <div class="proj-body">
+      <p class="proj-number">02 / 06</p>
+      <h3 class="proj-title">BioVision</h3>
+      <div class="proj-meta-tags">
+        <span class="tag">AI / ML</span>
+        <span class="tag">Wildlife Research</span>
+      </div>
+      <p class="proj-desc">AI-powered trail camera analysis — from raw footage to corrected, research-ready animal detection data.</p>
+      <span class="proj-link">
+        View case study
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+      </span>
+    </div>
+  </a>
+
+  <!-- 03 FileGPT -->
+  <a href="/work/filegpt" class="proj-row s">
+    <div class="proj-img img-filegpt">
+      <img src="/253shots_so.png" alt="FileGPT document analysis">
+    </div>
+    <div class="proj-body">
+      <p class="proj-number">03 / 06</p>
+      <h3 class="proj-title">FileGPT</h3>
+      <div class="proj-meta-tags">
+        <span class="tag">UX Research</span>
+        <span class="tag">AI</span>
+      </div>
+      <p class="proj-desc">Document analysis that turns dense files into structured, searchable knowledge — designed for real research workflows.</p>
+      <span class="proj-link">
+        View case study
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+      </span>
+    </div>
+  </a>
+
+  <!-- 04 Offerplz — flipped -->
+  <a href="/work/offerplz" class="proj-row flipped s">
+    <div class="proj-img img-offerplz">
+      <img src="/639shots_so.png" alt="Offerplz hiring flow" style="object-position:center">
+    </div>
+    <div class="proj-body">
+      <p class="proj-number">04 / 06</p>
+      <h3 class="proj-title">Offerplz</h3>
+      <div class="proj-meta-tags">
+        <span class="tag">Product Strategy</span>
+        <span class="tag">Flow Optimization</span>
+      </div>
+      <p class="proj-desc">Job offer management that removes the back-and-forth — cleaner path from offer to acceptance for everyone involved.</p>
+      <span class="proj-link">
+        View case study
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+      </span>
+    </div>
+  </a>
+
+  <!-- 05 BarBuddy -->
+  <a href="/work/barbuddy" class="proj-row s">
+    <div class="proj-img img-barbuddy proj-img-contain">
+      <img src="/bar_mockup.png" alt="BarBuddy IoT exercise system">
+    </div>
+    <div class="proj-body">
+      <p class="proj-number">05 / 06</p>
+      <h3 class="proj-title">BarBuddy</h3>
+      <div class="proj-meta-tags">
+        <span class="tag">IoT</span>
+        <span class="tag">Computer Vision</span>
+        <span class="tag">ML</span>
+      </div>
+      <p class="proj-desc">Smart exercise guidance using computer vision — real-time form feedback at the intersection of hardware and software.</p>
+      <span class="proj-link">
+        View case study
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+      </span>
+    </div>
+  </a>
+
+  <!-- 06 Cycle — flipped -->
+  <a href="/work/cycle" class="proj-row flipped s">
+    <div class="proj-img img-cycle proj-img-contain">
+      <img src="/lockup_red.png" alt="Cycle NYC brand identity">
+    </div>
+    <div class="proj-body">
+      <p class="proj-number">06 / 06</p>
+      <h3 class="proj-title">Cycle NYC</h3>
+      <div class="proj-meta-tags">
+        <span class="tag">Brand Identity</span>
+        <span class="tag">Women's Wellness</span>
+      </div>
+      <p class="proj-desc">Visual identity that balances clinical clarity with genuine warmth — built to empower women through their menstrual journey.</p>
+      <span class="proj-link">
+        View case study
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+      </span>
+    </div>
+  </a>
+</section>
+
+<!-- CTA -->
+<section class="cta s">
+  <div class="cta-left">
+    <h2>Do meaningful work, and do it fast enough to matter.</h2>
+  </div>
+  <div class="cta-right">
+    <p class="cta-sub">Open to full-time roles in product design and engineering. Particularly interested in AI-powered products with real-world impact.</p>
+    <a href="mailto:qiongran.huang@gmail.com" class="btn-primary">
+      Get in touch
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4-4 4M3 12h18"/></svg>
+    </a>
+    <div class="cta-socials">
+      <a href="https://www.linkedin.com/in/rebecca-huang-a60388249/">LinkedIn</a>
+      <a href="https://github.com/acceberH">GitHub</a>
+      <a href="/about">About</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="foot-logo">Rebecca Huang</span>
+  <span class="foot-copy">© 2026</span>
+</footer>
+
+<script>
+const io = new IntersectionObserver(
+  es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
+  { threshold: 0.07, rootMargin: '-8px 0px' }
+);
+document.querySelectorAll('.s').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

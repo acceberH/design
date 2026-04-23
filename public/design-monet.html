@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rebecca Huang — Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark-green:    #0A3323;
+      --moss-green:    #839958;
+      --beige:         #F7F4D5;
+      --rosy:          #D3968C;
+      --midnight:      #105666;
+      --beige-dark:    #ede9bb;
+      --text-primary:  #0A3323;
+      --text-secondary:#4a6640;
+      --text-muted:    #839958;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--beige);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── WATERCOLOR BACKGROUND ── */
+    .canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .canvas::before {
+      content: '';
+      position: absolute;
+      width: 900px; height: 900px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, rgba(131,153,88,0.18), transparent 65%);
+      top: -200px; left: -200px;
+      animation: drift1 18s ease-in-out infinite alternate;
+    }
+    .canvas::after {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 60% 60%, rgba(211,150,140,0.15), transparent 65%);
+      bottom: -100px; right: -100px;
+      animation: drift2 22s ease-in-out infinite alternate;
+    }
+    .blob3 {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, rgba(16,86,102,0.10), transparent 65%);
+      top: 40%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation: drift3 26s ease-in-out infinite alternate;
+    }
+    @keyframes drift1 { from { transform: translate(0,0) scale(1); } to { transform: translate(60px, 40px) scale(1.08); } }
+    @keyframes drift2 { from { transform: translate(0,0) scale(1); } to { transform: translate(-50px, -60px) scale(1.06); } }
+    @keyframes drift3 { from { transform: translate(-50%,-50%) scale(1); } to { transform: translate(-44%,-54%) scale(1.1); } }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 64px;
+      mix-blend-mode: multiply;
+    }
+    .nav-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-weight: 500; letter-spacing: 0.04em;
+      color: var(--dark-green);
+    }
+    .nav-links { display: flex; gap: 40px; }
+    .nav-links a {
+      font-size: 12px; font-weight: 400; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-secondary);
+      text-decoration: none; opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+
+    /* ── LAYOUT ── */
+    .page { position: relative; z-index: 1; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      align-items: center;
+      padding: 120px 64px 80px;
+      gap: 80px;
+    }
+    .hero-left { max-width: 680px; }
+
+    .hero-greeting {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--moss-green); margin-bottom: 32px;
+      opacity: 0; animation: fadeUp 0.8s 0.1s forwards;
+    }
+    .hero-greeting::before {
+      content: '';
+      display: block; width: 28px; height: 1px;
+      background: var(--moss-green);
+    }
+
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 7vw, 88px);
+      font-weight: 400; line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--dark-green);
+      margin-bottom: 32px;
+      opacity: 0; animation: fadeUp 0.9s 0.2s forwards;
+    }
+    .hero-headline em {
+      font-style: italic; color: var(--midnight);
+    }
+    .hero-headline .verb {
+      color: var(--moss-green);
+      font-style: italic;
+      display: inline-block; min-width: 3ch;
+    }
+    .cursor-blink {
+      display: inline-block;
+      width: 2px; height: 0.85em;
+      background: var(--moss-green);
+      margin-left: 3px;
+      vertical-align: middle;
+      animation: blink 0.55s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-sub {
+      font-size: 15px; line-height: 1.75;
+      color: var(--text-secondary); max-width: 480px;
+      opacity: 0; animation: fadeUp 0.8s 0.35s forwards;
+    }
+
+    .hero-cta {
+      display: flex; gap: 20px; align-items: center;
+      margin-top: 48px;
+      opacity: 0; animation: fadeUp 0.8s 0.48s forwards;
+    }
+    .btn-primary {
+      padding: 13px 32px;
+      background: var(--dark-green); color: var(--beige);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px; font-weight: 400; letter-spacing: 0.1em;
+      text-transform: uppercase; text-decoration: none;
+      border: none; cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--midnight); transform: translateY(-1px); }
+    .btn-ghost {
+      font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none;
+      border-bottom: 1px solid var(--moss-green);
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--dark-green); }
+
+    /* Hero right: painted orb */
+    .hero-right {
+      opacity: 0; animation: fadeIn 1.2s 0.3s forwards;
+      position: relative; display: flex; align-items: center; justify-content: center;
+    }
+    .hero-orb {
+      width: 280px; height: 280px; border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 35%, rgba(211,150,140,0.4) 0%, transparent 50%),
+        radial-gradient(circle at 70% 65%, rgba(131,153,88,0.35) 0%, transparent 55%),
+        radial-gradient(circle at 50% 50%, rgba(16,86,102,0.2) 0%, transparent 70%);
+      background-color: rgba(247,244,213,0.4);
+      border: 1px solid rgba(131,153,88,0.2);
+      backdrop-filter: blur(2px);
+      animation: orbFloat 8s ease-in-out infinite;
+    }
+    .hero-orb::after {
+      content: '';
+      position: absolute;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      border: 1px solid rgba(131,153,88,0.15);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      animation: orbFloat 11s ease-in-out infinite reverse;
+    }
+    .hero-orb-label {
+      position: absolute;
+      bottom: -48px; left: 50%; transform: translateX(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 13px;
+      color: var(--text-muted); white-space: nowrap;
+      letter-spacing: 0.06em;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: scale(1) translateY(0); }
+      50% { transform: scale(1.04) translateY(-12px); }
+    }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      overflow: hidden;
+      border-top: 1px solid rgba(10,51,35,0.1);
+      border-bottom: 1px solid rgba(10,51,35,0.1);
+      padding: 14px 0;
+      background: rgba(247,244,213,0.6);
+      backdrop-filter: blur(4px);
+      mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    }
+    .ticker-track {
+      display: flex; width: max-content;
+      animation: ticker 48s linear infinite;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .ticker-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 0 28px;
+      font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-muted); white-space: nowrap; font-weight: 400;
+    }
+    .ticker-item img {
+      width: 13px; height: 13px; opacity: 0.5;
+      filter: sepia(1) hue-rotate(60deg) saturate(0.6);
+    }
+    .ticker-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--moss-green); opacity: 0.4; }
+
+    /* ── WORK ── */
+    .work { padding: 100px 64px 120px; }
+    .section-label {
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--moss-green); margin-bottom: 64px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .section-label::after {
+      content: ''; flex: 1; max-width: 60px; height: 1px;
+      background: var(--moss-green); opacity: 0.4;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .work-card {
+      position: relative; overflow: hidden;
+      background: rgba(247,244,213,0.5);
+      border: 1px solid rgba(10,51,35,0.08);
+      text-decoration: none;
+      display: flex; flex-direction: column;
+      transition: transform 0.4s cubic-bezier(0.25,1,0.5,1), box-shadow 0.4s;
+      opacity: 0;
+      animation: fadeUp 0.7s forwards;
+    }
+    .work-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(10,51,35,0.1);
+    }
+    .work-card:nth-child(1) { animation-delay: 0.05s; }
+    .work-card:nth-child(2) { animation-delay: 0.12s; }
+    .work-card:nth-child(3) { animation-delay: 0.19s; grid-column: span 2; }
+
+    .work-card-image {
+      width: 100%; aspect-ratio: 16/9;
+      overflow: hidden; background: var(--beige-dark);
+    }
+    .work-card-image img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top;
+      transition: transform 0.6s cubic-bezier(0.25,1,0.5,1);
+    }
+    .work-card:hover .work-card-image img { transform: scale(1.04); }
+    .work-card-image.wide { aspect-ratio: 21/9; }
+
+    .work-card-body { padding: 28px 32px 32px; }
+    .work-card-tags {
+      font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--moss-green); margin-bottom: 10px; font-weight: 400;
+    }
+    .work-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 400; color: var(--dark-green);
+      line-height: 1.2; margin-bottom: 10px;
+    }
+    .work-card-desc {
+      font-size: 13px; line-height: 1.65; color: var(--text-secondary);
+      max-width: 400px;
+    }
+    .work-card-arrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 20px; font-size: 11px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--moss-green);
+      transition: gap 0.2s;
+    }
+    .work-card:hover .work-card-arrow { gap: 14px; }
+
+    /* ── CTA ── */
+    .cta {
+      padding: 120px 64px;
+      border-top: 1px solid rgba(10,51,35,0.08);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .cta-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 400; font-style: italic;
+      line-height: 1.3; color: var(--dark-green);
+    }
+    .cta-quote span { color: var(--rosy); }
+    .cta-right { display: flex; flex-direction: column; gap: 16px; }
+    .cta-text { font-size: 14px; line-height: 1.7; color: var(--text-secondary); }
+    .cta-actions { display: flex; gap: 20px; align-items: center; margin-top: 16px; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 40px 64px;
+      border-top: 1px solid rgba(10,51,35,0.08);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px; color: var(--dark-green);
+    }
+    .footer-copy { font-size: 11.5px; color: var(--text-muted); letter-spacing: 0.06em; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+
+<body>
+  <!-- Painted background -->
+  <div class="canvas"><div class="blob3"></div></div>
+
+  <!-- Nav -->
+  <nav>
+    <span class="nav-name">Rebecca Huang</span>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="/about">About</a>
+      <a href="mailto:qiongran.huang@gmail.com">Contact</a>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="hero-greeting">Product Designer</div>
+
+        <h1 class="hero-headline">
+          I <span class="verb" id="verb">design</span><span class="cursor-blink"></span><br>
+          AI products that<br>
+          <em>bring clarity</em><br>
+          to complexity.
+        </h1>
+
+        <p class="hero-sub">
+          3+ years designing and building AI-powered products,
+          focusing on real-world workflows and measurable impact.
+          Based in Seattle.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#work" class="btn-primary">View Work</a>
+          <a href="mailto:qiongran.huang@gmail.com" class="btn-ghost">Get in touch</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-orb"></div>
+        <span class="hero-orb-label">Wenzhou · Shanghai · Brooklyn · Seattle</span>
+      </div>
+    </section>
+
+    <!-- ── TICKER ── -->
+    <div class="ticker-wrap">
+      <div class="ticker-track" id="ticker"></div>
+    </div>
+
+    <!-- ── WORK ── -->
+    <section class="work" id="work">
+      <div class="section-label">Selected Work</div>
+
+      <div class="work-grid">
+
+        <a href="#" class="work-card reveal">
+          <div class="work-card-image">
+            <img src="op-previewnew.png" alt="OpenPromo" onerror="this.parentElement.style.background='#e8e4c4'">
+          </div>
+          <div class="work-card-body">
+            <p class="work-card-tags">Product Design · SaaS · B2B</p>
+            <h3 class="work-card-title">OpenPromo</h3>
+            <p class="work-card-desc">Multi-tenant social content management platform for marketing teams with advanced analytics and collaboration tools.</p>
+            <span class="work-card-arrow">View case study →</span>
+          </div>
+        </a>
+
+        <a href="#" class="work-card reveal">
+          <div class="work-card-image">
+            <img src="bv-preview.png" alt="BioVision" onerror="this.parentElement.style.background='#dde8d4'">
+          </div>
+          <div class="work-card-body">
+            <p class="work-card-tags">Product Design · AI/ML · Wildlife Research</p>
+            <h3 class="work-card-title">BioVision</h3>
+            <p class="work-card-desc">AI-powered wildlife image analysis platform helping researchers identify animals from trail camera footage.</p>
+            <span class="work-card-arrow">View case study →</span>
+          </div>
+        </a>
+
+        <a href="#" class="work-card reveal">
+          <div class="work-card-image wide">
+            <img src="253shots_so.png" alt="FileGPT" onerror="this.parentElement.style.background='#e4dfc4'">
+          </div>
+          <div class="work-card-body">
+            <p class="work-card-tags">UX Research · AI/ML · Product Design</p>
+            <h3 class="work-card-title">FileGPT</h3>
+            <p class="work-card-desc">AI-powered document analysis platform that transforms complex files into actionable insights.</p>
+            <span class="work-card-arrow">View case study →</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section class="cta reveal">
+      <p class="cta-quote">
+        Do meaningful work,<br>
+        and do it <span>fast enough</span><br>
+        to matter.
+      </p>
+      <div class="cta-right">
+        <p class="cta-text">
+          I'm currently open to full-time product design roles starting Summer 2026.
+          If you're working on something ambitious, I'd love to hear about it.
+        </p>
+        <div class="cta-actions">
+          <a href="mailto:qiongran.huang@gmail.com" class="btn-primary">Say hello</a>
+          <a href="/v1%20(3).pdf" class="btn-ghost">Download CV</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+      <span class="footer-name">Rebecca Huang</span>
+      <span class="footer-copy">© 2026 · Seattle, WA</span>
+    </footer>
+
+  </div><!-- /page -->
+
+  <script>
+    // Typewriter
+    const VERBS = ['design', 'build', 'ship'];
+    const el = document.getElementById('verb');
+    let wi = 0, ci = VERBS[0].length, del = false;
+    function tick() {
+      const word = VERBS[wi];
+      if (!del) {
+        if (ci < word.length) { ci++; el.textContent = word.slice(0, ci); setTimeout(tick, 90); }
+        else { del = true; setTimeout(tick, 2200); }
+      } else {
+        if (ci > 0) { ci--; el.textContent = word.slice(0, ci); setTimeout(tick, 55); }
+        else { del = false; wi = (wi + 1) % VERBS.length; setTimeout(tick, 150); }
+      }
+    }
+    setTimeout(tick, 2400);
+
+    // Ticker
+    const TOOLS = [
+      { name: 'Figma',        icon: 'https://cdn.simpleicons.org/figma/839958' },
+      { name: 'Framer',       icon: 'https://cdn.simpleicons.org/framer/839958' },
+      { name: 'React',        icon: 'https://cdn.simpleicons.org/react/839958' },
+      { name: 'TypeScript',   icon: 'https://cdn.simpleicons.org/typescript/839958' },
+      { name: 'Tailwind CSS', icon: 'https://cdn.simpleicons.org/tailwindcss/839958' },
+      { name: 'Python',       icon: 'https://cdn.simpleicons.org/python/839958' },
+      { name: 'Next.js',      icon: 'https://cdn.simpleicons.org/nextdotjs/839958' },
+      { name: 'GitHub',       icon: 'https://cdn.simpleicons.org/github/839958' },
+      { name: 'Vercel',       icon: 'https://cdn.simpleicons.org/vercel/839958' },
+      { name: 'Sketch',       icon: 'https://cdn.simpleicons.org/sketch/839958' },
+      { name: 'Miro',         icon: 'https://cdn.simpleicons.org/miro/839958' },
+      { name: 'Illustrator',  icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg' },
+      { name: 'After Effects',icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-original.svg' },
+      { name: 'Cursor',       icon: null },
+      { name: 'Claude',       icon: 'https://cdn.simpleicons.org/anthropic/839958' },
+    ];
+    const doubled = [...TOOLS, ...TOOLS];
+    const track = document.getElementById('ticker');
+    doubled.forEach(t => {
+      const span = document.createElement('span');
+      span.className = 'ticker-item';
+      span.innerHTML = `${t.icon ? `<img src="${t.icon}" alt="${t.name}" onerror="this.style.display='none'">` : ''}<span>${t.name}</span><span class="ticker-dot"></span>`;
+      track.appendChild(span);
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '-40px' });
+    reveals.forEach(r => io.observe(r));
+  </script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rebecca Huang — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Archivo', sans-serif;
+      background: #F7F5F2;
+      color: #111;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 64px;
+    }
+
+    .nav-logo { font-size: 14px; font-weight: 600; color: #111; letter-spacing: -0.01em; }
+
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { font-size: 13px; color: #888; transition: color 0.15s; }
+    .nav-links a:hover { color: #111; }
+
+    .nav-cta {
+      background: #111; color: #fff !important;
+      font-size: 13px; font-weight: 500;
+      padding: 9px 22px; border-radius: 100px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: #333 !important; }
+
+    /* HERO */
+    .hero {
+      padding: 120px 64px 0;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-status { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+
+    .status-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #4ade80;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .status-text { font-size: 12px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    .hero-headline {
+      font-size: clamp(64px, 7.5vw, 108px);
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      color: #111;
+    }
+
+    .hero-headline .faded { color: #C8C4BE; }
+
+    .line1 { overflow: hidden; }
+    .line2 { overflow: hidden; }
+    .line3 { overflow: hidden; }
+
+    .hero-sub-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 32px;
+      margin-bottom: 52px;
+    }
+
+    .hero-desc { font-size: 15px; color: #777; line-height: 1.65; max-width: 340px; }
+
+    .tag-pills { display: flex; gap: 10px; }
+
+    .pill {
+      background: #E8E4E0; border-radius: 100px;
+      padding: 8px 16px; font-size: 12px; color: #555; font-weight: 500;
+    }
+
+    /* Vertical side label */
+    .hero-side {
+      position: fixed;
+      right: 40px; top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .side-label {
+      font-size: 10px; color: #BBB;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      writing-mode: vertical-rl; transform: rotate(180deg);
+    }
+
+    .side-line { width: 1px; height: 48px; background: #DDD; }
+
+    /* WORK SECTION */
+    .work-section { padding: 0 64px 80px; }
+
+    .section-label {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: #AAA; margin-bottom: 20px;
+    }
+
+    .projects-row {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .row-1 { grid-template-columns: 1.45fr 1fr 1fr; }
+    .row-2 { grid-template-columns: 1fr 1fr 1fr; }
+
+    .card {
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 360px;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    .card:hover { transform: translateY(-6px); }
+    .card:hover .card-img img { transform: scale(1.04); }
+    .card:hover .card-arrow { background: #333; }
+
+    .card-img { flex: 1; overflow: hidden; position: relative; }
+
+    .card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top;
+      transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
+      display: block;
+    }
+
+    .card-footer {
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .card-tag { font-size: 11px; color: #888; margin-bottom: 3px; }
+    .card-title { font-size: 17px; font-weight: 700; color: #111; letter-spacing: -0.02em; }
+
+    .card-arrow {
+      width: 30px; height: 30px;
+      background: #111; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background 0.2s;
+    }
+
+    .card-arrow svg { width: 13px; height: 13px; stroke: #fff; }
+
+    .card-openpromo { background: #E9ECF3; }
+    .card-biovision  { background: #E4EEE9; }
+    .card-filegpt   { background: #EEE9E3; }
+    .card-offerplz  { background: #EDF0EA; }
+    .card-barbuddy  { background: #EEEAF0; }
+    .card-cycle     { background: #F5ECEC; }
+
+    .card-cycle .card-img {
+      display: flex; align-items: center; justify-content: center; padding: 32px;
+    }
+
+    .card-cycle .card-img img {
+      object-fit: contain; object-position: center; max-height: 120px; width: auto;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: #111; padding: 80px 64px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .cta-text {
+      font-size: clamp(28px, 3.5vw, 52px);
+      font-weight: 800; color: #fff;
+      line-height: 1.1; letter-spacing: -0.03em; max-width: 560px;
+    }
+
+    .cta-text span { color: #444; }
+
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #fff; color: #111;
+      font-family: 'Archivo', sans-serif;
+      font-size: 14px; font-weight: 600;
+      padding: 16px 28px; border-radius: 100px;
+      transition: background 0.2s, transform 0.2s; white-space: nowrap;
+    }
+    .cta-btn:hover { background: #F0EDE8; transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer {
+      background: #111;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 24px 64px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    footer p { font-size: 12px; color: #555; }
+
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a { font-size: 12px; color: #555; transition: color 0.15s; }
+    .footer-links a:hover { color: #fff; }
+
+    .footer-icons { display: flex; gap: 20px; }
+    .footer-icons a { color: #555; transition: color 0.15s; }
+    .footer-icons a:hover { color: #fff; }
+
+    /* ENTRANCE ANIMATIONS */
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .hero-status  { animation: fadeIn  0.5s ease 0.1s  both; }
+    .line1        { animation: slideUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.15s both; }
+    .line2        { animation: slideUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.22s both; }
+    .line3        { animation: slideUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.29s both; }
+    .hero-sub-row { animation: fadeIn  0.6s ease 0.46s both; }
+    .work-section { animation: fadeIn  0.6s ease 0.55s both; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">Rebecca Huang</a>
+    <div class="nav-links">
+      <a href="/about">About</a>
+      <a href="#work">Work</a>
+      <a href="mailto:qiongran.huang@gmail.com" class="nav-cta">Contact</a>
+    </div>
+  </nav>
+
+  <!-- SIDE LABEL -->
+  <div class="hero-side">
+    <span class="side-label">2025 Portfolio</span>
+    <div class="side-line"></div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero-section">
+    <div class="hero-status">
+      <div class="status-dot"></div>
+      <span class="status-text">Available for work</span>
+    </div>
+
+    <div class="hero-headline">
+      <div class="line1">I design &amp;</div>
+      <div class="line2">build things</div>
+      <div class="line3 faded">that ship.</div>
+    </div>
+
+    <div class="hero-sub-row">
+      <p class="hero-desc">Product Designer &amp; Engineer specializing in AI-powered products — where complexity meets craft.</p>
+      <div class="tag-pills">
+        <span class="pill">Product Design</span>
+        <span class="pill">AI / ML</span>
+        <span class="pill">Engineering</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" class="work-section">
+    <p class="section-label">Selected Work</p>
+
+    <div class="projects-row row-1">
+      <a href="/work/openpromo" class="card card-openpromo">
+        <div class="card-img"><img src="/656shots_so.png" alt="OpenPromo" /></div>
+        <div class="card-footer">
+          <div>
+            <div class="card-tag">Product Design · SaaS · B2B</div>
+            <div class="card-title">OpenPromo</div>
+          </div>
+          <div class="card-arrow">
+            <svg fill="none" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="/work/biovision" class="card card-biovision">
+        <div class="card-img"><img src="/749shots_so.png" alt="BioVision" /></div>
+        <div class="card-footer">
+          <div>
+            <div class="card-tag">AI/ML · Wildlife Research</div>
+            <div class="card-title">BioVision</div>
+          </div>
+          <div class="card-arrow">
+            <svg fill="none" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="/work/filegpt" class="card card-filegpt">
+        <div class="card-img"><img src="/253shots_so.png" alt="FileGPT" /></div>
+        <div class="card-footer">
+          <div>
+            <div class="card-tag">UX Research · AI/ML</div>
+            <div class="card-title">FileGPT</div>
+          </div>
+          <div class="card-arrow">
+            <svg fill="none" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="projects-row row-2">
+      <a href="/work/offerplz" class="card card-offerplz">
+        <div class="card-img"><img src="/639shots_so.png" alt="Offerplz" /></div>
+        <div class="card-footer">
+          <div>
+            <div class="card-tag">Product Strategy · Flow</div>
+            <div class="card-title">Offerplz</div>
+          </div>
+          <div class="card-arrow">
+            <svg fill="none" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="/work/barbuddy" class="card card-barbuddy">
+        <div class="card-img"><img src="/bar_mockup.png" alt="BarBuddy" /></div>
+        <div class="card-footer">
+          <div>
+            <div class="card-tag">IoT · Computer Vision</div>
+            <div class="card-title">BarBuddy</div>
+          </div>
+          <div class="card-arrow">
+            <svg fill="none" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="/work/cycle" class="card card-cycle">
+        <div class="card-img"><img src="/lockup_red.png" alt="Cycle" /></div>
+        <div class="card-footer">
+          <div>
+            <div class="card-tag">Brand Identity · Visual Design</div>
+            <div class="card-title">Cycle</div>
+          </div>
+          <div class="card-arrow">
+            <svg fill="none" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <p class="cta-text">Do meaningful work,<br /><span>and do it fast enough</span><br />to matter.</p>
+    <a href="mailto:qiongran.huang@gmail.com" class="cta-btn">
+      Get in touch
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Rebecca Huang</p>
+    <div class="footer-links">
+      <a href="/about">About</a>
+      <a href="#work">Work</a>
+      <a href="mailto:qiongran.huang@gmail.com">Contact</a>
+    </div>
+    <div class="footer-icons">
+      <a href="https://www.linkedin.com/in/rebecca-huang-a60388249/" target="_blank" aria-label="LinkedIn">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M6.94 8.5H3.56V20h3.38V8.5zM5.25 3A1.96 1.96 0 105.24 6.9 1.96 1.96 0 005.25 3zM20.44 13.41c0-3.4-1.82-4.98-4.24-4.98-1.95 0-2.82 1.07-3.31 1.82V8.5H9.51V20h3.38v-5.68c0-1.5.28-2.95 2.14-2.95 1.83 0 1.86 1.72 1.86 3.05V20h3.38v-6.59z"/></svg>
+      </a>
+      <a href="https://github.com/acceberH" target="_blank" aria-label="GitHub">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5A12 12 0 000 12.8c0 5.4 3.44 9.98 8.2 11.6.6.12.82-.27.82-.58 0-.29-.01-1.07-.02-2.1-3.34.75-4.04-1.65-4.04-1.65-.55-1.44-1.34-1.83-1.34-1.83-1.1-.77.08-.75.08-.75 1.21.09 1.85 1.28 1.85 1.28 1.08 1.9 2.83 1.35 3.52 1.03.11-.82.42-1.35.76-1.66-2.67-.32-5.48-1.37-5.48-6.08 0-1.34.47-2.43 1.24-3.29-.12-.31-.54-1.56.12-3.25 0 0 1.01-.33 3.3 1.25A11.2 11.2 0 0112 6.4c.99 0 2 .14 2.94.41 2.29-1.58 3.3-1.25 3.3-1.25.66 1.69.24 2.94.12 3.25.77.86 1.24 1.95 1.24 3.29 0 4.72-2.82 5.76-5.5 6.08.43.38.82 1.13.82 2.29 0 1.66-.02 3-.02 3.4 0 .31.21.7.83.58A12.3 12.3 0 0024 12.8 12 12 0 0012 .5z"/></svg>
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>
