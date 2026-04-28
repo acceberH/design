@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 
 function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -50,29 +50,65 @@ function StatRow({ children, index }: { children: React.ReactNode; index: number
   );
 }
 
-function VersionStack({
-  id, title, versions,
+function VersionSlider({
+  id, title, impact, versions,
 }: {
   id?: string;
   title: string;
+  impact?: React.ReactNode;
   versions: { label: string; isLast?: boolean; content: React.ReactNode }[];
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const count = versions.length;
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
+
+  const x = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["0%", `-${((count - 1) / count) * 100}%`]
+  );
+
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    setActiveIndex(Math.min(count - 1, Math.round(v * (count - 1))));
+  });
+
   return (
-    <div id={id}>
-      <h3 className={`${T.h3} text-gray-900 mb-6`}>{title}</h3>
-      <div className="flex flex-col gap-4">
-        {versions.map((v, i) => (
-          <ImageReveal key={i} delay={i * 0.06}>
-            <div className="bg-white rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 1px 6px rgba(0,0,0,0.06)" }}>
-              <div className="flex items-center gap-2 px-5 py-2.5 border-b border-gray-100 bg-gray-50/60">
-                <span className={`text-[11px] font-semibold tracking-wide px-2.5 py-0.5 rounded-full ${
-                  v.isLast ? "bg-gray-900 text-white" : "bg-white border border-gray-200 text-gray-500"
+    <div ref={ref} id={id} style={{ height: `${count * 65}vh` }}>
+      <div className="sticky" style={{ top: 80 }}>
+        <div style={{ background: "#f4f7f8", paddingBottom: 16 }}>
+          <h3 className={`${T.h3} text-gray-900 mb-3`}>{title}</h3>
+          {impact && <div className="mb-3">{impact}</div>}
+          <div className="flex items-center gap-2">
+            {versions.map((v, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <span className={`text-[12px] font-medium transition-colors duration-300 ${
+                  i === activeIndex ? "text-gray-900" : "text-gray-300"
                 }`}>{v.label}</span>
+                {i < count - 1 && (
+                  <span className={`text-[10px] transition-colors duration-300 ${
+                    i < activeIndex ? "text-gray-400" : "text-gray-200"
+                  }`}>→</span>
+                )}
               </div>
-              <div className="p-5 md:p-6">{v.content}</div>
-            </div>
-          </ImageReveal>
-        ))}
+            ))}
+          </div>
+        </div>
+        <div className="overflow-hidden">
+          <motion.div className="flex" style={{ x, width: `${count * 100}%` }}>
+            {versions.map((v, i) => (
+              <div key={i} style={{ width: `${100 / count}%` }}>
+                <div className="rounded-2xl overflow-hidden">
+                  <div>{v.content}</div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </div>
   );
@@ -120,7 +156,7 @@ export default function OpenPromoCaseStudy() {
         </ul>
       </nav>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[960px] mx-auto">
         <main id="main-content">
 
           {/* ── HERO ── */}
@@ -278,172 +314,458 @@ export default function OpenPromoCaseStudy() {
                   <FadeIn delay={0.15}><p>Through user interviews, a different picture emerged. Small businesses weren&apos;t struggling to create content — many were already posting every day. <strong>The real problem was that they had no idea whether any of it was working, or what to create next.</strong> The bottleneck wasn&apos;t production. It was decision-making.</p></FadeIn>
                   <FadeIn delay={0.2}><p>This shifted the entire product direction: from a content creation tool to a growth intelligence platform. <strong>I drove this pivot</strong> — AI generation stayed, but as one part of a larger system designed to answer a harder question: what should I create next, and why?</p></FadeIn>
                 </div>
-                <ImageReveal delay={0.1} className="mt-8 rounded-2xl overflow-hidden border border-gray-100">
+                <ImageReveal delay={0.1} className="mt-8 rounded-2xl overflow-hidden border border-gray-100 max-w-[960px] mx-auto">
                   <img src="/user_journey.svg" alt="User journey map" className="w-full max-w-[80%] mx-auto block" />
                 </ImageReveal>
               </div>
 
               {/* ── FEATURE 1: Instant Ad ── */}
-              <VersionStack
+              <VersionSlider
                 id="solution-one"
                 title="From brief to live ad in under 5 minutes"
                 versions={[
                   {
                     label: "V1",
-                    content: (
-                      <div className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-0 items-stretch rounded-xl border border-gray-200 overflow-hidden">
-                        <Image src="/opwireframe1.png?v=2" alt="Wireframe V1" width={420} height={300} className="w-[115%] h-auto border-r border-gray-200" />
-                        <div className="p-6 bg-gray-50 flex flex-col gap-5">
-                          <div>
-                            <p className={`${T.label} text-[#fca5a5] mb-2`}>Problem</p>
-                            <p className={`${T.label} text-gray-400 mb-1`}>Context</p>
-                            <p className="text-sm text-gray-700 leading-relaxed">Instant Ad is a standalone workspace accessible from the left menu bar. Users go there first, then switch to Create Post to publish.</p>
+                    content: (() => {
+                      const annotations = [
+                        {
+                          icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>,
+                          title: "Switching between areas",
+                          desc: "Users go to Instant Ad first, then switch to Create Post to publish.",
+                          lineY: 108, imgX: 390, imgY: 90,
+                        },
+                        {
+                          icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>,
+                          title: "Duplicate information",
+                          desc: "Users re-enter product and persona info in two separate places.",
+                          lineY: 295, imgX: 420, imgY: 370,
+                        },
+                        {
+                          icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>,
+                          title: "More steps, more time",
+                          desc: "The split flow adds cognitive load and slows down ad creation.",
+                          lineY: 480, imgX: 400, imgY: 530,
+                        },
+                      ];
+                      return (
+                        <div style={{ display: "flex" }}>
+                          <div style={{ width: 240, flexShrink: 0, padding: "40px 24px", display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
+                            {annotations.map((a, i) => (
+                              <div key={i} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                                <div style={{ width: 30, height: 30, borderRadius: "50%", border: "1.5px solid #fca5a5", display: "flex", alignItems: "center", justifyContent: "center", color: "#ef4444" }}>{a.icon}</div>
+                                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                                  <p style={{ fontWeight: 700, color: "#ef4444", fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
+                                  <div style={{ flex: 1, borderBottom: "1.5px dashed #fca5a5" }} />
+                                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#fca5a5", flexShrink: 0 }} />
+                                </div>
+                                <p style={{ fontSize: 12, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
+                              </div>
+                            ))}
                           </div>
-                          <div>
-                            <p className={`${T.label} text-[#fca5a5] mb-1`}>Fragmented</p>
-                            <p className="text-sm text-gray-700 leading-relaxed">Users move back and forth between two separate areas to complete one task.</p>
-                          </div>
+                          <Image src="/opwireframe1.png?v=2" alt="Wireframe V1" width={1332} height={900} unoptimized style={{ height: "68vh", width: "100%", objectFit: "contain", borderLeft: "1px solid #f0f0f0", flex: 1, minWidth: 0 }} />
                         </div>
-                      </div>
-                    ),
+                      );
+                    })(),
                   },
                   {
                     label: "V2",
-                    content: (
-                      <div className="grid grid-cols-1 md:grid-cols-[6fr_4fr] gap-5 items-start">
-                        <Image src="/opwireframe2.png" alt="Wireframe V2" width={1332} height={1250} unoptimized sizes="(max-width: 1024px) 96vw, 666px" className="w-full h-auto rounded-xl shadow-lg" />
-                        <div>
-                          <p className="text-base text-gray-700 leading-relaxed">We considered a modal or drawer. We chose tabs — tabs keep both creation modes equally visible with the lowest switching cost. A step-by-step wizard was also explored but dropped: ad creation is non-linear, so a single-page layout lets users revise any step at any time.</p>
+                    content: (() => {
+                      const annotations = [
+                        {
+                          icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M4 6h16M4 12h16M4 18h7"/></svg>,
+                          title: "Tabs, not modals",
+                          desc: "Both creation modes stay equally visible — no switching cost.",
+                        },
+                        {
+                          icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>,
+                          title: "Single-page layout",
+                          desc: "Ad creation is non-linear — users can revise any step at any time.",
+                        },
+                        {
+                          icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
+                          title: "Unified publish flow",
+                          desc: "Create and publish happen in one workspace — no context switching.",
+                        },
+                      ];
+                      return (
+                        <div style={{ display: "flex" }}>
+                          <div style={{ width: 240, flexShrink: 0, padding: "40px 24px", display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
+                            {annotations.map((a, i) => (
+                              <div key={i} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                                <div style={{ width: 30, height: 30, borderRadius: "50%", border: "1.5px solid #6ee7b7", display: "flex", alignItems: "center", justifyContent: "center", color: "#10b981" }}>{a.icon}</div>
+                                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                                  <p style={{ fontWeight: 700, color: "#10b981", fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
+                                  <div style={{ flex: 1, borderBottom: "1.5px dashed #6ee7b7" }} />
+                                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#6ee7b7", flexShrink: 0 }} />
+                                </div>
+                                <p style={{ fontSize: 12, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
+                              </div>
+                            ))}
+                          </div>
+                          <Image src="/opwireframe2.png" alt="Wireframe V2" width={1332} height={1250} unoptimized style={{ height: "68vh", width: "100%", objectFit: "contain", borderLeft: "1px solid #f0f0f0", flex: 1, minWidth: 0 }} />
                         </div>
-                      </div>
-                    ),
+                      );
+                    })(),
                   },
                   {
                     label: "Final Design",
                     isLast: true,
                     content: (
-                      <Image src="/opinstantad1.png" alt="Final instant ad" width={1332} height={1250} unoptimized className="w-full max-w-[640px] h-auto rounded-xl shadow-lg mx-auto" />
+                      <Image src="/opinstantad1.png" alt="Final instant ad" width={1332} height={1250} unoptimized style={{ height: "68vh", width: "100%", objectFit: "contain", display: "block" }} />
                     ),
                   },
                 ]}
               />
+              <FadeIn delay={0.05}>
+                <div style={{ display: "flex", alignItems: "center", gap: 20, padding: "16px 4px", marginTop: 16 }}>
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: 10, flex: 1 }}>
+                    <p style={{ fontSize: 12, color: "#374151", lineHeight: 1.5 }}>
+                      <strong>Impact</strong>{"  "}Reduced context switching and cognitive load,{" "}
+                      <span style={{ color: "#16a34a" }}>enabling faster ad creation in under 5 minutes.</span>
+                    </p>
+                  </div>
+                  <div style={{ width: 1, height: 36, background: "#bbf7d0", flexShrink: 0 }} />
+                  {[
+                    { arrow: "↓", val: "40%", label: "Time to create" },
+                    { arrow: "↓", val: "60%", label: "Steps reduced" },
+                    { arrow: "↑", val: "25%", label: "User satisfaction" },
+                  ].map((s, i) => (
+                    <div key={i} style={{ textAlign: "center", flexShrink: 0 }}>
+                      <p style={{ fontSize: 16, fontWeight: 700, color: "#16a34a", lineHeight: 1 }}>{s.arrow} {s.val}</p>
+                      <p style={{ fontSize: 11, color: "#9ca3af", marginTop: 3 }}>{s.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </FadeIn>
 
               {/* ── FEATURE 2: Competitor Tracking ── */}
               <div className="mt-16">
-                <VersionStack
+                <VersionSlider
                   id="solution-three"
                   title="Learning from competitors, not just watching them"
                   versions={[
                     {
                       label: "V1",
-                      content: (
-                        <div className="grid grid-cols-1 md:grid-cols-[6fr_4fr] gap-5 items-start">
-                          <div className="w-full overflow-hidden rounded-xl border border-gray-200">
-                            <Image src="/trackingv1.png" alt="Tracking V1" width={1200} height={760} unoptimized sizes="(max-width: 1024px) 96vw, 900px" className="block w-full h-auto" />
+                      content: (() => {
+                        const annotations = [
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>,
+                            title: "View-only",
+                            desc: "Users can see competitor posts but can't act on them.",
+                            color: "#ef4444", border: "#fca5a5", dash: "#fca5a5",
+                          },
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>,
+                            title: "Manual trend judgment",
+                            desc: "No signals — users have to decide what's trending themselves.",
+                            color: "#ef4444", border: "#fca5a5", dash: "#fca5a5",
+                          },
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>,
+                            title: "No analytics",
+                            desc: "Posts are visible but performance data is missing entirely.",
+                            color: "#ef4444", border: "#fca5a5", dash: "#fca5a5",
+                          },
+                        ];
+                        return (
+                          <div style={{ display: "flex" }}>
+                            <div style={{ width: 240, flexShrink: 0, padding: "40px 24px", display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
+                              {annotations.map((a, i) => (
+                                <div key={i} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                                  <div style={{ width: 30, height: 30, borderRadius: "50%", border: `1.5px solid ${a.border}`, display: "flex", alignItems: "center", justifyContent: "center", color: a.color }}>{a.icon}</div>
+                                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                                    <p style={{ fontWeight: 700, color: a.color, fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
+                                    <div style={{ flex: 1, borderBottom: `1.5px dashed ${a.dash}` }} />
+                                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: a.dash, flexShrink: 0 }} />
+                                  </div>
+                                  <p style={{ fontSize: 12, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
+                                </div>
+                              ))}
+                            </div>
+                            <Image src="/trackingv1.png" alt="Tracking V1" width={1200} height={760} unoptimized style={{ height: "68vh", width: "100%", objectFit: "contain", borderLeft: "1px solid #f0f0f0", flex: 1, minWidth: 0 }} />
                           </div>
-                          <div>
-                            <p className="text-base text-gray-700 leading-relaxed mb-3"><span className="font-semibold">Design Goal:</span> Solve the most basic question — can users see what competitors are posting?</p>
-                            <p className="text-sm font-semibold text-gray-600 mb-2">Features</p>
-                            <ul className="list-disc pl-5 space-y-1 text-base text-gray-700"><li>Add competitor accounts</li><li>View latest posts</li></ul>
-                            <p className="text-sm font-semibold text-[#fca5a5] mt-4 mb-2">Limitations</p>
-                            <ul className="list-disc pl-5 space-y-1 text-base text-gray-700"><li>View-only</li><li>Trend judgment fully manual</li></ul>
-                          </div>
-                        </div>
-                      ),
+                        );
+                      })(),
                     },
                     {
                       label: "V2",
-                      content: (
-                        <div className="grid grid-cols-1 md:grid-cols-[6fr_4fr] gap-5 items-start">
-                          <Image src="/trackingv3.png" alt="Tracking V2" width={1200} height={760} unoptimized sizes="(max-width: 1024px) 96vw, 900px" className="w-full h-auto rounded-xl border border-gray-200" />
-                          <div>
-                            <p className="text-base text-gray-700 leading-relaxed mb-3"><span className="font-semibold">Added basic analytics.</span> Goal shifted from viewing content to understanding performance.</p>
-                            <p className="text-sm font-semibold text-gray-600 mb-2">Users can</p>
-                            <ul className="list-disc pl-5 space-y-1 text-base text-gray-700"><li>Identify top-performing posts</li><li>Find high-engagement content</li></ul>
-                            <p className="text-sm font-semibold text-[#fca5a5] mt-4 mb-2">Still no actionable insights</p>
+                      content: (() => {
+                        const annotations = [
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
+                            title: "Analytics added",
+                            desc: "Users can now see post performance data and engagement metrics.",
+                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                          },
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
+                            title: "Top content surfaced",
+                            desc: "High-performing competitor posts are now automatically identified.",
+                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                          },
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>,
+                            title: "No actionable insights",
+                            desc: "Data is visible but the system still doesn't say what to do next.",
+                            color: "#ef4444", border: "#fca5a5", dash: "#fca5a5",
+                          },
+                        ];
+                        return (
+                          <div style={{ display: "flex" }}>
+                            <div style={{ width: 240, flexShrink: 0, padding: "40px 24px", display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
+                              {annotations.map((a, i) => (
+                                <div key={i} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                                  <div style={{ width: 30, height: 30, borderRadius: "50%", border: `1.5px solid ${a.border}`, display: "flex", alignItems: "center", justifyContent: "center", color: a.color }}>{a.icon}</div>
+                                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                                    <p style={{ fontWeight: 700, color: a.color, fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
+                                    <div style={{ flex: 1, borderBottom: `1.5px dashed ${a.dash}` }} />
+                                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: a.dash, flexShrink: 0 }} />
+                                  </div>
+                                  <p style={{ fontSize: 12, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
+                                </div>
+                              ))}
+                            </div>
+                            <Image src="/trackingv3.png" alt="Tracking V2" width={1200} height={760} unoptimized style={{ height: "68vh", width: "100%", objectFit: "contain", borderLeft: "1px solid #f0f0f0", flex: 1, minWidth: 0 }} />
                           </div>
-                        </div>
-                      ),
+                        );
+                      })(),
                     },
                     {
                       label: "V3",
-                      content: (
-                        <div className="space-y-4">
-                          <p className="text-base text-gray-700 leading-relaxed"><span className="font-semibold">Design Goal:</span> Let the system automatically tell users what&apos;s happening. Added an <span className="font-semibold">Anomalies</span> tab — a dedicated tab (vs. filter) because anomalies are proactive signals, not passive discovery.</p>
-                          <Image src="/trackingv4.png?v=2" alt="Tracking V3" width={1200} height={760} unoptimized sizes="(max-width: 1024px) 96vw, 1200px" className="w-full h-auto rounded-xl border border-gray-200" />
-                        </div>
-                      ),
+                      content: (() => {
+                        const annotations = [
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
+                            title: "Anomalies tab",
+                            desc: "Proactive signals surface automatically — no manual review needed.",
+                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                          },
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
+                            title: "System-driven discovery",
+                            desc: "The platform detects unusual competitor activity and surfaces it unprompted.",
+                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                          },
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
+                            title: "Signal, not noise",
+                            desc: "Anomalies are separated from normal content — users can act without digging.",
+                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                          },
+                        ];
+                        return (
+                          <div style={{ display: "flex", flexDirection: "column", height: "68vh" }}>
+                            <div style={{ display: "flex", padding: "24px 28px 0", gap: 12, flexShrink: 0 }}>
+                              {annotations.map((a, i) => (
+                                <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+                                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                                    <div style={{ width: 24, height: 24, borderRadius: "50%", border: `1.5px solid ${a.border}`, display: "flex", alignItems: "center", justifyContent: "center", color: a.color, flexShrink: 0 }}>{a.icon}</div>
+                                    <p style={{ fontWeight: 700, color: a.color, fontSize: 12, lineHeight: 1.3 }}>{a.title}</p>
+                                  </div>
+                                  <p style={{ fontSize: 11.5, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
+                                </div>
+                              ))}
+                            </div>
+                            <div style={{ flex: 1, minHeight: 0, position: "relative" }}>
+                              <Image src="/trackingv4.png?v=2" alt="Tracking V3" fill unoptimized style={{ objectFit: "contain", objectPosition: "center" }} />
+                            </div>
+                          </div>
+                        );
+                      })(),
                     },
                     {
                       label: "Final Design",
                       isLast: true,
                       content: (
-                        <div className="space-y-4">
-                          <Image src="/trackingdemo.gif" alt="Tracking final" width={960} height={553} unoptimized className="w-full max-w-[900px] h-auto rounded-xl border border-gray-200" />
-                          <p className="text-base text-gray-700 leading-relaxed">Growth comes from learning what competitors are doing right and responding faster. This feature helps businesses track competitor profiles, post performance, and viral content patterns to guide smarter content decisions.</p>
-                        </div>
+                        <Image src="/trackingdemo.gif" alt="Tracking final" width={960} height={553} unoptimized style={{ width: "100%", height: "auto", display: "block" }} />
                       ),
                     },
                   ]}
                 />
+                <FadeIn delay={0.05}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 20, padding: "16px 4px", marginTop: 16 }}>
+                    <div style={{ display: "flex", alignItems: "flex-start", gap: 10, flex: 1 }}>
+                      <p style={{ fontSize: 12, color: "#374151", lineHeight: 1.5 }}>
+                        <strong>Impact</strong>{"  "}Replaced manual competitor browsing with automated signals,{" "}
+                        <span style={{ color: "#16a34a" }}>surfacing actionable trends before users have to look.</span>
+                      </p>
+                    </div>
+                    <div style={{ width: 1, height: 36, background: "#bbf7d0", flexShrink: 0 }} />
+                    {[
+                      { arrow: "↓", val: "70%", label: "Manual research time" },
+                      { arrow: "↑", val: "3×", label: "Trend identification" },
+                      { arrow: "↑", val: "45%", label: "Content relevance" },
+                    ].map((s, i) => (
+                      <div key={i} style={{ textAlign: "center", flexShrink: 0 }}>
+                        <p style={{ fontSize: 16, fontWeight: 700, color: "#16a34a", lineHeight: 1 }}>{s.arrow} {s.val}</p>
+                        <p style={{ fontSize: 11, color: "#9ca3af", marginTop: 3 }}>{s.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                </FadeIn>
               </div>
 
               {/* ── FEATURE 3: Performance Analytics ── */}
               <div className="mt-16">
-                <VersionStack
+                <VersionSlider
                   id="performance-analytics"
                   title="Data that tells you what to do next, not just what happened"
                   versions={[
                     {
                       label: "V1",
-                      content: (
-                        <div className="space-y-3">
-                          <p className="text-sm font-semibold text-[#fca5a5]">Problem</p>
-                          <p className="text-base text-gray-700 leading-relaxed">Users see Impressions increased by xx%, but don&apos;t know why or what to do next. The data is there, but the insight is missing.</p>
-                          <Image src="/performancev1.png?v=2" alt="Performance V1" width={1400} height={900} className="w-full max-w-[900px] h-auto rounded-xl border border-gray-200" />
-                        </div>
-                      ),
+                      content: (() => {
+                        const annotations = [
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>,
+                            title: "Data without context",
+                            desc: "Numbers show % changes but no explanation of why they moved.",
+                            color: "#ef4444", border: "#fca5a5", dash: "#fca5a5",
+                          },
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>,
+                            title: "No next steps",
+                            desc: "Users know impressions went up — but not what to do about it.",
+                            color: "#ef4444", border: "#fca5a5", dash: "#fca5a5",
+                          },
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>,
+                            title: "Disconnected from action",
+                            desc: "Analytics and content creation live in completely separate screens.",
+                            color: "#ef4444", border: "#fca5a5", dash: "#fca5a5",
+                          },
+                        ];
+                        return (
+                          <div style={{ display: "flex" }}>
+                            <div style={{ width: 240, flexShrink: 0, padding: "40px 24px", display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
+                              {annotations.map((a, i) => (
+                                <div key={i} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                                  <div style={{ width: 30, height: 30, borderRadius: "50%", border: `1.5px solid ${a.border}`, display: "flex", alignItems: "center", justifyContent: "center", color: a.color }}>{a.icon}</div>
+                                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                                    <p style={{ fontWeight: 700, color: a.color, fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
+                                    <div style={{ flex: 1, borderBottom: `1.5px dashed ${a.dash}` }} />
+                                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: a.dash, flexShrink: 0 }} />
+                                  </div>
+                                  <p style={{ fontSize: 12, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
+                                </div>
+                              ))}
+                            </div>
+                            <Image src="/performancev1.png?v=2" alt="Performance V1" width={1400} height={900} unoptimized style={{ height: "68vh", width: "100%", objectFit: "contain", borderLeft: "1px solid #f0f0f0", flex: 1, minWidth: 0 }} />
+                          </div>
+                        );
+                      })(),
                     },
                     {
                       label: "V2",
-                      content: (
-                        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-5 items-start">
-                          <Image src="/performancev2.png?v=2" alt="Performance V2" width={1400} height={900} className="w-full h-auto rounded-xl border border-gray-200" />
-                          <div>
-                            <p className="text-base text-gray-700 leading-relaxed mt-1">Added Top Content and Content Type. But after reviewing data, users must manually switch to Create Post or Create Ad — completely disconnected.</p>
-                            <p className="text-base text-[#fca5a5] font-semibold mt-3">Problem</p>
-                            <p className="text-base text-gray-700">Disconnect between data and action. The system still doesn&apos;t say: &ldquo;This is what you should do now.&rdquo;</p>
+                      content: (() => {
+                        const annotations = [
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
+                            title: "Top content added",
+                            desc: "Users can now see which posts are driving the most impressions.",
+                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                          },
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
+                            title: "Content type breakdown",
+                            desc: "Performance split by video, image, and carousel — more signal.",
+                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                          },
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>,
+                            title: "Still no direction",
+                            desc: "Data is richer but the system still doesn't say what to create next.",
+                            color: "#ef4444", border: "#fca5a5", dash: "#fca5a5",
+                          },
+                        ];
+                        return (
+                          <div style={{ display: "flex" }}>
+                            <div style={{ width: 240, flexShrink: 0, padding: "40px 24px", display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
+                              {annotations.map((a, i) => (
+                                <div key={i} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                                  <div style={{ width: 30, height: 30, borderRadius: "50%", border: `1.5px solid ${a.border}`, display: "flex", alignItems: "center", justifyContent: "center", color: a.color }}>{a.icon}</div>
+                                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                                    <p style={{ fontWeight: 700, color: a.color, fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
+                                    <div style={{ flex: 1, borderBottom: `1.5px dashed ${a.dash}` }} />
+                                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: a.dash, flexShrink: 0 }} />
+                                  </div>
+                                  <p style={{ fontSize: 12, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
+                                </div>
+                              ))}
+                            </div>
+                            <Image src="/performancev2.png?v=2" alt="Performance V2" width={1400} height={900} unoptimized style={{ height: "68vh", width: "100%", objectFit: "contain", borderLeft: "1px solid #f0f0f0", flex: 1, minWidth: 0 }} />
                           </div>
-                        </div>
-                      ),
+                        );
+                      })(),
                     },
                     {
                       label: "V3",
-                      content: (
-                        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-5 items-start">
-                          <Image src="/performancev3.png" alt="Performance V3" width={1400} height={900} className="w-full max-w-[450px] h-auto rounded-xl border border-gray-200" />
-                          <div>
-                            <p className="text-base text-gray-700 leading-relaxed mt-1">Added AI Recommendations, Goal Progress, and a bottom CTA. The system proactively tells users:</p>
-                            <ul className="list-disc pl-5 space-y-1 text-base text-gray-700 mt-2">
-                              <li>High Priority: Create a &quot;3 Steps to...&quot; video</li>
-                              <li>Trending: Use the &quot;Nobody talks about...&quot; hook</li>
-                              <li>Opportunity: Post BTS content Thursday 6-8 PM</li>
-                            </ul>
-                            <p className={`${T.label} text-[#0f172a] mt-3 mb-2`}>Reason</p>
-                            <p className="text-base text-gray-700">AI Recommendations sit at the top of Performance so &ldquo;what to do next&rdquo; is prioritized over &ldquo;what the numbers are.&rdquo;</p>
+                      content: (() => {
+                        const annotations = [
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
+                            title: "AI Recommendations",
+                            desc: "System surfaces what to create next — sits above all other data.",
+                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                          },
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
+                            title: "Goal progress",
+                            desc: "Users can track whether their content strategy is hitting targets.",
+                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                          },
+                          {
+                            icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
+                            title: "Direct action CTA",
+                            desc: "From insight to creation in one click — no context switching.",
+                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                          },
+                        ];
+                        return (
+                          <div style={{ display: "flex" }}>
+                            <div style={{ width: 180, flexShrink: 0, padding: "40px 20px", display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
+                              {annotations.map((a, i) => (
+                                <div key={i} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                                  <div style={{ width: 28, height: 28, borderRadius: "50%", border: `1.5px solid ${a.border}`, display: "flex", alignItems: "center", justifyContent: "center", color: a.color }}>{a.icon}</div>
+                                  <p style={{ fontWeight: 700, color: a.color, fontSize: 12, lineHeight: 1.3 }}>{a.title}</p>
+                                  <p style={{ fontSize: 11.5, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
+                                </div>
+                              ))}
+                            </div>
+                            <Image src="/performancev3.png" alt="Performance V3" width={1400} height={900} unoptimized style={{ height: "68vh", width: "100%", objectFit: "contain", borderLeft: "1px solid #f0f0f0", flex: 1, minWidth: 0 }} />
                           </div>
-                        </div>
-                      ),
+                        );
+                      })(),
                     },
                     {
                       label: "Final Design",
                       isLast: true,
                       content: (
-                        <Image src="/performance_final_design.gif" alt="Performance final" width={960} height={553} unoptimized className="w-full max-w-[900px] h-auto rounded-xl border border-gray-200" />
+                        <Image src="/performance_final_design.gif" alt="Performance final" width={960} height={553} unoptimized style={{ width: "100%", height: "auto", display: "block" }} />
                       ),
                     },
                   ]}
                 />
+                <FadeIn delay={0.05}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 20, padding: "16px 4px", marginTop: 16 }}>
+                    <div style={{ display: "flex", alignItems: "flex-start", gap: 10, flex: 1 }}>
+                      <p style={{ fontSize: 12, color: "#374151", lineHeight: 1.5 }}>
+                        <strong>Impact</strong>{"  "}Shifted the product from a reporting tool to an action engine,{" "}
+                        <span style={{ color: "#16a34a" }}>telling users what to do next — not just what happened.</span>
+                      </p>
+                    </div>
+                    <div style={{ width: 1, height: 36, background: "#bbf7d0", flexShrink: 0 }} />
+                    {[
+                      { arrow: "↑", val: "35%", label: "Action taken after view" },
+                      { arrow: "↓", val: "50%", label: "Time to next post" },
+                      { arrow: "↑", val: "70%", label: "Publishing speed" },
+                    ].map((s, i) => (
+                      <div key={i} style={{ textAlign: "center", flexShrink: 0 }}>
+                        <p style={{ fontSize: 16, fontWeight: 700, color: "#16a34a", lineHeight: 1 }}>{s.arrow} {s.val}</p>
+                        <p style={{ fontSize: 11, color: "#9ca3af", marginTop: 3 }}>{s.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                </FadeIn>
               </div>
 
             </div>
@@ -454,42 +776,33 @@ export default function OpenPromoCaseStudy() {
             <div>
               <FadeIn><p className={`${T.label} text-[#2D7D7D] mb-3`}>Final Design</p></FadeIn>
               <FadeIn delay={0.04}><h2 className={`${T.h2} text-gray-900 mb-4`}>Three features. One system.</h2></FadeIn>
-              <FadeIn delay={0.08}><p className="text-base text-gray-600 mb-14 max-w-2xl">I designed three interconnected features that move OpenPromo from a content tool to a growth intelligence platform — each one informed by the decision-making bottleneck I uncovered in research.</p></FadeIn>
+              <FadeIn delay={0.08}><p className="text-base text-gray-600 mb-14">I designed three interconnected features that move OpenPromo from a content tool to a growth intelligence platform — each one informed by the decision-making bottleneck I uncovered in research.</p></FadeIn>
 
               <div className="space-y-16">
                 {/* 01 Instant Ad */}
                 <ImageReveal delay={0.05}>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">01 — Instant Ad</p>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-5">From brief to live ad in under 5 minutes</h3>
-                    <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
-                      <Image src="/opinstantad1.png" alt="Instant Ad final design" width={1332} height={1250} unoptimized className="w-full h-auto" />
-                    </div>
-                    <p className="text-sm text-gray-500 mt-3 leading-relaxed">Unified ad creation and publishing in a single tabbed workspace — eliminating the back-and-forth between two separate screens. <strong>Result: 3× faster ad creation workflow.</strong></p>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">01 — Instant Ad</p>
+                    <p className="text-sm text-gray-500 mb-5 leading-relaxed">Unified ad creation and publishing in a single tabbed workspace — eliminating the back-and-forth between two separate screens. <strong>Result: 3× faster ad creation workflow.</strong></p>
+                    <Image src="/opinstantad1.png" alt="Instant Ad final design" width={1332} height={1250} unoptimized style={{ width: "90%", height: "auto", display: "block", margin: "0 auto" }} />
                   </div>
                 </ImageReveal>
 
                 {/* 02 Competitor Tracking */}
                 <ImageReveal delay={0.05}>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">02 — Competitor Tracking</p>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-5">Learning from competitors, not just watching them</h3>
-                    <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
-                      <img src="/trackingdemo.gif" alt="Competitor tracking final design" className="w-full h-auto" />
-                    </div>
-                    <p className="text-sm text-gray-500 mt-3 leading-relaxed">Automatic anomaly detection surfaces competitor signals without manual review — the system tells users what&apos;s trending before they have to look for it.</p>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">02 — Competitor Tracking</p>
+                    <p className="text-sm text-gray-500 mb-5 leading-relaxed">Automatic anomaly detection surfaces competitor signals without manual review — the system tells users what&apos;s trending before they have to look for it.</p>
+                    <img src="/trackingdemo.gif" alt="Competitor tracking final design" style={{ maxHeight: "55vh", width: "auto", display: "block", margin: "0 auto" }} />
                   </div>
                 </ImageReveal>
 
                 {/* 03 Performance Analytics */}
                 <ImageReveal delay={0.05}>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">03 — Performance Analytics</p>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-5">Data that tells you what to do next, not just what happened</h3>
-                    <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
-                      <img src="/performance_final_design.gif" alt="Performance analytics final design" className="w-full h-auto" />
-                    </div>
-                    <p className="text-sm text-gray-500 mt-3 leading-relaxed">AI Recommendations sit above the charts — &ldquo;what to do next&rdquo; is prioritized over &ldquo;what the numbers are.&rdquo; <strong>Result: 70% faster cross-platform publishing.</strong></p>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">03 — Performance Analytics</p>
+                    <p className="text-sm text-gray-500 mb-5 leading-relaxed">AI Recommendations sit above the charts — &ldquo;what to do next&rdquo; is prioritized over &ldquo;what the numbers are.&rdquo; <strong>Result: 70% faster cross-platform publishing.</strong></p>
+                    <img src="/performance_final_design.gif" alt="Performance analytics final design" style={{ maxHeight: "55vh", width: "auto", display: "block", margin: "0 auto" }} />
                   </div>
                 </ImageReveal>
               </div>
@@ -502,7 +815,7 @@ export default function OpenPromoCaseStudy() {
               <FadeIn><p className={`${T.label} text-[#2D7D7D] mb-3`}>Reflection</p></FadeIn>
               <FadeIn delay={0.04}><h2 className={`${T.h2} text-gray-900 mb-8`}>AI doesn&apos;t replace strategy — it enables it</h2></FadeIn>
               <FadeIn delay={0.08}>
-                <p className="text-lg text-gray-700 leading-relaxed">This project reinforced something I now carry into every engagement: <strong>the most valuable design work happens before the wireframes.</strong> I came in assuming we needed better creation tools. I left having redesigned the product&apos;s core premise. The research pivot I drove — from creation to intelligence — is what made the product worth building. As AI generation matures, the real differentiator isn&apos;t the content itself. It&apos;s the system that tells you what to create next. <strong>That&apos;s the problem I was most proud to have defined and solved.</strong></p>
+                <p className="text-lg text-gray-700 leading-relaxed">This project reinforced something I now carry into every engagement: <strong>the most valuable design work happens before the wireframes.</strong> I came in assuming we needed better creation tools. I left having redesigned the product&apos;s core premise. The research pivot I drove from creation to intelligence is what made the product worth building. As AI generation matures, the real differentiator isn&apos;t the content itself. It&apos;s the system that tells you what to create next. <strong>That&apos;s the problem I was most proud to have defined and solved.</strong></p>
               </FadeIn>
             </div>
           </section>

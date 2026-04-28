@@ -124,7 +124,7 @@ export default function BioVisionCaseStudy() {
         </ul>
       </nav>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[960px] mx-auto">
         <main id="main-content">
 
           {/* ── HERO ── */}

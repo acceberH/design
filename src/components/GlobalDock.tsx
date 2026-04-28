@@ -82,7 +82,7 @@ function DockIcon({
         padding: "4px 10px", borderRadius: 8,
         fontSize: 11, color: "rgba(255,255,255,0.9)",
         whiteSpace: "nowrap", pointerEvents: "none",
-        opacity: size > BASE ? 1 : 0,
+        opacity: size >= PEAK ? 1 : 0,
         transition: `opacity 0.12s, bottom 0.2s ${SPRING}`,
         zIndex: 10,
       }}>
@@ -130,35 +130,26 @@ export default function GlobalDock() {
   return (
     <div style={{ position: "fixed", bottom: 24, left: 0, right: 0, zIndex: 100, pointerEvents: "none" }}>
 
-      {/* Prev / Next — bottom left */}
-      {isProjectPage && (
-        <div style={{ position: "absolute", left: 24, bottom: 0, pointerEvents: "auto" }}>
-          <div style={pillStyle} onMouseLeave={() => setHoveredIdx(null)}>
-            <DockIcon
-              label="Previous" href={prevProject ?? "#"}
-              isLink={false} isActive={false} showPip={false}
-              size={getSize(-2, hoveredIdx)}
-              onEnter={() => setHoveredIdx(-2)}
-              onLeave={() => setHoveredIdx(null)}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: prevProject ? 1 : 0.3 }}><path d="M15 18l-6-6 6-6"/></svg>
-            </DockIcon>
-            <DockIcon
-              label="Next" href={nextProject ?? "#"}
-              isLink={false} isActive={false} showPip={false}
-              size={getSize(-1, hoveredIdx)}
-              onEnter={() => setHoveredIdx(-1)}
-              onLeave={() => setHoveredIdx(null)}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: nextProject ? 1 : 0.3 }}><path d="M9 18l6-6-6-6"/></svg>
-            </DockIcon>
-          </div>
-        </div>
-      )}
-
-      {/* Main nav — bottom center */}
+      {/* Single pill — bottom center */}
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div style={pillStyle} onMouseLeave={() => setHoveredIdx(null)}>
+
+          {/* Prev arrow */}
+          {isProjectPage && (
+            <>
+              <DockIcon
+                label="Previous" href={prevProject ?? "#"}
+                isLink={false} isActive={false} showPip={false}
+                size={getSize(-20, hoveredIdx)}
+                onEnter={() => setHoveredIdx(-20)}
+                onLeave={() => setHoveredIdx(null)}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: prevProject ? 1 : 0.3 }}><path d="M15 18l-6-6 6-6"/></svg>
+              </DockIcon>
+              <div style={{ width: 0.5, height: 32, background: "rgba(0,0,0,0.1)", alignSelf: "center", flexShrink: 0, margin: "0 2px" }} />
+            </>
+          )}
+
           {NAV.map(item => (
             <DockIcon
               key={item.key}
@@ -186,6 +177,23 @@ export default function GlobalDock() {
               {item.icon}
             </DockIcon>
           ))}
+
+          {/* Next arrow */}
+          {isProjectPage && (
+            <>
+              <div style={{ width: 0.5, height: 32, background: "rgba(0,0,0,0.1)", alignSelf: "center", flexShrink: 0, margin: "0 2px" }} />
+              <DockIcon
+                label="Next" href={nextProject ?? "#"}
+                isLink={false} isActive={false} showPip={false}
+                size={getSize(20, hoveredIdx)}
+                onEnter={() => setHoveredIdx(20)}
+                onLeave={() => setHoveredIdx(null)}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: nextProject ? 1 : 0.3 }}><path d="M9 18l6-6-6-6"/></svg>
+              </DockIcon>
+            </>
+          )}
+
         </div>
       </div>
 
