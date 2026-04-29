@@ -31,10 +31,10 @@ function ImageReveal({ children, delay = 0, className = "" }: { children: React.
 
 // ── Typography scale ──────────────────────────────────────────
 const T = {
-  h1:    "text-[48px] font-semibold leading-tight tracking-tight",
+  h1:    "text-[48px] font-medium leading-tight tracking-tight",
   h2:    "text-[28px] font-medium leading-snug tracking-tight",
-  h3:    "text-[16px] font-medium leading-snug",
-  label: "text-[11px] font-normal uppercase tracking-[0.1em]",
+  h3:    "text-[20px] font-medium leading-snug",
+  label: "text-[11px] font-medium uppercase tracking-[0.1em]",
 } as const;
 // ─────────────────────────────────────────────────────────────
 
@@ -86,11 +86,11 @@ function VersionSlider({
           <div className="flex items-center gap-2">
             {versions.map((v, i) => (
               <div key={i} className="flex items-center gap-2">
-                <span className={`text-[12px] font-medium transition-colors duration-300 ${
+                <span className={`text-[13px] font-medium transition-colors duration-300 ${
                   i === activeIndex ? "text-gray-900" : "text-gray-300"
                 }`}>{v.label}</span>
                 {i < count - 1 && (
-                  <span className={`text-[10px] transition-colors duration-300 ${
+                  <span className={`text-[11px] transition-colors duration-300 ${
                     i < activeIndex ? "text-gray-400" : "text-gray-200"
                   }`}>→</span>
                 )}
@@ -138,19 +138,26 @@ export default function OpenPromoCaseStudy() {
   return (
     <div className="font-sans" style={{ background: "#f4f7f8" }}>
 
-      {/* Bottom-left floating nav */}
-      <nav className="fixed bottom-6 left-6 z-50 hidden lg:block">
-        <ul className="flex flex-col gap-0.5">
+      {/* Left sidebar nav */}
+      <nav className="fixed top-1/2 -translate-y-1/2 z-50 hidden lg:block" style={{ left: "calc(50% - 680px)" }}>
+        <ul className="flex flex-col gap-1">
           {NAV_SECTIONS.map(([id, label]) => (
             <li key={id}>
               <span
                 onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
-                className="block px-1 py-1 text-xs font-medium cursor-pointer transition-all duration-200"
-                style={{
-                  color: activeSection === id ? "#111" : "#9ca3af",
-                  fontWeight: activeSection === id ? 700 : 400,
-                }}
-              >{label}</span>
+                className="flex items-center gap-2 py-1 cursor-pointer group transition-all duration-200"
+                style={{ color: activeSection === id ? "#1f2937" : "#9ca3af" }}
+              >
+                <span style={{
+                  width: activeSection === id ? 20 : 8,
+                  height: 1.5,
+                  background: activeSection === id ? "#2D7D7D" : "#d1d5db",
+                  borderRadius: 2,
+                  flexShrink: 0,
+                  transition: "width 0.25s ease",
+                }} />
+                <span className="text-[11px] font-medium tracking-wide transition-all duration-200">{label}</span>
+              </span>
             </li>
           ))}
         </ul>
@@ -166,7 +173,7 @@ export default function OpenPromoCaseStudy() {
                 transition={{ duration: 0.5, ease: [0.22,1,0.36,1] as [number,number,number,number] }}
                 className="flex flex-wrap gap-3 mb-6">
                 {["Product Design","UX Research","B2B","Social Media Tech"].map(t => (
-                  <span key={t} className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm font-medium">{t}</span>
+                  <span key={t} className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-[13px] font-medium">{t}</span>
                 ))}
               </motion.div>
               <motion.h1 initial={{ opacity: 0, y: 20, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -174,7 +181,7 @@ export default function OpenPromoCaseStudy() {
                 className={`${T.h1} text-gray-900 mb-4`}>OpenPromo</motion.h1>
               <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.18, ease: [0.22,1,0.36,1] as [number,number,number,number] }}
-                className="flex flex-wrap gap-6 text-sm text-gray-600 mb-8">
+                className="flex flex-wrap gap-6 text-base text-gray-600 mb-8">
                 <span><strong>Company:</strong> OpenPromo</span>
                 <span><strong>Role:</strong> UX Designer, Researcher</span>
                 <span><strong>Duration:</strong> 7 months</span>
@@ -193,19 +200,19 @@ export default function OpenPromoCaseStudy() {
               <div className="grid md:grid-cols-2 gap-6">
                 <FadeIn delay={0.05}>
                   <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                    <h3 className="text-[12px] font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-3">Problem</h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">Small businesses are creating content constantly, but without strategic direction — they don&apos;t know what to create, when to post, or whether any of it is working.</p>
+                    <p className={`${T.label} text-[#2D7D7D] mb-3`}>Problem</p>
+                    <p className="text-base text-gray-600 leading-relaxed">Small businesses are creating content constantly, but without strategic direction — they don&apos;t know what to create, when to post, or whether any of it is working.</p>
                   </div>
                 </FadeIn>
                 <FadeIn delay={0.12}>
                   <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                    <h3 className="text-[12px] font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-3">Solution</h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">An AI-powered growth platform that helps small businesses create promotional content, manage social accounts, and learn from competitors in one place.</p>
+                    <p className={`${T.label} text-[#2D7D7D] mb-3`}>Solution</p>
+                    <p className="text-base text-gray-600 leading-relaxed">An AI-powered growth platform that helps small businesses create promotional content, manage social accounts, and learn from competitors in one place.</p>
                   </div>
                 </FadeIn>
               </div>
               <FadeIn delay={0.1} className="mt-8">
-                <p className="text-[12px] font-bold uppercase tracking-[0.1em] text-[#0f172a] mb-4">Impact</p>
+                <p className={`${T.label} text-[#2D7D7D] mb-4`}>Impact</p>
                 <div className="border-t border-gray-200 pt-6 grid grid-cols-3">
                   {[
                     { stat: "0→1",  desc: "Product built from scratch" },
@@ -213,8 +220,8 @@ export default function OpenPromoCaseStudy() {
                     { stat: "70%",  desc: "Faster cross-platform publishing" },
                   ].map((item, i) => (
                     <div key={i} className={`pr-8 ${i > 0 ? "pl-8 border-l border-gray-200" : ""}`}>
-                      <p className="text-[42px] font-bold text-gray-900 leading-none mb-3">{item.stat}</p>
-                      <p className="text-sm text-gray-500">{item.desc}</p>
+                      <p className="text-[42px] font-medium leading-none mb-3 text-gray-900">{item.stat}</p>
+                      <p className="text-[13px] text-gray-500">{item.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -235,7 +242,7 @@ export default function OpenPromoCaseStudy() {
                   <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     <Image src="/b927e770173c1c8012e2191e2d7237bb.png" alt="Competitive analysis" width={5945} height={5314} unoptimized sizes="(max-width: 1024px) 86vw, 900px" className="w-full max-w-[450px] h-auto mx-auto" />
                     <div className="p-4">
-                      <p className="text-sm text-gray-600 italic">Competitive landscape showing gaps in AI-driven growth features.</p>
+                      <p className="text-[13px] text-gray-600 italic">Competitive landscape showing gaps in AI-driven growth features.</p>
                     </div>
                   </div>
                 </ImageReveal>
@@ -250,21 +257,57 @@ export default function OpenPromoCaseStudy() {
               <FadeIn><p className={`${T.label} text-[#2D7D7D] mb-3`}>User Research</p></FadeIn>
               <FadeIn delay={0.04}><h2 className={`${T.h2} text-gray-900 mb-8`}>The real bottleneck isn&apos;t tools — it&apos;s decisions</h2></FadeIn>
               <div className="space-y-8">
-                <FadeIn delay={0.05}><p className="text-base text-gray-700">I interviewed small business owners to understand their daily social media workflow and marketing challenges. <strong>What I found contradicted my starting assumption entirely.</strong></p></FadeIn>
+                <FadeIn delay={0.05}><p className="text-base text-gray-700">I interviewed small business owners to understand their daily social media workflow and marketing challenges. <strong>What I found contradicted my starting assumption entirely.</strong> Most businesses spend significant time producing content but struggle to determine what content actually drives growth.</p></FadeIn>
                 <FadeIn delay={0.1}>
-                  <div className="flex items-start gap-4 py-6 border-t border-b border-gray-200">
-                    <Image src="/openpromo_confused.png" alt="Interview illustration" width={180} height={180} className="w-12 h-12 flex-shrink-0 mt-1" />
-                    <p className="text-2xl font-medium text-gray-800 leading-snug tracking-tight">&ldquo;We spend hours making posts, but we don&apos;t know if any of it is actually working.&rdquo;</p>
+                  <div style={{ borderRadius: 16, border: "1px solid #e5e7eb", overflow: "hidden", background: "white" }}>
+                    {/* Top: persona + quote */}
+                    <div style={{ padding: "32px 36px 24px" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
+                        <div style={{ width: 40, height: 40, borderRadius: "50%", overflow: "hidden", background: "#f3f4f6", flexShrink: 0 }}>
+                          <Image src="/openpromo_confused.png" alt="Persona" width={40} height={40} unoptimized style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        </div>
+                        <div>
+                          <p style={{ fontSize: 13, fontWeight: 500, color: "#374151" }}>Sarah Chen</p>
+                          <p style={{ fontSize: 11, color: "#9ca3af", marginTop: 1 }}>Small Business Owner</p>
+                        </div>
+                      </div>
+                      <p style={{ fontSize: 36, lineHeight: 0.8, color: "#2D7D7D", opacity: 0.2, fontFamily: "Georgia, serif", marginBottom: 8 }}>&ldquo;</p>
+                      <p style={{ fontSize: 18, fontWeight: 500, color: "#1f2937", lineHeight: 1.65 }}>
+                        We spend hours making posts, but we don&apos;t know if any of it is actually working.
+                      </p>
+                      <p style={{ fontSize: 36, lineHeight: 0.8, color: "#2D7D7D", opacity: 0.2, fontFamily: "Georgia, serif", marginTop: 8, textAlign: "right" }}>&rdquo;</p>
+                    </div>
+                    {/* Bottom: pain points + goals */}
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderTop: "1px solid #f0f0f0" }}>
+                      <div style={{ padding: "22px 28px", borderRight: "1px solid #f0f0f0" }}>
+                        <p style={{ fontSize: 12, fontWeight: 500, color: "#ef4444", marginBottom: 14 }}>Pain Points</p>
+                        {["Not sure which content brings in sales","Less than 1hr/day on marketing","Hard to track across platforms","Ads spending with no clear ROI"].map((pt, i) => (
+                          <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 8, marginBottom: 9 }}>
+                            <div style={{ width: 12, height: 12, borderRadius: "50%", border: "1.5px solid #fca5a5", flexShrink: 0, marginTop: 3 }} />
+                            <p style={{ fontSize: 12, color: "#374151", lineHeight: 1.55 }}>{pt}</p>
+                          </div>
+                        ))}
+                      </div>
+                      <div style={{ padding: "22px 28px" }}>
+                        <p style={{ fontSize: 12, fontWeight: 500, color: "#16a34a", marginBottom: 14 }}>Goals</p>
+                        {["Grow brand awareness","Create content that converts","Know what's actually working","Save time with automation"].map((g, i) => (
+                          <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 8, marginBottom: 9 }}>
+                            <div style={{ width: 12, height: 12, borderRadius: "50%", border: "1.5px solid #86efac", flexShrink: 0, marginTop: 3 }} />
+                            <p style={{ fontSize: 12, color: "#374151", lineHeight: 1.55 }}>{g}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </FadeIn>
-                <FadeIn delay={0.05}><p className="text-base text-gray-600 leading-relaxed">Most businesses spend significant time producing content but struggle to determine what content actually drives growth.</p></FadeIn>
+
                 <div>
                   <FadeIn><p className={`${T.label} text-[#2D7D7D] mb-4`}>Research Insights</p></FadeIn>
                   <div className="border-t border-gray-200">
                     {[["73%","of small businesses are not confident their marketing strategy is working."],["56%","of SMBs spend one hour or less per day on marketing."],["54%","of SMBs struggle to produce content consistently."]].map(([stat,desc],i) => (
                       <StatRow key={stat} index={i}>
                         <div className="py-5 border-b border-gray-200 grid grid-cols-[100px_1fr] md:grid-cols-[140px_1fr] items-start gap-4">
-                          <p className="text-2xl font-bold text-gray-900">{stat}</p>
+                          <p className="text-[28px] font-medium text-gray-900">{stat}</p>
                           <p className="text-base text-gray-600 leading-relaxed pt-1">{desc}</p>
                         </div>
                       </StatRow>
@@ -272,14 +315,14 @@ export default function OpenPromoCaseStudy() {
                   </div>
                 </div>
 
-                {/* Key Insight — climax callout */}
+
                 <FadeIn delay={0.08}>
-                  <div className="rounded-2xl bg-gray-900 px-8 py-10 md:px-12 md:py-12">
-                    <p className={`${T.label} text-gray-500 mb-4`}>Key Insight</p>
-                    <p className="text-[26px] md:text-[32px] font-semibold text-white leading-snug tracking-tight">
-                      The real bottleneck isn&apos;t tools — it&apos;s <span style={{ color: "#6ee7b7" }}>decisions</span>.
-                    </p>
-                    <p className="text-base text-gray-400 mt-5 leading-relaxed max-w-2xl">
+                  <div className="flex flex-col items-center gap-3">
+                    <svg width="16" height="32" viewBox="0 0 16 32" fill="none" style={{ color: "#2D7D7D", opacity: 0.4 }}>
+                      <line x1="8" y1="0" x2="8" y2="26" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3"/>
+                      <path d="M3 22l5 8 5-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                    </svg>
+                    <p className="text-base text-gray-600 leading-relaxed">
                       Small businesses aren&apos;t failing to create content. They&apos;re failing to decide <em>what</em> to create, <em>when</em> to post it, and whether any of it is working. This single insight shifted the entire product direction.
                     </p>
                   </div>
@@ -290,8 +333,8 @@ export default function OpenPromoCaseStudy() {
                     <Image src="/filegpt_ideas.svg" alt="Design opportunity" width={220} height={220} className="w-16 md:w-24 h-auto object-contain" />
                   </ImageReveal>
                   <FadeIn delay={0.1}>
-                    <p className="text-base text-gray-800 leading-relaxed font-medium">
-                      <span className="text-gray-700">Design Opportunity:</span> How might we help small businesses decide what content to create next using signals from competitors, performance analytics, and emerging trends?
+                    <p className="text-[20px] text-gray-800 leading-relaxed font-medium">
+                      <strong>How might we</strong> help small businesses decide what content to create next using signals from competitors, performance analytics, and emerging trends?
                     </p>
                   </FadeIn>
                 </div>
@@ -307,10 +350,10 @@ export default function OpenPromoCaseStudy() {
 
               {/* Starting Assumption */}
               <div className="mb-20">
-                <FadeIn><p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-4">Problem Framing</p></FadeIn>
+                <FadeIn><p className={`${T.label} text-[#2D7D7D] mb-4`}>Problem Framing</p></FadeIn>
                 <div className="space-y-4 text-base text-gray-600 leading-relaxed">
                   <FadeIn delay={0.05}><p>When I first joined OpenPromo, my assumption was straightforward: <strong>small businesses need better content creation tools.</strong> Specifically, I believed AI video generation would be the highest-value feature — if we could help them produce professional video ads without a production team, that would remove the biggest barrier.</p></FadeIn>
-                  <FadeIn delay={0.1}><p className="font-semibold text-gray-900">This assumption was wrong.</p></FadeIn>
+                  <FadeIn delay={0.1}><p className="font-medium text-gray-900">This assumption was wrong.</p></FadeIn>
                   <FadeIn delay={0.15}><p>Through user interviews, a different picture emerged. Small businesses weren&apos;t struggling to create content — many were already posting every day. <strong>The real problem was that they had no idea whether any of it was working, or what to create next.</strong> The bottleneck wasn&apos;t production. It was decision-making.</p></FadeIn>
                   <FadeIn delay={0.2}><p>This shifted the entire product direction: from a content creation tool to a growth intelligence platform. <strong>I drove this pivot</strong> — AI generation stayed, but as one part of a larger system designed to answer a harder question: what should I create next, and why?</p></FadeIn>
                 </div>
@@ -354,11 +397,11 @@ export default function OpenPromoCaseStudy() {
                               <div key={i} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                                 <div style={{ width: 30, height: 30, borderRadius: "50%", border: "1.5px solid #fca5a5", display: "flex", alignItems: "center", justifyContent: "center", color: "#ef4444" }}>{a.icon}</div>
                                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                                  <p style={{ fontWeight: 700, color: "#ef4444", fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
+                                  <p style={{ fontWeight: 500, color: "#ef4444", fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
                                   <div style={{ flex: 1, borderBottom: "1.5px dashed #fca5a5" }} />
                                   <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#fca5a5", flexShrink: 0 }} />
                                 </div>
-                                <p style={{ fontSize: 12, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
+                                <p style={{ fontSize: 13, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
                               </div>
                             ))}
                           </div>
@@ -392,13 +435,13 @@ export default function OpenPromoCaseStudy() {
                           <div style={{ width: 240, flexShrink: 0, padding: "40px 24px", display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
                             {annotations.map((a, i) => (
                               <div key={i} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                                <div style={{ width: 30, height: 30, borderRadius: "50%", border: "1.5px solid #6ee7b7", display: "flex", alignItems: "center", justifyContent: "center", color: "#10b981" }}>{a.icon}</div>
+                                <div style={{ width: 30, height: 30, borderRadius: "50%", border: "1.5px solid #16a34a", display: "flex", alignItems: "center", justifyContent: "center", color: "#16a34a" }}>{a.icon}</div>
                                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                                  <p style={{ fontWeight: 700, color: "#10b981", fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
-                                  <div style={{ flex: 1, borderBottom: "1.5px dashed #6ee7b7" }} />
-                                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#6ee7b7", flexShrink: 0 }} />
+                                  <p style={{ fontWeight: 500, color: "#16a34a", fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
+                                  <div style={{ flex: 1, borderBottom: "1.5px dashed #16a34a" }} />
+                                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#16a34a", flexShrink: 0 }} />
                                 </div>
-                                <p style={{ fontSize: 12, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
+                                <p style={{ fontSize: 13, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
                               </div>
                             ))}
                           </div>
@@ -417,9 +460,9 @@ export default function OpenPromoCaseStudy() {
                 ]}
               />
               <FadeIn delay={0.05}>
-                <div style={{ display: "flex", alignItems: "center", gap: 20, padding: "16px 4px", marginTop: 16 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 20, padding: "8px 4px", marginTop: 4 }}>
                   <div style={{ display: "flex", alignItems: "flex-start", gap: 10, flex: 1 }}>
-                    <p style={{ fontSize: 12, color: "#374151", lineHeight: 1.5 }}>
+                    <p style={{ fontSize: 16, color: "#374151", lineHeight: 1.7 }}>
                       <strong>Impact</strong>{"  "}Reduced context switching and cognitive load,{" "}
                       <span style={{ color: "#16a34a" }}>enabling faster ad creation in under 5 minutes.</span>
                     </p>
@@ -431,7 +474,7 @@ export default function OpenPromoCaseStudy() {
                     { arrow: "↑", val: "25%", label: "User satisfaction" },
                   ].map((s, i) => (
                     <div key={i} style={{ textAlign: "center", flexShrink: 0 }}>
-                      <p style={{ fontSize: 16, fontWeight: 700, color: "#16a34a", lineHeight: 1 }}>{s.arrow} {s.val}</p>
+                      <p style={{ fontSize: 13, fontWeight: 500, color: "#16a34a", lineHeight: 1 }}>{s.arrow} {s.val}</p>
                       <p style={{ fontSize: 11, color: "#9ca3af", marginTop: 3 }}>{s.label}</p>
                     </div>
                   ))}
@@ -474,11 +517,11 @@ export default function OpenPromoCaseStudy() {
                                 <div key={i} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                                   <div style={{ width: 30, height: 30, borderRadius: "50%", border: `1.5px solid ${a.border}`, display: "flex", alignItems: "center", justifyContent: "center", color: a.color }}>{a.icon}</div>
                                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                                    <p style={{ fontWeight: 700, color: a.color, fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
+                                    <p style={{ fontWeight: 500, color: a.color, fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
                                     <div style={{ flex: 1, borderBottom: `1.5px dashed ${a.dash}` }} />
                                     <div style={{ width: 6, height: 6, borderRadius: "50%", background: a.dash, flexShrink: 0 }} />
                                   </div>
-                                  <p style={{ fontSize: 12, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
+                                  <p style={{ fontSize: 13, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
                                 </div>
                               ))}
                             </div>
@@ -495,13 +538,13 @@ export default function OpenPromoCaseStudy() {
                             icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
                             title: "Analytics added",
                             desc: "Users can now see post performance data and engagement metrics.",
-                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                            color: "#16a34a", border: "#16a34a", dash: "#16a34a",
                           },
                           {
                             icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
                             title: "Top content surfaced",
                             desc: "High-performing competitor posts are now automatically identified.",
-                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                            color: "#16a34a", border: "#16a34a", dash: "#16a34a",
                           },
                           {
                             icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>,
@@ -517,11 +560,11 @@ export default function OpenPromoCaseStudy() {
                                 <div key={i} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                                   <div style={{ width: 30, height: 30, borderRadius: "50%", border: `1.5px solid ${a.border}`, display: "flex", alignItems: "center", justifyContent: "center", color: a.color }}>{a.icon}</div>
                                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                                    <p style={{ fontWeight: 700, color: a.color, fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
+                                    <p style={{ fontWeight: 500, color: a.color, fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
                                     <div style={{ flex: 1, borderBottom: `1.5px dashed ${a.dash}` }} />
                                     <div style={{ width: 6, height: 6, borderRadius: "50%", background: a.dash, flexShrink: 0 }} />
                                   </div>
-                                  <p style={{ fontSize: 12, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
+                                  <p style={{ fontSize: 13, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
                                 </div>
                               ))}
                             </div>
@@ -538,19 +581,19 @@ export default function OpenPromoCaseStudy() {
                             icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
                             title: "Anomalies tab",
                             desc: "Proactive signals surface automatically — no manual review needed.",
-                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                            color: "#16a34a", border: "#16a34a", dash: "#16a34a",
                           },
                           {
                             icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
                             title: "System-driven discovery",
                             desc: "The platform detects unusual competitor activity and surfaces it unprompted.",
-                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                            color: "#16a34a", border: "#16a34a", dash: "#16a34a",
                           },
                           {
                             icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
                             title: "Signal, not noise",
                             desc: "Anomalies are separated from normal content — users can act without digging.",
-                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                            color: "#16a34a", border: "#16a34a", dash: "#16a34a",
                           },
                         ];
                         return (
@@ -560,9 +603,9 @@ export default function OpenPromoCaseStudy() {
                                 <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column" }}>
                                   <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
                                     <div style={{ width: 24, height: 24, borderRadius: "50%", border: `1.5px solid ${a.border}`, display: "flex", alignItems: "center", justifyContent: "center", color: a.color, flexShrink: 0 }}>{a.icon}</div>
-                                    <p style={{ fontWeight: 700, color: a.color, fontSize: 12, lineHeight: 1.3 }}>{a.title}</p>
+                                    <p style={{ fontWeight: 500, color: a.color, fontSize: 13, lineHeight: 1.3 }}>{a.title}</p>
                                   </div>
-                                  <p style={{ fontSize: 11.5, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
+                                  <p style={{ fontSize: 11, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
                                 </div>
                               ))}
                             </div>
@@ -577,15 +620,17 @@ export default function OpenPromoCaseStudy() {
                       label: "Final Design",
                       isLast: true,
                       content: (
-                        <Image src="/trackingdemo.gif" alt="Tracking final" width={960} height={553} unoptimized style={{ width: "100%", height: "auto", display: "block" }} />
+                        <div style={{ height: "68vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff" }}>
+                          <Image src="/trackingdemo.gif" alt="Tracking final" width={960} height={553} unoptimized style={{ maxHeight: "100%", width: "auto", display: "block" }} />
+                        </div>
                       ),
                     },
                   ]}
                 />
                 <FadeIn delay={0.05}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 20, padding: "16px 4px", marginTop: 16 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 20, padding: "8px 4px", marginTop: 4 }}>
                     <div style={{ display: "flex", alignItems: "flex-start", gap: 10, flex: 1 }}>
-                      <p style={{ fontSize: 12, color: "#374151", lineHeight: 1.5 }}>
+                      <p style={{ fontSize: 16, color: "#374151", lineHeight: 1.7 }}>
                         <strong>Impact</strong>{"  "}Replaced manual competitor browsing with automated signals,{" "}
                         <span style={{ color: "#16a34a" }}>surfacing actionable trends before users have to look.</span>
                       </p>
@@ -597,7 +642,7 @@ export default function OpenPromoCaseStudy() {
                       { arrow: "↑", val: "45%", label: "Content relevance" },
                     ].map((s, i) => (
                       <div key={i} style={{ textAlign: "center", flexShrink: 0 }}>
-                        <p style={{ fontSize: 16, fontWeight: 700, color: "#16a34a", lineHeight: 1 }}>{s.arrow} {s.val}</p>
+                        <p style={{ fontSize: 13, fontWeight: 500, color: "#16a34a", lineHeight: 1 }}>{s.arrow} {s.val}</p>
                         <p style={{ fontSize: 11, color: "#9ca3af", marginTop: 3 }}>{s.label}</p>
                       </div>
                     ))}
@@ -641,11 +686,11 @@ export default function OpenPromoCaseStudy() {
                                 <div key={i} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                                   <div style={{ width: 30, height: 30, borderRadius: "50%", border: `1.5px solid ${a.border}`, display: "flex", alignItems: "center", justifyContent: "center", color: a.color }}>{a.icon}</div>
                                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                                    <p style={{ fontWeight: 700, color: a.color, fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
+                                    <p style={{ fontWeight: 500, color: a.color, fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
                                     <div style={{ flex: 1, borderBottom: `1.5px dashed ${a.dash}` }} />
                                     <div style={{ width: 6, height: 6, borderRadius: "50%", background: a.dash, flexShrink: 0 }} />
                                   </div>
-                                  <p style={{ fontSize: 12, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
+                                  <p style={{ fontSize: 13, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
                                 </div>
                               ))}
                             </div>
@@ -662,13 +707,13 @@ export default function OpenPromoCaseStudy() {
                             icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
                             title: "Top content added",
                             desc: "Users can now see which posts are driving the most impressions.",
-                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                            color: "#16a34a", border: "#16a34a", dash: "#16a34a",
                           },
                           {
                             icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
                             title: "Content type breakdown",
                             desc: "Performance split by video, image, and carousel — more signal.",
-                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                            color: "#16a34a", border: "#16a34a", dash: "#16a34a",
                           },
                           {
                             icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>,
@@ -684,11 +729,11 @@ export default function OpenPromoCaseStudy() {
                                 <div key={i} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                                   <div style={{ width: 30, height: 30, borderRadius: "50%", border: `1.5px solid ${a.border}`, display: "flex", alignItems: "center", justifyContent: "center", color: a.color }}>{a.icon}</div>
                                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                                    <p style={{ fontWeight: 700, color: a.color, fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
+                                    <p style={{ fontWeight: 500, color: a.color, fontSize: 13, lineHeight: 1.3, whiteSpace: "nowrap" }}>{a.title}</p>
                                     <div style={{ flex: 1, borderBottom: `1.5px dashed ${a.dash}` }} />
                                     <div style={{ width: 6, height: 6, borderRadius: "50%", background: a.dash, flexShrink: 0 }} />
                                   </div>
-                                  <p style={{ fontSize: 12, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
+                                  <p style={{ fontSize: 13, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
                                 </div>
                               ))}
                             </div>
@@ -705,19 +750,19 @@ export default function OpenPromoCaseStudy() {
                             icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
                             title: "AI Recommendations",
                             desc: "System surfaces what to create next — sits above all other data.",
-                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                            color: "#16a34a", border: "#16a34a", dash: "#16a34a",
                           },
                           {
                             icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
                             title: "Goal progress",
                             desc: "Users can track whether their content strategy is hitting targets.",
-                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                            color: "#16a34a", border: "#16a34a", dash: "#16a34a",
                           },
                           {
                             icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
                             title: "Direct action CTA",
                             desc: "From insight to creation in one click — no context switching.",
-                            color: "#10b981", border: "#6ee7b7", dash: "#6ee7b7",
+                            color: "#16a34a", border: "#16a34a", dash: "#16a34a",
                           },
                         ];
                         return (
@@ -726,8 +771,8 @@ export default function OpenPromoCaseStudy() {
                               {annotations.map((a, i) => (
                                 <div key={i} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                                   <div style={{ width: 28, height: 28, borderRadius: "50%", border: `1.5px solid ${a.border}`, display: "flex", alignItems: "center", justifyContent: "center", color: a.color }}>{a.icon}</div>
-                                  <p style={{ fontWeight: 700, color: a.color, fontSize: 12, lineHeight: 1.3 }}>{a.title}</p>
-                                  <p style={{ fontSize: 11.5, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
+                                  <p style={{ fontWeight: 500, color: a.color, fontSize: 13, lineHeight: 1.3 }}>{a.title}</p>
+                                  <p style={{ fontSize: 11, color: "#6b7280", lineHeight: 1.5 }}>{a.desc}</p>
                                 </div>
                               ))}
                             </div>
@@ -740,15 +785,17 @@ export default function OpenPromoCaseStudy() {
                       label: "Final Design",
                       isLast: true,
                       content: (
-                        <Image src="/performance_final_design.gif" alt="Performance final" width={960} height={553} unoptimized style={{ width: "100%", height: "auto", display: "block" }} />
+                        <div style={{ height: "68vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff" }}>
+                          <Image src="/performance_final_design.gif" alt="Performance final" width={960} height={553} unoptimized style={{ maxHeight: "100%", width: "auto", display: "block" }} />
+                        </div>
                       ),
                     },
                   ]}
                 />
                 <FadeIn delay={0.05}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 20, padding: "16px 4px", marginTop: 16 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 20, padding: "8px 4px", marginTop: 4 }}>
                     <div style={{ display: "flex", alignItems: "flex-start", gap: 10, flex: 1 }}>
-                      <p style={{ fontSize: 12, color: "#374151", lineHeight: 1.5 }}>
+                      <p style={{ fontSize: 16, color: "#374151", lineHeight: 1.7 }}>
                         <strong>Impact</strong>{"  "}Shifted the product from a reporting tool to an action engine,{" "}
                         <span style={{ color: "#16a34a" }}>telling users what to do next — not just what happened.</span>
                       </p>
@@ -760,7 +807,7 @@ export default function OpenPromoCaseStudy() {
                       { arrow: "↑", val: "70%", label: "Publishing speed" },
                     ].map((s, i) => (
                       <div key={i} style={{ textAlign: "center", flexShrink: 0 }}>
-                        <p style={{ fontSize: 16, fontWeight: 700, color: "#16a34a", lineHeight: 1 }}>{s.arrow} {s.val}</p>
+                        <p style={{ fontSize: 13, fontWeight: 500, color: "#16a34a", lineHeight: 1 }}>{s.arrow} {s.val}</p>
                         <p style={{ fontSize: 11, color: "#9ca3af", marginTop: 3 }}>{s.label}</p>
                       </div>
                     ))}
@@ -782,8 +829,8 @@ export default function OpenPromoCaseStudy() {
                 {/* 01 Instant Ad */}
                 <ImageReveal delay={0.05}>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">01 — Instant Ad</p>
-                    <p className="text-sm text-gray-500 mb-5 leading-relaxed">Unified ad creation and publishing in a single tabbed workspace — eliminating the back-and-forth between two separate screens. <strong>Result: 3× faster ad creation workflow.</strong></p>
+                    <p className={`${T.label} text-[#2D7D7D] mb-3`}>01 — Instant Ad</p>
+                    <p className="text-base text-gray-500 mb-5 leading-relaxed">Unified ad creation and publishing in a single tabbed workspace — eliminating the back-and-forth between two separate screens. <strong>Result: 3× faster ad creation workflow.</strong></p>
                     <Image src="/opinstantad1.png" alt="Instant Ad final design" width={1332} height={1250} unoptimized style={{ width: "90%", height: "auto", display: "block", margin: "0 auto" }} />
                   </div>
                 </ImageReveal>
@@ -791,8 +838,8 @@ export default function OpenPromoCaseStudy() {
                 {/* 02 Competitor Tracking */}
                 <ImageReveal delay={0.05}>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">02 — Competitor Tracking</p>
-                    <p className="text-sm text-gray-500 mb-5 leading-relaxed">Automatic anomaly detection surfaces competitor signals without manual review — the system tells users what&apos;s trending before they have to look for it.</p>
+                    <p className={`${T.label} text-[#2D7D7D] mb-3`}>02 — Competitor Tracking</p>
+                    <p className="text-base text-gray-500 mb-5 leading-relaxed">Automatic anomaly detection surfaces competitor signals without manual review — the system tells users what&apos;s trending before they have to look for it.</p>
                     <img src="/trackingdemo.gif" alt="Competitor tracking final design" style={{ maxHeight: "55vh", width: "auto", display: "block", margin: "0 auto" }} />
                   </div>
                 </ImageReveal>
@@ -800,8 +847,8 @@ export default function OpenPromoCaseStudy() {
                 {/* 03 Performance Analytics */}
                 <ImageReveal delay={0.05}>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">03 — Performance Analytics</p>
-                    <p className="text-sm text-gray-500 mb-5 leading-relaxed">AI Recommendations sit above the charts — &ldquo;what to do next&rdquo; is prioritized over &ldquo;what the numbers are.&rdquo; <strong>Result: 70% faster cross-platform publishing.</strong></p>
+                    <p className={`${T.label} text-[#2D7D7D] mb-3`}>03 — Performance Analytics</p>
+                    <p className="text-base text-gray-500 mb-5 leading-relaxed">AI Recommendations sit above the charts — &ldquo;what to do next&rdquo; is prioritized over &ldquo;what the numbers are.&rdquo; <strong>Result: 70% faster cross-platform publishing.</strong></p>
                     <img src="/performance_final_design.gif" alt="Performance analytics final design" style={{ maxHeight: "55vh", width: "auto", display: "block", margin: "0 auto" }} />
                   </div>
                 </ImageReveal>
@@ -815,7 +862,7 @@ export default function OpenPromoCaseStudy() {
               <FadeIn><p className={`${T.label} text-[#2D7D7D] mb-3`}>Reflection</p></FadeIn>
               <FadeIn delay={0.04}><h2 className={`${T.h2} text-gray-900 mb-8`}>AI doesn&apos;t replace strategy — it enables it</h2></FadeIn>
               <FadeIn delay={0.08}>
-                <p className="text-lg text-gray-700 leading-relaxed">This project reinforced something I now carry into every engagement: <strong>the most valuable design work happens before the wireframes.</strong> I came in assuming we needed better creation tools. I left having redesigned the product&apos;s core premise. The research pivot I drove from creation to intelligence is what made the product worth building. As AI generation matures, the real differentiator isn&apos;t the content itself. It&apos;s the system that tells you what to create next. <strong>That&apos;s the problem I was most proud to have defined and solved.</strong></p>
+                <p className="text-base text-gray-700 leading-relaxed">This project reinforced something I now carry into every engagement: <strong>the most valuable design work happens before the wireframes.</strong> I came in assuming we needed better creation tools. I left having redesigned the product&apos;s core premise. The research pivot I drove from creation to intelligence is what made the product worth building. As AI generation matures, the real differentiator isn&apos;t the content itself. It&apos;s the system that tells you what to create next. <strong>That&apos;s the problem I was most proud to have defined and solved.</strong></p>
               </FadeIn>
             </div>
           </section>
@@ -825,7 +872,7 @@ export default function OpenPromoCaseStudy() {
       {/* Next Project */}
       <FadeIn className="py-20 px-6 text-center border-t border-gray-100">
         <p className="text-[11px] uppercase tracking-widest text-gray-400 mb-4">Next Project</p>
-        <a href="/work/biovision" className="group inline-flex items-center gap-3 text-[28px] font-bold text-gray-900 hover:text-gray-400 transition-colors duration-200">
+        <a href="/work/biovision" className="group inline-flex items-center gap-3 text-[28px] font-medium text-gray-900 hover:text-gray-400 transition-colors duration-200">
           BioVision
           <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
         </a>
