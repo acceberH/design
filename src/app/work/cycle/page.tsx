@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function CyclePage() {
   useEffect(() => {
@@ -753,10 +754,10 @@ export default function CyclePage() {
           {/* Next Project */}
           <div className="py-20 px-6 text-center border-t border-gray-100">
             <p className="text-[11px] uppercase tracking-widest text-gray-400 mb-4">Next Project</p>
-            <a href="/work/openpromo" className="group inline-flex items-center gap-3 text-[28px] font-bold text-gray-900 hover:text-gray-400 transition-colors duration-200">
-              OpenPromo
+            <Link href="/#work" className="group inline-flex items-center gap-3 text-[28px] font-bold text-gray-900 hover:text-gray-400 transition-colors duration-200">
+              All Projects
               <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
-            </a>
+            </Link>
           </div>
 
           {/* Footer */}

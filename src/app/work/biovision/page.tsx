@@ -563,9 +563,9 @@ export default function BioVisionCaseStudy() {
       <footer id="footer" className="bg-white border-t border-gray-200 mt-16">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="flex justify-between items-center mb-8">
-            <Link href="/work/openpromo" className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
+            <Link href="/#work" className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
               <svg className="mr-2 w-4 h-4" fill="currentColor" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
-              Previous Project
+              All Projects
             </Link>
             <Link href="/work/filegpt" className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
               Next Project

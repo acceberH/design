@@ -151,19 +151,6 @@ export default function Home() {
             </FadeIn>
             <div className="relative">
 
-              {/* OpenPromo */}
-              <div className="sticky top-6 z-10">
-                <Link href="/work/openpromo" className="group block">
-                  <div className="relative rounded-2xl overflow-hidden h-[500px] transition-all duration-300 hover:-translate-y-2" style={{ boxShadow: "0 2px 16px rgba(0,0,0,0.07)" }}>
-                    <Image src="/op-previewnew.png" alt="OpenPromo" width={1920} height={1080} unoptimized className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]" />
-                    <div className="absolute top-0 left-0 right-0 p-8" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%)" }}>
-                      <p className="text-[12px] text-white/60 mb-1">Product Design · SaaS · B2B</p>
-                      <h3 className="text-[22px] font-bold text-white">OpenPromo</h3>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-
               {/* BioVision */}
               <div className="sticky top-10 z-20 mt-4">
                 <Link href="/work/biovision" className="group block">
