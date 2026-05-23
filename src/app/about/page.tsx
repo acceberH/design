@@ -41,6 +41,7 @@ function PhotoSlider() {
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 const EXPERIENCE = [
+  { period: "2025 — Now",  title: "Freelance",          sub: "Product Designer" },
   { period: "2025 — 2026", title: "Amazon Web Services", sub: "Product Designer · Industry-sponsored Project" },
   { period: "2025",        title: "AISPIRE",             sub: "UX Design Intern" },
   { period: "2024 — 2025", title: "OfferPlz",            sub: "Product Designer" },
