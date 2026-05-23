@@ -223,7 +223,6 @@ export default function Home() {
             </FadeIn>
             <div className="flex flex-col">
               {[
-                { period: "2025 — Now",  title: "OpenPromo",           sub: "Product Designer" },
                 { period: "2025 — 2026", title: "Amazon Web Services", sub: "Product Designer · Industry-sponsored Project" },
                 { period: "2025",        title: "AISPIRE",             sub: "UX Design Intern" },
                 { period: "2024 — 2025", title: "OfferPlz",            sub: "Product Designer" },
