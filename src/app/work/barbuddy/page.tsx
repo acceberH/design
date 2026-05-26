@@ -3,8 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { scopedHref } from "@/lib/routeScope";
 
 export default function BarBuddyCaseStudy() {
+  const pathname = usePathname();
+
   useEffect(() => {
     // Smooth scrolling and active navigation
     const navLinks = document.querySelectorAll('.nav-link');
@@ -695,7 +699,7 @@ export default function BarBuddyCaseStudy() {
       {/* Next Project */}
       <div className="py-20 px-6 text-center border-t border-gray-100">
         <p className="text-[11px] uppercase tracking-widest text-gray-400 mb-4">Next Project</p>
-        <a href="/work/cycle" className="group inline-flex items-center gap-3 text-[28px] font-bold text-gray-900 hover:text-gray-400 transition-colors duration-200">
+        <a href={scopedHref(pathname, "/work/cycle")} className="group inline-flex items-center gap-3 text-[28px] font-bold text-gray-900 hover:text-gray-400 transition-colors duration-200">
           Cycle NYC
           <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
         </a>
@@ -705,7 +709,7 @@ export default function BarBuddyCaseStudy() {
       <footer id="footer" className="bg-white border-t border-gray-200 mt-16">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="flex justify-between items-center mb-8">
-            <Link href="/#work" className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
+            <Link href={scopedHref(pathname, "/#work")} className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
               <svg className="mr-2 w-4 h-4" fill="currentColor" viewBox="0 0 448 512">
                 <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
               </svg>

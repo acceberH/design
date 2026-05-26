@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { scopedHref } from "@/lib/routeScope";
 
 const BASE = 44;
 const PEAK = 64;
@@ -12,6 +13,15 @@ const DOCK_PADDING_V = 10;
 
 const PROJECT_ORDER = [
   "/work/aispire",
+  "/work/biovision",
+  "/work/filegpt",
+  "/work/offerplz",
+  "/work/cycle",
+];
+
+const HR_PROJECT_ORDER = [
+  "/work/aispire",
+  "/work/openpromo",
   "/work/biovision",
   "/work/filegpt",
   "/work/offerplz",
@@ -103,14 +113,34 @@ function DockIcon({
 
 export default function GlobalDock() {
   const pathname = usePathname();
+  const router = useRouter();
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
-  const activeKey = pathname === "/" ? "home" : pathname.startsWith("/work") ? "work" : pathname === "/about" ? "about" : null;
+  const activeKey =
+    pathname === "/" || pathname === "/hr"
+      ? "home"
+      : pathname.startsWith("/work") || pathname.startsWith("/hr/work")
+        ? "work"
+        : pathname === "/about" || pathname === "/hr/about"
+          ? "about"
+          : null;
 
-  const projectIdx = PROJECT_ORDER.indexOf(pathname);
-  const prevProject = projectIdx > 0 ? PROJECT_ORDER[projectIdx - 1] : null;
-  const nextProject = projectIdx !== -1 && projectIdx < PROJECT_ORDER.length - 1 ? PROJECT_ORDER[projectIdx + 1] : null;
+  const projectOrder = pathname?.startsWith("/hr/") ? HR_PROJECT_ORDER : PROJECT_ORDER;
+  const scopedProjects = projectOrder.map((href) => scopedHref(pathname, href));
+  const projectIdx = scopedProjects.indexOf(pathname ?? "");
+  const prevProject = projectIdx > 0 ? scopedProjects[projectIdx - 1] : null;
+  const nextProject = projectIdx !== -1 && projectIdx < scopedProjects.length - 1 ? scopedProjects[projectIdx + 1] : null;
   const isProjectPage = projectIdx !== -1;
+
+  useEffect(() => {
+    if (!isProjectPage) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "ArrowLeft" && prevProject) router.push(prevProject);
+      if (e.key === "ArrowRight" && nextProject) router.push(nextProject);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isProjectPage, prevProject, nextProject, router]);
 
   const pillStyle: React.CSSProperties = {
     pointerEvents: "auto",
@@ -152,7 +182,7 @@ export default function GlobalDock() {
           {NAV.map(item => (
             <DockIcon
               key={item.key}
-              label={item.label} href={item.href}
+              label={item.label} href={scopedHref(pathname, item.href)}
               isLink={false} isActive={activeKey === item.key} showPip
               size={getSize(item.idx, hoveredIdx)}
               onEnter={() => setHoveredIdx(item.idx)}

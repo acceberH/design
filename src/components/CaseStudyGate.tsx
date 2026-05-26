@@ -4,27 +4,39 @@ import { FormEvent, ReactNode, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const ease = [0.22, 1, 0.36, 1] as const;
-const PASSWORD = "qiongran2026";
-const STORAGE_KEY = "case_studies_unlocked";
+const DEFAULT_PASSWORD = "qiongran2026";
+const DEFAULT_STORAGE_KEY = "case_studies_unlocked";
 
-export default function CaseStudyGate({ children }: { children: ReactNode }) {
+export default function CaseStudyGate({
+  children,
+  password = DEFAULT_PASSWORD,
+  storageKey = DEFAULT_STORAGE_KEY,
+  title = "This case study is protected",
+  description = "Enter the password to continue",
+}: {
+  children: ReactNode;
+  password?: string;
+  storageKey?: string;
+  title?: string;
+  description?: string;
+}) {
   const [input, setInput] = useState("");
   const [error, setError] = useState(false);
   const [unlocked, setUnlocked] = useState(false);
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    if (localStorage.getItem(STORAGE_KEY) === "1") {
+    if (localStorage.getItem(storageKey) === "1") {
       setUnlocked(true);
     }
     setChecking(false);
-  }, []);
+  }, [storageKey]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (input === PASSWORD) {
-      localStorage.setItem(STORAGE_KEY, "1");
+    if (input === password) {
+      localStorage.setItem(storageKey, "1");
       setUnlocked(true);
       return;
     }
@@ -55,10 +67,10 @@ export default function CaseStudyGate({ children }: { children: ReactNode }) {
       >
         <div style={{ fontSize: 36, marginBottom: 20 }}>🔒</div>
         <h2 style={{ fontSize: 20, fontWeight: 600, color: "#111827", marginBottom: 8 }}>
-          This case study is protected
+          {title}
         </h2>
         <p style={{ fontSize: 14, color: "#9ca3af", marginBottom: 32 }}>
-          Enter the password to continue
+          {description}
         </p>
         <form
           onSubmit={handleSubmit}

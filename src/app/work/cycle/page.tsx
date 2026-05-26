@@ -3,8 +3,12 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { scopedHref } from '@/lib/routeScope';
 
 export default function CyclePage() {
+  const pathname = usePathname();
+
   useEffect(() => {
     // Smooth scrolling and active navigation
     const navLinks = document.querySelectorAll('.nav-link');
@@ -754,7 +758,7 @@ export default function CyclePage() {
           {/* Next Project */}
           <div className="py-20 px-6 text-center border-t border-gray-100">
             <p className="text-[11px] uppercase tracking-widest text-gray-400 mb-4">Next Project</p>
-            <Link href="/#work" className="group inline-flex items-center gap-3 text-[28px] font-bold text-gray-900 hover:text-gray-400 transition-colors duration-200">
+            <Link href={scopedHref(pathname, "/#work")} className="group inline-flex items-center gap-3 text-[28px] font-bold text-gray-900 hover:text-gray-400 transition-colors duration-200">
               All Projects
               <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
             </Link>

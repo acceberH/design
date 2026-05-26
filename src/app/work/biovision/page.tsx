@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { scopedHref } from "@/lib/routeScope";
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -33,10 +35,10 @@ function ImageReveal({ children, delay = 0, className = "" }: { children: React.
 
 // ── Typography scale ──────────────────────────────────────────
 const T = {
-  h1:    "text-[48px] font-semibold leading-tight tracking-tight",   // project name
-  h2:    "text-[28px] font-medium leading-snug tracking-tight",      // section titles
-  h3:    "text-[16px] font-medium leading-snug",                     // subsection titles
-  label: "text-[11px] font-normal uppercase tracking-[0.1em]",      // TL;DR / PROBLEM / IMPACT
+  h1:    "text-[48px] font-medium leading-tight tracking-tight",
+  h2:    "text-[28px] font-medium leading-snug tracking-tight",
+  h3:    "text-[20px] font-medium leading-snug",
+  label: "text-[11px] font-medium uppercase tracking-[0.1em]",
 } as const;
 // ─────────────────────────────────────────────────────────────
 
@@ -81,11 +83,12 @@ const OUTCOME_ITEMS = [
 
 
 const NAV_SECTIONS = [
-  ["tldr","TL;DR"],["outcome","Outcome"],["context","Context"],
-  ["research","Research"],["approach","Design Process"],["reflection","Reflection"],
+  ["tldr","TL;DR"],["context","Context"],["research","Research"],
+  ["approach","Design Process"],["outcome","Outcome"],["reflection","Reflection"],
 ] as const;
 
 export default function BioVisionCaseStudy() {
+  const pathname = usePathname();
   const [activeSection, setActiveSection] = useState<string>("");
 
   useEffect(() => {
@@ -106,19 +109,26 @@ export default function BioVisionCaseStudy() {
   return (
     <div className="font-sans" style={{ background: "#f4f7f8" }}>
 
-      {/* Bottom-left floating nav */}
-      <nav className="fixed bottom-6 left-6 z-50 hidden lg:block">
-        <ul className="flex flex-col gap-0.5">
+      {/* Left sidebar nav */}
+      <nav className="fixed top-1/2 -translate-y-1/2 z-50 hidden lg:block" style={{ left: "calc(50% - 680px)" }}>
+        <ul className="flex flex-col gap-1">
           {NAV_SECTIONS.map(([id, label]) => (
             <li key={id}>
               <span
                 onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
-                className="block px-1 py-1 text-xs font-medium cursor-pointer transition-all duration-200"
-                style={{
-                  color: activeSection === id ? "#111" : "#9ca3af",
-                  fontWeight: activeSection === id ? 700 : 400,
-                }}
-              >{label}</span>
+                className="flex items-center gap-2 py-1 cursor-pointer transition-all duration-200"
+                style={{ color: activeSection === id ? "#1f2937" : "#9ca3af" }}
+              >
+                <span style={{
+                  width: activeSection === id ? 20 : 8,
+                  height: 1.5,
+                  background: activeSection === id ? "#2563EB" : "#d1d5db",
+                  borderRadius: 2,
+                  flexShrink: 0,
+                  transition: "width 0.25s ease",
+                }} />
+                <span className="text-[11px] font-medium tracking-wide transition-all duration-200">{label}</span>
+              </span>
             </li>
           ))}
         </ul>
@@ -134,7 +144,7 @@ export default function BioVisionCaseStudy() {
                 transition={{ duration: 0.5, ease }}
                 className="flex flex-wrap gap-3 mb-6">
                 {["Product Design","AI/ML","Wildlife Research"].map(t => (
-                  <span key={t} className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-sm font-medium">{t}</span>
+                  <span key={t} className="px-3 py-1 rounded-full text-[13px] font-medium" style={{ background: "rgba(37,99,235,0.08)", color: "#2563EB", border: "1px solid rgba(37,99,235,0.15)" }}>{t}</span>
                 ))}
               </motion.div>
 
@@ -144,7 +154,7 @@ export default function BioVisionCaseStudy() {
 
               <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.18, ease }}
-                className="flex flex-wrap gap-6 text-sm text-gray-600 mb-8">
+                className="flex flex-wrap gap-6 text-base text-gray-600 mb-8">
                 <span><strong>Role:</strong> Product Designer & Engineer (Full-stack)</span>
                 <span><strong>Duration:</strong> 6 Months</span>
                 <span><strong>Sponsor:</strong> AWS · Washington Department of Wildlife</span>
@@ -171,9 +181,9 @@ export default function BioVisionCaseStudy() {
               {/* Problem */}
               <FadeIn delay={0.05}>
                 <div className="grid grid-cols-[160px_1fr] gap-8 py-8 border-b border-gray-200">
-                  <p className={`${T.label} text-[#2D7D7D] pt-1`}>Problem</p>
-                  <p style={{ fontSize: 20, fontWeight: 600, color: "rgba(0,0,0,0.85)", lineHeight: 1.45 }}>
-                    Wildlife researchers spend weeks manually reviewing trail camera images — delaying research insights.
+                  <p className={`${T.label} text-[#2563EB] pt-1`}>Problem</p>
+                  <p style={{ fontSize: 16, fontWeight: 500, color: "rgba(0,0,0,0.85)", lineHeight: 1.7 }}>
+                    Wildlife researchers spend weeks manually reviewing trail camera images, delaying research insights.
                   </p>
                 </div>
               </FadeIn>
@@ -181,7 +191,7 @@ export default function BioVisionCaseStudy() {
               {/* Solution */}
               <FadeIn delay={0.08}>
                 <div className="grid grid-cols-[160px_1fr] gap-8 py-8 border-b border-gray-200">
-                  <p className={`${T.label} text-[#2D7D7D] pt-1`}>Solution</p>
+                  <p className={`${T.label} text-[#2563EB] pt-1`}>Solution</p>
                   <p className="text-base text-gray-500 leading-relaxed">Designed BioVision, an AI system that detects wildlife in large-scale camera trap datasets via AI + human verification.</p>
                 </div>
               </FadeIn>
@@ -189,7 +199,7 @@ export default function BioVisionCaseStudy() {
               {/* Impact */}
               <FadeIn delay={0.1}>
                 <div className="pt-8">
-                  <p className={`${T.label} text-[#2D7D7D] mb-6`}>Impact</p>
+                  <p className={`${T.label} text-[#2563EB] mb-6`}>Impact</p>
                   <div className="grid grid-cols-3">
                     {[
                       { stat: "0→1",                                         desc: "Full platform from scratch" },
@@ -197,8 +207,8 @@ export default function BioVisionCaseStudy() {
                       { stat: <>↓<CountUp target={20} suffix="%" /></>,       desc: "Correction rate" },
                     ].map((item, i) => (
                       <div key={i} className={`pr-8 ${i > 0 ? "pl-8 border-l border-gray-200" : ""}`}>
-                        <p className="text-[42px] font-bold text-gray-900 leading-none mb-2">{item.stat}</p>
-                        <p className="text-sm text-gray-500">{item.desc}</p>
+                        <p className="text-[42px] font-medium text-gray-900 leading-none mb-2">{item.stat}</p>
+                        <p className="text-[13px] text-gray-500">{item.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -208,40 +218,26 @@ export default function BioVisionCaseStudy() {
             </div>
           </section>
 
-          {/* ── OUTCOME ── */}
-          <section id="outcome" className="px-6 py-16 border-t border-gray-200">
-            <div>
-              <FadeIn><h2 className={`${T.h2} text-gray-900 mb-8`}>Outcome</h2></FadeIn>
-              <div className="space-y-10">
-                {OUTCOME_ITEMS.map(({ n, title, src }) => (
-                  <div key={n} className="grid grid-cols-[180px_1fr] gap-10 items-start">
-                    <FadeIn>
-                      <p className={`${T.label} text-[#2D7D7D] mb-2`}>{n}</p>
-                      <h3 className={`${T.h3} text-gray-900 leading-snug`}>{title}</h3>
-                    </FadeIn>
-                    <ImageReveal>
-                      <video src={src} autoPlay loop muted playsInline className="w-full h-auto rounded-xl border border-gray-200" />
-                    </ImageReveal>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
           {/* ── CONTEXT ── */}
           <section id="context" className="px-6 py-16 border-t border-gray-200">
-            <div>
+            <div className="space-y-10">
+              <FadeIn><p className={`${T.label} text-[#2563EB] mb-3`}>Context</p></FadeIn>
+
               <div>
-                <FadeIn><h2 className={`${T.h2} text-gray-900 mb-6`}>A critical species, invisible to existing tools</h2></FadeIn>
+                <FadeIn><h3 className={`${T.h3} text-gray-900 mb-4`}>How this project started</h3></FadeIn>
                 <FadeIn delay={0.05}>
-                  <p className="text-base text-gray-600 leading-relaxed mb-4">Beavers play a critical role in restoring stream ecosystems. By building dams, they slow water flow, increase water retention, and create habitats that support salmon migration and spawning. As a result, monitoring beaver activity has become an important indicator for ecological restoration efforts.</p>
+                  <p className="text-base text-gray-600 leading-relaxed">This project began as an AWS-sponsored capstone in partnership with the Washington Department of Fish and Wildlife (WDFW). WDFW biologists monitor beaver activity as a key indicator of stream ecosystem health, but their trail cameras generate thousands of images per deployment, each requiring manual review. Our brief was open-ended: explore whether AI could make this workflow viable at scale.</p>
+                </FadeIn>
+              </div>
+
+              <div>
+                <FadeIn><h3 className={`${T.h3} text-gray-900 mb-4`}>My role</h3></FadeIn>
+                <FadeIn delay={0.05}>
+                  <p className="text-base text-gray-600 leading-relaxed mb-4">I was the sole designer on the team, working with a PM and a data engineer. I owned the product end-to-end — leading stakeholder research with WDFW biologists, defining product scope and UX, building the front-end, and shaping the AI detection pipeline alongside our data engineer.</p>
                 </FadeIn>
                 <FadeIn delay={0.1}>
-                  <p className="text-base text-gray-600 leading-relaxed mb-6">Wildlife researchers deploy camera traps along streams to observe animal activity, but these cameras generate thousands of images that must be manually reviewed. Identifying beavers within these large datasets is time-consuming and difficult to scale, creating a major bottleneck for ecological monitoring.</p>
+                  <p className="text-base text-gray-600 leading-relaxed">This was a 0→1 project with no existing playbook: no off-the-shelf model worked for our use case, and no comparable tool existed for biologists. Most of the design challenge was figuring out what to build in the first place.</p>
                 </FadeIn>
-                <ImageReveal delay={0.15}>
-                  <Image src="/beaver-importance.webp" alt="Beaver ecosystem importance" width={1200} height={600} className="w-full rounded-xl object-cover" />
-                </ImageReveal>
               </div>
             </div>
           </section>
@@ -249,12 +245,13 @@ export default function BioVisionCaseStudy() {
           {/* ── RESEARCH ── */}
           <section id="research" className="px-6 py-16 border-t border-gray-200">
             <div>
+              <FadeIn><p className={`${T.label} text-[#2563EB] mb-3`}>Research</p></FadeIn>
               <FadeIn><h2 className={`${T.h2} text-gray-900 mb-8`}>Every model we tried failed — so we built our own approach</h2></FadeIn>
 
               <div className="space-y-12">
                 <div>
                   <FadeIn>
-                    <p className={`${T.label} text-[#2D7D7D] mb-1`}>01</p>
+                    <p className={`${T.label} text-[#2563EB] mb-1`}>01</p>
                     <h3 className={`${T.h3} text-gray-900 mb-4`}>Understanding the biologist&apos;s workflow</h3>
                   </FadeIn>
                   <FadeIn delay={0.05}>
@@ -279,7 +276,7 @@ export default function BioVisionCaseStudy() {
 
                 <div>
                   <FadeIn>
-                    <p className={`${T.label} text-[#2D7D7D] mb-1`}>02</p>
+                    <p className={`${T.label} text-[#2563EB] mb-1`}>02</p>
                     <h3 className={`${T.h3} text-gray-900 mb-4`}>Market &amp; Tool Audit</h3>
                   </FadeIn>
                   <div className="space-y-4">
@@ -302,7 +299,7 @@ export default function BioVisionCaseStudy() {
 
                 <div>
                   <FadeIn>
-                    <p className={`${T.label} text-[#2D7D7D] mb-1`}>03</p>
+                    <p className={`${T.label} text-[#2563EB] mb-1`}>03</p>
                     <h3 className={`${T.h3} text-gray-900 mb-4`}>Technical Iteration</h3>
                   </FadeIn>
                   <FadeIn delay={0.05}>
@@ -311,24 +308,24 @@ export default function BioVisionCaseStudy() {
                   <ImageReveal delay={0.05}>
                     <div className="border border-gray-200 rounded-xl overflow-hidden">
                       <div className="grid grid-cols-3 bg-gray-50 border-b border-gray-200">
-                        <div className="px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-400">Approach</div>
-                        <div className="px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-400">What we tried</div>
-                        <div className="px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-400">Outcome</div>
+                        <div className="px-4 py-3 text-[11px] font-medium uppercase tracking-widest text-gray-400">Approach</div>
+                        <div className="px-4 py-3 text-[11px] font-medium uppercase tracking-widest text-gray-400">What we tried</div>
+                        <div className="px-4 py-3 text-[11px] font-medium uppercase tracking-widest text-gray-400">Outcome</div>
                       </div>
                       <div className="grid grid-cols-3 border-b border-gray-200">
-                        <div className="px-4 py-4 text-sm font-medium text-gray-900">Traditional ML classifier</div>
-                        <div className="px-4 py-4 text-sm text-gray-600">Fed beaver images and empty-scene images into a binary classification model</div>
-                        <div className="px-4 py-4"><span className="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-red-50 text-red-400 mb-1">Insufficient</span><p className="text-sm text-gray-500">Dataset too small; poor generalization</p></div>
+                        <div className="px-4 py-4 text-[13px] font-medium text-gray-900">Traditional ML classifier</div>
+                        <div className="px-4 py-4 text-[13px] text-gray-600">Fed beaver images and empty-scene images into a binary classification model</div>
+                        <div className="px-4 py-4"><span className="inline-block px-2 py-0.5 rounded-full text-[11px] font-medium bg-red-50 text-red-400 mb-1">Insufficient</span><p className="text-[13px] text-gray-500">Dataset too small; poor generalization</p></div>
                       </div>
                       <div className="grid grid-cols-3 border-b border-gray-200">
-                        <div className="px-4 py-4 text-sm font-medium text-gray-900">YOLOv8 fine-tuning</div>
-                        <div className="px-4 py-4 text-sm text-gray-600">Manually annotated bounding boxes for all beaver images; trained via Roboflow</div>
-                        <div className="px-4 py-4"><span className="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-50 text-yellow-500 mb-1">Partial</span><p className="text-sm text-gray-500">~80% accuracy but recall remained poor</p></div>
+                        <div className="px-4 py-4 text-[13px] font-medium text-gray-900">YOLOv8 fine-tuning</div>
+                        <div className="px-4 py-4 text-[13px] text-gray-600">Manually annotated bounding boxes for all beaver images; trained via Roboflow</div>
+                        <div className="px-4 py-4"><span className="inline-block px-2 py-0.5 rounded-full text-[11px] font-medium bg-yellow-50 text-yellow-500 mb-1">Partial</span><p className="text-[13px] text-gray-500">~80% accuracy but recall remained poor</p></div>
                       </div>
                       <div className="grid grid-cols-3">
-                        <div className="px-4 py-4 text-sm font-medium text-gray-900">LLM agent</div>
-                        <div className="px-4 py-4 text-sm text-gray-600">Leveraged a vision-language model with structured prompting</div>
-                        <div className="px-4 py-4"><span className="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-green-50 text-green-500 mb-1">Adopted</span><p className="text-sm text-gray-500">Flexible, no retraining needed</p></div>
+                        <div className="px-4 py-4 text-[13px] font-medium text-gray-900">LLM agent</div>
+                        <div className="px-4 py-4 text-[13px] text-gray-600">Leveraged a vision-language model with structured prompting</div>
+                        <div className="px-4 py-4"><span className="inline-block px-2 py-0.5 rounded-full text-[11px] font-medium bg-green-50 text-green-500 mb-1">Adopted</span><p className="text-[13px] text-gray-500">Flexible, no retraining needed</p></div>
                       </div>
                     </div>
                   </ImageReveal>
@@ -336,7 +333,7 @@ export default function BioVisionCaseStudy() {
 
                 <div>
                   <FadeIn>
-                    <p className={`${T.label} text-[#2D7D7D] mb-1`}>04</p>
+                    <p className={`${T.label} text-[#2563EB] mb-1`}>04</p>
                     <h3 className={`${T.h3} text-gray-900 mb-4`}>Scope Evolution — Two late requirements reinforced the pivot</h3>
                   </FadeIn>
                   <FadeIn delay={0.05}>
@@ -345,13 +342,13 @@ export default function BioVisionCaseStudy() {
                   <div className="space-y-5 mb-8">
                     <FadeIn delay={0.05}>
                       <div>
-                        <p className="text-sm font-semibold text-gray-900 mb-1">Sequence-based detection</p>
+                        <p className="text-[13px] font-medium text-gray-900 mb-1">Sequence-based detection</p>
                         <p className="text-base text-gray-600 leading-relaxed">Camera traps fire in bursts of three consecutive frames. A beaver may appear in only one of three shots. Stakeholders needed detection to operate at the sequence level — not per-image — to avoid false negatives across a capture event.</p>
                       </div>
                     </FadeIn>
                     <FadeIn delay={0.1}>
                       <div>
-                        <p className="text-sm font-semibold text-gray-900 mb-1">General animal pre-filtering</p>
+                        <p className="text-[13px] font-medium text-gray-900 mb-1">General animal pre-filtering</p>
                         <p className="text-base text-gray-600 leading-relaxed">The desired workflow was two-stage: first filter for any animal presence, then identify beaver specifically. But as established in the tool audit, no reliable general-purpose animal detector existed that could handle our image conditions. This reinforced the case for an AI agent capable of reasoning across both steps simultaneously.</p>
                       </div>
                     </FadeIn>
@@ -375,6 +372,7 @@ export default function BioVisionCaseStudy() {
           {/* ── DESIGN PROCESS ── */}
           <section id="approach" className="px-6 py-16 border-t border-gray-200">
             <div>
+              <FadeIn><p className={`${T.label} text-[#2563EB] mb-3`}>Design Process</p></FadeIn>
               <FadeIn><h2 className={`${T.h2} text-gray-900 mb-8`}>Design Process</h2></FadeIn>
 
               <div className="space-y-12">
@@ -382,7 +380,7 @@ export default function BioVisionCaseStudy() {
                 {/* 01 Upload & Detection */}
                 <div>
                   <FadeIn>
-                    <p className={`${T.label} text-[#2D7D7D] mb-1`}>01</p>
+                    <p className={`${T.label} text-[#2563EB] mb-1`}>01</p>
                     <h3 className={`${T.h3} text-gray-900 mb-2`}>Upload & Detection</h3>
                     <p className="text-base text-gray-500 leading-relaxed mb-6">Pain point: manually reviewing large volumes of images one by one is extremely inefficient.</p>
                   </FadeIn>
@@ -427,7 +425,7 @@ export default function BioVisionCaseStudy() {
                     <FadeIn delay={0.05}>
                       <div>
                         <h5 className={`${T.label} text-green-400 mt-4 mb-2`}>Impact</h5>
-                        <p className="text-sm text-gray-500 leading-relaxed">Reduced manual image review time by 90%, enabling biologists to process hundreds of trail camera images in minutes rather than hours.</p>
+                        <p className="text-[13px] text-gray-500 leading-relaxed">Reduced manual image review time by 90%, enabling biologists to process hundreds of trail camera images in minutes rather than hours.</p>
                       </div>
                     </FadeIn>
                   </div>
@@ -436,7 +434,7 @@ export default function BioVisionCaseStudy() {
                 {/* 02 Review Results */}
                 <div>
                   <FadeIn>
-                    <p className={`${T.label} text-[#2D7D7D] mb-1`}>02</p>
+                    <p className={`${T.label} text-[#2563EB] mb-1`}>02</p>
                     <h3 className={`${T.h3} text-gray-900 mb-2`}>Review Results</h3>
                     <p className="text-base text-gray-500 leading-relaxed mb-6">Pain point: AI detection results are not trustworthy and require manual verification, but there are no tools to support that process.</p>
                   </FadeIn>
@@ -480,7 +478,7 @@ export default function BioVisionCaseStudy() {
                     <FadeIn delay={0.05}>
                       <div>
                         <h5 className={`${T.label} text-green-400 mt-4 mb-2`}>Impact</h5>
-                        <p className="text-sm text-gray-500 leading-relaxed">Detection accuracy improved from 92% to 97% following the introduction of the dual-agent pipeline. Manual correction rate dropped from 40% to 20%.</p>
+                        <p className="text-[13px] text-gray-500 leading-relaxed">Detection accuracy improved from 92% to 97% following the introduction of the dual-agent pipeline. Manual correction rate dropped from 40% to 20%.</p>
                       </div>
                     </FadeIn>
                   </div>
@@ -489,7 +487,7 @@ export default function BioVisionCaseStudy() {
                 {/* 03 AI Chatbot */}
                 <div>
                   <FadeIn>
-                    <p className={`${T.label} text-[#2D7D7D] mb-1`}>03</p>
+                    <p className={`${T.label} text-[#2563EB] mb-1`}>03</p>
                     <h3 className={`${T.h3} text-gray-900 mb-2`}>AI Chatbot</h3>
                     <p className="text-base text-gray-500 leading-relaxed mb-6">Pain point: after detection, there are no data analysis tools to make sense of the results.</p>
                   </FadeIn>
@@ -501,7 +499,7 @@ export default function BioVisionCaseStudy() {
                     <FadeIn delay={0.1}>
                       <div>
                         <h4 className={`${T.label} text-[#0f172a] mb-1`}>Version 1</h4>
-                        <p className="text-sm font-semibold text-gray-700 mb-3">Chatbot embedded in workflow</p>
+                        <p className="text-[13px] font-medium text-gray-700 mb-3">Chatbot embedded in workflow</p>
                         <p className="text-base text-gray-600 leading-relaxed mb-4">The chatbot was embedded directly alongside the detection results on the Workflow page, so users could ask questions immediately after a detection run.</p>
                         <h5 className={`${T.label} text-red-300 mb-2`}>Problem</h5>
                         <ul className="list-disc pl-5 space-y-2">
@@ -523,7 +521,7 @@ export default function BioVisionCaseStudy() {
                     <FadeIn delay={0.05}>
                       <div>
                         <h5 className={`${T.label} text-green-400 mt-4 mb-2`}>Impact</h5>
-                        <p className="text-sm text-gray-500 leading-relaxed">Expanded the tool beyond a single research team. Biologists working with any wildlife species can upload their own CSV and query their data through natural language, making the platform applicable across broader conservation workflows.</p>
+                        <p className="text-[13px] text-gray-500 leading-relaxed">Expanded the tool beyond a single research team. Biologists working with any wildlife species can upload their own CSV and query their data through natural language, making the platform applicable across broader conservation workflows.</p>
                       </div>
                     </FadeIn>
                   </div>
@@ -536,9 +534,31 @@ export default function BioVisionCaseStudy() {
             </div>
           </section>
 
+          {/* ── OUTCOME ── */}
+          <section id="outcome" className="px-6 py-16 border-t border-gray-200">
+            <div>
+              <FadeIn><p className={`${T.label} text-[#2563EB] mb-3`}>Outcome</p></FadeIn>
+              <FadeIn><h2 className={`${T.h2} text-gray-900 mb-8`}>Outcome</h2></FadeIn>
+              <div className="space-y-10">
+                {OUTCOME_ITEMS.map(({ n, title, src }) => (
+                  <div key={n} className="grid grid-cols-[180px_1fr] gap-10 items-start">
+                    <FadeIn>
+                      <p className={`${T.label} text-[#2563EB] mb-2`}>{n}</p>
+                      <h3 className={`${T.h3} text-gray-900 leading-snug`}>{title}</h3>
+                    </FadeIn>
+                    <ImageReveal>
+                      <video src={src} autoPlay loop muted playsInline className="w-full h-auto rounded-xl border border-gray-200" />
+                    </ImageReveal>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* ── REFLECTION ── */}
           <section id="reflection" className="px-6 py-16 border-t border-gray-200">
             <div>
+              <FadeIn><p className={`${T.label} text-[#2563EB] mb-3`}>Reflection</p></FadeIn>
               <FadeIn><h2 className={`${T.h2} text-gray-900 mb-8`}>The tool outlived the use case — and that&apos;s the point</h2></FadeIn>
               <div className="space-y-6">
                 <FadeIn delay={0.05}><p className="text-base text-gray-600 leading-relaxed">Working on BioVision offered a rare opportunity to apply large vision-language models to a domain where AI adoption is still in its early stages. Wildlife camera trap analysis has traditionally relied on manual review or conventional machine learning, both of which struggle with the realities of field data: low-light grayscale images, partially visible subjects, and visually similar species. Shifting to an AI agent approach proved far more resilient to these conditions, and the biologists from the Washington Department of Fish and Wildlife responded with genuine excitement.</p></FadeIn>
@@ -553,7 +573,7 @@ export default function BioVisionCaseStudy() {
       {/* Next Project */}
       <FadeIn className="py-20 px-6 text-center border-t border-gray-100">
         <p className="text-[11px] uppercase tracking-widest text-gray-400 mb-4">Next Project</p>
-        <a href="/work/filegpt" className="group inline-flex items-center gap-3 text-[28px] font-bold text-gray-900 hover:text-gray-400 transition-colors duration-200">
+        <a href={scopedHref(pathname, "/work/filegpt")} className="group inline-flex items-center gap-3 text-[28px] font-medium text-gray-900 hover:text-gray-400 transition-colors duration-200">
           FileGPT
           <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
         </a>
@@ -563,17 +583,17 @@ export default function BioVisionCaseStudy() {
       <footer id="footer" className="bg-white border-t border-gray-200 mt-16">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="flex justify-between items-center mb-8">
-            <Link href="/#work" className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
+            <Link href={scopedHref(pathname, "/#work")} className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
               <svg className="mr-2 w-4 h-4" fill="currentColor" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
               All Projects
             </Link>
-            <Link href="/work/filegpt" className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
+            <Link href={scopedHref(pathname, "/work/filegpt")} className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
               Next Project
               <svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
             </Link>
           </div>
           <div className="text-center">
-            <p className="text-gray-600 text-sm">© 2025 Rebecca Huang. All rights reserved.</p>
+            <p className="text-gray-600 text-[13px]">© 2025 Rebecca Huang. All rights reserved.</p>
           </div>
         </div>
       </footer>

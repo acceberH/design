@@ -3,8 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { scopedHref } from "@/lib/routeScope";
 
 export default function Aispire() {
+  const pathname = usePathname();
+
   useEffect(() => {
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('.nav-link');
@@ -753,13 +757,13 @@ export default function Aispire() {
         <div className="max-w-7xl mx-auto px-6 py-12">
           {/* Navigation Links */}
           <div className="flex justify-between items-center mb-8">
-            <Link href="/work/filegpt" className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors">
+            <Link href={scopedHref(pathname, "/work/filegpt")} className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors">
               <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               Previous Project
             </Link>
-            <Link href="/work/offerplz" className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors">
+            <Link href={scopedHref(pathname, "/work/offerplz")} className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors">
               Next Project
               <svg className="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />

@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { scopedHref } from "@/lib/routeScope";
 
 function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -119,6 +121,7 @@ const NAV_SECTIONS = [
 ] as const;
 
 export default function OpenPromoCaseStudy() {
+  const pathname = usePathname();
   const [activeSection, setActiveSection] = useState<string>("");
 
   useEffect(() => {
@@ -151,7 +154,7 @@ export default function OpenPromoCaseStudy() {
                 <span style={{
                   width: activeSection === id ? 20 : 8,
                   height: 1.5,
-                  background: activeSection === id ? "#2D7D7D" : "#d1d5db",
+                  background: activeSection === id ? "#2563EB" : "#d1d5db",
                   borderRadius: 2,
                   flexShrink: 0,
                   transition: "width 0.25s ease",
@@ -173,7 +176,7 @@ export default function OpenPromoCaseStudy() {
                 transition={{ duration: 0.5, ease: [0.22,1,0.36,1] as [number,number,number,number] }}
                 className="flex flex-wrap gap-3 mb-6">
                 {["Product Design","UX Research","B2B","Social Media Tech"].map(t => (
-                  <span key={t} className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-[13px] font-medium">{t}</span>
+                  <span key={t} className="px-3 py-1 rounded-full text-[13px] font-medium" style={{ background: "rgba(37,99,235,0.08)", color: "#2563EB", border: "1px solid rgba(37,99,235,0.15)" }}>{t}</span>
                 ))}
               </motion.div>
               <motion.h1 initial={{ opacity: 0, y: 20, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -200,19 +203,19 @@ export default function OpenPromoCaseStudy() {
               <div className="grid md:grid-cols-2 gap-6">
                 <FadeIn delay={0.05}>
                   <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                    <p className={`${T.label} text-[#2D7D7D] mb-3`}>Problem</p>
+                    <p className={`${T.label} text-[#2563EB] mb-3`}>Problem</p>
                     <p className="text-base text-gray-600 leading-relaxed">Small businesses are creating content constantly, but without strategic direction — they don&apos;t know what to create, when to post, or whether any of it is working.</p>
                   </div>
                 </FadeIn>
                 <FadeIn delay={0.12}>
                   <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                    <p className={`${T.label} text-[#2D7D7D] mb-3`}>Solution</p>
+                    <p className={`${T.label} text-[#2563EB] mb-3`}>Solution</p>
                     <p className="text-base text-gray-600 leading-relaxed">An AI-powered growth platform that helps small businesses create promotional content, manage social accounts, and learn from competitors in one place.</p>
                   </div>
                 </FadeIn>
               </div>
               <FadeIn delay={0.1} className="mt-8">
-                <p className={`${T.label} text-[#2D7D7D] mb-4`}>Impact</p>
+                <p className={`${T.label} text-[#2563EB] mb-4`}>Impact</p>
                 <div className="border-t border-gray-200 pt-6 grid grid-cols-3">
                   {[
                     { stat: "0→1",  desc: "Product built from scratch" },
@@ -232,7 +235,7 @@ export default function OpenPromoCaseStudy() {
           {/* ── CONTEXT ── */}
           <section id="context" className="px-6 py-16 border-t border-gray-200">
             <div>
-              <FadeIn><p className={`${T.label} text-[#2D7D7D] mb-3`}>Context</p></FadeIn>
+              <FadeIn><p className={`${T.label} text-[#2563EB] mb-3`}>Context</p></FadeIn>
               <FadeIn delay={0.04}><h2 className={`${T.h2} text-gray-900 mb-8`}>Small businesses are flying blind</h2></FadeIn>
               <div className="space-y-6">
                 <FadeIn delay={0.05}><p className="text-base text-gray-700 leading-relaxed"><strong>I joined OpenPromo as the sole designer</strong>, owning end-to-end product design for 7 months — from research and strategy through to shipping three core features. I led all UX research, drove the product direction, and took the platform from concept to launch.</p></FadeIn>
@@ -254,7 +257,7 @@ export default function OpenPromoCaseStudy() {
           {/* ── RESEARCH ── */}
           <section id="research" className="px-6 py-16 border-t border-gray-200">
             <div>
-              <FadeIn><p className={`${T.label} text-[#2D7D7D] mb-3`}>User Research</p></FadeIn>
+              <FadeIn><p className={`${T.label} text-[#2563EB] mb-3`}>User Research</p></FadeIn>
               <FadeIn delay={0.04}><h2 className={`${T.h2} text-gray-900 mb-8`}>The real bottleneck isn&apos;t tools — it&apos;s decisions</h2></FadeIn>
               <div className="space-y-8">
                 <FadeIn delay={0.05}><p className="text-base text-gray-700">I interviewed small business owners to understand their daily social media workflow and marketing challenges. <strong>What I found contradicted my starting assumption entirely.</strong> Most businesses spend significant time producing content but struggle to determine what content actually drives growth.</p></FadeIn>
@@ -271,11 +274,11 @@ export default function OpenPromoCaseStudy() {
                           <p style={{ fontSize: 11, color: "#9ca3af", marginTop: 1 }}>Small Business Owner</p>
                         </div>
                       </div>
-                      <p style={{ fontSize: 36, lineHeight: 0.8, color: "#2D7D7D", opacity: 0.2, fontFamily: "Georgia, serif", marginBottom: 8 }}>&ldquo;</p>
+                      <p style={{ fontSize: 36, lineHeight: 0.8, color: "#2563EB", opacity: 0.2, fontFamily: "Georgia, serif", marginBottom: 8 }}>&ldquo;</p>
                       <p style={{ fontSize: 18, fontWeight: 500, color: "#1f2937", lineHeight: 1.65 }}>
                         We spend hours making posts, but we don&apos;t know if any of it is actually working.
                       </p>
-                      <p style={{ fontSize: 36, lineHeight: 0.8, color: "#2D7D7D", opacity: 0.2, fontFamily: "Georgia, serif", marginTop: 8, textAlign: "right" }}>&rdquo;</p>
+                      <p style={{ fontSize: 36, lineHeight: 0.8, color: "#2563EB", opacity: 0.2, fontFamily: "Georgia, serif", marginTop: 8, textAlign: "right" }}>&rdquo;</p>
                     </div>
                     {/* Bottom: pain points + goals */}
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderTop: "1px solid #f0f0f0" }}>
@@ -302,7 +305,7 @@ export default function OpenPromoCaseStudy() {
                 </FadeIn>
 
                 <div>
-                  <FadeIn><p className={`${T.label} text-[#2D7D7D] mb-4`}>Research Insights</p></FadeIn>
+                  <FadeIn><p className={`${T.label} text-[#2563EB] mb-4`}>Research Insights</p></FadeIn>
                   <div className="border-t border-gray-200">
                     {[["73%","of small businesses are not confident their marketing strategy is working."],["56%","of SMBs spend one hour or less per day on marketing."],["54%","of SMBs struggle to produce content consistently."]].map(([stat,desc],i) => (
                       <StatRow key={stat} index={i}>
@@ -318,7 +321,7 @@ export default function OpenPromoCaseStudy() {
 
                 <FadeIn delay={0.08}>
                   <div className="flex flex-col items-center gap-3">
-                    <svg width="16" height="32" viewBox="0 0 16 32" fill="none" style={{ color: "#2D7D7D", opacity: 0.4 }}>
+                    <svg width="16" height="32" viewBox="0 0 16 32" fill="none" style={{ color: "#2563EB", opacity: 0.4 }}>
                       <line x1="8" y1="0" x2="8" y2="26" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3"/>
                       <path d="M3 22l5 8 5-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
                     </svg>
@@ -345,12 +348,12 @@ export default function OpenPromoCaseStudy() {
           {/* ── DESIGN PROCESS ── */}
           <section id="approach" className="px-6 py-16 border-t border-gray-200">
             <div>
-              <FadeIn><p className={`${T.label} text-[#2D7D7D] mb-3`}>Design Process</p></FadeIn>
+              <FadeIn><p className={`${T.label} text-[#2563EB] mb-3`}>Design Process</p></FadeIn>
               <FadeIn delay={0.04}><h2 className={`${T.h2} text-gray-900 mb-6`}>From wrong assumption to product pivot</h2></FadeIn>
 
               {/* Starting Assumption */}
               <div className="mb-20">
-                <FadeIn><p className={`${T.label} text-[#2D7D7D] mb-4`}>Problem Framing</p></FadeIn>
+                <FadeIn><p className={`${T.label} text-[#2563EB] mb-4`}>Problem Framing</p></FadeIn>
                 <div className="space-y-4 text-base text-gray-600 leading-relaxed">
                   <FadeIn delay={0.05}><p>When I first joined OpenPromo, my assumption was straightforward: <strong>small businesses need better content creation tools.</strong> Specifically, I believed AI video generation would be the highest-value feature — if we could help them produce professional video ads without a production team, that would remove the biggest barrier.</p></FadeIn>
                   <FadeIn delay={0.1}><p className="font-medium text-gray-900">This assumption was wrong.</p></FadeIn>
@@ -821,7 +824,7 @@ export default function OpenPromoCaseStudy() {
           {/* ── FINAL DESIGN ── */}
           <section id="final-design" className="px-6 py-16 border-t border-gray-200">
             <div>
-              <FadeIn><p className={`${T.label} text-[#2D7D7D] mb-3`}>Final Design</p></FadeIn>
+              <FadeIn><p className={`${T.label} text-[#2563EB] mb-3`}>Final Design</p></FadeIn>
               <FadeIn delay={0.04}><h2 className={`${T.h2} text-gray-900 mb-4`}>Three features. One system.</h2></FadeIn>
               <FadeIn delay={0.08}><p className="text-base text-gray-600 mb-14">I designed three interconnected features that move OpenPromo from a content tool to a growth intelligence platform — each one informed by the decision-making bottleneck I uncovered in research.</p></FadeIn>
 
@@ -829,7 +832,7 @@ export default function OpenPromoCaseStudy() {
                 {/* 01 Instant Ad */}
                 <ImageReveal delay={0.05}>
                   <div>
-                    <p className={`${T.label} text-[#2D7D7D] mb-3`}>01 — Instant Ad</p>
+                    <p className={`${T.label} text-[#2563EB] mb-3`}>01 — Instant Ad</p>
                     <p className="text-base text-gray-500 mb-5 leading-relaxed">Unified ad creation and publishing in a single tabbed workspace — eliminating the back-and-forth between two separate screens. <strong>Result: 3× faster ad creation workflow.</strong></p>
                     <Image src="/opinstantad1.png" alt="Instant Ad final design" width={1332} height={1250} unoptimized style={{ width: "90%", height: "auto", display: "block", margin: "0 auto" }} />
                   </div>
@@ -838,7 +841,7 @@ export default function OpenPromoCaseStudy() {
                 {/* 02 Competitor Tracking */}
                 <ImageReveal delay={0.05}>
                   <div>
-                    <p className={`${T.label} text-[#2D7D7D] mb-3`}>02 — Competitor Tracking</p>
+                    <p className={`${T.label} text-[#2563EB] mb-3`}>02 — Competitor Tracking</p>
                     <p className="text-base text-gray-500 mb-5 leading-relaxed">Automatic anomaly detection surfaces competitor signals without manual review — the system tells users what&apos;s trending before they have to look for it.</p>
                     <img src="/trackingdemo.gif" alt="Competitor tracking final design" style={{ maxHeight: "55vh", width: "auto", display: "block", margin: "0 auto" }} />
                   </div>
@@ -847,7 +850,7 @@ export default function OpenPromoCaseStudy() {
                 {/* 03 Performance Analytics */}
                 <ImageReveal delay={0.05}>
                   <div>
-                    <p className={`${T.label} text-[#2D7D7D] mb-3`}>03 — Performance Analytics</p>
+                    <p className={`${T.label} text-[#2563EB] mb-3`}>03 — Performance Analytics</p>
                     <p className="text-base text-gray-500 mb-5 leading-relaxed">AI Recommendations sit above the charts — &ldquo;what to do next&rdquo; is prioritized over &ldquo;what the numbers are.&rdquo; <strong>Result: 70% faster cross-platform publishing.</strong></p>
                     <img src="/performance_final_design.gif" alt="Performance analytics final design" style={{ maxHeight: "55vh", width: "auto", display: "block", margin: "0 auto" }} />
                   </div>
@@ -859,7 +862,7 @@ export default function OpenPromoCaseStudy() {
           {/* ── REFLECTION ── */}
           <section id="reflection" className="px-6 py-16 border-t border-gray-200">
             <div>
-              <FadeIn><p className={`${T.label} text-[#2D7D7D] mb-3`}>Reflection</p></FadeIn>
+              <FadeIn><p className={`${T.label} text-[#2563EB] mb-3`}>Reflection</p></FadeIn>
               <FadeIn delay={0.04}><h2 className={`${T.h2} text-gray-900 mb-8`}>AI doesn&apos;t replace strategy — it enables it</h2></FadeIn>
               <FadeIn delay={0.08}>
                 <p className="text-base text-gray-700 leading-relaxed">This project reinforced something I now carry into every engagement: <strong>the most valuable design work happens before the wireframes.</strong> I came in assuming we needed better creation tools. I left having redesigned the product&apos;s core premise. The research pivot I drove from creation to intelligence is what made the product worth building. As AI generation matures, the real differentiator isn&apos;t the content itself. It&apos;s the system that tells you what to create next. <strong>That&apos;s the problem I was most proud to have defined and solved.</strong></p>
@@ -872,7 +875,7 @@ export default function OpenPromoCaseStudy() {
       {/* Next Project */}
       <FadeIn className="py-20 px-6 text-center border-t border-gray-100">
         <p className="text-[11px] uppercase tracking-widest text-gray-400 mb-4">Next Project</p>
-        <a href="/work/biovision" className="group inline-flex items-center gap-3 text-[28px] font-medium text-gray-900 hover:text-gray-400 transition-colors duration-200">
+        <a href={scopedHref(pathname, "/work/biovision")} className="group inline-flex items-center gap-3 text-[28px] font-medium text-gray-900 hover:text-gray-400 transition-colors duration-200">
           BioVision
           <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
         </a>
@@ -882,11 +885,11 @@ export default function OpenPromoCaseStudy() {
       <footer id="footer" className="bg-white border-t border-gray-200 mt-16">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="flex justify-between items-center mb-8">
-            <Link href="/work/aispire" className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
+            <Link href={scopedHref(pathname, "/work/aispire")} className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
               <svg className="mr-2 w-4 h-4" fill="currentColor" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
               Previous Project
             </Link>
-            <Link href="/work/biovision" className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
+            <Link href={scopedHref(pathname, "/work/biovision")} className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
               Next Project
               <svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
             </Link>
