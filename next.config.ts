@@ -11,35 +11,7 @@ const nextConfig: NextConfig = {
 
     return [
       {
-        source: "/work/openpromo",
-        headers: noIndexHeaders,
-      },
-      {
-        source: "/design-dark.html",
-        headers: noIndexHeaders,
-      },
-      {
-        source: "/design-editorial.html",
-        headers: noIndexHeaders,
-      },
-      {
-        source: "/design-monet.html",
-        headers: noIndexHeaders,
-      },
-      {
-        source: "/design-monet2.html",
-        headers: noIndexHeaders,
-      },
-      {
-        source: "/design-taste.html",
-        headers: noIndexHeaders,
-      },
-      {
-        source: "/design-upgraded.html",
-        headers: noIndexHeaders,
-      },
-      {
-        source: "/reference-design.html",
+        source: "/:path*",
         headers: noIndexHeaders,
       },
     ];

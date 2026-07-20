@@ -13,6 +13,17 @@ import Tracker from "@/components/Tracker";
 export const metadata: Metadata = {
   title: "Rebecca Huang",
   description: "Product designer & engineer",
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+      noarchive: true,
+      nosnippet: true,
+      noimageindex: true,
+    },
+  },
 };
 
 export default function RootLayout({
