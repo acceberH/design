@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ReactNode } from "react";
-import CaseStudyGate from "@/components/CaseStudyGate";
 
 export const metadata: Metadata = {
   title: "Rebecca Huang",
@@ -21,13 +20,5 @@ export const metadata: Metadata = {
 };
 
 export default function HrLayout({ children }: { children: ReactNode }) {
-  return (
-    <CaseStudyGate
-      storageKey="hr_site_unlocked"
-      title="This HR version is protected"
-      description="Enter the password to continue"
-    >
-      {children}
-    </CaseStudyGate>
-  );
+  return <>{children}</>;
 }
