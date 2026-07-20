@@ -23,6 +23,7 @@ export default async function AccessPage({ searchParams }: AccessPageProps) {
             required
             type="password"
           />
+          <p className="text-xs leading-5 text-[#1d1b19]/60">Hint: the password is on the resume.</p>
           {error === "1" ? <p className="text-sm text-[#9d1919]" role="alert">That password is not correct. Try again.</p> : null}
           <button className="w-full bg-[#1d1b19] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#393532] focus:outline-none focus:ring-2 focus:ring-[#1d1b19] focus:ring-offset-2" type="submit">
             Unlock site
