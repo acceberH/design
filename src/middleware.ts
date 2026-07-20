@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { isValidSiteSession } from "./src/lib/siteAccess";
+import { isValidSiteSession } from "./lib/siteAccess";
 
 const ACCESS_PATH = "/access";
 const ACCESS_API_PATH = "/api/site-access";
