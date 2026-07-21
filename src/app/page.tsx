@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { isHrPath, scopedHref } from "@/lib/routeScope";
+import { scopedHref } from "@/lib/routeScope";
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -26,7 +26,6 @@ const VERBS = ["design", "build", "ship"];
 export default function Home() {
   const [verbIdx, setVerbIdx] = useState(0);
   const pathname = usePathname();
-  const hrMode = isHrPath(pathname);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -155,22 +154,21 @@ export default function Home() {
             </FadeIn>
             <div className="relative">
 
-              {hrMode && (
-                <div className="sticky top-6 z-10">
-                  <Link href={scopedHref(pathname, "/work/openpromo")} className="group block">
-                    <div className="relative rounded-2xl overflow-hidden h-[500px] transition-all duration-300 hover:-translate-y-2" style={{ boxShadow: "0 2px 16px rgba(0,0,0,0.07)" }}>
-                      <Image src="/op-previewnew.png" alt="OpenPromo" width={1920} height={1080} unoptimized className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]" />
-                      <div className="absolute top-0 left-0 right-0 p-8" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%)" }}>
-                        <p className="text-[12px] text-white/60 mb-1">Product Design · SaaS · B2B</p>
-                        <h3 className="text-[22px] font-bold text-white">OpenPromo</h3>
-                      </div>
+              {/* OpenPromo */}
+              <div className="sticky top-6 z-10">
+                <Link href={scopedHref(pathname, "/work/openpromo")} className="group block">
+                  <div className="relative rounded-2xl overflow-hidden h-[500px] transition-all duration-300 hover:-translate-y-2" style={{ boxShadow: "0 2px 16px rgba(0,0,0,0.07)" }}>
+                    <Image src="/op-previewnew.png" alt="OpenPromo" width={1920} height={1080} unoptimized className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]" />
+                    <div className="absolute top-0 left-0 right-0 p-8" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%)" }}>
+                      <p className="text-[12px] text-white/60 mb-1">Product Design · SaaS · B2B</p>
+                      <h3 className="text-[22px] font-bold text-white">OpenPromo</h3>
                     </div>
-                  </Link>
-                </div>
-              )}
+                  </div>
+                </Link>
+              </div>
 
               {/* BioVision */}
-              <div className={`sticky ${hrMode ? "top-10 z-20 mt-4" : "top-6 z-10"}`}>
+              <div className="sticky top-10 z-20 mt-4">
                 <Link href={scopedHref(pathname, "/work/biovision")} className="group block">
                   <div className="relative rounded-2xl overflow-hidden h-[500px] transition-all duration-300 hover:-translate-y-2" style={{ boxShadow: "0 2px 16px rgba(0,0,0,0.07)" }}>
                     <Image src="/biov-cover.png" alt="BioVision" width={1920} height={1080} unoptimized className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]" />
@@ -183,7 +181,7 @@ export default function Home() {
               </div>
 
               {/* FileGPT */}
-              <div className={`sticky ${hrMode ? "top-14 z-30 mt-4" : "top-10 z-20 mt-4"}`}>
+              <div className="sticky top-14 z-30 mt-4">
                 <Link href={scopedHref(pathname, "/work/filegpt")} className="group block">
                   <div className="relative rounded-2xl overflow-hidden h-[500px] transition-all duration-300 hover:-translate-y-2" style={{ boxShadow: "0 2px 16px rgba(0,0,0,0.07)" }}>
                     <Image src="/fg-cover.png" alt="FileGPT" width={1920} height={1080} unoptimized className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]" />
@@ -196,7 +194,7 @@ export default function Home() {
               </div>
 
               {/* Offerplz */}
-              <div className={`sticky ${hrMode ? "top-[72px] z-40 mt-4" : "top-14 z-30 mt-4"}`}>
+              <div className="sticky top-[72px] z-40 mt-4">
                 <Link href={scopedHref(pathname, "/work/offerplz")} className="group block">
                   <div className="relative rounded-2xl overflow-hidden h-[500px] transition-all duration-300 hover:-translate-y-2" style={{ boxShadow: "0 2px 16px rgba(0,0,0,0.07)" }}>
                     <Image src="/offerplzcover.png" alt="Offerplz" width={1248} height={512} unoptimized className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]" />
@@ -211,7 +209,7 @@ export default function Home() {
               {/* BarBuddy — hidden */}
 
               {/* Cycle */}
-              <div className={`sticky ${hrMode ? "top-[104px] z-[60] mt-4" : "top-[72px] z-40 mt-4"}`}>
+              <div className="sticky top-[104px] z-[60] mt-4">
                 <Link href={scopedHref(pathname, "/work/cycle")} className="group block">
                   <div className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col md:flex-row-reverse h-[500px]" style={{ background: "linear-gradient(160deg, rgba(255,252,253,0.95) 0%, rgba(255,248,250,0.90) 100%)", border: "1px solid rgba(255,255,255,0.90)", boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)", backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)" }}>
                     <div className="md:w-[68%] relative overflow-hidden flex-shrink-0">

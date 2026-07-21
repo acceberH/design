@@ -13,6 +13,7 @@ const DOCK_PADDING_V = 10;
 
 const PROJECT_ORDER = [
   "/work/aispire",
+  "/work/openpromo",
   "/work/biovision",
   "/work/filegpt",
   "/work/offerplz",
